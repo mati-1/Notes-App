@@ -1,20 +1,23 @@
 import React from 'react'
 import classes from './Nav.module.scss'
-import { NavLink } from './NavLink'
+import { NavButton } from './NavLink'
 import { Wrapper } from '../UI/Wrapper'
+import { NavLink } from 'react-router-dom'
 
 export const Nav = () => {
 	return (
 		<nav className={classes.nav}>
 			<Wrapper>
 				<div className={classes.navWrapper}>
-					<p className={classes.logo}>Notes App</p>
+					<NavLink to='/' className={classes.logo}>
+						Notes App
+					</NavLink>
 
 					<div className={classes.links}>
-						<NavLink variant='contained' isSecondary={false} title='Create new' href='/create' />
-						<NavLink variant='text' isSecondary={false} title='Notes' href='/notes' />
-						<NavLink variant='text' isSecondary={false} title='Favourite' href='/favourite' />
-						<NavLink variant='text' isSecondary={false} title='Trash' href='/trash' />
+						<NavButton variant='contained' isSecondary={false} title='Create new' href='/create' />
+						<NavButton variant='text' isSecondary={true} title='Notes' href='/notes' />
+						<NavButton variant='text' isSecondary={true} title='Favourite' href='/favourite' />
+						<NavButton variant='text' isSecondary={true} title='Trash' href='/trash' />
 					</div>
 				</div>
 			</Wrapper>

@@ -1,5 +1,6 @@
 import { MainButton } from '../UI/MainButton'
 import { SecondaryButton } from './../UI/SecondaryButton'
+import { NavLink } from 'react-router-dom'
 
 type NavLinksProps = {
 	href: string
@@ -8,18 +9,14 @@ type NavLinksProps = {
 	variant: string | any
 }
 
-export const NavLink = ({ href, isSecondary, title, variant }: NavLinksProps) => {
+export const NavButton = ({ href, isSecondary, title, variant }: NavLinksProps) => {
 	return isSecondary ? (
-		<a href={href}>
-			<div>
-				<MainButton variant={variant} title={title} />
-			</div>
-		</a>
+		<NavLink to={href}>
+			<MainButton variant={variant} title={title} />
+		</NavLink>
 	) : (
-		<a href={href}>
-			<div>
-				<SecondaryButton variant={variant} title={title} />
-			</div>
-		</a>
+		<NavLink to={href}>
+			<SecondaryButton variant={variant} title={title} />
+		</NavLink>
 	)
 }

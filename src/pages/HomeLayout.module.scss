@@ -1,0 +1,23 @@
+.header {
+	.headerModules {
+		display: flex;
+		align-items: center;
+		justify-content: space-around;
+		h1 {
+			color: var(--white-color);
+			font-size: var(--biggest-size);
+			margin-bottom: 0.4rem;
+		}
+		p {
+			font-size: var(--basic-size);
+			color: var(--grey-color);
+			margin-bottom: 1.5rem;
+		}
+		img {
+			width: 38rem;
+		}
+		button {
+			width: 10rem;
+		}
+	}
+}
