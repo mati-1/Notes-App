@@ -1,0 +1,26 @@
+.nav {
+	position: fixed;
+	display: flex;
+	align-items: center;
+	left: 0;
+	top: 0;
+	background-color: var(--black-color);
+	width: 100vw;
+	height: 5rem;
+	.navWrapper {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		position: relative;
+		.logo {
+			color: white;
+			font-size: var(--logo-size);
+		}
+		.links {
+			display: flex;
+			align-items: center;
+			flex-direction: row-reverse;
+			gap: 1rem;
+		}
+	}
+}

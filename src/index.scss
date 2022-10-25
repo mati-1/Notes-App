@@ -1,0 +1,29 @@
+* {
+	box-sizing: border-box;
+	padding: 0;
+	margin: 0;
+}
+
+html,
+body {
+	font-family: Roboto;
+	background-color: var(--black2-color);
+}
+
+:root {
+	--main-color: rgb(98, 98, 255);
+	--main-hover-color: rgb(85, 85, 255);
+	--white-color: rgb(240, 240, 240);
+	--black-color: rgb(13, 16, 22);
+	--black2-color: rgb(19, 22, 30);
+	--space2rem: 2rem;
+	--basic-size: 1.3rem;
+	--big-size: 1.7rem;
+	--logo-size: 1.5rem;
+	--small-size: 1rem;
+}
+
+a {
+	text-decoration: none;
+	color: initial;
+}

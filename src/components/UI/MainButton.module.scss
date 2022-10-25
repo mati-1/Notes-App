@@ -1,0 +1,6 @@
+.mainButton {
+	background-color: var(--main-color);
+	&:hover {
+		background-color: var(--main-hover-color);
+	}
+}
