@@ -15,7 +15,7 @@ class Note {
 		NoteFavourite: boolean,
 		NoteDate: string
 	) {
-		this.id = (Math.random() * 2137).toString()
+		this.id = (Math.random() * (1 - 22313237) + 2137).toString()
 		this.author = NoteAuthor
 		this.title = NoteTitle
 		this.category = NoteCategory

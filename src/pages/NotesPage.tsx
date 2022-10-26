@@ -1,13 +1,13 @@
 import { Notes } from '../components/Notes/Notes'
-import { Wrapper } from '../components/UI/Wrapper'
 import classes from '../components/Notes/Notes.module.scss'
+import { Layout } from '../components/UI/Layout'
 
 const NotesPage = () => {
 	return (
 		<div className={classes.mainWrapper}>
-			<Wrapper>
+			<Layout>
 				<Notes />
-			</Wrapper>
+			</Layout>
 		</div>
 	)
 }
