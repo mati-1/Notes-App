@@ -1,0 +1,21 @@
+.heading {
+	position: relative;
+	font-size: var(--biggest-size);
+	color: var(--white-color);
+	margin-bottom: 1rem;
+
+	.notesLength {
+		position: absolute;
+		top: 0;
+		right: 0;
+
+		font-size: var(--basic-size);
+		color: var(--grey-color);
+	}
+}
+
+.list {
+	padding: 2rem;
+	border-radius: 1rem;
+	border: 1px solid var(--grey-color);
+}

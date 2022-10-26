@@ -3,9 +3,9 @@ import { NavButton } from '../components/Navigation/NavLink'
 
 import header from '../img/header.svg'
 
-const HomeLayout = () => {
+const HomePage = () => {
 	return (
-		<header className={classes.header}>
+		<div className={classes.header}>
 			<div className={classes.headerModules}>
 				<div>
 					<h1>Best notes app for everyone!</h1>
@@ -14,8 +14,8 @@ const HomeLayout = () => {
 				</div>
 				<img src={header} alt='xd' />
 			</div>
-		</header>
+		</div>
 	)
 }
 
-export default HomeLayout
+export default HomePage

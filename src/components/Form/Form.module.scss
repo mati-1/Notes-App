@@ -1,0 +1,57 @@
+.formModules {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+
+	img {
+		width: 33rem;
+	}
+
+	.form {
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+
+		.heading {
+			color: var(--white-color);
+			font-size: var(--biggest-size);
+			margin-bottom: 1rem;
+		}
+
+		.fieldset {
+			width: 40rem;
+			label {
+				color: var(--grey-color);
+			}
+			input {
+				color: var(--white-color);
+			}
+
+			p {
+				color: white;
+			}
+
+			div {
+				background-color: rgba(0, 0, 0, 0.096);
+				margin: 0;
+				div {
+					color: white;
+				}
+			}
+
+			.fieldsetRow {
+				display: flex;
+				justify-content: space-between;
+				gap: 2rem;
+			}
+		}
+		label {
+			color: var(--white-color);
+			span {
+				svg {
+					fill: var(--main-color);
+				}
+			}
+		}
+	}
+}
