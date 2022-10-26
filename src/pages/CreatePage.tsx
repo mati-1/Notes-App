@@ -1,7 +1,11 @@
 import { Form } from '../components/Form/Form'
-
+import { Layout } from '../components/UI/Layout'
 const CreateLayout = () => {
-	return <Form />
+	return (
+		<Layout>
+			<Form />
+		</Layout>
+	)
 }
 
 export default CreateLayout

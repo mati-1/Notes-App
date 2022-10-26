@@ -1,21 +1,40 @@
-.heading {
-	position: relative;
-	font-size: var(--biggest-size);
-	color: var(--white-color);
-	margin-bottom: 1rem;
+.notesModules {
+	padding-top: 5rem;
+	.heading {
+		display: flex;
+		align-items: center;
+		position: relative;
+		font-size: var(--biggest-size);
+		color: var(--white-color);
+		margin-bottom: 2rem;
 
-	.notesLength {
-		position: absolute;
-		top: 0;
-		right: 0;
+		.notesLength {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			margin-left: 0.5rem;
+			width: 2rem;
+			height: 2rem;
+			border-radius: 50%;
+			background-color: var(--main-color);
+			font-size: var(--basic-size);
+			color: var(--white-color);
+		}
+	}
 
-		font-size: var(--basic-size);
-		color: var(--grey-color);
+	.list {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: 2.5rem;
+		border-radius: 1rem;
+		list-style: none;
+
+		@media (max-width: 1000px) {
+			grid-template-columns: repeat(1, 1fr);
+		}
 	}
 }
 
-.list {
-	padding: 2rem;
-	border-radius: 1rem;
-	border: 1px solid var(--grey-color);
+.mainWrapper {
+	margin-top: 5rem;
 }

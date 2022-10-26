@@ -6,7 +6,7 @@ type LayoutProps = {
 	children: JSX.Element
 }
 
-export const Layout: React.FC<LayoutProps> = ({ children }) => {
+export const Layout = ({ children }: LayoutProps) => {
 	return (
 		<div className={classes.layout}>
 			<Wrapper>{children}</Wrapper>

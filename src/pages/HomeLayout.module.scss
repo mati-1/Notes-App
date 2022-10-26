@@ -1,8 +1,14 @@
 .header {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	height: 100vh;
 	.headerModules {
 		display: flex;
 		align-items: center;
 		justify-content: space-around;
+		padding: 0 2rem;
 		h1 {
 			color: var(--white-color);
 			font-size: var(--biggest-size);
@@ -17,7 +23,7 @@
 			width: 38rem;
 		}
 		button {
-			width: 10rem;
+			width: 9rem;
 		}
 	}
 }

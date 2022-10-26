@@ -1,0 +1,42 @@
+.note {
+	position: relative;
+	border-radius: 0.5rem;
+	border: 1px solid var(--black2-color);
+	padding: 1rem;
+	background-color: rgba(0, 0, 0, 0.096);
+
+	img {
+		position: absolute;
+		top: -3rem;
+		right: -3rem;
+		width: 10rem;
+	}
+
+	.header {
+		h2 {
+			color: var(--grey-color);
+			font-size: var(--big-size);
+			margin-bottom: 1rem;
+		}
+	}
+	.content {
+		border-radius: 0.5rem;
+		border: 1px solid var(--black2-color);
+		padding: 1rem;
+		margin-bottom: 2rem;
+
+		h3 {
+			color: var(--main-color);
+			padding-bottom: 0.5rem;
+		}
+
+		p {
+			color: var(--grey-color);
+		}
+	}
+	.buttons {
+		display: flex;
+		align-items: center;
+		gap: 1rem;
+	}
+}

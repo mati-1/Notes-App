@@ -7,11 +7,16 @@
 	background-color: var(--black-color);
 	width: 100vw;
 	height: 5rem;
+	z-index: 2137;
 	.navWrapper {
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
 		position: relative;
+		max-width: 1400px;
+		margin: 0 auto;
+		padding: 0 2rem;
+		width: 100%;
 		.logo {
 			color: white;
 			font-size: var(--logo-size);

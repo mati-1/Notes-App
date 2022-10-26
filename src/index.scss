@@ -7,7 +7,12 @@
 html,
 body {
 	font-family: Roboto;
-	background-color: var(--black2-color);
+	background-color: var(--black3-color);
+}
+
+::selection {
+	color: white;
+	background-color: var(--main-color);
 }
 
 :root {
@@ -16,7 +21,8 @@ body {
 	--white-color: rgb(240, 240, 240);
 	--grey-color: rgb(160, 160, 160);
 	--black-color: rgb(13, 16, 22);
-	--black2-color: rgb(19, 22, 30);
+	--black2-color: rgb(13, 15, 22);
+	--black3-color: rgb(19, 22, 30);
 	--space2rem: 2rem;
 	--basic-size: 1.3rem;
 	--big-size: 1.7rem;

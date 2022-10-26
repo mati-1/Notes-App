@@ -5,6 +5,6 @@ type WrapperProps = {
 	children: JSX.Element
 }
 
-export const Wrapper: React.FC<WrapperProps> = ({ children }) => {
+export const Wrapper = ({ children }: WrapperProps) => {
 	return <div className={classes.wrapper}>{children}</div>
 }
