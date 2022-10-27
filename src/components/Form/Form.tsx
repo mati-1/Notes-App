@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useState, useContext } from 'react'
+import { useNavigate } from 'react-router-dom'
 import TextField from '@mui/material/TextField'
 import FormControlLabel from '@mui/material/FormControlLabel'
 import Checkbox from '@mui/material/Checkbox'
@@ -9,21 +10,24 @@ import Select from '@mui/material/Select'
 import InputLabel from '@mui/material/InputLabel'
 import FormControl from '@mui/material/FormControl'
 import MenuItem from '@mui/material/MenuItem'
-
+import Note from '../../models/Note'
+import { NotesContext } from '../../context/NoteContext'
 import { useInput } from '../../hooks/use-input'
 
 export const Form = () => {
+	const today = new Date()
+	const fullDate = today.toLocaleDateString()
+	const [isFavourite, setIsFavourite] = useState<boolean>(true)
+	const navigate = useNavigate()
+
 	const {
 		value: enteredAuthor,
 		isInvalid: authorInputInvalid,
 		isValid: authorInputIsValid,
 		valueChangeHandler: authorInputChangeHandler,
 		valueBlurHandler: authorBlurHandler,
+		resetHandler: resetAuthorInput,
 	} = useInput((value) => !value.trim())
-
-	const { favouriteToggleHandler: toggleFavouriteHandler, resetHandler: resetInputsHandler } = useInput(
-		(value) => !value
-	)
 
 	const {
 		value: enteredTitle,
@@ -31,6 +35,7 @@ export const Form = () => {
 		isValid: titleInputIsValid,
 		valueChangeHandler: titleInputChangeHandler,
 		valueBlurHandler: titleBlurHandler,
+		resetHandler: resetTitleInput,
 	} = useInput((value) => !value.trim())
 
 	const {
@@ -39,6 +44,7 @@ export const Form = () => {
 		isValid: categoryInputIsValid,
 		valueChangeHandler: categoryInputChangeHandler,
 		valueBlurHandler: categoryBlurHandler,
+		resetHandler: resetCategoryInput,
 	} = useInput((value) => !value.trim())
 
 	const {
@@ -47,16 +53,30 @@ export const Form = () => {
 		isValid: descriptionInputIsValid,
 		valueChangeHandler: descriptionInputChangeHandler,
 		valueBlurHandler: descriptionBlurHandler,
+		resetHandler: resetDescriptionInput,
 	} = useInput((value) => !value.trim())
 
 	const allInputsIsValid = titleInputIsValid && authorInputIsValid && categoryInputIsValid && descriptionInputIsValid
 
-	const submitFormHandler = () => {
-		if (!allInputsIsValid) {
+	const { addNote } = useContext(NotesContext)
+
+	const submitFormHandler = (e: React.FormEvent) => {
+		e.preventDefault()
+
+		if (allInputsIsValid) {
 			return
 		}
 
-		resetInputsHandler()
+		const NoteObj = new Note(enteredAuthor, enteredTitle, enteredCategory, enteredDescription, isFavourite, fullDate)
+
+		addNote(NoteObj)
+
+		navigate('/notes')
+
+		resetAuthorInput()
+		resetTitleInput()
+		resetCategoryInput()
+		resetDescriptionInput()
 	}
 
 	return (
@@ -129,9 +149,12 @@ export const Form = () => {
 						variant='filled'
 					/>
 				</div>
-				<FormControlLabel control={<Checkbox onChange={toggleFavouriteHandler} defaultChecked />} label='Favourite' />
+				<FormControlLabel
+					control={<Checkbox onChange={() => setIsFavourite((prev) => !prev)} defaultChecked />}
+					label='Favourite'
+				/>
 
-				<MainButton variant='contained' title='Create' />
+				<MainButton type='submit' variant='contained' title='Create' />
 			</form>
 
 			<img src={formImg} alt='img' />

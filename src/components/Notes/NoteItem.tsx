@@ -1,11 +1,15 @@
+import { useContext } from 'react'
 import Note from '../../models/Note'
 import classes from './NoteItem.module.scss'
 import { NavButton } from '../Navigation/NavLink'
-import { MainButton } from '../UI/MainButton'
 import cat from '../../img/cat.svg'
 import { motion } from 'framer-motion'
+import Button from '@mui/material/Button'
+import { NotesContext } from '../../context/NoteContext'
 
 export const NoteItem = ({ id, author, title, category, description, favourite, date }: Note) => {
+	const { removeNote } = useContext(NotesContext)
+
 	return (
 		<motion.li
 			layout
@@ -23,7 +27,10 @@ export const NoteItem = ({ id, author, title, category, description, favourite, 
 			</div>
 			<div className={classes.buttons}>
 				<NavButton isSecondary={false} title='More info' href={`/notes/${id}`} variant='contained' />
-				<MainButton variant='outlined' title='Move to trash' />
+
+				<Button onClick={() => removeNote(id)} type='button' variant='outlined'>
+					Move to trash
+				</Button>
 			</div>
 		</motion.li>
 	)

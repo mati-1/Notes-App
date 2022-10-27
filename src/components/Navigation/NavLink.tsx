@@ -12,7 +12,7 @@ type NavLinksProps = {
 export const NavButton = ({ href, isSecondary, title, variant }: NavLinksProps) => {
 	return isSecondary ? (
 		<NavLink to={href}>
-			<MainButton variant={variant} title={title} />
+			<MainButton type='button' variant={variant} title={title} />
 		</NavLink>
 	) : (
 		<NavLink to={href}>

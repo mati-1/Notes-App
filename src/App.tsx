@@ -2,6 +2,7 @@ import React, { Suspense } from 'react'
 import { Route, createBrowserRouter, createRoutesFromElements, RouterProvider } from 'react-router-dom'
 import RootLayout from './pages/RootLayout'
 import { ErrorPage } from './pages/ErrorPage'
+import { NotesContextProvider } from './context/NoteContext'
 
 const HomeLayout = React.lazy(() => import('./pages/HomePage'))
 const CreateLayout = React.lazy(() => import('./pages/CreatePage'))
@@ -19,9 +20,11 @@ const router = createBrowserRouter(
 
 const App = () => {
 	return (
-		<Suspense fallback={<p>Loading...</p>}>
-			<RouterProvider router={router} />
-		</Suspense>
+		<NotesContextProvider>
+			<Suspense fallback={<p>Loading...</p>}>
+				<RouterProvider router={router} />
+			</Suspense>
+		</NotesContextProvider>
 	)
 }
 

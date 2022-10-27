@@ -4,6 +4,7 @@ export const useInput = (validateValue: (value: string) => boolean | string) => 
 	const [enteredValue, setEnteredValue] = useState<string>('')
 	const [favourite, setFavourite] = useState<boolean>()
 	const [isTouched, setIsTouched] = useState<boolean>(false)
+	const [isFavourite, setIsFavourite] = useState<boolean>(true)
 
 	const valueIsValid = validateValue(enteredValue)
 	const hasError = !valueIsValid && isTouched
