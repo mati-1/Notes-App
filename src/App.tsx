@@ -3,6 +3,7 @@ import { Route, createBrowserRouter, createRoutesFromElements, RouterProvider } 
 import RootLayout from './pages/RootLayout'
 import { ErrorPage } from './pages/ErrorPage'
 import { NotesContextProvider } from './context/NoteContext'
+import { ProgressBar } from './components/UI/Progressbar'
 
 const HomeLayout = React.lazy(() => import('./pages/HomePage'))
 const CreateLayout = React.lazy(() => import('./pages/CreatePage'))
@@ -21,7 +22,7 @@ const router = createBrowserRouter(
 const App = () => {
 	return (
 		<NotesContextProvider>
-			<Suspense fallback={<p>Loading...</p>}>
+			<Suspense fallback={<ProgressBar />}>
 				<RouterProvider router={router} />
 			</Suspense>
 		</NotesContextProvider>

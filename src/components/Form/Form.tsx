@@ -27,7 +27,7 @@ export const Form = () => {
 		valueChangeHandler: authorInputChangeHandler,
 		valueBlurHandler: authorBlurHandler,
 		resetHandler: resetAuthorInput,
-	} = useInput((value) => !value.trim())
+	} = useInput((value) => value.trim())
 
 	const {
 		value: enteredTitle,
@@ -36,7 +36,7 @@ export const Form = () => {
 		valueChangeHandler: titleInputChangeHandler,
 		valueBlurHandler: titleBlurHandler,
 		resetHandler: resetTitleInput,
-	} = useInput((value) => !value.trim())
+	} = useInput((value) => value.trim())
 
 	const {
 		value: enteredCategory,
@@ -45,7 +45,7 @@ export const Form = () => {
 		valueChangeHandler: categoryInputChangeHandler,
 		valueBlurHandler: categoryBlurHandler,
 		resetHandler: resetCategoryInput,
-	} = useInput((value) => !value.trim())
+	} = useInput((value) => value.trim())
 
 	const {
 		value: enteredDescription,
@@ -54,7 +54,7 @@ export const Form = () => {
 		valueChangeHandler: descriptionInputChangeHandler,
 		valueBlurHandler: descriptionBlurHandler,
 		resetHandler: resetDescriptionInput,
-	} = useInput((value) => !value.trim())
+	} = useInput((value) => value.trim())
 
 	const allInputsIsValid = titleInputIsValid && authorInputIsValid && categoryInputIsValid && descriptionInputIsValid
 
@@ -63,7 +63,7 @@ export const Form = () => {
 	const submitFormHandler = (e: React.FormEvent) => {
 		e.preventDefault()
 
-		if (allInputsIsValid) {
+		if (!allInputsIsValid) {
 			return
 		}
 
@@ -85,7 +85,7 @@ export const Form = () => {
 				<h1 className={classes.heading}>Create new note</h1>
 				<div className={classes.fieldset}>
 					<TextField
-						error={!authorInputInvalid}
+						error={authorInputInvalid}
 						value={enteredAuthor}
 						onChange={authorInputChangeHandler}
 						onBlur={authorBlurHandler}
@@ -103,7 +103,7 @@ export const Form = () => {
 						<TextField
 							value={enteredTitle}
 							onChange={titleInputChangeHandler}
-							error={!titleInputInvalid}
+							error={titleInputInvalid}
 							onBlur={titleBlurHandler}
 							autoComplete='off'
 							fullWidth
@@ -113,7 +113,7 @@ export const Form = () => {
 							variant='filled'
 						/>
 
-						<FormControl fullWidth variant='filled' error={!categoryInputInvalid}>
+						<FormControl fullWidth variant='filled' error={categoryInputInvalid}>
 							<InputLabel id='demo-simple-select-standard-label'>Category</InputLabel>
 							<Select
 								labelId='demo-simple-select-standard-label'
@@ -135,7 +135,7 @@ export const Form = () => {
 				</div>
 				<div className={classes.fieldset}>
 					<TextField
-						error={!descriptionInputInvalid}
+						error={descriptionInputInvalid}
 						value={enteredDescription}
 						onChange={descriptionInputChangeHandler}
 						onBlur={descriptionBlurHandler}
@@ -154,7 +154,7 @@ export const Form = () => {
 					label='Favourite'
 				/>
 
-				<MainButton type='submit' variant='contained' title='Create' />
+				<MainButton disabled={!allInputsIsValid} type='submit' variant='contained' title='Create' />
 			</form>
 
 			<img src={formImg} alt='img' />

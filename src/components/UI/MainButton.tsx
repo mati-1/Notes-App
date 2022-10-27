@@ -5,11 +5,12 @@ type ButtonProps = {
 	variant: string | any
 	title: string
 	type: any
+	disabled?: boolean
 }
 
-export const MainButton = ({ variant, title, type }: ButtonProps) => {
+export const MainButton = ({ variant, title, type, disabled }: ButtonProps) => {
 	return (
-		<Button type={type} variant={variant}>
+		<Button disabled={disabled} type={type} variant={variant}>
 			{title}
 		</Button>
 	)

@@ -2,11 +2,18 @@ import React, { useContext } from 'react'
 import { NoteItem } from './NoteItem'
 import { AnimatePresence } from 'framer-motion'
 import classes from './Notes.module.scss'
-
+import empty from '../../img/empty.svg'
 import { NotesContext } from '../../context/NoteContext'
 
 export const Notes = () => {
 	const { notes } = useContext(NotesContext)
+
+	const emptyContent = (
+		<div className={classes.emptyWrapper}>
+			<img src={empty} alt='empty' />
+			<h3 className={classes.empty}>Note list is empty</h3>
+		</div>
+	)
 
 	return (
 		<div className={classes.notesModules}>
@@ -31,6 +38,7 @@ export const Notes = () => {
 					})}
 				</AnimatePresence>
 			</ul>
+			{!notes.length && emptyContent}
 		</div>
 	)
 }
