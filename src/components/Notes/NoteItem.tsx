@@ -2,7 +2,6 @@ import { useContext } from 'react'
 import Note from '../../models/Note'
 import classes from './NoteItem.module.scss'
 import { NavButton } from '../Navigation/NavLink'
-import cat from '../../img/cat.svg'
 import { motion } from 'framer-motion'
 import Button from '@mui/material/Button'
 import { NotesContext } from '../../context/NoteContext'
@@ -23,7 +22,7 @@ export const NoteItem = ({ id, author, title, category, description, favourite, 
 			animate={{ x: 0, opacity: 1 }}
 			exit={{ x: 30, opacity: 0 }}
 			className={classes.note}>
-			{favourite && <img src={cat} alt='cat' />}
+			{favourite && <div className={classes.favouriteWrapper} />}
 			<div className={classes.header}>
 				<h2>{title}</h2>
 			</div>

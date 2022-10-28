@@ -7,17 +7,22 @@ import { NotesContext } from '../../context/NoteContext'
 import { NavButton } from '../Navigation/NavLink'
 import { NotePagination } from '../Pagination/Pagination'
 import { Button } from '@mui/material'
+import { FilterPopup } from '../Filter/FilterPopup'
 
 export const Notes = () => {
 	const { notes, trashNotes, removeAll } = useContext(NotesContext)
 	const [currentPage, setCurrentPage] = useState<number>(1)
 	const [notesPerPage] = useState<number>(4)
+	const [isOpenedFilter, setIsOpenedFilter] = useState<boolean>(false)
+	// const [filteredNotes, setFilteredNotes] = useState<Note[]>([])
 
 	const indexOfLastNote = currentPage * notesPerPage
 	const indexOfFirstNote = indexOfLastNote - notesPerPage
 	const currentNotes = notes.slice(indexOfFirstNote, indexOfLastNote)
 
 	const paginate = (event: React.ChangeEvent<unknown>, pageNumber: number) => setCurrentPage(pageNumber)
+
+	const toggleFilter = () => setIsOpenedFilter((prev) => !prev)
 
 	const emptyContent = (
 		<div className={classes.emptyWrapper}>
@@ -39,13 +44,16 @@ export const Notes = () => {
 				</h1>
 				{notes.length ? (
 					<div className={classes.buttons}>
-						<Button variant='contained'>Filters</Button>
+						<Button onClick={toggleFilter} variant='contained'>
+							Filters
+						</Button>
 						<Button variant='outlined' onClick={removeAll}>
 							Remove all notes
 						</Button>
 					</div>
 				) : null}
 			</div>
+			{isOpenedFilter && notes.length ? <FilterPopup /> : null}
 			<ul className={classes.list}>
 				<AnimatePresence>
 					{currentNotes.map((note) => {

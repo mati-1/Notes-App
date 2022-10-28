@@ -5,14 +5,21 @@
 	padding: 1rem;
 	background-color: rgba(0, 0, 0, 0.096);
 
-	img {
+	.favouriteWrapper {
 		position: absolute;
-		top: -3rem;
-		right: -3rem;
-		width: 7rem;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background-image: url('../../img/cat.svg');
+		background-repeat: no-repeat;
+		background-position: center;
+		background-size: contain;
+		opacity: 0.05;
 	}
 
 	.header {
+		z-index: 20;
 		h2 {
 			color: var(--grey-color);
 			font-size: var(--big-size);
@@ -20,6 +27,7 @@
 		}
 	}
 	.content {
+		z-index: 20;
 		border-radius: 0.5rem;
 		border: 1px solid var(--black2-color);
 		padding: 1rem;

@@ -1,13 +1,19 @@
 import { useContext } from 'react'
+import { useParams } from 'react-router-dom'
+import classes from './NoteItem.module.scss'
 import Note from '../../models/Note'
-import classes from '../Notes/NoteItem.module.scss'
+import { NavButton } from '../Navigation/NavLink'
 import { motion } from 'framer-motion'
-import Button from '@mui/material/Button'
 import { NotesContext } from '../../context/NoteContext'
+import Button from '@mui/material/Button'
 
-export const TrashItem = ({ id, author, title, category, description, favourite, date }: Note) => {
-	const { permRemove, undoNote } = useContext(NotesContext)
-	const noteObj = new Note(author, title, category, description, favourite, date)
+export const SingleNoteItem = () => {
+	const { notes } = useContext(NotesContext)
+	const { noteId } = useParams()
+
+	const note: Note | any = notes.find((note) => note.id === noteId)
+
+	const { author, title, category, description, favourite, date } = note
 
 	return (
 		<motion.li
@@ -24,14 +30,11 @@ export const TrashItem = ({ id, author, title, category, description, favourite,
 				<h3>{category}</h3>
 				<p>{description}</p>
 			</div>
+			<h1>{author}</h1>
+			<h1>{date}</h1>
 			<div className={classes.buttons}>
-				<Button onClick={() => permRemove(id)} type='button' variant='contained'>
-					Delete
-				</Button>
-
-				<Button onClick={() => undoNote(id, noteObj)} type='button' variant='text'>
-					Undo to notes
-				</Button>
+				<NavButton isSecondary={false} title='Back to list' href={`/notes`} variant='contained' />
+				<Button variant='text'>Edit</Button>
 			</div>
 		</motion.li>
 	)
