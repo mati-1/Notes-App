@@ -1,11 +1,14 @@
-import { Layout } from '../components/UI/Layout'
 import { SingleNoteItem } from '../components/Notes/SingleNote'
+import classes from '../components/Notes/Notes.module.scss'
+import { Wrapper } from '../components/UI/Wrapper'
 
 const DetailNoteLayout = () => {
 	return (
-		<Layout>
-			<SingleNoteItem />
-		</Layout>
+		<Wrapper>
+			<div className={classes.singleItemWrapper}>
+				<SingleNoteItem />
+			</div>
+		</Wrapper>
 	)
 }
 
