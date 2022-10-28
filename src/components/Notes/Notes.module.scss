@@ -28,6 +28,7 @@
 		gap: 2.5rem;
 		border-radius: 1rem;
 		list-style: none;
+		padding-bottom: 4rem;
 
 		@media (max-width: 1000px) {
 			grid-template-columns: repeat(1, 1fr);

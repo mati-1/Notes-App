@@ -12,7 +12,7 @@ export const Trash = () => {
 	const emptyContent = (
 		<div className={classes.emptyWrapper}>
 			<img src={empty} alt='empty' />
-			<h3 className={classes.empty}>Trash empty</h3>
+			<h3 className={classes.empty}>Trash is empty</h3>
 
 			<div className={classes.buttons}>
 				{notes.length ? <NavButton variant='text' title='Check notes' href='/notes' isSecondary={true} /> : null}
