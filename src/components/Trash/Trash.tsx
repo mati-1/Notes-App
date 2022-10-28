@@ -5,9 +5,10 @@ import classes from '../Notes/Notes.module.scss'
 import empty from '../../img/trash.svg'
 import { NotesContext } from '../../context/NoteContext'
 import { NavButton } from '../Navigation/NavLink'
+import { Button } from '@mui/material'
 
 export const Trash = () => {
-	const { trashNotes, notes } = useContext(NotesContext)
+	const { trashNotes, notes, clearTrash } = useContext(NotesContext)
 
 	const emptyContent = (
 		<div className={classes.emptyWrapper}>
@@ -23,9 +24,18 @@ export const Trash = () => {
 
 	return (
 		<div className={classes.notesModules}>
-			<h1 className={classes.heading}>
-				Trash <span className={classes.notesLength}>{trashNotes.length}</span>
-			</h1>
+			<div className={classes.header}>
+				<h1 className={classes.heading}>
+					Trash <span className={classes.notesLength}>{trashNotes.length}</span>
+				</h1>
+				{trashNotes.length ? (
+					<div className={classes.buttons}>
+						<Button variant='outlined' onClick={clearTrash}>
+							Clear trash
+						</Button>
+					</div>
+				) : null}
+			</div>
 			<ul className={classes.list}>
 				<AnimatePresence>
 					{trashNotes.map((note) => {

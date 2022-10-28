@@ -1,13 +1,25 @@
 .notesModules {
 	padding-top: 5rem;
-	.heading {
+
+	.header {
 		display: flex;
 		align-items: center;
-		position: relative;
-		font-size: var(--biggest-size);
-		color: var(--white-color);
+		justify-content: space-between;
 		margin-bottom: 2rem;
+		.heading {
+			display: flex;
+			align-items: center;
+			position: relative;
+			font-size: var(--biggest-size);
+			color: var(--white-color);
+			margin-bottom: 2rem;
 
+			.buttons {
+				display: flex;
+				align-items: center;
+				gap: 1rem;
+			}
+		}
 		.notesLength {
 			display: flex;
 			align-items: center;
@@ -28,7 +40,6 @@
 		gap: 2.5rem;
 		border-radius: 1rem;
 		list-style: none;
-		padding-bottom: 4rem;
 
 		@media (max-width: 1000px) {
 			grid-template-columns: repeat(1, 1fr);

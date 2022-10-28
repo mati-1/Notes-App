@@ -8,6 +8,8 @@ type NotesContextType = {
 	removeNote: (id: string, noteObj: Note) => void
 	permRemove: (id: string) => void
 	undoNote: (id: string, noteObj: Note) => void
+	removeAll: () => void
+	clearTrash: () => void
 }
 
 export const NotesContext = React.createContext<NotesContextType>({
@@ -17,6 +19,8 @@ export const NotesContext = React.createContext<NotesContextType>({
 	removeNote: () => {},
 	permRemove: () => {},
 	undoNote: () => {},
+	removeAll: () => {},
+	clearTrash: () => {},
 })
 
 export const NotesContextProvider = ({ children }: { children: JSX.Element }) => {
@@ -53,6 +57,16 @@ export const NotesContextProvider = ({ children }: { children: JSX.Element }) =>
 		setTrashNotes(newNotes)
 	}
 
+	const removeAllNotes = () => {
+		const prevNotes = [...notes, ...trashNotes]
+
+		setTrashNotes(prevNotes)
+
+		return setNotes([])
+	}
+
+	const removeAllTrashNotes = () => setTrashNotes([])
+
 	const contextValue: NotesContextType = {
 		notes: notes,
 		trashNotes: trashNotes,
@@ -60,6 +74,8 @@ export const NotesContextProvider = ({ children }: { children: JSX.Element }) =>
 		removeNote: removeNoteHandler,
 		permRemove: permDeleteNote,
 		undoNote: undoNoteHandler,
+		removeAll: removeAllNotes,
+		clearTrash: removeAllTrashNotes,
 	}
 
 	return <NotesContext.Provider value={contextValue}>{children}</NotesContext.Provider>

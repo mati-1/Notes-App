@@ -1,4 +1,4 @@
-import React, { useContext, useState, Suspense } from 'react'
+import React, { useContext, useState } from 'react'
 import { NoteItem } from './NoteItem'
 import { AnimatePresence } from 'framer-motion'
 import classes from './Notes.module.scss'
@@ -6,10 +6,10 @@ import empty from '../../img/empty.svg'
 import { NotesContext } from '../../context/NoteContext'
 import { NavButton } from '../Navigation/NavLink'
 import { NotePagination } from '../Pagination/Pagination'
-import { ProgressBar } from '../UI/Progressbar'
+import { Button } from '@mui/material'
 
 export const Notes = () => {
-	const { notes, trashNotes } = useContext(NotesContext)
+	const { notes, trashNotes, removeAll } = useContext(NotesContext)
 	const [currentPage, setCurrentPage] = useState<number>(1)
 	const [notesPerPage] = useState<number>(4)
 
@@ -33,31 +33,42 @@ export const Notes = () => {
 
 	return (
 		<div className={classes.notesModules}>
-			<h1 className={classes.heading}>
-				Notes <span className={classes.notesLength}>{notes.length}</span>
-			</h1>
-			<Suspense fallback={<ProgressBar />}>
-				<ul className={classes.list}>
-					<AnimatePresence>
-						{currentNotes.map((note) => {
-							return (
-								<NoteItem
-									key={note.id}
-									id={note.id}
-									author={note.author}
-									title={note.title}
-									category={note.category}
-									description={note.description}
-									favourite={note.favourite}
-									date={note.date}
-								/>
-							)
-						})}
-					</AnimatePresence>
-				</ul>
-			</Suspense>
+			<div className={classes.header}>
+				<h1 className={classes.heading}>
+					Notes <span className={classes.notesLength}>{notes.length}</span>
+				</h1>
+				{notes.length ? (
+					<div className={classes.buttons}>
+						<Button variant='contained'>Filters</Button>
+						<Button variant='outlined' onClick={removeAll}>
+							Remove all notes
+						</Button>
+					</div>
+				) : null}
+			</div>
+			<ul className={classes.list}>
+				<AnimatePresence>
+					{currentNotes.map((note) => {
+						return (
+							<NoteItem
+								key={note.id}
+								id={note.id}
+								author={note.author}
+								title={note.title}
+								category={note.category}
+								description={note.description}
+								favourite={note.favourite}
+								date={note.date}
+							/>
+						)
+					})}
+				</AnimatePresence>
+			</ul>
+
 			{!notes.length && emptyContent}
-			{notes.length && <NotePagination notesPerPage={notesPerPage} totalNotes={notes.length} paginate={paginate} />}
+			{notes.length ? (
+				<NotePagination notesPerPage={notesPerPage} totalNotes={notes.length} paginate={paginate} />
+			) : null}
 		</div>
 	)
 }

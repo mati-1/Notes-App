@@ -151,7 +151,7 @@ export const Form = () => {
 				</div>
 				<FormControlLabel
 					control={<Checkbox onChange={() => setIsFavourite((prev) => !prev)} defaultChecked />}
-					label='Favourite'
+					label={isFavourite ? 'Is favourite' : 'Not favourite'}
 				/>
 
 				<MainButton disabled={!allInputsIsValid} type='submit' variant='contained' title='Create' />
