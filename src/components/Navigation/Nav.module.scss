@@ -26,6 +26,25 @@
 			align-items: center;
 			flex-direction: row-reverse;
 			gap: 1rem;
+
+			a {
+				position: relative;
+				.notesLength {
+					position: absolute;
+					top: -0.4rem;
+					right: -0.4rem;
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					width: 1.1rem;
+					height: 1.1rem;
+					color: white;
+					font-size: 0.8rem;
+					background-color: var(--main-color);
+					border-radius: 50%;
+					pointer-events: none;
+				}
+			}
 		}
 	}
 }

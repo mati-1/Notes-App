@@ -6,11 +6,12 @@ type ButtonProps = {
 	title: string
 	type: any
 	disabled?: boolean
+	className?: string | boolean | any
 }
 
-export const MainButton = ({ variant, title, type, disabled }: ButtonProps) => {
+export const MainButton = ({ variant, title, type, disabled, className }: ButtonProps) => {
 	return (
-		<Button disabled={disabled} type={type} variant={variant}>
+		<Button className={className} disabled={disabled} type={type} variant={variant}>
 			{title}
 		</Button>
 	)

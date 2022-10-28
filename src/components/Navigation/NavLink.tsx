@@ -7,16 +7,20 @@ type NavLinksProps = {
 	isSecondary: boolean
 	title: string
 	variant: string | any
+	children?: JSX.Element
+	className?: string | boolean | any
 }
 
-export const NavButton = ({ href, isSecondary, title, variant }: NavLinksProps) => {
+export const NavButton = ({ href, isSecondary, title, variant, children, className }: NavLinksProps) => {
 	return isSecondary ? (
 		<NavLink to={href}>
-			<MainButton type='button' variant={variant} title={title} />
+			<MainButton className={className} type='button' variant={variant} title={title} />
+			{children}
 		</NavLink>
 	) : (
 		<NavLink to={href}>
 			<SecondaryButton variant={variant} title={title} />
+			{children}
 		</NavLink>
 	)
 }
