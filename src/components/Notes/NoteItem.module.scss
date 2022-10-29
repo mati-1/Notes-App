@@ -5,6 +5,7 @@
 	padding: 1rem;
 	background-color: rgba(0, 0, 0, 0.096);
 	list-style: none;
+	max-width: 40rem;
 
 	.header {
 		p {
@@ -27,16 +28,14 @@
 		flex-direction: column;
 		gap: 2rem;
 
-		.contentParams {
-			h3 {
-				color: var(--grey-color);
-			}
+		h3 {
+			color: var(--grey-color);
+		}
 
-			p {
-				color: var(--white-color);
-				font-size: var(--basic-size);
-				padding-bottom: 0.5rem;
-			}
+		p {
+			color: var(--white-color);
+			font-size: var(--basic-size);
+			padding-bottom: 0.5rem;
 		}
 	}
 	.info {
@@ -66,6 +65,7 @@
 
 .form {
 	.header {
+		margin-bottom: 1rem;
 		label {
 			color: var(--grey-color);
 		}
@@ -79,15 +79,6 @@
 	}
 	.content {
 		margin: 0;
-		.contentParams {
-			background-color: rgba(0, 0, 0, 0.096);
-			margin: 0;
-			div {
-				color: white;
-			}
-		}
-	}
-	.contentParams {
 		label {
 			color: var(--white-color);
 			span {
@@ -96,9 +87,10 @@
 				}
 			}
 		}
-		.info {
-			.contentParams {
-				color: var(--white-color);
+		.contentParams {
+			margin: 0;
+			div {
+				color: white;
 			}
 		}
 	}

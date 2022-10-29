@@ -1,7 +1,7 @@
 import { useContext, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import classes from './NoteItem.module.scss'
-import { motion } from 'framer-motion'
+import { useInput } from '../../hooks/use-input'
 import Button from '@mui/material/Button'
 import TextField from '@mui/material/TextField'
 import FormControlLabel from '@mui/material/FormControlLabel'
@@ -11,32 +11,48 @@ import FormControl from '@mui/material/FormControl'
 import MenuItem from '@mui/material/MenuItem'
 import { NotesContext } from '../../context/NoteContext'
 import Note from '../../models/Note'
-import { Select } from '@mui/material'
+import { Select, SelectChangeEvent } from '@mui/material'
 
 export const SingleNoteItem = () => {
 	const [isEditing, setIsEditing] = useState<boolean>(false)
 	const { notes } = useContext(NotesContext)
 	const { noteId } = useParams()
+
 	const navigate = useNavigate()
 
 	const note: Note | any = notes.find((note) => note.id === noteId)
 
 	const { author, title, category, description, favourite, date } = note
 
+	const [newTitle, setNewTitle] = useState<string>(title)
+	const [newCategory, setNewCategory] = useState<string>(category)
+	const [newDescription, setNewDescription] = useState<string>(description)
+	const [newFavourite, setNewFavourite] = useState<boolean>(favourite)
+
+	const allInputsIsValid = newTitle && newCategory && newDescription
+
+	const submitNewNoteDataHandler = (e: React.MouseEvent) => {
+		e.preventDefault()
+
+		if (!allInputsIsValid) {
+			return
+		}
+
+		setIsEditing(false)
+	}
+
 	return (
 		<>
 			<h1 className={classes.heading}>Check your note!</h1>
-			<motion.li
-				layout
-				initial={{ x: 30, opacity: 0 }}
-				animate={{ x: 0, opacity: 1 }}
-				exit={{ x: 30, opacity: 0 }}
-				className={classes.note}>
+			<li className={classes.note}>
 				{isEditing ? (
 					<form className={classes.form}>
 						<div className={classes.header}>
 							<p>Title</p>
 							<TextField
+								defaultValue={title}
+								onChange={(e: React.ChangeEvent<HTMLInputElement>) => setNewTitle(e.target.value)}
+								value={newTitle}
 								autoComplete='off'
 								fullWidth
 								color='primary'
@@ -50,7 +66,13 @@ export const SingleNoteItem = () => {
 								<p>Category</p>
 								<FormControl fullWidth variant='filled'>
 									<InputLabel id='demo-simple-select-standard-label'>Category</InputLabel>
-									<Select labelId='demo-simple-select-standard-label' id='demo-simple-select-standard' label='Age'>
+									<Select
+										onChange={(e: SelectChangeEvent) => setNewCategory(e.target.value)}
+										defaultValue={category}
+										value={newCategory}
+										labelId='demo-simple-select-standard-label'
+										id='demo-simple-select-standard'
+										label='Age'>
 										<MenuItem value=''>
 											<em>Choose category</em>
 										</MenuItem>
@@ -66,6 +88,9 @@ export const SingleNoteItem = () => {
 								<TextField
 									multiline
 									rows={4}
+									onChange={(e: React.ChangeEvent<HTMLInputElement>) => setNewDescription(e.target.value)}
+									defaultValue={description}
+									value={newDescription}
 									autoComplete='off'
 									fullWidth
 									color='primary'
@@ -75,35 +100,41 @@ export const SingleNoteItem = () => {
 								/>
 							</div>
 						</div>
-						<div className={classes.info}>
-							<div className={classes.contentParams}>
-								<p>Author</p>
-								<TextField
-									autoComplete='off'
-									fullWidth
-									color='primary'
-									id='filled-basic'
-									label='Author'
-									variant='filled'
+						<FormControlLabel
+							control={
+								<Checkbox
+									defaultChecked={newFavourite}
+									onChange={(e: React.ChangeEvent<HTMLInputElement>) => setNewFavourite(e.target.checked)}
 								/>
-							</div>
+							}
+							label={'Is favourite'}
+						/>
+						<div className={classes.buttons}>
+							<Button onClick={() => setIsEditing(false)} variant={!isEditing ? 'contained' : 'text'}>
+								Cancel editing
+							</Button>
+							<Button
+								disabled={!allInputsIsValid}
+								onClick={submitNewNoteDataHandler}
+								variant={isEditing ? 'contained' : 'text'}>
+								{isEditing ? 'Save' : 'Edit'}
+							</Button>
 						</div>
-						<FormControlLabel control={<Checkbox defaultChecked />} label={'Is favourite'} />
 					</form>
 				) : (
 					<>
 						<div className={classes.header}>
 							<p>Title</p>
-							<h2>{title}</h2>
+							<h2>{newTitle}</h2>
 						</div>
 						<div className={classes.content}>
 							<div className={classes.contentParams}>
 								<p>Category</p>
-								<h3>{category}</h3>
+								<h3>{newCategory}</h3>
 							</div>
 							<div className={classes.contentParams}>
 								<p>Description</p>
-								<h3>{description}</h3>
+								<h3>{newDescription}</h3>
 							</div>
 						</div>
 						<div className={classes.info}>
@@ -115,18 +146,23 @@ export const SingleNoteItem = () => {
 								<p>Created at</p>
 								<h3>{date}</h3>
 							</div>
+							{newFavourite ? (
+								<div className={classes.contentParams}>
+									<h1>Favourite</h1>
+								</div>
+							) : null}
+						</div>
+						<div className={classes.buttons}>
+							<Button disabled={isEditing} onClick={() => navigate(-1)} variant='contained'>
+								Back to list
+							</Button>
+							<Button onClick={() => setIsEditing((prev) => !prev)} variant='text'>
+								Edit
+							</Button>
 						</div>
 					</>
 				)}
-				<div className={classes.buttons}>
-					<Button disabled={isEditing} onClick={() => navigate(-1)} variant='contained'>
-						Back to list
-					</Button>
-					<Button onClick={() => setIsEditing((prev) => !prev)} variant='text'>
-						{isEditing ? 'Save' : 'Edit'}
-					</Button>
-				</div>
-			</motion.li>
+			</li>
 		</>
 	)
 }
