@@ -29,7 +29,7 @@
 
 		.contentParams {
 			h3 {
-				color: var(--main-color);
+				color: var(--grey-color);
 			}
 
 			p {
@@ -47,7 +47,7 @@
 
 		.contentParams {
 			h3 {
-				color: var(--main-color);
+				color: var(--grey-color);
 			}
 
 			p {
@@ -62,4 +62,53 @@
 		align-items: center;
 		gap: 1rem;
 	}
+}
+
+.form {
+	.header {
+		label {
+			color: var(--grey-color);
+		}
+		input {
+			color: var(--white-color);
+		}
+
+		p {
+			color: white;
+		}
+	}
+	.content {
+		margin: 0;
+		.contentParams {
+			background-color: rgba(0, 0, 0, 0.096);
+			margin: 0;
+			div {
+				color: white;
+			}
+		}
+	}
+	.contentParams {
+		label {
+			color: var(--white-color);
+			span {
+				svg {
+					fill: var(--main-color);
+				}
+			}
+		}
+		.info {
+			.contentParams {
+				color: var(--white-color);
+			}
+		}
+	}
+}
+
+.heading {
+	display: flex;
+	align-items: center;
+	position: relative;
+	font-size: var(--biggest-size);
+	color: var(--white-color);
+	margin-bottom: 2rem;
 }
