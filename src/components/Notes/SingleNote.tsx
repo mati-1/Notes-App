@@ -1,7 +1,7 @@
 import { useContext, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import classes from './NoteItem.module.scss'
-import { useInput } from '../../hooks/use-input'
+import StarIcon from '@mui/icons-material/Star'
 import Button from '@mui/material/Button'
 import TextField from '@mui/material/TextField'
 import FormControlLabel from '@mui/material/FormControlLabel'
@@ -107,7 +107,7 @@ export const SingleNoteItem = () => {
 									onChange={(e: React.ChangeEvent<HTMLInputElement>) => setNewFavourite(e.target.checked)}
 								/>
 							}
-							label={'Is favourite'}
+							label={newFavourite ? 'Is favourite' : 'Not favourite'}
 						/>
 						<div className={classes.buttons}>
 							<Button onClick={() => setIsEditing(false)} variant={!isEditing ? 'contained' : 'text'}>
@@ -146,12 +146,12 @@ export const SingleNoteItem = () => {
 								<p>Created at</p>
 								<h3>{date}</h3>
 							</div>
-							{newFavourite ? (
-								<div className={classes.contentParams}>
-									<h1>Favourite</h1>
-								</div>
-							) : null}
 						</div>
+						{newFavourite ? (
+							<div className={classes.star}>
+								<StarIcon />
+							</div>
+						) : null}
 						<div className={classes.buttons}>
 							<Button disabled={isEditing} onClick={() => navigate(-1)} variant='contained'>
 								Back to list

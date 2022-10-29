@@ -5,6 +5,7 @@ import { NavButton } from '../Navigation/NavLink'
 import { motion } from 'framer-motion'
 import Button from '@mui/material/Button'
 import { NotesContext } from '../../context/NoteContext'
+import StarIcon from '@mui/icons-material/Star'
 
 export const NoteItem = ({ id, author, title, category, description, favourite, date }: Note) => {
 	const { removeNote } = useContext(NotesContext)
@@ -30,6 +31,11 @@ export const NoteItem = ({ id, author, title, category, description, favourite, 
 				<h3>{category}</h3>
 				<p>{description}</p>
 			</div>
+			{favourite ? (
+				<div className={classes.star}>
+					<StarIcon />
+				</div>
+			) : null}
 			<div className={classes.buttons}>
 				<NavButton isSecondary={false} title='More info' href={`/notes/${id}`} variant='contained' />
 

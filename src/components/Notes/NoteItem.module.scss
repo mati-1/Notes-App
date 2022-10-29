@@ -74,26 +74,36 @@
 		}
 
 		p {
-			color: white;
+			color: var(--grey-color);
+		}
+	}
+
+	label {
+		color: var(--white-color);
+		margin-bottom: 1rem;
+		span {
+			svg {
+				fill: var(--main-color);
+			}
 		}
 	}
 	.content {
-		margin: 0;
-		label {
-			color: var(--white-color);
-			span {
-				svg {
-					fill: var(--main-color);
-				}
-			}
-		}
 		.contentParams {
-			margin: 0;
 			div {
 				color: white;
 			}
+			p {
+				color: var(--grey-color);
+			}
 		}
 	}
+}
+
+.star {
+	position: absolute;
+	top: 1rem;
+	right: 1rem;
+	color: gold;
 }
 
 .heading {
