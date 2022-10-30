@@ -23,9 +23,6 @@ export const Nav = () => {
 					<Badge badgeContent={trashNotes.length} color='primary'>
 						<NavButton variant='text' isSecondary={true} title='Trash' href='/trash' />
 					</Badge>
-
-					<NavButton variant='text' isSecondary={true} title='Favourite' href='/favourite' />
-					<NavButton variant='text' isSecondary={true} title='Chart' href='/chart' />
 				</div>
 			</div>
 		</nav>

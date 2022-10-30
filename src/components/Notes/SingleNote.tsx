@@ -15,19 +15,28 @@ import { Select, SelectChangeEvent } from '@mui/material'
 
 export const SingleNoteItem = () => {
 	const [isEditing, setIsEditing] = useState<boolean>(false)
-	const { notes } = useContext(NotesContext)
+	const { notes, addNote } = useContext(NotesContext)
 	const { noteId } = useParams()
 
 	const navigate = useNavigate()
 
 	const note: Note | any = notes.find((note) => note.id === noteId)
 
-	const { author, title, category, description, favourite, date } = note
+	const {
+		author: NoteAuthor,
+		title: NoteTitle,
+		category: NoteCategory,
+		description: NoteDescription,
+		favourite: NoteFavourite,
+		date: NoteDate,
+	} = note || {}
 
-	const [newTitle, setNewTitle] = useState<string>(title)
-	const [newCategory, setNewCategory] = useState<string>(category)
-	const [newDescription, setNewDescription] = useState<string>(description)
-	const [newFavourite, setNewFavourite] = useState<boolean>(favourite)
+	const [newTitle, setNewTitle] = useState<string>(NoteTitle)
+	const [newCategory, setNewCategory] = useState<string>(NoteCategory)
+	const [newDescription, setNewDescription] = useState<string>(NoteDescription)
+	const [newFavourite, setNewFavourite] = useState<boolean>(NoteFavourite)
+	const [newAuthor] = useState<string>(NoteAuthor)
+	const [newDate] = useState<string>(NoteDate)
 
 	const allInputsIsValid = newTitle && newCategory && newDescription
 
@@ -37,6 +46,12 @@ export const SingleNoteItem = () => {
 		if (!allInputsIsValid) {
 			return
 		}
+
+		const NoteObj = new Note(newAuthor, newTitle, newCategory, newDescription, newFavourite, NoteDate)
+
+		console.log(NoteObj)
+
+		addNote(NoteObj)
 
 		setIsEditing(false)
 	}
@@ -50,7 +65,7 @@ export const SingleNoteItem = () => {
 						<div className={classes.header}>
 							<p>Title</p>
 							<TextField
-								defaultValue={title}
+								defaultValue={NoteTitle}
 								onChange={(e: React.ChangeEvent<HTMLInputElement>) => setNewTitle(e.target.value)}
 								value={newTitle}
 								autoComplete='off'
@@ -68,7 +83,7 @@ export const SingleNoteItem = () => {
 									<InputLabel id='demo-simple-select-standard-label'>Category</InputLabel>
 									<Select
 										onChange={(e: SelectChangeEvent) => setNewCategory(e.target.value)}
-										defaultValue={category}
+										defaultValue={NoteCategory}
 										value={newCategory}
 										labelId='demo-simple-select-standard-label'
 										id='demo-simple-select-standard'
@@ -89,7 +104,7 @@ export const SingleNoteItem = () => {
 									multiline
 									rows={4}
 									onChange={(e: React.ChangeEvent<HTMLInputElement>) => setNewDescription(e.target.value)}
-									defaultValue={description}
+									defaultValue={NoteDescription}
 									value={newDescription}
 									autoComplete='off'
 									fullWidth
@@ -110,7 +125,7 @@ export const SingleNoteItem = () => {
 							label={newFavourite ? 'Is favourite' : 'Not favourite'}
 						/>
 						<div className={classes.buttons}>
-							<Button onClick={() => setIsEditing(false)} variant={!isEditing ? 'contained' : 'text'}>
+							<Button onClick={() => setIsEditing(false)} variant={'outlined'}>
 								Cancel editing
 							</Button>
 							<Button
@@ -140,11 +155,11 @@ export const SingleNoteItem = () => {
 						<div className={classes.info}>
 							<div className={classes.contentParams}>
 								<p>Author</p>
-								<h3>{author}</h3>
+								<h3>{newAuthor}</h3>
 							</div>
 							<div className={classes.contentParams}>
 								<p>Created at</p>
-								<h3>{date}</h3>
+								<h3>{newDate}</h3>
 							</div>
 						</div>
 						{newFavourite ? (
@@ -156,7 +171,7 @@ export const SingleNoteItem = () => {
 							<Button disabled={isEditing} onClick={() => navigate(-1)} variant='contained'>
 								Back to list
 							</Button>
-							<Button onClick={() => setIsEditing((prev) => !prev)} variant='text'>
+							<Button onClick={() => setIsEditing((prev) => !prev)} variant='outlined'>
 								Edit
 							</Button>
 						</div>

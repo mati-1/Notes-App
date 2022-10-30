@@ -69,6 +69,8 @@ export const Form = () => {
 
 		const NoteObj = new Note(enteredAuthor, enteredTitle, enteredCategory, enteredDescription, isFavourite, fullDate)
 
+		console.log(NoteObj)
+
 		addNote(NoteObj)
 
 		navigate('/notes')

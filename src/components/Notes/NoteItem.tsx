@@ -39,7 +39,7 @@ export const NoteItem = ({ id, author, title, category, description, favourite, 
 			<div className={classes.buttons}>
 				<NavButton isSecondary={false} title='More info' href={`/notes/${id}`} variant='contained' />
 
-				<Button onClick={deleteHandler} type='button' variant='text'>
+				<Button onClick={deleteHandler} type='button' variant='outlined'>
 					Move to trash
 				</Button>
 			</div>

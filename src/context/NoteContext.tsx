@@ -4,6 +4,7 @@ import Note from '../models/Note'
 type NotesContextType = {
 	notes: Note[]
 	trashNotes: Note[]
+	favouriteNotes: Note[]
 	addNote: (noteObj: Note) => void
 	removeNote: (id: string, noteObj: Note) => void
 	permRemove: (id: string) => void
@@ -14,6 +15,7 @@ type NotesContextType = {
 
 export const NotesContext = React.createContext<NotesContextType>({
 	notes: [],
+	favouriteNotes: [],
 	trashNotes: [],
 	addNote: () => {},
 	removeNote: () => {},
@@ -26,11 +28,27 @@ export const NotesContext = React.createContext<NotesContextType>({
 export const NotesContextProvider = ({ children }: { children: JSX.Element }) => {
 	const [notes, setNotes] = useState<Note[]>([])
 	const [trashNotes, setTrashNotes] = useState<Note[]>([])
+	const [favouriteNotes, setFavouriteNotes] = useState<Note[]>([])
+
+	const filteredFavouriteNotes = notes.filter((note) => note.favourite === true)
 
 	const addNoteHandler = (noteObj: Note) => {
 		const newNote = noteObj
 
-		setNotes((prevNotes) => [...prevNotes, newNote])
+		setNotes((prevNotes) => {
+			const noteIndex = prevNotes.findIndex((note) => note.id !== noteObj.id)
+			const note = prevNotes[noteIndex]
+
+			const updatedNote = { ...note, ...noteObj }
+
+			prevNotes[noteIndex] = updatedNote
+
+			return [{ prevNotes, ...noteObj }]
+		})
+
+		if (newNote.favourite) {
+			setFavouriteNotes(filteredFavouriteNotes)
+		}
 	}
 
 	const undoNoteHandler = (id: string, noteObj: Note) => {
@@ -70,6 +88,7 @@ export const NotesContextProvider = ({ children }: { children: JSX.Element }) =>
 	const contextValue: NotesContextType = {
 		notes: notes,
 		trashNotes: trashNotes,
+		favouriteNotes: favouriteNotes,
 		addNote: addNoteHandler,
 		removeNote: removeNoteHandler,
 		permRemove: permDeleteNote,
