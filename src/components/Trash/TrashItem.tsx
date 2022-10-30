@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-import Note from '../../models/Note'
+import { Note } from '../../types/NoteType'
 import classes from '../Notes/NoteItem.module.scss'
 import { motion } from 'framer-motion'
 import Button from '@mui/material/Button'
@@ -7,7 +7,16 @@ import { NotesContext } from '../../context/NoteContext'
 
 export const TrashItem = ({ id, author, title, category, description, favourite, date }: Note) => {
 	const { permRemove, undoNote } = useContext(NotesContext)
-	const noteObj = new Note(author, title, category, description, favourite, date)
+
+	const noteObj: Note = {
+		id: id,
+		author: author,
+		title: title,
+		category: category,
+		description: description,
+		favourite: favourite,
+		date: date,
+	}
 
 	return (
 		<motion.li

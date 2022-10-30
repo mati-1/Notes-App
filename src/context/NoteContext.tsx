@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import Note from '../models/Note'
+import { Note } from '../types/NoteType'
 
 type NotesContextType = {
 	notes: Note[]
@@ -7,6 +7,7 @@ type NotesContextType = {
 	favouriteNotes: Note[]
 	addNote: (noteObj: Note) => void
 	removeNote: (id: string, noteObj: Note) => void
+	updateNote: (noteObj: Note) => void
 	permRemove: (id: string) => void
 	undoNote: (id: string, noteObj: Note) => void
 	removeAll: () => void
@@ -19,6 +20,7 @@ export const NotesContext = React.createContext<NotesContextType>({
 	trashNotes: [],
 	addNote: () => {},
 	removeNote: () => {},
+	updateNote: () => {},
 	permRemove: () => {},
 	undoNote: () => {},
 	removeAll: () => {},
@@ -35,20 +37,18 @@ export const NotesContextProvider = ({ children }: { children: JSX.Element }) =>
 	const addNoteHandler = (noteObj: Note) => {
 		const newNote = noteObj
 
-		setNotes((prevNotes) => {
-			const noteIndex = prevNotes.findIndex((note) => note.id !== noteObj.id)
-			const note = prevNotes[noteIndex]
-
-			const updatedNote = { ...note, ...noteObj }
-
-			prevNotes[noteIndex] = updatedNote
-
-			return [{ prevNotes, ...noteObj }]
-		})
+		setNotes((prevNotes) => [...prevNotes, newNote])
 
 		if (newNote.favourite) {
 			setFavouriteNotes(filteredFavouriteNotes)
 		}
+	}
+
+	const updateNote = (noteObj: Note) => {
+		const oldNotes = notes.filter((note) => note.id !== noteObj.id)
+
+		setNotes([...oldNotes, noteObj])
+		console.log('tutaj kurwa', oldNotes)
 	}
 
 	const undoNoteHandler = (id: string, noteObj: Note) => {
@@ -89,6 +89,7 @@ export const NotesContextProvider = ({ children }: { children: JSX.Element }) =>
 		notes: notes,
 		trashNotes: trashNotes,
 		favouriteNotes: favouriteNotes,
+		updateNote: updateNote,
 		addNote: addNoteHandler,
 		removeNote: removeNoteHandler,
 		permRemove: permDeleteNote,

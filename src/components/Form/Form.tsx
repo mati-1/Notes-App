@@ -10,7 +10,7 @@ import Select from '@mui/material/Select'
 import InputLabel from '@mui/material/InputLabel'
 import FormControl from '@mui/material/FormControl'
 import MenuItem from '@mui/material/MenuItem'
-import Note from '../../models/Note'
+import { Note } from '../../types/NoteType'
 import { NotesContext } from '../../context/NoteContext'
 import { useInput } from '../../hooks/use-input'
 
@@ -67,7 +67,15 @@ export const Form = () => {
 			return
 		}
 
-		const NoteObj = new Note(enteredAuthor, enteredTitle, enteredCategory, enteredDescription, isFavourite, fullDate)
+		const NoteObj: Note = {
+			id: Math.floor(Math.random() * 2137).toString(),
+			author: enteredAuthor,
+			title: enteredTitle,
+			category: enteredCategory,
+			description: enteredDescription,
+			favourite: isFavourite,
+			date: fullDate,
+		}
 
 		console.log(NoteObj)
 

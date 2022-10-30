@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-import Note from '../../models/Note'
+import { Note } from '../../types/NoteType'
 import classes from './NoteItem.module.scss'
 import { NavButton } from '../Navigation/NavLink'
 import { motion } from 'framer-motion'
@@ -10,7 +10,15 @@ import StarIcon from '@mui/icons-material/Star'
 export const NoteItem = ({ id, author, title, category, description, favourite, date }: Note) => {
 	const { removeNote } = useContext(NotesContext)
 
-	const noteObj = new Note(author, title, category, description, favourite, date)
+	const noteObj: Note = {
+		id: Math.floor(Math.random() * 2137).toString(),
+		author: author,
+		title: title,
+		category: category,
+		description: description,
+		favourite: favourite,
+		date: date,
+	}
 
 	const deleteHandler = () => {
 		removeNote(id, noteObj)

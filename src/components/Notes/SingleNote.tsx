@@ -10,12 +10,12 @@ import InputLabel from '@mui/material/InputLabel'
 import FormControl from '@mui/material/FormControl'
 import MenuItem from '@mui/material/MenuItem'
 import { NotesContext } from '../../context/NoteContext'
-import Note from '../../models/Note'
+import { Note } from '../../types/NoteType'
 import { Select, SelectChangeEvent } from '@mui/material'
 
 export const SingleNoteItem = () => {
 	const [isEditing, setIsEditing] = useState<boolean>(false)
-	const { notes, addNote } = useContext(NotesContext)
+	const { notes, updateNote } = useContext(NotesContext)
 	const { noteId } = useParams()
 
 	const navigate = useNavigate()
@@ -47,11 +47,18 @@ export const SingleNoteItem = () => {
 			return
 		}
 
-		const NoteObj = new Note(newAuthor, newTitle, newCategory, newDescription, newFavourite, NoteDate)
+		const NoteObj: Note = {
+			author: newAuthor,
+			title: newTitle,
+			category: newCategory,
+			description: newDescription,
+			favourite: newFavourite,
+			date: newDate,
+		}
 
 		console.log(NoteObj)
 
-		addNote(NoteObj)
+		updateNote(NoteObj)
 
 		setIsEditing(false)
 	}
