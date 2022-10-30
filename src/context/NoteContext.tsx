@@ -45,10 +45,16 @@ export const NotesContextProvider = ({ children }: { children: JSX.Element }) =>
 	}
 
 	const updateNote = (noteObj: Note) => {
-		const oldNotes = notes.filter((note) => note.id !== noteObj.id)
+		setNotes((prevNotes) => {
+			const existingNoteIndex = prevNotes.findIndex((note) => note.id === noteObj.id)
 
-		setNotes([...oldNotes, noteObj])
-		console.log('tutaj kurwa', oldNotes)
+			const existingNote = prevNotes[existingNoteIndex]
+			const updatedNote = { ...existingNote, ...noteObj }
+
+			console.log('tu', updatedNote)
+
+			return prevNotes
+		})
 	}
 
 	const undoNoteHandler = (id: string, noteObj: Note) => {
