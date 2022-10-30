@@ -48,6 +48,7 @@ export const SingleNoteItem = () => {
 		}
 
 		const NoteObj: Note = {
+			id: noteId,
 			author: newAuthor,
 			title: newTitle,
 			category: newCategory,

@@ -77,8 +77,6 @@ export const Form = () => {
 			date: fullDate,
 		}
 
-		console.log(NoteObj)
-
 		addNote(NoteObj)
 
 		navigate('/notes')
