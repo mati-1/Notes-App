@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import { Note } from '../types/NoteType'
 
 type NotesContextType = {
@@ -42,21 +42,28 @@ export const NotesContextProvider = ({ children }: { children: JSX.Element }) =>
 	const [trashNotes, setTrashNotes] = useState<Note[]>(getTrashNotes)
 	const [favouriteNotes, setFavouriteNotes] = useState<Note[]>([])
 
-	useEffect(() => {
+	const updateLocalStorage = useCallback(() => {
 		localStorage.setItem('notes', JSON.stringify(notes))
 		localStorage.setItem('favNotes', JSON.stringify(favouriteNotes))
 		localStorage.setItem('trashNotes', JSON.stringify(trashNotes))
 	}, [notes, favouriteNotes, trashNotes])
 
-	const addNoteHandler = (noteObj: Note) => {
-		const filteredFavouriteNotes = notes.filter((note) => note.favourite === true)
-		const newNote = noteObj
+	useEffect(() => {
+		updateLocalStorage()
+	}, [updateLocalStorage])
 
-		setFavouriteNotes((prevNotes) => [...filteredFavouriteNotes, ...prevNotes])
-		setNotes((prevNotes) => [newNote, ...prevNotes])
+	const addNoteHandler = useCallback(
+		(noteObj: Note) => {
+			const filteredFavouriteNotes = notes.filter((note) => note.favourite === true)
+			const newNote = noteObj
 
-		console.log(filteredFavouriteNotes)
-	}
+			setFavouriteNotes((prevNotes) => [...filteredFavouriteNotes, ...prevNotes])
+			setNotes((prevNotes) => [newNote, ...prevNotes])
+
+			console.log(filteredFavouriteNotes)
+		},
+		[notes]
+	)
 
 	const updateNote = (noteObj: Note) => {
 		const oldNotes = notes.filter((note) => note.id !== noteObj.id)
@@ -64,25 +71,31 @@ export const NotesContextProvider = ({ children }: { children: JSX.Element }) =>
 		setNotes([noteObj, ...oldNotes])
 	}
 
-	const undoNoteHandler = (id: string, noteObj: Note) => {
-		const newNotes: Note[] = trashNotes.filter((note) => note.id !== id)
+	const undoNoteHandler = useCallback(
+		(id: string, noteObj: Note) => {
+			const newNotes: Note[] = trashNotes.filter((note) => note.id !== id)
 
-		const newNote = noteObj
+			const newNote = noteObj
 
-		setNotes((prevNotes) => [...prevNotes, newNote])
-		setTrashNotes(newNotes)
-	}
+			setNotes((prevNotes) => [...prevNotes, newNote])
+			setTrashNotes(newNotes)
+		},
+		[trashNotes]
+	)
 
-	const removeNoteHandler = (id: string, noteObj: Note) => {
-		const newNotes: Note[] = notes.filter((note) => note.id !== id)
+	const removeNoteHandler = useCallback(
+		(id: string, noteObj: Note) => {
+			const newNotes: Note[] = notes.filter((note) => note.id !== id)
 
-		const newTrashNote = noteObj
+			const newTrashNote = noteObj
 
-		setNotes(newNotes)
-		setTrashNotes((prevNotes) => [...prevNotes, newTrashNote])
+			setNotes(newNotes)
+			setTrashNotes((prevNotes) => [...prevNotes, newTrashNote])
 
-		localStorage.removeItem('notes')
-	}
+			localStorage.removeItem('notes')
+		},
+		[notes]
+	)
 
 	const permDeleteNote = (id: string) => {
 		const newNotes: Note[] = trashNotes.filter((note) => note.id !== id)

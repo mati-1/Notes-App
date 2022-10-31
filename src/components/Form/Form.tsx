@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useId } from 'react'
 import { useNavigate } from 'react-router-dom'
 import TextField from '@mui/material/TextField'
 import FormControlLabel from '@mui/material/FormControlLabel'
@@ -19,6 +19,7 @@ export const Form = () => {
 	const fullDate = today.toLocaleDateString()
 	const [isFavourite, setIsFavourite] = useState<boolean>(true)
 	const navigate = useNavigate()
+	const id = useId()
 
 	const {
 		value: enteredAuthor,
@@ -68,7 +69,7 @@ export const Form = () => {
 		}
 
 		const NoteObj: Note = {
-			id: Math.floor(Math.random() * 2137).toString(),
+			id: id,
 			author: enteredAuthor,
 			title: enteredTitle,
 			category: enteredCategory,
