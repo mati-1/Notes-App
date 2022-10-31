@@ -38,7 +38,11 @@ export const SingleNoteItem = () => {
 	const [newAuthor] = useState<string>(NoteAuthor)
 	const [newDate] = useState<string>(NoteDate)
 
-	const theSameData = newTitle === NoteTitle && newCategory === NoteCategory && newDescription === NoteDescription
+	const theSameData =
+		newTitle === NoteTitle &&
+		newCategory === NoteCategory &&
+		newDescription === NoteDescription &&
+		newFavourite === NoteFavourite
 
 	const allInputsIsValid = newTitle && newCategory && newDescription && !theSameData
 
