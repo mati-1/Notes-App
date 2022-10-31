@@ -38,7 +38,11 @@ export const SingleNoteItem = () => {
 	const [newAuthor] = useState<string>(NoteAuthor)
 	const [newDate] = useState<string>(NoteDate)
 
-	const allInputsIsValid = newTitle && newCategory && newDescription
+	const theSameData = newTitle === NoteTitle && newCategory === NoteCategory && newDescription === NoteDescription
+
+	const allInputsIsValid = newTitle && newCategory && newDescription && !theSameData
+
+	console.log(theSameData)
 
 	const submitNewNoteDataHandler = (e: React.MouseEvent) => {
 		e.preventDefault()
@@ -140,7 +144,7 @@ export const SingleNoteItem = () => {
 								disabled={!allInputsIsValid}
 								onClick={submitNewNoteDataHandler}
 								variant={isEditing ? 'contained' : 'text'}>
-								{isEditing ? 'Save' : 'Edit'}
+								Save
 							</Button>
 						</div>
 					</form>
