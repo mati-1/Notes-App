@@ -52,8 +52,8 @@ export const NotesContextProvider = ({ children }: { children: JSX.Element }) =>
 		const filteredFavouriteNotes = notes.filter((note) => note.favourite === true)
 		const newNote = noteObj
 
-		setFavouriteNotes((prevNotes) => [...prevNotes, ...filteredFavouriteNotes])
-		setNotes((prevNotes) => [...prevNotes, newNote])
+		setFavouriteNotes((prevNotes) => [...filteredFavouriteNotes, ...prevNotes])
+		setNotes((prevNotes) => [newNote, ...prevNotes])
 
 		console.log(filteredFavouriteNotes)
 	}
@@ -61,7 +61,7 @@ export const NotesContextProvider = ({ children }: { children: JSX.Element }) =>
 	const updateNote = (noteObj: Note) => {
 		const oldNotes = notes.filter((note) => note.id !== noteObj.id)
 
-		setNotes([...oldNotes, noteObj])
+		setNotes([noteObj, ...oldNotes])
 	}
 
 	const undoNoteHandler = (id: string, noteObj: Note) => {
