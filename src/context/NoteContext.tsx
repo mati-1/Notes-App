@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Note } from '../types/NoteType'
 
 type NotesContextType = {
@@ -27,38 +27,41 @@ export const NotesContext = React.createContext<NotesContextType>({
 	clearTrash: () => {},
 })
 
+const getNotes = () => {
+	const notes = localStorage.getItem('notes')
+	return notes ? JSON.parse(notes) : []
+}
+
+const getTrashNotes = () => {
+	const trashNotes = localStorage.getItem('trashNotes')
+	return trashNotes ? JSON.parse(trashNotes) : []
+}
+
 export const NotesContextProvider = ({ children }: { children: JSX.Element }) => {
-	const [notes, setNotes] = useState<Note[]>([])
-	const [trashNotes, setTrashNotes] = useState<Note[]>([])
+	const [notes, setNotes] = useState<Note[]>(getNotes)
+	const [trashNotes, setTrashNotes] = useState<Note[]>(getTrashNotes)
 	const [favouriteNotes, setFavouriteNotes] = useState<Note[]>([])
 
-	const filteredFavouriteNotes = notes.filter((note) => note.favourite === true)
+	useEffect(() => {
+		localStorage.setItem('notes', JSON.stringify(notes))
+		localStorage.setItem('favNotes', JSON.stringify(favouriteNotes))
+		localStorage.setItem('trashNotes', JSON.stringify(trashNotes))
+	}, [notes, favouriteNotes, trashNotes])
 
 	const addNoteHandler = (noteObj: Note) => {
+		const filteredFavouriteNotes = notes.filter((note) => note.favourite === true)
 		const newNote = noteObj
 
+		setFavouriteNotes((prevNotes) => [...prevNotes, ...filteredFavouriteNotes])
 		setNotes((prevNotes) => [...prevNotes, newNote])
 
-		if (newNote.favourite) {
-			setFavouriteNotes(filteredFavouriteNotes)
-		}
+		console.log(filteredFavouriteNotes)
 	}
 
 	const updateNote = (noteObj: Note) => {
-		const oldNotes = notes.filter((n) => n.id !== noteObj.id)
+		const oldNotes = notes.filter((note) => note.id !== noteObj.id)
 
 		setNotes([...oldNotes, noteObj])
-
-		// setNotes((prevNotes) => {
-		// 	const existingNoteIndex = prevNotes.findIndex((note) => note.id === noteObj.id)
-
-		// 	const existingNote = prevNotes[existingNoteIndex]
-		// 	const updatedNote = { ...existingNote, ...noteObj }
-
-		// 	console.log('tu', updatedNote)
-
-		// 	return prevNotes
-		// })
 	}
 
 	const undoNoteHandler = (id: string, noteObj: Note) => {
@@ -77,6 +80,8 @@ export const NotesContextProvider = ({ children }: { children: JSX.Element }) =>
 
 		setNotes(newNotes)
 		setTrashNotes((prevNotes) => [...prevNotes, newTrashNote])
+
+		localStorage.removeItem('notes')
 	}
 
 	const permDeleteNote = (id: string) => {
