@@ -17,6 +17,14 @@
 			display: flex;
 			align-items: center;
 			gap: 1rem;
+
+			button {
+				box-shadow: 0px 0px 30px -17px rgba(25, 118, 210, 1);
+
+				&:hover {
+					box-shadow: 0px 0px 50px -15px rgba(25, 118, 210, 1);
+				}
+			}
 		}
 
 		.notesLength {
@@ -65,6 +73,14 @@
 		align-items: center;
 		gap: 1rem;
 		margin-top: 2rem;
+
+		button {
+			box-shadow: 0px 0px 30px -17px rgba(25, 118, 210, 1);
+
+			&:hover {
+				box-shadow: 0px 0px 50px -15px rgba(25, 118, 210, 1);
+			}
+		}
 	}
 
 	img {

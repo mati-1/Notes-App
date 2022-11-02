@@ -60,6 +60,14 @@
 		display: flex;
 		align-items: center;
 		gap: 1rem;
+
+		button {
+			box-shadow: 0px 0px 30px -17px rgba(25, 118, 210, 1);
+
+			&:hover {
+				box-shadow: 0px 0px 50px -15px rgba(25, 118, 210, 1);
+			}
+		}
 	}
 }
 
@@ -108,7 +116,7 @@
 
 .favouriteNote {
 	border: 4px solid transparent;
-	border-image: linear-gradient(36deg, rgba(13, 16, 22, 1) 0%, rgba(25, 118, 210, 0.4) 100%);
+	border-image: linear-gradient(36deg, rgba(13, 16, 22, 1) 0%, var(--main-color) 100%);
 	border-image-slice: 1;
 }
 

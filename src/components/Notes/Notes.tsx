@@ -16,9 +16,9 @@ export const Notes = () => {
 	const [currentPage, setCurrentPage] = useState<number>(1)
 	const [notesPerPage] = useState<number>(4)
 
+	const paginate = (event: React.ChangeEvent<unknown>, pageNumber: number) => setCurrentPage(pageNumber)
 	const indexOfLastNote = currentPage * notesPerPage
 	const indexOfFirstNote = indexOfLastNote - notesPerPage
-	const paginate = (event: React.ChangeEvent<unknown>, pageNumber: number) => setCurrentPage(pageNumber)
 
 	const [search] = useSearchParams()
 	const sort = search.get('sort')
@@ -48,7 +48,9 @@ export const Notes = () => {
 			<h3 className={classes.empty}>Note list is empty</h3>
 
 			<div className={classes.buttons}>
-				{trashNotes.length ? <NavButton variant='text' title='Check trash' href='/trash' isSecondary={true} /> : null}
+				{trashNotes.length ? (
+					<NavButton variant='outlined' title='Check trash' href='/trash' isSecondary={true} />
+				) : null}
 				<NavButton variant='contained' title='Create new' href='/create' isSecondary={false} />
 			</div>
 		</div>

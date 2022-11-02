@@ -39,7 +39,7 @@ export const TrashItem = ({ id, author, title, category, description, favourite,
 					Delete
 				</Button>
 
-				<Button onClick={() => undoNote(id, noteObj)} type='button' variant='text'>
+				<Button onClick={() => undoNote(id, noteObj)} type='button' variant='outlined'>
 					Undo to notes
 				</Button>
 			</div>

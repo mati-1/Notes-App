@@ -27,6 +27,14 @@
 			flex-direction: row-reverse;
 			gap: 1.5rem;
 
+			button {
+				box-shadow: 0px 0px 30px -17px rgba(25, 118, 210, 1);
+
+				&:hover {
+					box-shadow: 0px 0px 50px -15px rgba(25, 118, 210, 1);
+				}
+			}
+
 			.link {
 				color: var(--grey-color);
 				padding: 0.4rem;

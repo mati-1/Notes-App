@@ -16,7 +16,7 @@ export const Trash = () => {
 			<h3 className={classes.empty}>Trash is empty</h3>
 
 			<div className={classes.buttons}>
-				{notes.length ? <NavButton variant='text' title='Check notes' href='/notes' isSecondary={true} /> : null}
+				{notes.length ? <NavButton variant='outlined' title='Check notes' href='/notes' isSecondary={true} /> : null}
 				<NavButton variant='contained' title='Create new' href='/create' isSecondary={false} />
 			</div>
 		</div>
