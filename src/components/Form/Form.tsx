@@ -76,7 +76,10 @@ export const Form = () => {
 			description: enteredDescription,
 			favourite: isFavourite,
 			date: fullDate,
+			descLength: enteredDescription.length,
 		}
+
+		console.log(enteredDescription.length)
 
 		addNote(NoteObj)
 

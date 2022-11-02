@@ -46,8 +46,6 @@ export const SingleNoteItem = () => {
 
 	const allInputsIsValid = newTitle && newCategory && newDescription && !theSameData
 
-	console.log(theSameData)
-
 	const submitNewNoteDataHandler = (e: React.MouseEvent) => {
 		e.preventDefault()
 
@@ -63,6 +61,7 @@ export const SingleNoteItem = () => {
 			description: newDescription,
 			favourite: newFavourite,
 			date: newDate,
+			descLength: newDescription.length,
 		}
 
 		console.log(NoteObj)
@@ -75,7 +74,7 @@ export const SingleNoteItem = () => {
 	return (
 		<>
 			<h1 className={classes.heading}>Check your note!</h1>
-			<li className={classes.note}>
+			<li className={`${classes.note} ${newFavourite ? classes.favouriteNote : undefined}`}>
 				{isEditing ? (
 					<form className={classes.form}>
 						<div className={classes.header}>

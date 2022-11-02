@@ -8,21 +8,47 @@ import { NavButton } from '../Navigation/NavLink'
 import { NotePagination } from '../Pagination/Pagination'
 import { Button } from '@mui/material'
 import { FilterPopup } from '../Filter/FilterPopup'
+import { Note } from '../../types/NoteType'
+import { useSearchParams } from 'react-router-dom'
 
 export const Notes = () => {
 	const { notes, trashNotes, removeAll } = useContext(NotesContext)
 	const [currentPage, setCurrentPage] = useState<number>(1)
 	const [notesPerPage] = useState<number>(4)
 	const [isOpenedFilter, setIsOpenedFilter] = useState<boolean>(false)
-	// const [filteredNotes, setFilteredNotes] = useState<Note[]>([])
 
 	const indexOfLastNote = currentPage * notesPerPage
 	const indexOfFirstNote = indexOfLastNote - notesPerPage
-	const currentNotes = notes.slice(indexOfFirstNote, indexOfLastNote)
-
 	const paginate = (event: React.ChangeEvent<unknown>, pageNumber: number) => setCurrentPage(pageNumber)
 
-	const toggleFilter = () => setIsOpenedFilter((prev) => !prev)
+	const [search] = useSearchParams()
+
+	const sort = search.get('sort')
+
+	const sortedNotes = (notes: Note[]) => {
+		type sortProps = {
+			a: Note
+			b: Note
+		}
+
+		return notes.sort((a: Note, b: Note) => {
+			const { favourite, descLength, id } = a
+			const { favourite: favouriteB, descLength: descLengthB, id: id2 } = b
+
+			switch (sort) {
+				case 'favourite':
+					return favourite > favouriteB
+				case 'longest':
+					return descLength > descLengthB
+				default:
+					return id > id2
+			}
+		})
+	}
+
+	const sortingNotes = sortedNotes(notes)
+
+	const currentNotes = sortingNotes.slice(indexOfFirstNote, indexOfLastNote)
 
 	const emptyContent = (
 		<div className={classes.emptyWrapper}>
@@ -44,16 +70,13 @@ export const Notes = () => {
 				</h1>
 				{notes.length ? (
 					<div className={classes.buttons}>
-						<Button onClick={toggleFilter} variant='contained'>
-							Filters
-						</Button>
+						<FilterPopup />
 						<Button variant='outlined' onClick={removeAll}>
 							Remove all notes
 						</Button>
 					</div>
 				) : null}
 			</div>
-			{isOpenedFilter && notes.length ? <FilterPopup /> : null}
 			<ul className={classes.list}>
 				<AnimatePresence>
 					{currentNotes.map((note) => {
@@ -67,6 +90,7 @@ export const Notes = () => {
 								description={note.description}
 								favourite={note.favourite}
 								date={note.date}
+								descLength={note.descLength}
 							/>
 						)
 					})}

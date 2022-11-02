@@ -59,8 +59,6 @@ export const NotesContextProvider = ({ children }: { children: JSX.Element }) =>
 
 			setFavouriteNotes((prevNotes) => [...filteredFavouriteNotes, ...prevNotes])
 			setNotes((prevNotes) => [newNote, ...prevNotes])
-
-			console.log(filteredFavouriteNotes)
 		},
 		[notes]
 	)

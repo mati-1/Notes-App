@@ -16,6 +16,7 @@ export const TrashItem = ({ id, author, title, category, description, favourite,
 		description: description,
 		favourite: favourite,
 		date: date,
+		descLength: description.length,
 	}
 
 	return (

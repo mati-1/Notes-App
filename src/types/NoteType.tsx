@@ -6,4 +6,5 @@ export interface Note {
 	description: string
 	favourite: boolean
 	date: string
+	descLength: number
 }

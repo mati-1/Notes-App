@@ -49,6 +49,7 @@ export const Trash = () => {
 								description={note.description}
 								favourite={note.favourite}
 								date={note.date}
+								descLength={note.descLength}
 							/>
 						)
 					})}

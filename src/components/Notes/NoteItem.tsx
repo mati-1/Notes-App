@@ -20,6 +20,7 @@ export const NoteItem = ({ id, author, title, category, description, favourite, 
 		description: description,
 		favourite: favourite,
 		date: date,
+		descLength: description.length,
 	}
 
 	const deleteHandler = () => removeNote(id, noteObj)
@@ -30,7 +31,7 @@ export const NoteItem = ({ id, author, title, category, description, favourite, 
 			initial={{ x: 30, opacity: 0 }}
 			animate={{ x: 0, opacity: 1 }}
 			exit={{ x: 30, opacity: 0 }}
-			className={classes.note}>
+			className={`${classes.note} ${favourite ? classes.favouriteNote : undefined}`}>
 			{favourite && <div className={classes.favouriteWrapper} />}
 			<div className={classes.header}>
 				<h2>{title}</h2>
