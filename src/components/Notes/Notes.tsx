@@ -15,39 +15,31 @@ export const Notes = () => {
 	const { notes, trashNotes, removeAll } = useContext(NotesContext)
 	const [currentPage, setCurrentPage] = useState<number>(1)
 	const [notesPerPage] = useState<number>(4)
-	const [isOpenedFilter, setIsOpenedFilter] = useState<boolean>(false)
 
 	const indexOfLastNote = currentPage * notesPerPage
 	const indexOfFirstNote = indexOfLastNote - notesPerPage
 	const paginate = (event: React.ChangeEvent<unknown>, pageNumber: number) => setCurrentPage(pageNumber)
 
 	const [search] = useSearchParams()
-
 	const sort = search.get('sort')
 
 	const sortedNotes = (notes: Note[]) => {
-		type sortProps = {
-			a: Note
-			b: Note
-		}
-
-		return notes.sort((a: Note, b: Note) => {
+		return notes.sort((a, b) => {
 			const { favourite, descLength, id } = a
 			const { favourite: favouriteB, descLength: descLengthB, id: id2 } = b
 
 			switch (sort) {
 				case 'favourite':
-					return favourite > favouriteB
+					return favourite > favouriteB ? -1 : 1
 				case 'longest':
-					return descLength > descLengthB
+					return descLength > descLengthB ? -1 : 1
 				default:
-					return id > id2
+					return id > id2 ? -1 : 1
 			}
 		})
 	}
 
 	const sortingNotes = sortedNotes(notes)
-
 	const currentNotes = sortingNotes.slice(indexOfFirstNote, indexOfLastNote)
 
 	const emptyContent = (

@@ -21,25 +21,22 @@ export const FilterPopup = () => {
 
 	return (
 		<div className={classes.filterPopup}>
-			<div>
-				<h3 className={classes.heading}>Filter by</h3>
-				<FormControl>
-					<InputLabel variant='standard' htmlFor='sort'>
-						Sort by
-					</InputLabel>
-					<NativeSelect
-						defaultValue={search}
-						inputProps={{
-							name: 'Sort by',
-							id: 'sort',
-						}}
-						onChange={changeSortingHandler}>
-						<option value={'none'}>None</option>
-						<option value={'favourite'}>Favourites</option>
-						<option value={'longest'}>Longest</option>
-					</NativeSelect>
-				</FormControl>
-			</div>
+			<FormControl>
+				<InputLabel variant='standard' htmlFor='sort'>
+					Sort by
+				</InputLabel>
+				<NativeSelect
+					defaultValue={search}
+					inputProps={{
+						name: 'Sort by',
+						id: 'sort',
+					}}
+					onChange={changeSortingHandler}>
+					<option value={'none'}>None</option>
+					<option value={'favourite'}>Favourites</option>
+					<option value={'longest'}>Longest</option>
+				</NativeSelect>
+			</FormControl>
 		</div>
 	)
 }
