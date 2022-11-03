@@ -22,7 +22,8 @@ body {
 	--grey-color: rgb(160, 160, 160);
 	--black-color: rgb(13, 16, 22);
 	--black2-color: rgb(11, 14, 19);
-	--black3-color: rgb(19, 22, 30);
+	--black3-color: rgb(23, 27, 36);
+	--black4-color: rgb(32, 37, 49);
 	--space2rem: 2rem;
 	--basic-size: 1.3rem;
 	--big-size: 1.7rem;
@@ -40,12 +41,4 @@ body {
 a {
 	text-decoration: none;
 	color: initial;
-}
-
-.test1 {
-	display: flex;
-
-	.test2 {
-		width: 100%;
-	}
 }

@@ -30,26 +30,30 @@ export const Nav = () => {
 
 					<div className={classes.links}>
 						<NavLink className={({ isActive }) => (isActive ? classes.activeLink : classes.link)} to='/create'>
-							<AddIcon className={classes.icon} /> Create new
+							<AddIcon className={classes.icon} />{' '}
+							<span className={` ${hiddenNav ? classes.hiddenLinkTitle : ''}`}>Create new</span>
 						</NavLink>
 						<NavLink className={({ isActive }) => (isActive ? classes.activeLink : classes.link)} to='/notes'>
 							<Badge badgeContent={notes.length} color='primary'>
 								<FormatListBulletedIcon className={classes.icon} />
-								Notes
+								<span className={` ${hiddenNav ? classes.hiddenLinkTitle : ''}`}>Notes</span>
 							</Badge>
 						</NavLink>
 						<NavLink className={({ isActive }) => (isActive ? classes.activeLink : classes.link)} to='/trash'>
 							<Badge badgeContent={trashNotes.length} color='primary'>
-								<DeleteOutlineIcon className={classes.icon} /> Trash
+								<DeleteOutlineIcon className={classes.icon} />{' '}
+								<span className={` ${hiddenNav ? classes.hiddenLinkTitle : ''}`}>Trash</span>
 							</Badge>
 						</NavLink>
 						<NavLink className={({ isActive }) => (isActive ? classes.activeLink : classes.link)} to='/favourite'>
 							<Badge badgeContent={null} color='primary'>
-								<FavoriteBorderIcon className={classes.icon} /> Favourite
+								<FavoriteBorderIcon className={classes.icon} />{' '}
+								<span className={` ${hiddenNav ? classes.hiddenLinkTitle : ''}`}>Favourite</span>
 							</Badge>
 						</NavLink>
 						<NavLink className={({ isActive }) => (isActive ? classes.activeLink : classes.link)} to='/settings'>
-							<SettingsIcon className={classes.icon} /> Settings
+							<SettingsIcon className={classes.icon} />{' '}
+							<span className={` ${hiddenNav ? classes.hiddenLinkTitle : ''}`}>Settings</span>
 						</NavLink>
 					</div>
 				</div>

@@ -64,10 +64,7 @@ export const SingleNoteItem = () => {
 			descLength: newDescription.length,
 		}
 
-		console.log(NoteObj)
-
 		updateNote(NoteObj)
-
 		setIsEditing(false)
 	}
 

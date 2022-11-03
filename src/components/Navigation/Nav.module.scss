@@ -1,10 +1,11 @@
 .nav {
 	position: fixed;
-	background-color: var(--black-color);
+	background-color: var(--black3-color);
 	min-width: 23rem;
+	max-width: 23rem;
 	height: 100vh;
 	z-index: 2137;
-	transition: transform 0.2s ease;
+	transition: min-width 0.2s ease;
 
 	@media (max-width: 1200px) {
 		position: fixed;
@@ -68,7 +69,7 @@
 				padding: 1.5rem 2rem;
 				&:hover {
 					color: var(--white-color);
-					background-color: var(--black3-color);
+					background-color: var(--black4-color);
 				}
 
 				.icon {
@@ -113,5 +114,15 @@
 
 .hiddenNav {
 	position: fixed;
-	transform: translateX(-100%);
+	min-width: 5.5rem;
+	max-width: 5.5rem;
+}
+
+.hiddenLinkTitle {
+	opacity: 0;
+	display: none;
+}
+
+.padding0 {
+	padding: 0;
 }
