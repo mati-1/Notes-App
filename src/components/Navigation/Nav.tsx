@@ -1,34 +1,50 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import classes from './Nav.module.scss'
-import { NavButton } from './NavLink'
 import { NavLink } from 'react-router-dom'
 import { NotesContext } from '../../context/NoteContext'
 import { Badge } from '@mui/material'
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward'
+import AddIcon from '@mui/icons-material/Add'
+import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted'
+import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline'
+import { Backdrop } from '../UI/Backdrop'
 
 export const Nav = () => {
+	const [hiddenNav, setHiddenNav] = useState<boolean>(false)
 	const { notes, trashNotes } = useContext(NotesContext)
 
 	return (
-		<nav className={classes.nav}>
-			<div className={classes.navWrapper}>
-				<NavLink to='/' className={classes.logo}>
-					Notes App
-				</NavLink>
+		<>
+			<nav className={`${classes.nav} ${hiddenNav ? classes.hiddenNav : ''}`}>
+				<button
+					onClick={() => setHiddenNav((prev) => !prev)}
+					className={`${classes.hideButton} ${hiddenNav ? classes.toggledArrow : ''}`}>
+					<ArrowForwardIcon className={`${hiddenNav ? classes.toggledArrow : ''}`} />
+				</button>
+				<div className={classes.navWrapper}>
+					<NavLink to='/' className={classes.logo}>
+						<span>Notes</span> App
+					</NavLink>
 
-				<div className={classes.links}>
-					<NavButton variant='contained' isSecondary={false} title='Create new' href='/create' />
-					<Badge badgeContent={notes.length} color='primary'>
+					<div className={classes.links}>
+						<NavLink className={({ isActive }) => (isActive ? classes.activeLink : classes.link)} to='/create'>
+							<AddIcon className={classes.icon} /> Create new
+						</NavLink>
 						<NavLink className={({ isActive }) => (isActive ? classes.activeLink : classes.link)} to='/notes'>
-							Notes
+							<Badge badgeContent={notes.length} color='primary'>
+								<FormatListBulletedIcon className={classes.icon} />
+								Notes
+							</Badge>
 						</NavLink>
-					</Badge>
-					<Badge badgeContent={trashNotes.length} color='primary'>
 						<NavLink className={({ isActive }) => (isActive ? classes.activeLink : classes.link)} to='/trash'>
-							Trash
+							<Badge badgeContent={trashNotes.length} color='primary'>
+								<DeleteOutlineIcon className={classes.icon} /> Trash
+							</Badge>
 						</NavLink>
-					</Badge>
+					</div>
 				</div>
-			</div>
-		</nav>
+			</nav>
+			{!hiddenNav && <Backdrop onHideNav={() => setHiddenNav(true)} />}
+		</>
 	)
 }

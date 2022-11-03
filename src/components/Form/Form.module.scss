@@ -62,3 +62,41 @@
 		}
 	}
 }
+
+@media (max-width: 1300px) {
+	.formModules {
+		margin-top: 5rem;
+		justify-content: center;
+	}
+	img {
+		display: none;
+	}
+
+	.form {
+		.fieldset {
+			max-width: 35rem;
+		}
+	}
+}
+
+@media (max-width: 768px) {
+	.formModules {
+		margin-top: 20%;
+	}
+	img {
+		display: none;
+	}
+
+	.form {
+		.fieldset {
+			max-width: 20rem;
+
+			.fieldsetRow {
+				display: flex;
+				justify-content: center;
+				flex-direction: column;
+				gap: 2rem;
+			}
+		}
+	}
+}

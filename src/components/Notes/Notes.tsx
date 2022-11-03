@@ -71,6 +71,7 @@ export const Notes = () => {
 					</div>
 				) : null}
 			</div>
+
 			<ul className={classes.list}>
 				<AnimatePresence>
 					{currentNotes.map((note) => {

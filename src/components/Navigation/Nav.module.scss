@@ -1,56 +1,116 @@
 .nav {
 	position: fixed;
-	display: flex;
-	align-items: center;
-	left: 0;
-	top: 0;
 	background-color: var(--black-color);
-	width: 100vw;
-	height: 5rem;
+	min-width: 23rem;
+	height: 100vh;
 	z-index: 2137;
+
+	@media (max-width: 1200px) {
+		position: fixed;
+	}
+
+	.hideButton {
+		position: absolute;
+		top: 2rem;
+		right: -5rem;
+		cursor: pointer;
+		color: white;
+		border-radius: 50%;
+		width: 3rem;
+		height: 3rem;
+		background-color: var(--black-color);
+		border: none;
+		transform: rotate(-180deg);
+		transition: background-color 0.2s ease;
+
+		&:hover {
+			background-color: var(--black3-color);
+		}
+
+		.toggledArrow {
+			transform: rotate(180deg);
+		}
+	}
+
 	.navWrapper {
 		display: flex;
-		justify-content: space-between;
-		align-items: center;
-		position: relative;
-		max-width: 1400px;
-		margin: 0 auto;
-		padding: 0 2rem;
-		width: 100%;
+		flex-direction: column;
+		margin-top: 10rem;
+
 		.logo {
+			position: absolute;
+			top: 2rem;
+			left: 2rem;
 			color: white;
 			font-size: var(--logo-size);
+
+			span {
+				color: var(--white-color);
+				background-color: var(--main-color);
+				font-weight: bold;
+				padding: 0.1rem 0.5rem;
+				border-radius: 2rem 2rem 2rem 0rem;
+			}
 		}
+
 		.links {
 			display: flex;
-			align-items: center;
-			flex-direction: row-reverse;
-			gap: 1.5rem;
-
-			button {
-				box-shadow: 0px 0px 30px -17px rgba(25, 118, 210, 1);
-
-				&:hover {
-					box-shadow: 0px 0px 50px -15px rgba(25, 118, 210, 1);
-				}
-			}
+			flex-direction: column;
 
 			.link {
+				display: flex;
+				align-items: center;
+				font-size: var(--basic-size);
 				color: var(--grey-color);
 				padding: 0.4rem;
 				transition: color 0.2s ease;
+				padding: 1.5rem 2rem;
 				&:hover {
 					color: var(--white-color);
+					background-color: var(--black3-color);
+				}
+
+				.icon {
+					margin-right: 1rem;
+				}
+
+				span {
+					span {
+						top: -0.5rem;
+						right: -0.5rem;
+					}
 				}
 			}
 
 			.activeLink {
+				display: flex;
+				align-items: center;
+				font-size: var(--basic-size);
 				color: var(--white-color);
 				padding: 0.4rem;
+				transition: color 0.2s ease;
+				padding: 1.5rem 2rem;
 				&:hover {
 					color: var(--white-color);
+					background-color: var(--black3-color);
+				}
+
+				.icon {
+					margin-right: 1rem;
+				}
+
+				span {
+					span {
+						top: -0.5rem;
+						right: -0.5rem;
+					}
 				}
 			}
 		}
 	}
+}
+
+.hiddenNav {
+	position: fixed;
+	transform: translateX(-100%);
 }
