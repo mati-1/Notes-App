@@ -4,12 +4,11 @@ import { AnimatePresence } from 'framer-motion'
 import classes from './Notes.module.scss'
 import empty from '../../img/empty.svg'
 import { NotesContext } from '../../context/NoteContext'
-import { NavButton } from '../Navigation/NavLink'
 import { NotePagination } from '../Pagination/Pagination'
 import { Button } from '@mui/material'
 import { FilterPopup } from '../Filter/FilterPopup'
 import { Note } from '../../types/NoteType'
-import { useSearchParams } from 'react-router-dom'
+import { useSearchParams, Link } from 'react-router-dom'
 
 export const Notes = () => {
 	const { notes, trashNotes, removeAll } = useContext(NotesContext)
@@ -49,9 +48,13 @@ export const Notes = () => {
 
 			<div className={classes.buttons}>
 				{trashNotes.length ? (
-					<NavButton variant='outlined' title='Check trash' href='/trash' isSecondary={true} />
+					<Link to='/trash'>
+						<Button variant='outlined'>Check trash</Button>
+					</Link>
 				) : null}
-				<NavButton variant='contained' title='Create new' href='/create' isSecondary={false} />
+				<Link to='/create'>
+					<Button variant='contained'>Create new</Button>
+				</Link>
 			</div>
 		</div>
 	)

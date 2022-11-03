@@ -1,11 +1,11 @@
 import { useContext, useId } from 'react'
 import { Note } from '../../types/NoteType'
 import classes from './NoteItem.module.scss'
-import { NavButton } from '../Navigation/NavLink'
 import { motion } from 'framer-motion'
 import Button from '@mui/material/Button'
 import { NotesContext } from '../../context/NoteContext'
 import StarIcon from '@mui/icons-material/Star'
+import { Link } from 'react-router-dom'
 
 export const NoteItem = ({ id, author, title, category, description, favourite, date }: Note) => {
 	const { removeNote } = useContext(NotesContext)
@@ -46,7 +46,9 @@ export const NoteItem = ({ id, author, title, category, description, favourite, 
 				</div>
 			) : null}
 			<div className={classes.buttons}>
-				<NavButton isSecondary={false} title='More info' href={`/notes/${id}`} variant='contained' />
+				<Link to={`/notes/${id}`}>
+					<Button variant='contained'>More info</Button>
+				</Link>
 
 				<Button onClick={deleteHandler} type='button' variant='outlined'>
 					Move to trash

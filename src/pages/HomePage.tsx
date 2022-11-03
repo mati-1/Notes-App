@@ -1,7 +1,7 @@
 import classes from './HomeLayout.module.scss'
-import { NavButton } from '../components/Navigation/NavLink'
-
+import { Link } from 'react-router-dom'
 import header from '../img/header.svg'
+import Button from '@mui/material/Button'
 
 const HomePage = () => {
 	return (
@@ -10,7 +10,9 @@ const HomePage = () => {
 				<div>
 					<h1>Best notes app for everyone!</h1>
 					<p>Create your first Note</p>
-					<NavButton isSecondary={false} href='/create' variant='contained' title='Get Started' />
+					<Link to='/create'>
+						<Button variant='contained'>Get Started</Button>
+					</Link>
 				</div>
 				<img src={header} alt='xd' />
 			</div>

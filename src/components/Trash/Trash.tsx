@@ -1,14 +1,14 @@
 import React, { useContext } from 'react'
 import { TrashItem } from './TrashItem'
-import { AnimatePresence } from 'framer-motion'
 import classes from '../Notes/Notes.module.scss'
 import empty from '../../img/trash.svg'
+import { AnimatePresence } from 'framer-motion'
 import { NotesContext } from '../../context/NoteContext'
-import { NavButton } from '../Navigation/NavLink'
 import { Button } from '@mui/material'
+import { Link } from 'react-router-dom'
 
 export const Trash = () => {
-	const { trashNotes, notes, clearTrash } = useContext(NotesContext)
+	const { trashNotes, clearTrash } = useContext(NotesContext)
 
 	const emptyContent = (
 		<div className={classes.emptyWrapper}>
@@ -16,8 +16,14 @@ export const Trash = () => {
 			<h3 className={classes.empty}>Trash is empty</h3>
 
 			<div className={classes.buttons}>
-				{notes.length ? <NavButton variant='outlined' title='Check notes' href='/notes' isSecondary={true} /> : null}
-				<NavButton variant='contained' title='Create new' href='/create' isSecondary={false} />
+				{trashNotes.length ? (
+					<Link to='/trash'>
+						<Button variant='outlined'>Check trash</Button>
+					</Link>
+				) : null}
+				<Link to='/create'>
+					<Button variant='contained'>Create new</Button>
+				</Link>
 			</div>
 		</div>
 	)
