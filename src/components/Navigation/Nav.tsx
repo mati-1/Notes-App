@@ -7,6 +7,8 @@ import ArrowForwardIcon from '@mui/icons-material/ArrowForward'
 import AddIcon from '@mui/icons-material/Add'
 import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted'
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline'
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
+import SettingsIcon from '@mui/icons-material/Settings'
 import { Backdrop } from '../UI/Backdrop'
 
 export const Nav = () => {
@@ -40,6 +42,14 @@ export const Nav = () => {
 							<Badge badgeContent={trashNotes.length} color='primary'>
 								<DeleteOutlineIcon className={classes.icon} /> Trash
 							</Badge>
+						</NavLink>
+						<NavLink className={({ isActive }) => (isActive ? classes.activeLink : classes.link)} to='/favourite'>
+							<Badge badgeContent={null} color='primary'>
+								<FavoriteBorderIcon className={classes.icon} /> Favourite
+							</Badge>
+						</NavLink>
+						<NavLink className={({ isActive }) => (isActive ? classes.activeLink : classes.link)} to='/settings'>
+							<SettingsIcon className={classes.icon} /> Settings
 						</NavLink>
 					</div>
 				</div>
