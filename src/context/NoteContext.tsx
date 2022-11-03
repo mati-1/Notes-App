@@ -7,6 +7,7 @@ type NotesContextType = {
 	favouriteNotes: Note[]
 	addNote: (noteObj: Note) => void
 	removeNote: (id: string, noteObj: Note) => void
+	removeFavourite: (noteObj: Note) => void
 	updateNote: (noteObj: Note) => void
 	permRemove: (id: string) => void
 	undoNote: (id: string, noteObj: Note) => void
@@ -20,6 +21,7 @@ export const NotesContext = React.createContext<NotesContextType>({
 	trashNotes: [],
 	addNote: () => {},
 	removeNote: () => {},
+	removeFavourite: () => {},
 	updateNote: () => {},
 	permRemove: () => {},
 	undoNote: () => {},
@@ -52,16 +54,31 @@ export const NotesContextProvider = ({ children }: { children: JSX.Element }) =>
 		updateLocalStorage()
 	}, [updateLocalStorage])
 
-	const addNoteHandler = useCallback(
-		(noteObj: Note) => {
-			const filteredFavouriteNotes = notes.filter((note) => note.favourite === true)
-			const newNote = noteObj
+	const addNoteHandler = useCallback((noteObj: Note) => {
+		const newNote = noteObj
+		setNotes((prevNotes) => [newNote, ...prevNotes])
+	}, [])
 
-			setFavouriteNotes((prevNotes) => [...filteredFavouriteNotes, ...prevNotes])
-			setNotes((prevNotes) => [newNote, ...prevNotes])
+	const removeFromFavourite = useCallback(
+		(noteObj: Note) => {
+			const oldNotes = notes.filter((note) => note.id !== noteObj.id)
+
+			setNotes([noteObj, ...oldNotes])
 		},
 		[notes]
 	)
+
+	const pushNotesToFavouriteHandler = useCallback(() => {
+		const filteredFavouriteNotes = notes.filter((note) => note.favourite === true)
+
+		if (filteredFavouriteNotes) {
+			setFavouriteNotes(filteredFavouriteNotes)
+		}
+	}, [notes])
+
+	useEffect(() => {
+		pushNotesToFavouriteHandler()
+	}, [pushNotesToFavouriteHandler])
 
 	const updateNote = (noteObj: Note) => {
 		const oldNotes = notes.filter((note) => note.id !== noteObj.id)
@@ -115,9 +132,10 @@ export const NotesContextProvider = ({ children }: { children: JSX.Element }) =>
 		notes: notes,
 		trashNotes: trashNotes,
 		favouriteNotes: favouriteNotes,
-		updateNote: updateNote,
 		addNote: addNoteHandler,
+		updateNote: updateNote,
 		removeNote: removeNoteHandler,
+		removeFavourite: removeFromFavourite,
 		permRemove: permDeleteNote,
 		undoNote: undoNoteHandler,
 		removeAll: removeAllNotes,

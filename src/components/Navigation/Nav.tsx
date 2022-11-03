@@ -13,7 +13,7 @@ import { NavigationLink } from './NavLink'
 
 export const Nav = () => {
 	const [hiddenNav, setHiddenNav] = useState<boolean>(true)
-	const { notes, trashNotes } = useContext(NotesContext)
+	const { notes, trashNotes, favouriteNotes } = useContext(NotesContext)
 
 	return (
 		<>
@@ -26,11 +26,14 @@ export const Nav = () => {
 				<div className={classes.navWrapper}>
 					<NavLink to='/' className={classes.logo}>
 						{hiddenNav ? (
-							<span>N</span>
+							<h3>
+								<span>N</span>
+							</h3>
 						) : (
-							<>
-								<span>Notes</span> <br /> <p>App</p>
-							</>
+							<h3>
+								<span>Notes</span>
+								App
+							</h3>
 						)}
 					</NavLink>
 
@@ -63,7 +66,7 @@ export const Nav = () => {
 							hiddenNav={hiddenNav}
 							title='Favourite'
 							href='/favourite'
-							elementsLength={undefined}
+							elementsLength={favouriteNotes.length}
 							icon={<FavoriteBorderIcon className={classes.icon} />}
 						/>
 

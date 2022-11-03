@@ -26,12 +26,11 @@ export const FilterPopup = () => {
 
 	return (
 		<div className={classes.filterPopup}>
-			<FormControl>
+			<FormControl error={notesCondition}>
 				<InputLabel variant='standard' htmlFor='sort'>
 					{!notesCondition ? 'Sort by' : 'Add more notes!'}
 				</InputLabel>
 				<NativeSelect
-					disabled={notesCondition}
 					defaultValue={search}
 					inputProps={{
 						name: 'Sort by',
