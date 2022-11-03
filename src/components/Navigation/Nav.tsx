@@ -12,7 +12,7 @@ import SettingsIcon from '@mui/icons-material/Settings'
 import { Backdrop } from '../UI/Backdrop'
 
 export const Nav = () => {
-	const [hiddenNav, setHiddenNav] = useState<boolean>(false)
+	const [hiddenNav, setHiddenNav] = useState<boolean>(true)
 	const { notes, trashNotes } = useContext(NotesContext)
 
 	return (
@@ -25,7 +25,7 @@ export const Nav = () => {
 				</button>
 				<div className={classes.navWrapper}>
 					<NavLink to='/' className={classes.logo}>
-						<span>Notes</span> App
+						<span>Notes</span> <br /> App
 					</NavLink>
 
 					<div className={classes.links}>

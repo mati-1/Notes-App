@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react'
+import { useContext, useState, useEffect, useCallback } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import classes from './NoteItem.module.scss'
 import StarIcon from '@mui/icons-material/Star'
@@ -12,15 +12,38 @@ import MenuItem from '@mui/material/MenuItem'
 import { NotesContext } from '../../context/NoteContext'
 import { Note } from '../../types/NoteType'
 import { Select, SelectChangeEvent } from '@mui/material'
+import { useSearchParams } from 'react-router-dom'
 
 export const SingleNoteItem = () => {
-	const [isEditing, setIsEditing] = useState<boolean>(false)
-	const { notes, updateNote } = useContext(NotesContext)
 	const { noteId } = useParams()
-
+	const { notes, updateNote } = useContext(NotesContext)
+	const note: Note | any = notes.find((note) => note.id === noteId)
 	const navigate = useNavigate()
 
-	const note: Note | any = notes.find((note) => note.id === noteId)
+	const [isEditing, setIsEditing] = useState<boolean>(false)
+	const [search, setSearch] = useSearchParams()
+	const edit = search.get('edit')
+
+	const toggleEditModeHandler = useCallback(() => {
+		setIsEditing((prev) => !prev)
+	}, [])
+
+	useEffect(() => {
+		const searchBy = isEditing.toString()
+		search.set('edit', searchBy)
+
+		setSearch(search, {
+			replace: true,
+		})
+
+		switch (edit) {
+			case 'true':
+				setIsEditing(true)
+				break
+			case 'false':
+				setIsEditing(false)
+		}
+	}, [edit, search, setSearch, isEditing])
 
 	const {
 		author: NoteAuthor,
@@ -183,7 +206,7 @@ export const SingleNoteItem = () => {
 							<Button disabled={isEditing} onClick={() => navigate(-1)} variant='contained'>
 								Back to list
 							</Button>
-							<Button onClick={() => setIsEditing((prev) => !prev)} variant='outlined'>
+							<Button onClick={toggleEditModeHandler} variant='outlined'>
 								Edit
 							</Button>
 						</div>
