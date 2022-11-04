@@ -2,11 +2,8 @@
 	position: relative;
 	border-radius: 0.5rem;
 	padding: 1rem;
-	background-color: rgba(0, 0, 0, 0.096);
+	background-color: var(--black3-color);
 	list-style: none;
-	border: 1px solid transparent;
-	border-image: linear-gradient(36deg, rgba(13, 16, 22, 1) 0%, var(--black4-color) 100%);
-	border-image-slice: 1;
 	width: 100%;
 
 	.header {
@@ -23,7 +20,7 @@
 	}
 	.content {
 		border-radius: 0.5rem;
-		border: 1px solid var(--black3-color);
+		background-color: var(--black4-color);
 		padding: 1rem;
 		margin: 2rem 0 2rem 0;
 		display: flex;
@@ -116,10 +113,17 @@
 	color: var(--main-color);
 }
 
+.starCursor {
+	cursor: pointer;
+	transition: transform 0.2s ease;
+
+	&:hover {
+		transform: scale(1.2);
+	}
+}
+
 .favouriteNote {
-	border: 2px solid transparent;
-	border-image: linear-gradient(36deg, rgba(13, 16, 22, 1) 0%, var(--main-color) 100%);
-	border-image-slice: 1;
+	border: 1px solid var(--main-color);
 }
 
 .heading {

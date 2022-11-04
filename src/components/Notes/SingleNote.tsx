@@ -1,7 +1,7 @@
 import { useContext, useState, useEffect, useCallback } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import classes from './NoteItem.module.scss'
-import StarIcon from '@mui/icons-material/Star'
+import FavoriteIcon from '@mui/icons-material/Favorite'
 import Button from '@mui/material/Button'
 import TextField from '@mui/material/TextField'
 import FormControlLabel from '@mui/material/FormControlLabel'
@@ -93,7 +93,7 @@ export const SingleNoteItem = () => {
 
 	return (
 		<>
-			<h1 className={classes.heading}>Check your note!</h1>
+			<h1 className={classes.heading}>Manage your note</h1>
 			<li className={`${classes.note} ${newFavourite ? classes.favouriteNote : undefined}`}>
 				{isEditing ? (
 					<form className={classes.form}>
@@ -102,7 +102,7 @@ export const SingleNoteItem = () => {
 							<TextField
 								defaultValue={NoteTitle}
 								onChange={(e: React.ChangeEvent<HTMLInputElement>) => setNewTitle(e.target.value)}
-								value={newTitle}
+								// value={newTitle}
 								autoComplete='off'
 								fullWidth
 								color='primary'
@@ -140,7 +140,7 @@ export const SingleNoteItem = () => {
 									rows={4}
 									onChange={(e: React.ChangeEvent<HTMLInputElement>) => setNewDescription(e.target.value)}
 									defaultValue={NoteDescription}
-									value={newDescription}
+									// value={newDescription}
 									autoComplete='off'
 									fullWidth
 									color='primary'
@@ -153,7 +153,7 @@ export const SingleNoteItem = () => {
 						<FormControlLabel
 							control={
 								<Checkbox
-									defaultChecked={newFavourite}
+									checked={newFavourite}
 									onChange={(e: React.ChangeEvent<HTMLInputElement>) => setNewFavourite(e.target.checked)}
 								/>
 							}
@@ -199,7 +199,7 @@ export const SingleNoteItem = () => {
 						</div>
 						{newFavourite ? (
 							<div className={classes.star}>
-								<StarIcon />
+								<FavoriteIcon />
 							</div>
 						) : null}
 						<div className={classes.buttons}>

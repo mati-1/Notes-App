@@ -4,7 +4,8 @@ import classes from './NoteItem.module.scss'
 import { motion } from 'framer-motion'
 import Button from '@mui/material/Button'
 import { NotesContext } from '../../context/NoteContext'
-import StarIcon from '@mui/icons-material/Star'
+import FavoriteIcon from '@mui/icons-material/Favorite'
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
 import { Link } from 'react-router-dom'
 
 export const NoteItem = ({ id, author, title, category, description, favourite, date }: Note) => {
@@ -40,14 +41,10 @@ export const NoteItem = ({ id, author, title, category, description, favourite, 
 				<h3>{category}</h3>
 				<p>{description}</p>
 			</div>
-			{favourite ? (
-				<div className={classes.star}>
-					<StarIcon />
-				</div>
-			) : null}
+			<div className={`${classes.star}`}>{favourite ? <FavoriteIcon /> : <FavoriteBorderIcon />}</div>
 			<div className={classes.buttons}>
 				<Link to={`/notes/${id}`}>
-					<Button variant='contained'>More info</Button>
+					<Button variant='contained'>Details</Button>
 				</Link>
 
 				<Button onClick={deleteHandler} type='button' variant='outlined'>

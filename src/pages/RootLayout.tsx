@@ -3,9 +3,11 @@ import { Nav } from '../components/Navigation/Nav'
 import classes from './RootLayout.module.scss'
 import ProgressBar from '@badrap/bar-of-progress'
 
-const progress = new ProgressBar()
-
 const RootLayout = () => {
+	const progress = new ProgressBar({
+		delay: 0,
+	})
+
 	progress.start()
 
 	setTimeout(() => {
