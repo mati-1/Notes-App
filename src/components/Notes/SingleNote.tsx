@@ -1,7 +1,6 @@
 import { useContext, useState, useEffect, useCallback } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import classes from './NoteItem.module.scss'
-import FavoriteIcon from '@mui/icons-material/Favorite'
 import Button from '@mui/material/Button'
 import TextField from '@mui/material/TextField'
 import FormControlLabel from '@mui/material/FormControlLabel'
@@ -102,7 +101,6 @@ export const SingleNoteItem = () => {
 							<TextField
 								defaultValue={NoteTitle}
 								onChange={(e: React.ChangeEvent<HTMLInputElement>) => setNewTitle(e.target.value)}
-								// value={newTitle}
 								autoComplete='off'
 								fullWidth
 								color='primary'
@@ -140,7 +138,6 @@ export const SingleNoteItem = () => {
 									rows={4}
 									onChange={(e: React.ChangeEvent<HTMLInputElement>) => setNewDescription(e.target.value)}
 									defaultValue={NoteDescription}
-									// value={newDescription}
 									autoComplete='off'
 									fullWidth
 									color='primary'
@@ -197,11 +194,6 @@ export const SingleNoteItem = () => {
 								<h3>{newDate}</h3>
 							</div>
 						</div>
-						{newFavourite ? (
-							<div className={classes.star}>
-								<FavoriteIcon />
-							</div>
-						) : null}
 						<div className={classes.buttons}>
 							<Button disabled={isEditing} onClick={() => navigate(-1)} variant='contained'>
 								Back to list

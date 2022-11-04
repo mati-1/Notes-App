@@ -17,7 +17,7 @@
 		right: -5rem;
 		cursor: pointer;
 		color: white;
-		border-radius: 50%;
+		border-radius: 1rem;
 		width: 3rem;
 		height: 3rem;
 		background-color: var(--black3-color);
@@ -38,6 +38,24 @@
 		display: flex;
 		flex-direction: column;
 
+		.login {
+			display: flex;
+			align-items: center;
+			font-size: var(--basic-size);
+			color: var(--grey-color);
+			padding: 0.4rem;
+			transition: color 0.2s ease;
+			padding: 1.5rem 2rem;
+			&:hover {
+				color: var(--white-color);
+				background-color: var(--black4-color);
+			}
+
+			.icon {
+				margin-right: 1.5rem;
+			}
+		}
+
 		.logo {
 			color: white;
 			font-size: var(--logo-size);
@@ -53,9 +71,10 @@
 		}
 
 		.links {
+			padding: 0.5rem;
 			display: flex;
 			flex-direction: column;
-			margin-top: 10rem;
+			margin-top: 7rem;
 
 			.link {
 				display: flex;
@@ -65,6 +84,7 @@
 				padding: 0.4rem;
 				transition: color 0.2s ease;
 				padding: 1.5rem 2rem;
+				border-radius: 1rem;
 				&:hover {
 					color: var(--white-color);
 					background-color: var(--black4-color);
@@ -91,6 +111,7 @@
 				transition: color 0.2s ease;
 				padding: 1.5rem 2rem;
 				background-color: var(--black4-color);
+				border-radius: 1rem;
 				&:hover {
 					color: var(--white-color);
 					background-color: var(--black4-color);
@@ -113,8 +134,8 @@
 
 .hiddenNav {
 	position: fixed;
-	min-width: 5.5rem;
-	max-width: 5.5rem;
+	min-width: 6.5rem;
+	max-width: 6rem;
 }
 
 .hiddenLinkTitle {

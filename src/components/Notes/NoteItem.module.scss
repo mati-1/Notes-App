@@ -3,29 +3,31 @@
 	border-radius: 0.5rem;
 	padding: 1rem;
 	background-color: var(--black3-color);
+
 	list-style: none;
 	width: 100%;
 
 	.header {
+		background-color: var(--black4-color);
+		padding: 0.5rem 1rem;
+		border-radius: 0.5rem;
 		p {
 			color: var(--white-color);
 			font-size: var(--basic-size);
-			padding-bottom: 1rem;
 		}
 		h2 {
 			color: var(--grey-color);
 			font-size: var(--big-size);
-			margin-bottom: 1rem;
 		}
 	}
 	.content {
 		border-radius: 0.5rem;
-		background-color: var(--black4-color);
 		padding: 1rem;
 		margin: 2rem 0 2rem 0;
 		display: flex;
 		flex-direction: column;
 		gap: 1rem;
+		background-color: var(--black4-color);
 
 		h3 {
 			color: var(--grey-color);

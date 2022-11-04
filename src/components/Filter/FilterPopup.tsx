@@ -1,13 +1,10 @@
-import { useContext } from 'react'
 import classes from './FilterPopup.module.scss'
 import InputLabel from '@mui/material/InputLabel'
 import FormControl from '@mui/material/FormControl'
 import NativeSelect from '@mui/material/NativeSelect'
 import { useSearchParams } from 'react-router-dom'
-import { NotesContext } from '../../context/NoteContext'
 
 export const FilterPopup = () => {
-	const { notes } = useContext(NotesContext)
 	const [search, setSearch] = useSearchParams({
 		sort: 'none',
 	})
@@ -22,13 +19,11 @@ export const FilterPopup = () => {
 		})
 	}
 
-	const notesCondition = notes.length <= 1
-
 	return (
 		<div className={classes.filterPopup}>
-			<FormControl error={notesCondition}>
+			<FormControl>
 				<InputLabel variant='standard' htmlFor='sort'>
-					{!notesCondition ? 'Sort by' : 'Add more notes!'}
+					Sorting
 				</InputLabel>
 				<NativeSelect
 					defaultValue={search}

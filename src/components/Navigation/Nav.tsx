@@ -9,6 +9,7 @@ import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline'
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
 import SettingsIcon from '@mui/icons-material/Settings'
 import { Backdrop } from '../UI/Backdrop'
+import PermIdentityIcon from '@mui/icons-material/PermIdentity'
 import { NavigationLink } from './NavLink'
 
 export const Nav = () => {
@@ -76,6 +77,14 @@ export const Nav = () => {
 							href='/settings'
 							elementsLength={undefined}
 							icon={<SettingsIcon className={classes.icon} />}
+						/>
+
+						<NavigationLink
+							hiddenNav={hiddenNav}
+							title='Login'
+							href='/login'
+							elementsLength={undefined}
+							icon={<PermIdentityIcon className={classes.icon} />}
 						/>
 					</div>
 				</div>
