@@ -1,5 +1,18 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import { Note } from '../types/NoteType'
+import { toast } from 'react-toastify'
+
+const notify = (text: string) =>
+	toast.success(text, {
+		position: 'top-right',
+		autoClose: 1000,
+		hideProgressBar: false,
+		closeOnClick: true,
+		pauseOnHover: true,
+		draggable: false,
+		progress: undefined,
+		theme: 'colored',
+	})
 
 type NotesContextType = {
 	notes: Note[]
@@ -56,7 +69,12 @@ export const NotesContextProvider = ({ children }: { children: JSX.Element }) =>
 
 	const addNoteHandler = useCallback((noteObj: Note) => {
 		const newNote = noteObj
-		setNotes((prevNotes) => [newNote, ...prevNotes])
+		try {
+			setNotes((prevNotes) => [newNote, ...prevNotes])
+			notify('Added new note')
+		} catch (err: any) {
+			throw new Error(err)
+		}
 	}, [])
 
 	const removeFromFavourite = useCallback(
@@ -64,6 +82,7 @@ export const NotesContextProvider = ({ children }: { children: JSX.Element }) =>
 			const oldNotes = notes.filter((note) => note.id !== noteObj.id)
 
 			setNotes([noteObj, ...oldNotes])
+			notify('Note is unfavourited')
 		},
 		[notes]
 	)
@@ -84,6 +103,7 @@ export const NotesContextProvider = ({ children }: { children: JSX.Element }) =>
 		const oldNotes = notes.filter((note) => note.id !== noteObj.id)
 
 		setNotes([noteObj, ...oldNotes])
+		notify('Note is saved')
 	}
 
 	const undoNoteHandler = useCallback(
@@ -92,8 +112,13 @@ export const NotesContextProvider = ({ children }: { children: JSX.Element }) =>
 
 			const newNote = noteObj
 
-			setNotes((prevNotes) => [...prevNotes, newNote])
-			setTrashNotes(newNotes)
+			try {
+				setNotes((prevNotes) => [...prevNotes, newNote])
+				setTrashNotes(newNotes)
+				notify('Note is undo')
+			} catch (err: any) {
+				throw new Error(err)
+			}
 		},
 		[trashNotes]
 	)
@@ -104,10 +129,15 @@ export const NotesContextProvider = ({ children }: { children: JSX.Element }) =>
 
 			const newTrashNote = noteObj
 
-			setNotes(newNotes)
-			setTrashNotes((prevNotes) => [...prevNotes, newTrashNote])
+			try {
+				setNotes(newNotes)
+				setTrashNotes((prevNotes) => [...prevNotes, newTrashNote])
 
-			localStorage.removeItem('notes')
+				localStorage.removeItem('notes')
+				notify('Note is trashed')
+			} catch (err: any) {
+				throw new Error(err)
+			}
 		},
 		[notes]
 	)
@@ -115,18 +145,27 @@ export const NotesContextProvider = ({ children }: { children: JSX.Element }) =>
 	const permDeleteNote = (id: string) => {
 		const newNotes: Note[] = trashNotes.filter((note) => note.id !== id)
 
-		setTrashNotes(newNotes)
+		try {
+			setTrashNotes(newNotes)
+			notify('Note is deleted')
+		} catch (err: any) {
+			throw new Error(err)
+		}
 	}
 
 	const removeAllNotes = () => {
 		const prevNotes = [...notes, ...trashNotes]
 
 		setTrashNotes(prevNotes)
+		notify('Trashed all notes')
 
-		return setNotes([])
+		setNotes([])
 	}
 
-	const removeAllTrashNotes = () => setTrashNotes([])
+	const removeAllTrashNotes = () => {
+		setTrashNotes([])
+		notify('Deleted all notes')
+	}
 
 	const contextValue: NotesContextType = {
 		notes: notes,

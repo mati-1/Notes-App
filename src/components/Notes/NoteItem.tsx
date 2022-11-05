@@ -5,6 +5,7 @@ import { motion } from 'framer-motion'
 import Button from '@mui/material/Button'
 import { NotesContext } from '../../context/NoteContext'
 import { Link } from 'react-router-dom'
+import 'react-toastify/dist/ReactToastify.css'
 
 export const NoteItem = ({ id, author, title, category, description, favourite, date }: Note) => {
 	const { removeNote } = useContext(NotesContext)
@@ -22,7 +23,9 @@ export const NoteItem = ({ id, author, title, category, description, favourite, 
 		descLength: description.length,
 	}
 
-	const deleteHandler = () => removeNote(id, noteObj)
+	const deleteHandler = () => {
+		removeNote(id, noteObj)
+	}
 
 	return (
 		<motion.li

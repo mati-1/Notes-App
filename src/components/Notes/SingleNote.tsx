@@ -86,8 +86,12 @@ export const SingleNoteItem = () => {
 			descLength: newDescription.length,
 		}
 
-		updateNote(NoteObj)
-		setIsEditing(false)
+		try {
+			updateNote(NoteObj)
+			setIsEditing(false)
+		} catch (err) {
+			throw new Error('Something went wrong!')
+		}
 	}
 
 	return (

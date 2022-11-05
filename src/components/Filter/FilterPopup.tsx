@@ -3,6 +3,19 @@ import InputLabel from '@mui/material/InputLabel'
 import FormControl from '@mui/material/FormControl'
 import NativeSelect from '@mui/material/NativeSelect'
 import { useSearchParams } from 'react-router-dom'
+import { toast } from 'react-toastify'
+
+const notify = (text: string) =>
+	toast.success(text, {
+		position: 'top-right',
+		autoClose: 1000,
+		hideProgressBar: false,
+		closeOnClick: true,
+		pauseOnHover: true,
+		draggable: false,
+		progress: undefined,
+		theme: 'colored',
+	})
 
 export const FilterPopup = () => {
 	const [search, setSearch] = useSearchParams({
@@ -12,11 +25,17 @@ export const FilterPopup = () => {
 	const changeSortingHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
 		const sortBy = e.target.value
 
-		search.set('sort', sortBy)
+		try {
+			search.set('sort', sortBy)
 
-		setSearch(search, {
-			replace: true,
-		})
+			setSearch(search, {
+				replace: true,
+			})
+
+			notify(`Sorted by ${sortBy}`)
+		} catch (err: any) {
+			throw new Error(err)
+		}
 	}
 
 	return (

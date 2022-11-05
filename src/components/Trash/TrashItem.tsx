@@ -19,6 +19,14 @@ export const TrashItem = ({ id, author, title, category, description, favourite,
 		descLength: description.length,
 	}
 
+	const permRemoveNoteHandler = () => {
+		permRemove(id)
+	}
+
+	const undoNoteHandler = () => {
+		undoNote(id, noteObj)
+	}
+
 	return (
 		<motion.li
 			layout
@@ -35,11 +43,11 @@ export const TrashItem = ({ id, author, title, category, description, favourite,
 				<p>{description}</p>
 			</div>
 			<div className={classes.buttons}>
-				<Button onClick={() => permRemove(id)} type='button' variant='contained'>
+				<Button onClick={permRemoveNoteHandler} type='button' variant='contained'>
 					Delete
 				</Button>
 
-				<Button onClick={() => undoNote(id, noteObj)} type='button' variant='outlined'>
+				<Button onClick={undoNoteHandler} type='button' variant='outlined'>
 					Undo to notes
 				</Button>
 			</div>
