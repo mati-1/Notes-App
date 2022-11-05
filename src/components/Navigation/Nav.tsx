@@ -18,7 +18,7 @@ export const Nav = () => {
 
 	return (
 		<>
-			<nav className={`${classes.nav} ${hiddenNav ? classes.hiddenNav : ''}`}>
+			<nav onDoubleClick={() => setHiddenNav(false)} className={`${classes.nav} ${hiddenNav ? classes.hiddenNav : ''}`}>
 				<button
 					onClick={() => setHiddenNav((prev) => !prev)}
 					className={`${classes.hideButton} ${hiddenNav ? classes.toggledArrow : ''}`}>

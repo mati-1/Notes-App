@@ -1,18 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import { Note } from '../types/NoteType'
-import { toast } from 'react-toastify'
-
-const notify = (text: string) =>
-	toast.success(text, {
-		position: 'top-right',
-		autoClose: 1000,
-		hideProgressBar: false,
-		closeOnClick: true,
-		pauseOnHover: true,
-		draggable: false,
-		progress: undefined,
-		theme: 'colored',
-	})
+import { notify } from './../constants/Notify'
 
 type NotesContextType = {
 	notes: Note[]
@@ -58,9 +46,13 @@ export const NotesContextProvider = ({ children }: { children: JSX.Element }) =>
 	const [favouriteNotes, setFavouriteNotes] = useState<Note[]>([])
 
 	const updateLocalStorage = useCallback(() => {
-		localStorage.setItem('notes', JSON.stringify(notes))
-		localStorage.setItem('favNotes', JSON.stringify(favouriteNotes))
-		localStorage.setItem('trashNotes', JSON.stringify(trashNotes))
+		try {
+			localStorage.setItem('notes', JSON.stringify(notes))
+			localStorage.setItem('favNotes', JSON.stringify(favouriteNotes))
+			localStorage.setItem('trashNotes', JSON.stringify(trashNotes))
+		} catch (err: any) {
+			throw new Error(err)
+		}
 	}, [notes, favouriteNotes, trashNotes])
 
 	useEffect(() => {
