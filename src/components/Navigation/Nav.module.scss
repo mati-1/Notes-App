@@ -76,7 +76,7 @@
 			flex-direction: column;
 			margin-top: 7rem;
 
-			.link {
+			a {
 				display: flex;
 				align-items: center;
 				font-size: var(--basic-size);
@@ -101,8 +101,8 @@
 					}
 				}
 			}
-
-			.activeLink {
+			.activeLink,
+			.active {
 				display: flex;
 				align-items: center;
 				font-size: var(--basic-size);

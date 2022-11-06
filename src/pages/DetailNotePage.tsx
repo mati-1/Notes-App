@@ -2,6 +2,7 @@ import { SingleNoteItem } from '../components/Notes/SingleNote'
 import classes from '../components/Notes/Notes.module.scss'
 import { Wrapper } from '../components/UI/Wrapper'
 import { motion } from 'framer-motion'
+import { SingleNoteDetails } from '../components/Notes/SingleNoteDetails'
 
 const DetailNoteLayout = () => {
 	const variants = {
@@ -19,6 +20,7 @@ const DetailNoteLayout = () => {
 				transition={{ type: 'linear' }}
 				className={classes.singleItemWrapper}>
 				<SingleNoteItem />
+				<SingleNoteDetails />
 			</motion.div>
 		</Wrapper>
 	)

@@ -11,6 +11,7 @@ import SettingsIcon from '@mui/icons-material/Settings'
 import { Backdrop } from '../UI/Backdrop'
 import PermIdentityIcon from '@mui/icons-material/PermIdentity'
 import { NavigationLink } from './NavLink'
+import Typography from '@mui/material/Typography'
 
 export const Nav = () => {
 	const [hiddenNav, setHiddenNav] = useState<boolean>(true)
@@ -45,6 +46,7 @@ export const Nav = () => {
 							href='/create'
 							elementsLength={undefined}
 							icon={<AddIcon className={classes.icon} />}
+							tooltipTitle={<Typography fontSize={15}>Create</Typography>}
 						/>
 
 						<NavigationLink
@@ -53,6 +55,7 @@ export const Nav = () => {
 							href='/notes'
 							elementsLength={notes.length}
 							icon={<FormatListBulletedIcon className={classes.icon} />}
+							tooltipTitle={<Typography fontSize={15}>Notes</Typography>}
 						/>
 
 						<NavigationLink
@@ -61,6 +64,7 @@ export const Nav = () => {
 							href='/trash'
 							elementsLength={trashNotes.length}
 							icon={<DeleteOutlineIcon className={classes.icon} />}
+							tooltipTitle={<Typography fontSize={15}>Trash</Typography>}
 						/>
 
 						<NavigationLink
@@ -69,6 +73,7 @@ export const Nav = () => {
 							href='/favourite'
 							elementsLength={favouriteNotes.length}
 							icon={<FavoriteBorderIcon className={classes.icon} />}
+							tooltipTitle={<Typography fontSize={15}>Favourite</Typography>}
 						/>
 
 						<NavigationLink
@@ -77,14 +82,16 @@ export const Nav = () => {
 							href='/settings'
 							elementsLength={undefined}
 							icon={<SettingsIcon className={classes.icon} />}
+							tooltipTitle={<Typography fontSize={15}>Settings</Typography>}
 						/>
 
 						<NavigationLink
-							hiddenNav={hiddenNav}
 							title='Login'
+							hiddenNav={hiddenNav}
 							href='/login'
 							elementsLength={undefined}
 							icon={<PermIdentityIcon className={classes.icon} />}
+							tooltipTitle={<Typography fontSize={15}>Login</Typography>}
 						/>
 					</div>
 				</div>

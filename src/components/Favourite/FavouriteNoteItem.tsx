@@ -3,7 +3,6 @@ import { Note } from '../../types/NoteType'
 import classes from '../Notes/NoteItem.module.scss'
 import { motion } from 'framer-motion'
 import Button from '@mui/material/Button'
-import FavoriteIcon from '@mui/icons-material/Favorite'
 import { NotesContext } from '../../context/NoteContext'
 
 export const FavouriteNoteItem = ({ id, author, title, category, description, favourite, date }: Note) => {
@@ -41,11 +40,6 @@ export const FavouriteNoteItem = ({ id, author, title, category, description, fa
 				<h3>{category}</h3>
 				<p>{description}</p>
 			</div>
-			{favourite ? (
-				<div onClick={removeFromFav} className={`${classes.star} ${classes.starCursor}`}>
-					<FavoriteIcon />
-				</div>
-			) : null}
 			<div className={classes.buttons}>
 				<Button onClick={removeFromFav} type='button' variant='outlined'>
 					Unfavourite

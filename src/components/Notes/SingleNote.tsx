@@ -95,7 +95,7 @@ export const SingleNoteItem = () => {
 	}
 
 	return (
-		<>
+		<div>
 			<h1 className={classes.heading}>Manage your note</h1>
 			<li className={`${classes.note} ${newFavourite ? classes.favouriteNote : undefined}`}>
 				{isEditing ? (
@@ -209,6 +209,6 @@ export const SingleNoteItem = () => {
 					</>
 				)}
 			</li>
-		</>
+		</div>
 	)
 }

@@ -61,6 +61,7 @@ export const NotesContextProvider = ({ children }: { children: JSX.Element }) =>
 
 	const addNoteHandler = useCallback((noteObj: Note) => {
 		const newNote = noteObj
+
 		try {
 			setNotes((prevNotes) => [newNote, ...prevNotes])
 			notify('Added new note')
