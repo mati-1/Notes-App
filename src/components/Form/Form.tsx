@@ -15,8 +15,14 @@ import { NotesContext } from '../../context/NoteContext'
 import { useInput } from '../../hooks/use-input'
 
 export const Form = () => {
+	const padTo2Digits = (num: number) => {
+		return String(num).padStart(2, '0')
+	}
+
 	const today = new Date()
-	const fullDate = today.toLocaleDateString()
+	const date = today.toLocaleDateString()
+	const hour = today.getHours() + ':' + padTo2Digits(today.getMinutes())
+	const fullDate = date + ' at ' + hour
 	const [isFavourite, setIsFavourite] = useState<boolean>(true)
 	const navigate = useNavigate()
 	const id = useId()

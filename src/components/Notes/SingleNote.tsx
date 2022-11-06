@@ -12,6 +12,7 @@ import { NotesContext } from '../../context/NoteContext'
 import { Note } from '../../types/NoteType'
 import { Select, SelectChangeEvent } from '@mui/material'
 import { useSearchParams } from 'react-router-dom'
+import { SingleNoteDetails } from './SingleNoteDetails'
 
 export const SingleNoteItem = () => {
 	const { noteId } = useParams()
@@ -95,120 +96,113 @@ export const SingleNoteItem = () => {
 	}
 
 	return (
-		<div>
-			<h1 className={classes.heading}>Manage your note</h1>
-			<li className={`${classes.note} ${newFavourite ? classes.favouriteNote : undefined}`}>
-				{isEditing ? (
-					<form className={classes.form}>
-						<div className={classes.header}>
-							<p>Title</p>
-							<TextField
-								defaultValue={NoteTitle}
-								onChange={(e: React.ChangeEvent<HTMLInputElement>) => setNewTitle(e.target.value)}
-								autoComplete='off'
-								fullWidth
-								color='primary'
-								id='filled-basic'
-								label='Title'
-								variant='filled'
-							/>
-						</div>
-						<div className={classes.content}>
-							<div className={classes.contentParams}>
-								<p>Category</p>
-								<FormControl fullWidth variant='filled'>
-									<InputLabel id='demo-simple-select-standard-label'>Category</InputLabel>
-									<Select
-										onChange={(e: SelectChangeEvent) => setNewCategory(e.target.value)}
-										defaultValue={NoteCategory}
-										value={newCategory}
-										labelId='demo-simple-select-standard-label'
-										id='demo-simple-select-standard'
-										label='Age'>
-										<MenuItem value=''>
-											<em>Choose category</em>
-										</MenuItem>
-										<MenuItem value={'Shopping'}>Shopping</MenuItem>
-										<MenuItem value={'Traveling'}>Traveling</MenuItem>
-										<MenuItem value={'Business'}>Business</MenuItem>
-										<MenuItem value={'Cooking'}>Cooking</MenuItem>
-									</Select>
-								</FormControl>
-							</div>
-							<div className={classes.contentParams}>
-								<p>Description</p>
+		<div className={classes.detailPageWrapper}>
+			<div>
+				<h1 className={classes.heading}>Manage your note</h1>
+				<li className={`${classes.note} ${newFavourite ? classes.favouriteNote : undefined}`}>
+					{isEditing ? (
+						<form className={classes.form}>
+							<div className={classes.header}>
+								<p>Title</p>
 								<TextField
-									multiline
-									rows={4}
-									onChange={(e: React.ChangeEvent<HTMLInputElement>) => setNewDescription(e.target.value)}
-									defaultValue={NoteDescription}
+									defaultValue={NoteTitle}
+									onChange={(e: React.ChangeEvent<HTMLInputElement>) => setNewTitle(e.target.value)}
 									autoComplete='off'
 									fullWidth
 									color='primary'
 									id='filled-basic'
-									label='Description'
+									label='Title'
 									variant='filled'
 								/>
 							</div>
-						</div>
-						<FormControlLabel
-							control={
-								<Checkbox
-									checked={newFavourite}
-									onChange={(e: React.ChangeEvent<HTMLInputElement>) => setNewFavourite(e.target.checked)}
-								/>
-							}
-							label={newFavourite ? 'Is favourite' : 'Not favourite'}
-						/>
-						<div className={classes.buttons}>
-							<Button onClick={() => setIsEditing(false)} variant={'outlined'}>
-								Cancel editing
-							</Button>
-							<Button
-								disabled={!allInputsIsValid}
-								onClick={submitNewNoteDataHandler}
-								variant={isEditing ? 'contained' : 'text'}>
-								Save
-							</Button>
-						</div>
-					</form>
-				) : (
-					<>
-						<div className={classes.header}>
-							<p>Title</p>
-							<h2>{newTitle}</h2>
-						</div>
-						<div className={classes.content}>
-							<div className={classes.contentParams}>
-								<p>Category</p>
-								<h3>{newCategory}</h3>
+							<div className={classes.content}>
+								<div className={classes.contentParams}>
+									<p>Category</p>
+									<FormControl fullWidth variant='filled'>
+										<InputLabel id='demo-simple-select-standard-label'>Category</InputLabel>
+										<Select
+											onChange={(e: SelectChangeEvent) => setNewCategory(e.target.value)}
+											defaultValue={NoteCategory}
+											value={newCategory}
+											labelId='demo-simple-select-standard-label'
+											id='demo-simple-select-standard'
+											label='Age'>
+											<MenuItem value=''>
+												<em>Choose category</em>
+											</MenuItem>
+											<MenuItem value={'Shopping'}>Shopping</MenuItem>
+											<MenuItem value={'Traveling'}>Traveling</MenuItem>
+											<MenuItem value={'Business'}>Business</MenuItem>
+											<MenuItem value={'Cooking'}>Cooking</MenuItem>
+										</Select>
+									</FormControl>
+								</div>
+								<div className={classes.contentParams}>
+									<p>Description</p>
+									<TextField
+										multiline
+										rows={4}
+										onChange={(e: React.ChangeEvent<HTMLInputElement>) => setNewDescription(e.target.value)}
+										defaultValue={NoteDescription}
+										autoComplete='off'
+										fullWidth
+										color='primary'
+										id='filled-basic'
+										label='Description'
+										variant='filled'
+									/>
+								</div>
 							</div>
-							<div className={classes.contentParams}>
-								<p>Description</p>
-								<h3>{newDescription}</h3>
+							<FormControlLabel
+								control={
+									<Checkbox
+										checked={newFavourite}
+										onChange={(e: React.ChangeEvent<HTMLInputElement>) => setNewFavourite(e.target.checked)}
+									/>
+								}
+								label={newFavourite ? 'Is favourite' : 'Not favourite'}
+							/>
+							<div className={classes.buttons}>
+								<Button onClick={() => setIsEditing(false)} variant={'outlined'}>
+									Cancel editing
+								</Button>
+								<Button
+									disabled={!allInputsIsValid}
+									onClick={submitNewNoteDataHandler}
+									variant={isEditing ? 'contained' : 'text'}>
+									Save
+								</Button>
 							</div>
-						</div>
-						<div className={classes.info}>
-							<div className={classes.contentParams}>
-								<p>Author</p>
-								<h3>{newAuthor}</h3>
+						</form>
+					) : (
+						<>
+							<div className={classes.header}>
+								<p>Title</p>
+								<h2>{newTitle}</h2>
 							</div>
-							<div className={classes.contentParams}>
-								<p>Created at</p>
-								<h3>{newDate}</h3>
+							<div className={classes.content}>
+								<div className={classes.contentParams}>
+									<p>Category</p>
+									<h3>{newCategory}</h3>
+								</div>
+								<div className={classes.contentParams}>
+									<p>Description</p>
+									<h3>{newDescription}</h3>
+								</div>
 							</div>
-						</div>
-						<div className={classes.buttons}>
-							<Button disabled={isEditing} onClick={() => navigate(-1)} variant='contained'>
-								Back to list
-							</Button>
-							<Button onClick={toggleEditModeHandler} variant='outlined'>
-								Edit
-							</Button>
-						</div>
-					</>
-				)}
-			</li>
+							<div className={classes.buttons}>
+								<Button disabled={isEditing} onClick={() => navigate(-1)} variant='contained'>
+									Back to list
+								</Button>
+								<Button onClick={toggleEditModeHandler} variant='outlined'>
+									Edit
+								</Button>
+							</div>
+						</>
+					)}
+				</li>
+			</div>
+			<SingleNoteDetails favourite={newFavourite} date={newDate} id={noteId} />
 		</div>
 	)
 }

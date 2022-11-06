@@ -42,3 +42,15 @@ a {
 	text-decoration: none;
 	color: initial;
 }
+
+body {
+	&::-webkit-scrollbar-thumb {
+		background-color: var(--black3-color);
+		border-radius: 20rem;
+		border: 1px solid var(--black4-color);
+	}
+	&::-webkit-scrollbar {
+		background-color: var(--black2-color);
+		width: 0.7rem;
+	}
+}

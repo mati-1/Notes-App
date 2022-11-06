@@ -59,46 +59,6 @@
 	margin-top: 5rem;
 }
 
-.singleItemWrapper {
-	display: flex;
-	align-items: flex-start;
-	justify-content: space-between;
-	gap: 3rem;
-	margin-top: 10rem;
-
-	.noteDetailsWrapper {
-		display: flex;
-		flex-direction: column;
-		gap: 1.5rem;
-		width: 35rem;
-		background-color: var(--black3-color);
-		border-radius: 0.5rem;
-		padding: 1rem;
-		margin-top: 5rem;
-
-		.heading {
-			color: var(--grey-color);
-			font-size: var(--big-size);
-			padding-bottom: 1rem;
-		}
-
-		.detailsControls,
-		div {
-			background-color: var(--black4-color);
-			color: var(--white-color);
-			border-radius: 0.5rem;
-		}
-
-		.detailsControls {
-			padding: 1rem;
-
-			h3 {
-				padding-bottom: 0.7rem;
-			}
-		}
-	}
-}
-
 .emptyWrapper {
 	display: flex;
 	flex-direction: column;
