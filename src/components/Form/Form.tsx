@@ -13,19 +13,14 @@ import MenuItem from '@mui/material/MenuItem'
 import { Note } from '../../types/NoteType'
 import { NotesContext } from '../../context/NoteContext'
 import { useInput } from '../../hooks/use-input'
+import { getFullDate } from '../../constants/FullDate'
 
 export const Form = () => {
-	const padTo2Digits = (num: number) => {
-		return String(num).padStart(2, '0')
-	}
-
-	const today = new Date()
-	const date = today.toLocaleDateString()
-	const hour = today.getHours() + ':' + padTo2Digits(today.getMinutes())
-	const fullDate = date + ' at ' + hour
 	const [isFavourite, setIsFavourite] = useState<boolean>(true)
+	const { addNote } = useContext(NotesContext)
 	const navigate = useNavigate()
 	const id = useId()
+	const { fullDate: noteFullDate } = getFullDate()
 
 	const {
 		value: enteredAuthor,
@@ -35,7 +30,6 @@ export const Form = () => {
 		valueBlurHandler: authorBlurHandler,
 		resetHandler: resetAuthorInput,
 	} = useInput((value) => value.trim())
-
 	const {
 		value: enteredTitle,
 		isInvalid: titleInputInvalid,
@@ -44,7 +38,6 @@ export const Form = () => {
 		valueBlurHandler: titleBlurHandler,
 		resetHandler: resetTitleInput,
 	} = useInput((value) => value.trim())
-
 	const {
 		value: enteredCategory,
 		isInvalid: categoryInputInvalid,
@@ -53,7 +46,6 @@ export const Form = () => {
 		valueBlurHandler: categoryBlurHandler,
 		resetHandler: resetCategoryInput,
 	} = useInput((value) => value.trim())
-
 	const {
 		value: enteredDescription,
 		isInvalid: descriptionInputInvalid,
@@ -64,8 +56,6 @@ export const Form = () => {
 	} = useInput((value) => value.trim())
 
 	const allInputsIsValid = titleInputIsValid && authorInputIsValid && categoryInputIsValid && descriptionInputIsValid
-
-	const { addNote } = useContext(NotesContext)
 
 	const submitFormHandler = (e: React.FormEvent) => {
 		e.preventDefault()
@@ -81,11 +71,10 @@ export const Form = () => {
 			category: enteredCategory,
 			description: enteredDescription,
 			favourite: isFavourite,
-			date: fullDate,
+			date: noteFullDate,
 			descLength: enteredDescription.length,
+			editHistory: [],
 		}
-
-		console.log(enteredDescription.length)
 
 		addNote(NoteObj)
 
@@ -96,7 +85,6 @@ export const Form = () => {
 		resetCategoryInput()
 		resetDescriptionInput()
 	}
-
 	return (
 		<div className={classes.formModules}>
 			<form onSubmit={submitFormHandler} className={classes.form}>
@@ -112,10 +100,9 @@ export const Form = () => {
 						color='primary'
 						id='filled-basic'
 						label='Author'
-						variant='filled'
+						variant='outlined'
 					/>
 				</div>
-
 				<div className={classes.fieldset}>
 					<div className={classes.fieldsetRow}>
 						<TextField
@@ -128,10 +115,10 @@ export const Form = () => {
 							color='primary'
 							id='filled-basic'
 							label='Title'
-							variant='filled'
+							variant='outlined'
 						/>
 
-						<FormControl fullWidth variant='filled' error={categoryInputInvalid}>
+						<FormControl fullWidth variant='outlined' error={categoryInputInvalid}>
 							<InputLabel id='demo-simple-select-standard-label'>Category</InputLabel>
 							<Select
 								labelId='demo-simple-select-standard-label'
@@ -164,7 +151,7 @@ export const Form = () => {
 						color='primary'
 						id='filled-basic'
 						label='Description'
-						variant='filled'
+						variant='outlined'
 					/>
 				</div>
 				<FormControlLabel

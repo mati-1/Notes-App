@@ -5,7 +5,7 @@ import { motion } from 'framer-motion'
 import Button from '@mui/material/Button'
 import { NotesContext } from '../../context/NoteContext'
 
-export const FavouriteNoteItem = ({ id, author, title, category, description, favourite, date }: Note) => {
+export const FavouriteNoteItem = ({ id, author, title, category, description, favourite, date, editHistory }: Note) => {
 	const { removeFavourite } = useContext(NotesContext)
 	const [isFavourite, setIsFavourite] = useState<boolean>(false)
 
@@ -18,6 +18,7 @@ export const FavouriteNoteItem = ({ id, author, title, category, description, fa
 		favourite: isFavourite,
 		date: date,
 		descLength: description.length,
+		editHistory: editHistory,
 	}
 
 	const removeFromFav = () => {

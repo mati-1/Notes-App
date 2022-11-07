@@ -7,7 +7,7 @@ import { NotesContext } from '../../context/NoteContext'
 import { Link } from 'react-router-dom'
 import 'react-toastify/dist/ReactToastify.css'
 
-export const NoteItem = ({ id, author, title, category, description, favourite, date }: Note) => {
+export const NoteItem = ({ id, author, title, category, description, favourite, date, editHistory }: Note) => {
 	const { removeNote } = useContext(NotesContext)
 
 	const randomId = useId()
@@ -21,6 +21,7 @@ export const NoteItem = ({ id, author, title, category, description, favourite, 
 		favourite: favourite,
 		date: date,
 		descLength: description.length,
+		editHistory: editHistory,
 	}
 
 	const deleteHandler = () => {

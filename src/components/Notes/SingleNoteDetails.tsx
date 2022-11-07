@@ -1,4 +1,4 @@
-import React, { useState, useId } from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import classes from './NoteItem.module.scss'
 import Accordion from '@mui/material/Accordion'
@@ -6,33 +6,17 @@ import AccordionSummary from '@mui/material/AccordionSummary'
 import AccordionDetails from '@mui/material/AccordionDetails'
 import Typography from '@mui/material/Typography'
 import Avatar from '@mui/material/Avatar'
-import Chip from '@mui/material/Chip'
-import Button from '@mui/material/Button'
-import TextField from '@mui/material/TextField'
+import { EditHistory } from './../../types/EditHistoryType'
 
 type noteDetailsType = {
 	id: string | undefined
 	date: string
 	favourite: boolean
+	editHistory: EditHistory[]
 }
 
-interface TagData {
-	id: string
-	label: string
-}
-
-export const SingleNoteDetails = ({ date, id, favourite }: noteDetailsType) => {
-	const tagId = useId()
+export const SingleNoteDetails = ({ date, id, favourite, editHistory }: noteDetailsType) => {
 	const [expanded, setExpanded] = useState<string | false>('panel1')
-	const [tags] = useState<readonly TagData[]>([
-		{ id: tagId, label: 'Nie wiem' },
-		{ id: tagId, label: 'chuj wie' },
-		{ id: tagId, label: 'cos tam' },
-		{ id: tagId, label: 'cos tam' },
-		{ id: tagId, label: 'cos tam' },
-		{ id: tagId, label: 'cos tam' },
-		{ id: tagId, label: 'cos tam' },
-	])
 
 	const handleChange = (panel: string) => (event: React.SyntheticEvent, newExpanded: boolean) => {
 		setExpanded(newExpanded ? panel : false)
@@ -47,23 +31,20 @@ export const SingleNoteDetails = ({ date, id, favourite }: noteDetailsType) => {
 						<Typography>Editing history</Typography>
 					</AccordionSummary>
 					<AccordionDetails>
-						<Typography>cos tu bedzie xD</Typography>
+						{editHistory ? (
+							<ul className={classes.historyList}>
+								{editHistory.map((item, index) => (
+									<li className={classes.historyItem} key={index}>
+										{item.date}
+									</li>
+								))}
+							</ul>
+						) : null}
 					</AccordionDetails>
 				</Accordion>
 				<div className={classes.detailsControls}>
 					<h3>Date of create</h3>
 					<p>{date}</p>
-				</div>
-
-				<div className={classes.detailsControls}>
-					<h3>Tags</h3>
-					{tags.length ? (
-						<ul className={classes.tags}>
-							{tags.map((tag) => {
-								return <Chip sx={{ margin: '0.3rem' }} key={tag.id} variant='outlined' label={tag.label} />
-							})}
-						</ul>
-					) : null}
 				</div>
 
 				<div className={classes.detailsControls}>

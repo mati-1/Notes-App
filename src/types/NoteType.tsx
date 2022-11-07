@@ -1,3 +1,5 @@
+import { EditHistory } from './EditHistoryType'
+
 export interface Note {
 	id?: string | any
 	author: string
@@ -7,4 +9,5 @@ export interface Note {
 	favourite: boolean
 	date: string
 	descLength: number
+	editHistory: EditHistory[]
 }

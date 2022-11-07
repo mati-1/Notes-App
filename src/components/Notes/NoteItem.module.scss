@@ -36,6 +36,18 @@
 			color: var(--white-color);
 			font-size: var(--basic-size);
 			padding-bottom: 0.5rem;
+			max-height: 4rem;
+			overflow-y: auto;
+
+			&::-webkit-scrollbar-thumb {
+				background-color: var(--black4-color);
+				border-radius: 20rem;
+				border: 1px solid var(--black3-color);
+			}
+			&::-webkit-scrollbar {
+				background-color: none;
+				width: 0.7rem;
+			}
 		}
 	}
 	.buttons {
@@ -133,6 +145,14 @@
 			@media (max-width: 1100px) {
 				width: 100%;
 				margin-bottom: 4rem;
+			}
+
+			.historyList {
+				display: grid;
+				gap: 1rem;
+				.historyItem {
+					list-style: none;
+				}
 			}
 
 			.detailsControls,

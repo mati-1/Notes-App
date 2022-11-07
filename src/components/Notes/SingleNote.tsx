@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect, useCallback } from 'react'
+import { useContext, useState, useEffect, useCallback, useId } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import classes from './NoteItem.module.scss'
 import Button from '@mui/material/Button'
@@ -13,16 +13,19 @@ import { Note } from '../../types/NoteType'
 import { Select, SelectChangeEvent } from '@mui/material'
 import { useSearchParams } from 'react-router-dom'
 import { SingleNoteDetails } from './SingleNoteDetails'
+import { EditHistory } from './../../types/EditHistoryType'
+import { getFullDate } from '../../constants/FullDate'
 
 export const SingleNoteItem = () => {
-	const { noteId } = useParams()
 	const { notes, updateNote } = useContext(NotesContext)
-	const note: Note | any = notes.find((note) => note.id === noteId)
-	const navigate = useNavigate()
-
 	const [isEditing, setIsEditing] = useState<boolean>(false)
 	const [search, setSearch] = useSearchParams()
+	const { fullDate: noteFullDate } = getFullDate()
+	const { noteId } = useParams()
+	const navigate = useNavigate()
+	const editId = useId()
 	const edit = search.get('edit')
+	const note: Note | any = notes.find((note) => note.id === noteId)
 
 	const toggleEditModeHandler = useCallback(() => {
 		setIsEditing((prev) => !prev)
@@ -52,6 +55,7 @@ export const SingleNoteItem = () => {
 		description: NoteDescription,
 		favourite: NoteFavourite,
 		date: NoteDate,
+		editHistory: NoteHistory,
 	} = note || {}
 
 	const [newTitle, setNewTitle] = useState<string>(NoteTitle)
@@ -60,6 +64,7 @@ export const SingleNoteItem = () => {
 	const [newFavourite, setNewFavourite] = useState<boolean>(NoteFavourite)
 	const [newAuthor] = useState<string>(NoteAuthor)
 	const [newDate] = useState<string>(NoteDate)
+	const [editHistory, setEditHistory] = useState<EditHistory[]>(NoteHistory)
 
 	const theSameData =
 		newTitle === NoteTitle &&
@@ -85,9 +90,18 @@ export const SingleNoteItem = () => {
 			favourite: newFavourite,
 			date: newDate,
 			descLength: newDescription.length,
+			editHistory: editHistory,
 		}
 
+		const historyObj = {
+			id: editId,
+			date: noteFullDate,
+		}
+
+		console.log(noteFullDate)
+
 		try {
+			setEditHistory((prev) => [...prev, historyObj])
 			updateNote(NoteObj)
 			setIsEditing(false)
 		} catch (err) {
@@ -103,7 +117,6 @@ export const SingleNoteItem = () => {
 					{isEditing ? (
 						<form className={classes.form}>
 							<div className={classes.header}>
-								<p>Title</p>
 								<TextField
 									defaultValue={NoteTitle}
 									onChange={(e: React.ChangeEvent<HTMLInputElement>) => setNewTitle(e.target.value)}
@@ -112,13 +125,12 @@ export const SingleNoteItem = () => {
 									color='primary'
 									id='filled-basic'
 									label='Title'
-									variant='filled'
+									variant='outlined'
 								/>
 							</div>
 							<div className={classes.content}>
 								<div className={classes.contentParams}>
-									<p>Category</p>
-									<FormControl fullWidth variant='filled'>
+									<FormControl fullWidth variant='outlined'>
 										<InputLabel id='demo-simple-select-standard-label'>Category</InputLabel>
 										<Select
 											onChange={(e: SelectChangeEvent) => setNewCategory(e.target.value)}
@@ -138,7 +150,6 @@ export const SingleNoteItem = () => {
 									</FormControl>
 								</div>
 								<div className={classes.contentParams}>
-									<p>Description</p>
 									<TextField
 										multiline
 										rows={4}
@@ -149,7 +160,7 @@ export const SingleNoteItem = () => {
 										color='primary'
 										id='filled-basic'
 										label='Description'
-										variant='filled'
+										variant='outlined'
 									/>
 								</div>
 							</div>
@@ -202,7 +213,7 @@ export const SingleNoteItem = () => {
 					)}
 				</li>
 			</div>
-			<SingleNoteDetails favourite={newFavourite} date={newDate} id={noteId} />
+			<SingleNoteDetails editHistory={NoteHistory} favourite={newFavourite} date={newDate} id={noteId} />
 		</div>
 	)
 }

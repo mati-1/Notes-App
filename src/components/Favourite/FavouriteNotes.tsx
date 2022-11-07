@@ -46,6 +46,7 @@ export const FavouriteNotes = () => {
 								favourite={note.favourite}
 								date={note.date}
 								descLength={note.descLength}
+								editHistory={note.editHistory}
 							/>
 						)
 					})}

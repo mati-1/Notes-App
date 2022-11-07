@@ -5,7 +5,7 @@ import { motion } from 'framer-motion'
 import Button from '@mui/material/Button'
 import { NotesContext } from '../../context/NoteContext'
 
-export const TrashItem = ({ id, author, title, category, description, favourite, date }: Note) => {
+export const TrashItem = ({ id, author, title, category, description, favourite, date, editHistory }: Note) => {
 	const { permRemove, undoNote } = useContext(NotesContext)
 
 	const noteObj: Note = {
@@ -17,6 +17,7 @@ export const TrashItem = ({ id, author, title, category, description, favourite,
 		favourite: favourite,
 		date: date,
 		descLength: description.length,
+		editHistory: editHistory,
 	}
 
 	const permRemoveNoteHandler = () => {
