@@ -222,7 +222,7 @@ export const SingleNoteItem = () => {
 					)}
 				</li>
 			</div>
-			<SingleNoteDetails editHistory={NoteHistory} favourite={newFavourite} date={newDate} id={noteId} />
+			<SingleNoteDetails editHistory={editHistory} favourite={newFavourite} date={newDate} id={noteId} />
 		</div>
 	)
 }
