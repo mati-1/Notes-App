@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect, useCallback, useId } from 'react'
+import { useContext, useState, useCallback } from 'react'
 import { useParams, useNavigate, Link } from 'react-router-dom'
 import classes from './NoteItem.module.scss'
 import Button from '@mui/material/Button'
@@ -11,43 +11,21 @@ import MenuItem from '@mui/material/MenuItem'
 import { NotesContext } from '../../context/NoteContext'
 import { Note } from '../../types/NoteType'
 import { Select, SelectChangeEvent } from '@mui/material'
-import { useSearchParams } from 'react-router-dom'
 import { SingleNoteDetails } from './SingleNoteDetails'
-import { EditHistory } from './../../types/EditHistoryType'
 import { getFullDate } from '../../constants/FullDate'
 import Avatar from '@mui/material/Avatar'
 
 export const SingleNoteItem = () => {
 	const { notes, updateNote } = useContext(NotesContext)
 	const [isEditing, setIsEditing] = useState<boolean>(false)
-	const [search, setSearch] = useSearchParams()
 	const { fullDate } = getFullDate()
 	const { noteId } = useParams()
 	const navigate = useNavigate()
-	const editId = useId()
-	const edit = search.get('edit')
 	const note: Note | any = notes.find((note) => note.id === noteId)
 
 	const toggleEditModeHandler = useCallback(() => {
 		setIsEditing((prev) => !prev)
 	}, [])
-
-	useEffect(() => {
-		const searchBy = isEditing.toString()
-		search.set('edit', searchBy)
-
-		setSearch(search, {
-			replace: true,
-		})
-
-		switch (edit) {
-			case 'true':
-				setIsEditing(true)
-				break
-			case 'false':
-				setIsEditing(false)
-		}
-	}, [edit, search, setSearch, isEditing])
 
 	const {
 		author: NoteAuthor,
@@ -65,7 +43,8 @@ export const SingleNoteItem = () => {
 	const [newFavourite, setNewFavourite] = useState<boolean>(NoteFavourite)
 	const [newAuthor] = useState<string>(NoteAuthor)
 	const [newDate] = useState<string>(NoteDate)
-	const [editHistory, setEditHistory] = useState<EditHistory[]>(NoteHistory)
+
+	console.log(NoteHistory)
 
 	const theSameData =
 		newTitle === NoteTitle &&
@@ -91,19 +70,13 @@ export const SingleNoteItem = () => {
 			favourite: newFavourite,
 			date: newDate,
 			descLength: newDescription.length,
-			editHistory: editHistory,
-		}
-
-		const historyObj = {
-			id: editId,
-			date: fullDate,
+			editHistory: [{ date: fullDate }],
 		}
 
 		try {
-			setEditHistory((prev) => [...prev, historyObj])
 			updateNote(NoteObj)
 			setIsEditing(false)
-			// navigate(0)
+			navigate(0)
 		} catch (err) {
 			console.log(err)
 		}
@@ -222,7 +195,7 @@ export const SingleNoteItem = () => {
 					)}
 				</li>
 			</div>
-			<SingleNoteDetails editHistory={editHistory} favourite={newFavourite} date={newDate} id={noteId} />
+			<SingleNoteDetails editHistory={NoteHistory} favourite={newFavourite} date={newDate} id={noteId} />
 		</div>
 	)
 }
