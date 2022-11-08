@@ -4,7 +4,7 @@ import classes from './NoteItem.module.scss'
 import Accordion from '@mui/material/Accordion'
 import AccordionSummary from '@mui/material/AccordionSummary'
 import AccordionDetails from '@mui/material/AccordionDetails'
-import Typography from '@mui/material/Typography'
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward'
 import Avatar from '@mui/material/Avatar'
 import { EditHistory } from './../../types/EditHistoryType'
 
@@ -28,15 +28,17 @@ export const SingleNoteDetails = ({ date, id, favourite, editHistory }: noteDeta
 			<div className={classes.noteDetailsWrapper}>
 				<Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
 					<AccordionSummary aria-controls='panel1d-content' id='panel1d-header'>
-						<Typography>Editing history</Typography>
+						<h3>Editing history</h3>
 					</AccordionSummary>
 					<AccordionDetails>
 						{editHistory ? (
 							<ul className={classes.historyList}>
 								{editHistory.map((item, index) => (
-									<li className={classes.historyItem} key={index}>
-										{item.date}
-									</li>
+									<Link to={`/notes/${id}/historyNote/${id}`}>
+										<li className={classes.historyItem} key={index}>
+											{item.date} <ArrowForwardIcon className={classes.icon} />
+										</li>
+									</Link>
 								))}
 							</ul>
 						) : null}

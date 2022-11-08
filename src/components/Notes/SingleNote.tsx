@@ -1,5 +1,5 @@
 import { useContext, useState, useEffect, useCallback, useId } from 'react'
-import { useParams, useNavigate } from 'react-router-dom'
+import { useParams, useNavigate, Link } from 'react-router-dom'
 import classes from './NoteItem.module.scss'
 import Button from '@mui/material/Button'
 import TextField from '@mui/material/TextField'
@@ -15,12 +15,13 @@ import { useSearchParams } from 'react-router-dom'
 import { SingleNoteDetails } from './SingleNoteDetails'
 import { EditHistory } from './../../types/EditHistoryType'
 import { getFullDate } from '../../constants/FullDate'
+import Avatar from '@mui/material/Avatar'
 
 export const SingleNoteItem = () => {
 	const { notes, updateNote } = useContext(NotesContext)
 	const [isEditing, setIsEditing] = useState<boolean>(false)
 	const [search, setSearch] = useSearchParams()
-	const { fullDate: noteFullDate } = getFullDate()
+	const { fullDate } = getFullDate()
 	const { noteId } = useParams()
 	const navigate = useNavigate()
 	const editId = useId()
@@ -95,17 +96,16 @@ export const SingleNoteItem = () => {
 
 		const historyObj = {
 			id: editId,
-			date: noteFullDate,
+			date: fullDate,
 		}
-
-		console.log(noteFullDate)
 
 		try {
 			setEditHistory((prev) => [...prev, historyObj])
 			updateNote(NoteObj)
 			setIsEditing(false)
+			// navigate(0)
 		} catch (err) {
-			throw new Error('Something went wrong!')
+			console.log(err)
 		}
 	}
 
@@ -188,8 +188,17 @@ export const SingleNoteItem = () => {
 					) : (
 						<>
 							<div className={classes.header}>
-								<p>Title</p>
-								<h2>{newTitle}</h2>
+								<Link to='/user' className={classes.user}>
+									<Avatar
+										alt='user profile'
+										src='https://scontent-frx5-1.xx.fbcdn.net/v/t39.30808-6/277465687_1630667890617860_6404384895161569634_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=HQ6CITGFdowAX_iS7LP&_nc_ht=scontent-frx5-1.xx&oh=00_AfCypr7OTxIUIcJ_xmN5P3kjUeeEQSsiPQ72HwA8EWVE-Q&oe=636D10CC'
+									/>
+									<p>Mateusz</p>
+								</Link>
+								<div className={classes.headerTitle}>
+									<p>Title</p>
+									<h2>{newTitle}</h2>
+								</div>
 							</div>
 							<div className={classes.content}>
 								<div className={classes.contentParams}>

@@ -11,16 +11,18 @@ import InputLabel from '@mui/material/InputLabel'
 import FormControl from '@mui/material/FormControl'
 import MenuItem from '@mui/material/MenuItem'
 import { Note } from '../../types/NoteType'
+import { EditHistory } from '../../types/EditHistoryType'
 import { NotesContext } from '../../context/NoteContext'
 import { useInput } from '../../hooks/use-input'
 import { getFullDate } from '../../constants/FullDate'
 
 export const Form = () => {
 	const [isFavourite, setIsFavourite] = useState<boolean>(true)
+	const [editHistory] = useState<EditHistory[]>([])
 	const { addNote } = useContext(NotesContext)
 	const navigate = useNavigate()
 	const id = useId()
-	const { fullDate: noteFullDate } = getFullDate()
+	const { fullDate } = getFullDate()
 
 	const {
 		value: enteredAuthor,
@@ -71,9 +73,9 @@ export const Form = () => {
 			category: enteredCategory,
 			description: enteredDescription,
 			favourite: isFavourite,
-			date: noteFullDate,
+			date: fullDate,
 			descLength: enteredDescription.length,
-			editHistory: [],
+			editHistory: editHistory,
 		}
 
 		addNote(NoteObj)
@@ -85,6 +87,7 @@ export const Form = () => {
 		resetCategoryInput()
 		resetDescriptionInput()
 	}
+
 	return (
 		<div className={classes.formModules}>
 			<form onSubmit={submitFormHandler} className={classes.form}>

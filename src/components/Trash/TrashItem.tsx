@@ -4,6 +4,8 @@ import classes from '../Notes/NoteItem.module.scss'
 import { motion } from 'framer-motion'
 import Button from '@mui/material/Button'
 import { NotesContext } from '../../context/NoteContext'
+import { Link } from 'react-router-dom'
+import Avatar from '@mui/material/Avatar'
 
 export const TrashItem = ({ id, author, title, category, description, favourite, date, editHistory }: Note) => {
 	const { permRemove, undoNote } = useContext(NotesContext)
@@ -37,6 +39,13 @@ export const TrashItem = ({ id, author, title, category, description, favourite,
 			className={classes.note}>
 			{favourite && <div className={classes.favouriteWrapper} />}
 			<div className={classes.header}>
+				<Link to='/user' className={classes.user}>
+					<Avatar
+						alt='user profile'
+						src='https://scontent-frx5-1.xx.fbcdn.net/v/t39.30808-6/277465687_1630667890617860_6404384895161569634_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=HQ6CITGFdowAX_iS7LP&_nc_ht=scontent-frx5-1.xx&oh=00_AfCypr7OTxIUIcJ_xmN5P3kjUeeEQSsiPQ72HwA8EWVE-Q&oe=636D10CC'
+					/>
+					<p>Mateusz</p>
+				</Link>
 				<h2>{title}</h2>
 			</div>
 			<div className={classes.content}>
