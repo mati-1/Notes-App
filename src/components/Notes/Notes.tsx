@@ -12,8 +12,8 @@ import { useSearchParams, Link } from 'react-router-dom'
 
 export const Notes = () => {
 	const { notes, trashNotes, removeAll } = useContext(NotesContext)
-	const [currentPage, setCurrentPage] = useState<number>(1)
-	const [notesPerPage] = useState<number>(4)
+	const [currentPage, setCurrentPage] = useState(1)
+	const [notesPerPage] = useState(4)
 
 	const paginate = (event: React.ChangeEvent<unknown>, pageNumber: number) => setCurrentPage(pageNumber)
 	const indexOfLastNote = currentPage * notesPerPage
@@ -82,14 +82,11 @@ export const Notes = () => {
 							<NoteItem
 								key={note.id}
 								id={note.id}
-								author={note.author}
+								note={note}
 								title={note.title}
 								category={note.category}
 								description={note.description}
 								favourite={note.favourite}
-								date={note.date}
-								descLength={note.descLength}
-								editHistory={note.editHistory}
 							/>
 						)
 					})}

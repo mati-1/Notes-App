@@ -7,27 +7,25 @@ import { NotesContext } from '../../context/NoteContext'
 import { Link } from 'react-router-dom'
 import Avatar from '@mui/material/Avatar'
 
-export const TrashItem = ({ id, author, title, category, description, favourite, date, editHistory }: Note) => {
-	const { permRemove, undoNote } = useContext(NotesContext)
+type TrashItemProps = {
+	note: Note
+	id: string
+	title: string
+	category: string
+	description: string
+}
 
-	const noteObj: Note = {
-		id: id,
-		author: author,
-		title: title,
-		category: category,
-		description: description,
-		favourite: favourite,
-		date: date,
-		descLength: description.length,
-		editHistory: editHistory,
-	}
+export const TrashItem = ({ id, note, title, category, description }: TrashItemProps) => {
+	const { permRemove, undoNote } = useContext(NotesContext)
 
 	const permRemoveNoteHandler = () => {
 		permRemove(id)
 	}
 
 	const undoNoteHandler = () => {
-		undoNote(id, noteObj)
+		undoNote(id, {
+			...note,
+		})
 	}
 
 	return (
@@ -37,7 +35,6 @@ export const TrashItem = ({ id, author, title, category, description, favourite,
 			animate={{ x: 0, opacity: 1 }}
 			exit={{ x: 30, opacity: 0 }}
 			className={classes.note}>
-			{favourite && <div className={classes.favouriteWrapper} />}
 			<div className={classes.header}>
 				<Link to='/user' className={classes.user}>
 					<Avatar

@@ -33,8 +33,8 @@ export const FilterPopup = () => {
 			})
 
 			notify(`Sorted by ${sortBy}`)
-		} catch (err: any) {
-			throw new Error(err)
+		} catch (err) {
+			console.log(err)
 		}
 	}
 

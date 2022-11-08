@@ -38,15 +38,11 @@ export const FavouriteNotes = () => {
 						return (
 							<FavouriteNoteItem
 								key={note.id}
-								id={note.id}
-								author={note.author}
+								note={note}
+								favourite={note.favourite}
 								title={note.title}
 								category={note.category}
 								description={note.description}
-								favourite={note.favourite}
-								date={note.date}
-								descLength={note.descLength}
-								editHistory={note.editHistory}
 							/>
 						)
 					})}

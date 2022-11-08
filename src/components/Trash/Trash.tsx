@@ -49,14 +49,10 @@ export const Trash = () => {
 							<TrashItem
 								key={note.id}
 								id={note.id}
-								author={note.author}
 								title={note.title}
 								category={note.category}
 								description={note.description}
-								favourite={note.favourite}
-								date={note.date}
-								descLength={note.descLength}
-								editHistory={note.editHistory}
+								note={note}
 							/>
 						)
 					})}

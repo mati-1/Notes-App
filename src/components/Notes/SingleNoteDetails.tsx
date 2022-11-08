@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
 import classes from './NoteItem.module.scss'
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward'
@@ -21,9 +21,9 @@ export const SingleNoteDetails = ({ date, id, favourite, editHistory }: noteDeta
 					<h3>Last edit</h3>
 					{editHistory ? (
 						<ul className={classes.historyList}>
-							{editHistory.map((item, index) => (
-								<Link to={`/notes/${id}/historyNote/${index}`}>
-									<li className={classes.historyItem} key={index}>
+							{editHistory.map((item) => (
+								<Link to={`/notes/${id}/lastEdit`}>
+									<li className={classes.historyItem} key={item.date}>
 										{item.date} <ArrowForwardIcon className={classes.icon} />
 									</li>
 								</Link>

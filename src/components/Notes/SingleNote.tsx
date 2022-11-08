@@ -1,4 +1,4 @@
-import { useContext, useState, useCallback } from 'react'
+import { useContext, useState } from 'react'
 import { useParams, useNavigate, Link } from 'react-router-dom'
 import classes from './NoteItem.module.scss'
 import Button from '@mui/material/Button'
@@ -17,18 +17,13 @@ import Avatar from '@mui/material/Avatar'
 
 export const SingleNoteItem = () => {
 	const { notes, updateNote } = useContext(NotesContext)
-	const [isEditing, setIsEditing] = useState<boolean>(false)
+	const [isEditing, setIsEditing] = useState(false)
 	const { fullDate } = getFullDate()
 	const { noteId } = useParams()
 	const navigate = useNavigate()
 	const note: Note | any = notes.find((note) => note.id === noteId)
 
-	const toggleEditModeHandler = useCallback(() => {
-		setIsEditing((prev) => !prev)
-	}, [])
-
 	const {
-		author: NoteAuthor,
 		title: NoteTitle,
 		category: NoteCategory,
 		description: NoteDescription,
@@ -37,14 +32,11 @@ export const SingleNoteItem = () => {
 		editHistory: NoteHistory,
 	} = note || {}
 
-	const [newTitle, setNewTitle] = useState<string>(NoteTitle)
-	const [newCategory, setNewCategory] = useState<string>(NoteCategory)
-	const [newDescription, setNewDescription] = useState<string>(NoteDescription)
-	const [newFavourite, setNewFavourite] = useState<boolean>(NoteFavourite)
-	const [newAuthor] = useState<string>(NoteAuthor)
-	const [newDate] = useState<string>(NoteDate)
-
-	console.log(NoteHistory)
+	const [newTitle, setNewTitle] = useState(NoteTitle)
+	const [newCategory, setNewCategory] = useState(NoteCategory)
+	const [newDescription, setNewDescription] = useState(NoteDescription)
+	const [newFavourite, setNewFavourite] = useState(NoteFavourite)
+	const [newDate] = useState(NoteDate)
 
 	const theSameData =
 		newTitle === NoteTitle &&
@@ -63,7 +55,6 @@ export const SingleNoteItem = () => {
 
 		const NoteObj: Note = {
 			id: noteId,
-			author: newAuthor,
 			title: newTitle,
 			category: newCategory,
 			description: newDescription,
@@ -76,7 +67,6 @@ export const SingleNoteItem = () => {
 		try {
 			updateNote(NoteObj)
 			setIsEditing(false)
-			navigate(0)
 		} catch (err) {
 			console.log(err)
 		}
@@ -187,7 +177,7 @@ export const SingleNoteItem = () => {
 								<Button disabled={isEditing} onClick={() => navigate(-1)} variant='contained'>
 									Back to list
 								</Button>
-								<Button onClick={toggleEditModeHandler} variant='outlined'>
+								<Button onClick={() => setIsEditing((prev) => !prev)} variant='outlined'>
 									Edit
 								</Button>
 							</div>

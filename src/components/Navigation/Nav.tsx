@@ -14,7 +14,7 @@ import { NavigationLink } from './NavLink'
 import Typography from '@mui/material/Typography'
 
 export const Nav = () => {
-	const [hiddenNav, setHiddenNav] = useState<boolean>(true)
+	const [hiddenNav, setHiddenNav] = useState(true)
 	const { notes, trashNotes, favouriteNotes } = useContext(NotesContext)
 
 	return (

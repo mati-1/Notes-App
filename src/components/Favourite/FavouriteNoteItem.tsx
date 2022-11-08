@@ -7,25 +7,24 @@ import { NotesContext } from '../../context/NoteContext'
 import { Link } from 'react-router-dom'
 import Avatar from '@mui/material/Avatar'
 
-export const FavouriteNoteItem = ({ id, author, title, category, description, favourite, date, editHistory }: Note) => {
-	const { removeFavourite } = useContext(NotesContext)
-	const [isFavourite, setIsFavourite] = useState<boolean>(false)
+type FavouriteNoteItemProps = {
+	note: Note
+	favourite: boolean
+	title: string
+	category: string
+	description: string
+}
 
-	const NoteObj: Note = {
-		id: id,
-		author: author,
-		title: title,
-		category: category,
-		description: description,
-		favourite: isFavourite,
-		date: date,
-		descLength: description.length,
-		editHistory: editHistory,
-	}
+export const FavouriteNoteItem = ({ note, favourite, title, category, description }: FavouriteNoteItemProps) => {
+	const { removeFavourite } = useContext(NotesContext)
+	const [isFavourite, setIsFavourite] = useState(false)
 
 	const removeFromFav = () => {
 		setIsFavourite(false)
-		removeFavourite(NoteObj)
+		removeFavourite({
+			...note,
+			favourite: isFavourite,
+		})
 	}
 
 	return (

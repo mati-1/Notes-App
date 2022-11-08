@@ -8,25 +8,25 @@ import { Link } from 'react-router-dom'
 import Avatar from '@mui/material/Avatar'
 import 'react-toastify/dist/ReactToastify.css'
 
-export const NoteItem = ({ id, author, title, category, description, favourite, date, editHistory }: Note) => {
+type NoteItemProps = {
+	note: Note
+	id: string
+	title: string
+	category: string
+	description: string
+	favourite: boolean
+}
+
+export const NoteItem = ({ id, title, category, description, favourite, note }: NoteItemProps) => {
 	const { removeNote } = useContext(NotesContext)
 
 	const randomId = useId()
 
-	const noteObj: Note = {
-		id: randomId,
-		author: author,
-		title: title,
-		category: category,
-		description: description,
-		favourite: favourite,
-		date: date,
-		descLength: description.length,
-		editHistory: editHistory,
-	}
-
 	const deleteHandler = () => {
-		removeNote(id, noteObj)
+		removeNote(id, {
+			...note,
+			id: randomId,
+		})
 	}
 
 	return (
@@ -36,7 +36,6 @@ export const NoteItem = ({ id, author, title, category, description, favourite, 
 			animate={{ x: 0, opacity: 1 }}
 			exit={{ x: 30, opacity: 0 }}
 			className={`${classes.note} ${favourite ? classes.favouriteNote : undefined}`}>
-			{favourite && <div className={classes.favouriteWrapper} />}
 			<div className={classes.header}>
 				<Link to='/user' className={classes.user}>
 					<Avatar
