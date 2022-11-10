@@ -7,8 +7,8 @@ import { NotesContext } from '../../context/NoteContext'
 import { getFullDate } from '../../constants/FullDate'
 import FormControlLabel from '@mui/material/FormControlLabel'
 import Checkbox from '@mui/material/Checkbox'
-import { useForm, SubmitHandler } from 'react-hook-form'
 import formImg from '../../img/form.svg'
+import { useForm, SubmitHandler } from 'react-hook-form'
 
 type Inputs = {
 	title: string
@@ -30,13 +30,7 @@ export const Form = () => {
 	const id = useId()
 	const { fullDate } = getFullDate()
 
-	const inputsErrorCondition = errors.description && errors.title
-
 	const onSubmitForm: SubmitHandler<Inputs> = (data) => {
-		if (!inputsErrorCondition) {
-			return
-		}
-
 		const NoteObj: Note = {
 			id: id,
 			author: 'Mateusz',
@@ -66,20 +60,20 @@ export const Form = () => {
 						placeholder='Title'
 						id='title'
 						type='text'
-						{...register('title', { required: true, min: 3, max: 20 })}
+						{...register('title', { required: true, minLength: 3, maxLength: 20 })}
 					/>
 				</div>
-				{errors.title && <span className={classes.errorMessage}>This field is required</span>}
+				{errors.title && <span className={classes.errorMessage}>Title is required</span>}
 
 				<div className={classes.formControl}>
 					<label htmlFor='description'>Description</label>
 					<textarea
 						placeholder='Description'
 						id='description'
-						{...register('description', { required: true, min: 10, max: 100 })}
+						{...register('description', { required: true, minLength: 10, maxLength: 100 })}
 					/>
 				</div>
-				{errors.description && <span className={classes.errorMessage}>This field is required</span>}
+				{errors.description && <span className={classes.errorMessage}>Description is required</span>}
 
 				<div className={classes.formControl}>
 					<label htmlFor='category'>Category</label>
@@ -103,12 +97,7 @@ export const Form = () => {
 					/>
 				</div>
 
-				<button
-					className={`${inputsErrorCondition ? 'disabledButton' : ''}`}
-					disabled={!inputsErrorCondition}
-					type='submit'>
-					Create new note
-				</button>
+				<button type='submit'>Create new note</button>
 			</form>
 
 			<img src={formImg} alt='form' />

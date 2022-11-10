@@ -5,6 +5,7 @@
 	background-color: var(--black3-color);
 	list-style: none;
 	width: 100%;
+	border: 4px solid transparent;
 
 	.header .headerTitle {
 		background-color: var(--black4-color);
@@ -38,12 +39,12 @@
 	}
 	.content {
 		border-radius: 0.5rem;
-		padding: 1rem;
 		margin: 2rem 0 2rem 0;
 		display: flex;
 		flex-direction: column;
 		gap: 1rem;
-		background-color: var(--black4-color);
+		background: var(--black4-color);
+		padding: 1rem;
 
 		h3 {
 			color: var(--grey-color);
@@ -83,36 +84,37 @@
 }
 
 .form {
-	.header {
-		margin-bottom: 1rem;
-		label {
-			color: var(--grey-color);
-		}
-		input {
-			color: var(--white-color);
+	.content {
+		padding: 0;
+		background: none;
+	}
+	.header,
+	.contentParams {
+		display: flex;
+		flex-direction: column;
+		gap: 0;
+
+		textarea {
+			resize: none;
+			height: 10rem;
 		}
 
-		p {
+		label {
+			font-size: var(--small-size);
 			color: var(--grey-color);
+			padding-bottom: 0.5rem;
+		}
+
+		select {
+			cursor: pointer;
 		}
 	}
 
 	label {
 		color: var(--white-color);
-		margin-bottom: 1rem;
 		span {
 			svg {
 				fill: var(--main-color);
-			}
-		}
-	}
-	.content {
-		.contentParams {
-			div {
-				color: white;
-			}
-			p {
-				color: var(--grey-color);
 			}
 		}
 	}
@@ -228,5 +230,23 @@
 				}
 			}
 		}
+	}
+}
+
+textarea,
+input,
+select {
+	font-family: Roboto;
+	font-size: var(--small-size);
+	color: var(--white-color);
+	background-color: var(--black4-color);
+	padding: 0.9rem;
+	border: none;
+	outline: none;
+	border-radius: 0.5rem;
+	border: 1px solid transparent;
+
+	&:focus {
+		border: 1px solid var(--main-color);
 	}
 }

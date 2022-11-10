@@ -2,15 +2,10 @@ import { useContext, useState } from 'react'
 import { useParams, useNavigate, Link } from 'react-router-dom'
 import classes from './NoteItem.module.scss'
 import Button from '@mui/material/Button'
-import TextField from '@mui/material/TextField'
 import FormControlLabel from '@mui/material/FormControlLabel'
 import Checkbox from '@mui/material/Checkbox'
-import InputLabel from '@mui/material/InputLabel'
-import FormControl from '@mui/material/FormControl'
-import MenuItem from '@mui/material/MenuItem'
 import { NotesContext } from '../../context/NoteContext'
 import { Note } from '../../types/NoteType'
-import { Select, SelectChangeEvent } from '@mui/material'
 import { SingleNoteDetails } from './SingleNoteDetails'
 import { getFullDate } from '../../constants/FullDate'
 import Avatar from '@mui/material/Avatar'
@@ -80,50 +75,35 @@ export const SingleNoteItem = () => {
 					{isEditing ? (
 						<form className={classes.form}>
 							<div className={classes.header}>
-								<TextField
+								<label htmlFor='title'>Title</label>
+								<input
 									defaultValue={NoteTitle}
 									onChange={(e: React.ChangeEvent<HTMLInputElement>) => setNewTitle(e.target.value)}
 									autoComplete='off'
-									fullWidth
-									color='primary'
-									id='filled-basic'
-									label='Title'
-									variant='outlined'
+									id='title'
+									placeholder='New Title'
 								/>
 							</div>
 							<div className={classes.content}>
 								<div className={classes.contentParams}>
-									<FormControl fullWidth variant='outlined'>
-										<InputLabel id='demo-simple-select-standard-label'>Category</InputLabel>
-										<Select
-											onChange={(e: SelectChangeEvent) => setNewCategory(e.target.value)}
-											defaultValue={NoteCategory}
-											value={newCategory}
-											labelId='demo-simple-select-standard-label'
-											id='demo-simple-select-standard'
-											label='Age'>
-											<MenuItem value=''>
-												<em>Choose category</em>
-											</MenuItem>
-											<MenuItem value={'Shopping'}>Shopping</MenuItem>
-											<MenuItem value={'Traveling'}>Traveling</MenuItem>
-											<MenuItem value={'Business'}>Business</MenuItem>
-											<MenuItem value={'Cooking'}>Cooking</MenuItem>
-										</Select>
-									</FormControl>
+									<label htmlFor='category'>Category</label>
+									<select
+										onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setNewCategory(e.target.value)}
+										defaultValue={NoteCategory}
+										id='category'>
+										<option value={'Shopping'}>Shopping</option>
+										<option value={'Traveling'}>Traveling</option>
+										<option value={'Business'}>Business</option>
+										<option value={'Cooking'}>Cooking</option>
+									</select>
 								</div>
 								<div className={classes.contentParams}>
-									<TextField
-										multiline
-										rows={4}
-										onChange={(e: React.ChangeEvent<HTMLInputElement>) => setNewDescription(e.target.value)}
+									<label htmlFor='description'>Description</label>
+									<textarea
+										placeholder='Description'
+										id='description'
+										onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setNewDescription(e.target.value)}
 										defaultValue={NoteDescription}
-										autoComplete='off'
-										fullWidth
-										color='primary'
-										id='filled-basic'
-										label='Description'
-										variant='outlined'
 									/>
 								</div>
 							</div>

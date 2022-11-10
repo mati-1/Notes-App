@@ -35,7 +35,7 @@
 			label {
 				font-size: var(--small-size);
 				color: var(--grey-color);
-				padding-bottom: 0.3rem;
+				padding-bottom: 0.5rem;
 			}
 
 			select {
@@ -56,15 +56,13 @@
 			background: var(--main-color);
 			cursor: pointer;
 			font-size: var(--small-size);
+			transition: background 0.2s ease, border 0.2s ease;
+			border: 1px solid transparent;
 
 			&:hover {
 				background: var(--main-hover-color);
+				border-color: var(--main2-color);
 			}
-		}
-
-		.disabledButton {
-			opacity: 0.5;
-			cursor: not-allowed;
 		}
 
 		.errorMessage {
@@ -93,4 +91,14 @@ select {
 	border: none;
 	outline: none;
 	border-radius: 0.5rem;
+	border: 1px solid transparent;
+
+	&:focus {
+		border: 1px solid var(--main-color);
+	}
+}
+
+.disabledButton {
+	opacity: 0.5;
+	cursor: not-allowed;
 }
