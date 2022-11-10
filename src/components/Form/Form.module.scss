@@ -1,111 +1,96 @@
-.formModules {
+.formWrapper {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+	gap: 4rem;
+
+	@media (max-width: 1100px) {
+		justify-content: center;
+	}
 
 	img {
-		width: 25rem;
+		width: 30rem;
+
+		@media (max-width: 1100px) {
+			display: none;
+		}
 	}
 
 	.form {
 		display: flex;
 		flex-direction: column;
+		width: 40rem;
 		gap: 1rem;
 
-		.heading {
-			color: var(--white-color);
-			font-size: var(--biggest-size);
-			margin-bottom: 1rem;
-		}
+		.formControl {
+			display: flex;
+			flex-direction: column;
 
-		.fieldset {
-			width: 40rem;
+			textarea {
+				resize: vertical;
+				min-height: 5rem;
+				max-height: 10rem;
+			}
+
 			label {
+				font-size: var(--small-size);
 				color: var(--grey-color);
-			}
-			input,
-			div {
-				color: var(--white-color);
-
-				svg {
-					fill: var(--white-color);
-				}
+				padding-bottom: 0.3rem;
 			}
 
-			p {
-				color: white;
+			select {
+				cursor: pointer;
 			}
 
-			div {
-				background-color: rgba(0, 0, 0, 0.096);
-				margin: 0;
-				div {
-					color: white;
-				}
-			}
-
-			.fieldsetRow {
-				display: flex;
-				justify-content: space-between;
-				gap: 2rem;
-			}
-		}
-		label {
-			color: var(--white-color);
 			span {
 				svg {
 					fill: var(--main-color);
 				}
 			}
 		}
-	}
-	button {
-		box-shadow: 0px 0px 30px -17px rgba(25, 118, 210, 1);
 
-		&:hover {
-			box-shadow: 0px 0px 50px -15px rgba(25, 118, 210, 1);
-		}
-	}
-}
+		button {
+			padding: 0.7rem;
+			border-radius: 0.5rem;
+			color: var(--white-color);
+			background: var(--main-color);
+			cursor: pointer;
+			font-size: var(--small-size);
 
-div {
-	color: var(--white-color);
-}
-
-@media (max-width: 1300px) {
-	.formModules {
-		margin-top: 5rem;
-		justify-content: center;
-	}
-	img {
-		display: none;
-	}
-
-	.form {
-		.fieldset {
-			max-width: 35rem;
-		}
-	}
-}
-
-@media (max-width: 768px) {
-	.formModules {
-		margin-top: 20%;
-	}
-	img {
-		display: none;
-	}
-
-	.form {
-		.fieldset {
-			max-width: 20rem;
-
-			.fieldsetRow {
-				display: flex;
-				justify-content: center;
-				flex-direction: column;
-				gap: 2rem;
+			&:hover {
+				background: var(--main-hover-color);
 			}
 		}
+
+		.disabledButton {
+			opacity: 0.5;
+			cursor: not-allowed;
+		}
+
+		.errorMessage {
+			color: var(--main-color);
+		}
 	}
+}
+
+.heading {
+	display: flex;
+	align-items: center;
+	position: relative;
+	font-size: var(--biggest-size);
+	color: var(--white-color);
+	margin-bottom: 2rem;
+}
+
+textarea,
+input,
+select {
+	font-family: Roboto;
+	font-size: var(--small-size);
+	color: var(--white-color);
+	background-color: var(--black4-color);
+	padding: 0.9rem;
+	border: none;
+	outline: none;
+	border-radius: 0.5rem;
 }

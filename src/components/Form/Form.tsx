@@ -8,7 +8,7 @@ import { getFullDate } from '../../constants/FullDate'
 import FormControlLabel from '@mui/material/FormControlLabel'
 import Checkbox from '@mui/material/Checkbox'
 import { useForm, SubmitHandler } from 'react-hook-form'
-import { SelectChangeEvent } from '@mui/material'
+import formImg from '../../img/form.svg'
 
 type Inputs = {
 	title: string
@@ -30,7 +30,13 @@ export const Form = () => {
 	const id = useId()
 	const { fullDate } = getFullDate()
 
+	const inputsErrorCondition = errors.description && errors.title
+
 	const onSubmitForm: SubmitHandler<Inputs> = (data) => {
+		if (!inputsErrorCondition) {
+			return
+		}
+
 		const NoteObj: Note = {
 			id: id,
 			author: 'Mateusz',
@@ -51,45 +57,61 @@ export const Form = () => {
 	}
 
 	return (
-		<form className={classes.form} onSubmit={handleSubmit(onSubmitForm)}>
-			<div className={classes.formControl}>
-				<label htmlFor='title'>Title</label>
-				<input id='title' type='text' {...register('title', { required: true, min: 3, max: 20 })} />
-			</div>
-			{errors.title && <span className={classes.errorMessage}>This field is required</span>}
+		<div className={classes.formWrapper}>
+			<form className={classes.form} onSubmit={handleSubmit(onSubmitForm)}>
+				<h1 className={classes.heading}>Create new note</h1>
+				<div className={classes.formControl}>
+					<label htmlFor='title'>Title</label>
+					<input
+						placeholder='Title'
+						id='title'
+						type='text'
+						{...register('title', { required: true, min: 3, max: 20 })}
+					/>
+				</div>
+				{errors.title && <span className={classes.errorMessage}>This field is required</span>}
 
-			<div className={classes.formControl}>
-				<label htmlFor='description'>Description</label>
-				<textarea id='description' {...register('description', { required: true, min: 10, max: 50 })} />
-			</div>
+				<div className={classes.formControl}>
+					<label htmlFor='description'>Description</label>
+					<textarea
+						placeholder='Description'
+						id='description'
+						{...register('description', { required: true, min: 10, max: 100 })}
+					/>
+				</div>
+				{errors.description && <span className={classes.errorMessage}>This field is required</span>}
 
-			<div className={classes.formControl}>
-				<label htmlFor='category'>Category</label>
-				<select defaultValue='Choose category' {...register('category')} id='category'>
-					<option disabled value='Choose category'>
-						Choose category
-					</option>
-					<option value={'Shopping'}>Shopping</option>
-					<option value={'Traveling'}>Traveling</option>
-					<option value={'Business'}>Business</option>
-					<option value={'Cooking'}>Cooking</option>
-				</select>
-			</div>
-			{errors.category && <span className={classes.errorMessage}>This field is required</span>}
+				<div className={classes.formControl}>
+					<label htmlFor='category'>Category</label>
+					<select {...register('category')} id='category'>
+						<option value={'Shopping'}>Shopping</option>
+						<option value={'Traveling'}>Traveling</option>
+						<option value={'Business'}>Business</option>
+						<option value={'Cooking'}>Cooking</option>
+					</select>
+				</div>
 
-			<div className={classes.formControl}>
-				<FormControlLabel
-					control={
-						<Checkbox
-							defaultChecked
-							onChange={(e: React.ChangeEvent<HTMLInputElement>) => setIsFavourite(e.target.checked)}
-						/>
-					}
-					label={isFavourite ? 'Is favourite' : 'Not favourite'}
-				/>
-			</div>
+				<div className={classes.formControl}>
+					<FormControlLabel
+						control={
+							<Checkbox
+								defaultChecked
+								onChange={(e: React.ChangeEvent<HTMLInputElement>) => setIsFavourite(e.target.checked)}
+							/>
+						}
+						label={isFavourite ? 'Is favourite' : 'Not favourite'}
+					/>
+				</div>
 
-			<button type='submit'>Submit</button>
-		</form>
+				<button
+					className={`${inputsErrorCondition ? 'disabledButton' : ''}`}
+					disabled={!inputsErrorCondition}
+					type='submit'>
+					Create new note
+				</button>
+			</form>
+
+			<img src={formImg} alt='form' />
+		</div>
 	)
 }
