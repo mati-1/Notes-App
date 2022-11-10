@@ -8,6 +8,7 @@ import { getFullDate } from '../../constants/FullDate'
 import FormControlLabel from '@mui/material/FormControlLabel'
 import Checkbox from '@mui/material/Checkbox'
 import formImg from '../../img/form.svg'
+import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline'
 import { useForm, SubmitHandler } from 'react-hook-form'
 
 type Inputs = {
@@ -62,8 +63,13 @@ export const Form = () => {
 						type='text'
 						{...register('title', { required: true, minLength: 3, maxLength: 20 })}
 					/>
+					{errors.title && (
+						<span className={classes.errorMessage}>
+							<ErrorOutlineIcon />
+							Title is required
+						</span>
+					)}
 				</div>
-				{errors.title && <span className={classes.errorMessage}>Title is required</span>}
 
 				<div className={classes.formControl}>
 					<label htmlFor='description'>Description</label>
@@ -72,8 +78,12 @@ export const Form = () => {
 						id='description'
 						{...register('description', { required: true, minLength: 10, maxLength: 100 })}
 					/>
+					{errors.description && (
+						<span className={classes.errorMessage}>
+							<ErrorOutlineIcon /> Description is required
+						</span>
+					)}
 				</div>
-				{errors.description && <span className={classes.errorMessage}>Description is required</span>}
 
 				<div className={classes.formControl}>
 					<label htmlFor='category'>Category</label>

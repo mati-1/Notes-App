@@ -77,21 +77,21 @@ export const Nav = () => {
 						/>
 
 						<NavigationLink
-							hiddenNav={hiddenNav}
-							title='Settings'
-							href='/settings'
-							elementsLength={undefined}
-							icon={<SettingsIcon className={classes.icon} />}
-							tooltipTitle={<Typography fontSize={15}>Settings</Typography>}
-						/>
-
-						<NavigationLink
 							title='Login'
 							hiddenNav={hiddenNav}
 							href='/login'
 							elementsLength={undefined}
 							icon={<PermIdentityIcon className={classes.icon} />}
 							tooltipTitle={<Typography fontSize={15}>Login</Typography>}
+						/>
+
+						<NavigationLink
+							hiddenNav={hiddenNav}
+							title='Settings'
+							href='/settings'
+							elementsLength={undefined}
+							icon={<SettingsIcon className={classes.icon} />}
+							tooltipTitle={<Typography fontSize={15}>Settings</Typography>}
 						/>
 					</div>
 				</div>

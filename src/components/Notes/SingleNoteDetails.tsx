@@ -30,6 +30,7 @@ export const SingleNoteDetails = ({ date, id, favourite, editHistory }: noteDeta
 							))}
 						</ul>
 					) : null}
+					{!editHistory.length && <p>This note hasn't been edited</p>}
 				</div>
 
 				<div className={classes.detailsControls}>
