@@ -3,7 +3,7 @@ import { Note } from '../types/NoteType'
 import { notify } from './../constants/Notify'
 
 type NotesContextType = {
-
+	token: null
 }
 
 export const NotesContext = React.createContext<NotesContextType>({
