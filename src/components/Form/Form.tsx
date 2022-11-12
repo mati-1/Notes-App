@@ -12,9 +12,9 @@ import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline'
 import { useForm, SubmitHandler } from 'react-hook-form'
 
 type Inputs = {
-	title: string
-	description: string
-	category: string
+	readonly title: string
+	readonly description: string
+	readonly category: string
 }
 
 export const Form = () => {
@@ -44,10 +44,7 @@ export const Form = () => {
 			editHistory: editHistory,
 		}
 
-		console.log(NoteObj)
-
 		addNote(NoteObj)
-
 		navigate('/notes')
 	}
 
