@@ -6,7 +6,7 @@ import { Link, useLocation } from 'react-router-dom'
 import loginWallpaper from '../../img/login.svg'
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline'
 import { MainButton } from '../UI/MainButton'
-import { signUpUrl } from '../../constants/authApiData'
+import { signUpUrl, signInUrl } from '../../constants/authApiData'
 import { ProgressBar } from '../UI/Progressbar'
 
 const regex =
@@ -27,11 +27,12 @@ export const AuthForm = () => {
 		formState: { errors },
 	} = useForm<Inputs>()
 
-	// const navigate = useNavigate()
 	const location = useLocation()
 	const navigate = useNavigate()
 	const [isHiddenPassword, setIsHiddenPassword] = useState(true)
 	const [isLoading, setIsLoading] = useState(false)
+	const locationRegister = location.pathname === '/register'
+	let url = locationRegister ? signUpUrl : signInUrl
 
 	const submitRegister: SubmitHandler<Inputs> = async (formData) => {
 		setIsLoading(true)
@@ -43,7 +44,7 @@ export const AuthForm = () => {
 		}
 
 		try {
-			const res = await fetch(signUpUrl, {
+			const res = await fetch(url, {
 				method: 'POST',
 				body: JSON.stringify(registerData),
 				headers: {
@@ -51,24 +52,31 @@ export const AuthForm = () => {
 				},
 			})
 
-			const data = res.json()
+			const data = await res.json()
 
 			if (res.ok) {
 				setIsLoading(false)
 				navigate('/login')
 			} else {
-				console.log(data)
+				let errorMessage = 'Authentication failed'
+
+				if (data && data.error && data.error.message) {
+					errorMessage = data.error.message
+				}
+
+				alert(errorMessage)
 			}
+			console.log(data)
 		} catch (err) {
 			console.log(err)
 		}
 	}
 
-	if (location.pathname === '/register') {
+	if (locationRegister) {
 		return (
 			<div className={classes.authForm}>
-				{isLoading ? <ProgressBar /> : null}
 				<form onSubmit={handleSubmit(submitRegister)} className={classes.form}>
+					{isLoading && <ProgressBar />}
 					<h1 className={classes.heading}>Create new account!</h1>
 					<div className={classes.rowFormControl}>
 						<div className={classes.formControl}>
@@ -158,7 +166,7 @@ export const AuthForm = () => {
 						Are you have an account? Log in
 					</Link>
 
-					<MainButton type='submit' title='Create account' />
+					<MainButton type='submit' title={`${isLoading ? 'Sending' : 'Create account'}`} />
 				</form>
 				<div className={classes.features}>
 					<img src={loginWallpaper} alt='login' />
@@ -170,6 +178,7 @@ export const AuthForm = () => {
 	return (
 		<div className={classes.authForm}>
 			<form onSubmit={handleSubmit(submitRegister)} className={classes.form}>
+				{isLoading && <ProgressBar />}
 				<h1 className={classes.heading}>Login to your account!</h1>
 				<div className={classes.formControl}>
 					<label htmlFor='email'>Email</label>
@@ -223,7 +232,7 @@ export const AuthForm = () => {
 					You not have an account? Register
 				</Link>
 
-				<MainButton type='submit' title='Log in' />
+				<MainButton type='submit' title={isLoading ? 'Sending' : 'Log in'} />
 			</form>
 			<div className={classes.features}>
 				<img src={loginWallpaper} alt='login' />
