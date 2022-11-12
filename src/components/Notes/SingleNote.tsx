@@ -1,7 +1,6 @@
 import { useContext, useState } from 'react'
 import { useParams, useNavigate, Link } from 'react-router-dom'
 import classes from './NoteItem.module.scss'
-import Button from '@mui/material/Button'
 import FormControlLabel from '@mui/material/FormControlLabel'
 import Checkbox from '@mui/material/Checkbox'
 import { NotesContext } from '../../context/NoteContext'
@@ -9,6 +8,8 @@ import { Note } from '../../types/NoteType'
 import { SingleNoteDetails } from './SingleNoteDetails'
 import { getFullDate } from '../../constants/FullDate'
 import Avatar from '@mui/material/Avatar'
+import { MainButton } from '../UI/MainButton'
+import { SecondaryButton } from '../UI/SecondaryButton'
 
 export const SingleNoteItem = () => {
 	const { notes, updateNote } = useContext(NotesContext)
@@ -41,7 +42,7 @@ export const SingleNoteItem = () => {
 
 	const allInputsIsValid = newTitle && newCategory && newDescription && !theSameData
 
-	const submitNewNoteDataHandler = (e: React.MouseEvent) => {
+	const submitNewNoteDataHandler = (e: React.FormEvent) => {
 		e.preventDefault()
 
 		if (!allInputsIsValid) {
@@ -117,15 +118,11 @@ export const SingleNoteItem = () => {
 								label={newFavourite ? 'Is favourite' : 'Not favourite'}
 							/>
 							<div className={classes.buttons}>
-								<Button onClick={() => setIsEditing(false)} variant={'outlined'}>
-									Cancel editing
-								</Button>
-								<Button
-									disabled={!allInputsIsValid}
-									onClick={submitNewNoteDataHandler}
-									variant={isEditing ? 'contained' : 'text'}>
+								<SecondaryButton onClick={() => setIsEditing(false)} title='Cancel' />
+
+								<button className={classes.saveButton} disabled={!allInputsIsValid} onClick={submitNewNoteDataHandler}>
 									Save
-								</Button>
+								</button>
 							</div>
 						</form>
 					) : (
@@ -154,12 +151,9 @@ export const SingleNoteItem = () => {
 								</div>
 							</div>
 							<div className={classes.buttons}>
-								<Button disabled={isEditing} onClick={() => navigate(-1)} variant='contained'>
-									Back to list
-								</Button>
-								<Button onClick={() => setIsEditing((prev) => !prev)} variant='outlined'>
-									Edit
-								</Button>
+								<MainButton title='Back' disabled={isEditing} onClick={() => navigate(-1)} />
+
+								<SecondaryButton onClick={() => setIsEditing((prev) => !prev)} title='Edit' />
 							</div>
 						</>
 					)}

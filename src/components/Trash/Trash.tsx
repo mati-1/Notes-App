@@ -4,7 +4,7 @@ import classes from '../Notes/Notes.module.scss'
 import empty from '../../img/trash.svg'
 import { AnimatePresence } from 'framer-motion'
 import { NotesContext } from '../../context/NoteContext'
-import { Button } from '@mui/material'
+import { MainButton } from '../UI/MainButton'
 import { Link } from 'react-router-dom'
 
 export const Trash = () => {
@@ -18,11 +18,11 @@ export const Trash = () => {
 			<div className={classes.buttons}>
 				{trashNotes.length ? (
 					<Link to='/trash'>
-						<Button variant='outlined'>Check trash</Button>
+						<MainButton title='Check trash' />
 					</Link>
 				) : null}
 				<Link to='/create'>
-					<Button variant='contained'>Create new</Button>
+					<MainButton title='Create new' />
 				</Link>
 			</div>
 		</div>
@@ -36,9 +36,7 @@ export const Trash = () => {
 				</h1>
 				{trashNotes.length ? (
 					<div className={classes.buttons}>
-						<Button variant='outlined' onClick={clearTrash}>
-							Clear trash
-						</Button>
+						<MainButton title='Delete all' onClick={clearTrash} />
 					</div>
 				) : null}
 			</div>

@@ -19,7 +19,7 @@ export const NavigationLink = ({ icon, hiddenNav, title, elementsLength, href, t
 	const pathCondition = location.pathname === href
 
 	return hiddenNav ? (
-		<Tooltip arrow title={tooltipTitle} TransitionComponent={Zoom} placement='right'>
+		<Tooltip enterDelay={500} leaveDelay={100} arrow title={tooltipTitle} TransitionComponent={Zoom} placement='right'>
 			<NavLink className={pathCondition ? classes.activeLink : classes.link} to={href}>
 				<Badge badgeContent={elementsLength} color='primary'>
 					{icon}

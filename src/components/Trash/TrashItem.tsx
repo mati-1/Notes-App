@@ -2,9 +2,10 @@ import { useContext } from 'react'
 import { Note } from '../../types/NoteType'
 import classes from '../Notes/NoteItem.module.scss'
 import { motion } from 'framer-motion'
-import Button from '@mui/material/Button'
 import { NotesContext } from '../../context/NoteContext'
 import { Link } from 'react-router-dom'
+import { MainButton } from './../UI/MainButton'
+import { SecondaryButton } from '../UI/SecondaryButton'
 import Avatar from '@mui/material/Avatar'
 
 type TrashItemProps = {
@@ -50,13 +51,9 @@ export const TrashItem = ({ id, note, title, category, description }: TrashItemP
 				<p>{description}</p>
 			</div>
 			<div className={classes.buttons}>
-				<Button onClick={permRemoveNoteHandler} type='button' variant='contained'>
-					Delete
-				</Button>
+				<MainButton onClick={permRemoveNoteHandler} type='button' title='Delete' />
 
-				<Button onClick={undoNoteHandler} type='button' variant='outlined'>
-					Undo to notes
-				</Button>
+				<SecondaryButton onClick={undoNoteHandler} type='button' title='Undo' />
 			</div>
 		</motion.li>
 	)

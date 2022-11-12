@@ -5,10 +5,11 @@ import classes from './Notes.module.scss'
 import empty from '../../img/empty.svg'
 import { NotesContext } from '../../context/NoteContext'
 import { NotePagination } from '../Pagination/Pagination'
-import { Button } from '@mui/material'
 import { FilterPopup } from '../Filter/FilterPopup'
 import { Note } from '../../types/NoteType'
 import { useSearchParams, Link } from 'react-router-dom'
+import { MainButton } from '../UI/MainButton'
+import { SecondaryButton } from '../UI/SecondaryButton'
 
 export const Notes = () => {
 	const { notes, trashNotes, removeAll } = useContext(NotesContext)
@@ -49,11 +50,11 @@ export const Notes = () => {
 			<div className={classes.buttons}>
 				{trashNotes.length ? (
 					<Link to='/trash'>
-						<Button variant='outlined'>Check trash</Button>
+						<SecondaryButton title='Check trash' />
 					</Link>
 				) : null}
 				<Link to='/create'>
-					<Button variant='contained'>Create new</Button>
+					<MainButton title='Create new' />
 				</Link>
 			</div>
 		</div>
@@ -68,9 +69,7 @@ export const Notes = () => {
 				{notes.length ? (
 					<div className={classes.buttons}>
 						<FilterPopup />
-						<Button variant='outlined' onClick={removeAll}>
-							Remove all notes
-						</Button>
+						<MainButton title='Trash all' onClick={removeAll} />
 					</div>
 				) : null}
 			</div>
