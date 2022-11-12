@@ -1,4 +1,4 @@
-// import React, { useState, useContext } from 'react'
+import React, { useState } from 'react'
 // import { useNavigate } from 'react-router-dom'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import classes from './AuthForm.module.scss'
@@ -27,6 +27,7 @@ export const AuthForm = () => {
 
 	// const navigate = useNavigate()
 	const location = useLocation()
+	const [isHiddenPassword, setIsHiddenPassword] = useState(true)
 
 	const submitLogging: SubmitHandler<Inputs> = (data) => {
 		console.log(data)
@@ -94,17 +95,26 @@ export const AuthForm = () => {
 					</div>
 					<div className={classes.formControl}>
 						<label htmlFor='password'>Password</label>
-						<input
-							autoComplete='off'
-							id='password'
-							placeholder='Your password'
-							type='password'
-							{...register('password', {
-								required: true,
-								minLength: 8,
-								maxLength: 25,
-							})}
-						/>
+						<div className={classes.passwordInput}>
+							<input
+								autoComplete='off'
+								id='password'
+								placeholder='Your password'
+								type={isHiddenPassword ? 'password' : ' text'}
+								{...register('password', {
+									required: true,
+									minLength: 8,
+									maxLength: 25,
+								})}
+							/>
+							<button
+								onClick={() => setIsHiddenPassword((p) => !p)}
+								type='button'
+								className={classes.passwordToggleButton}>
+								{isHiddenPassword ? 'Show' : 'Hide'} password
+							</button>
+						</div>
+
 						{errors.password && (
 							<p className={classes.errorMessage}>
 								<ErrorOutlineIcon /> Password is invalid, min. 8 letters
@@ -151,17 +161,25 @@ export const AuthForm = () => {
 				</div>
 				<div className={classes.formControl}>
 					<label htmlFor='password'>Password</label>
-					<input
-						autoComplete='off'
-						id='password'
-						placeholder='Your password'
-						type='password'
-						{...register('password', {
-							required: true,
-							minLength: 8,
-							maxLength: 25,
-						})}
-					/>
+					<div className={classes.passwordInput}>
+						<input
+							autoComplete='off'
+							id='password'
+							placeholder='Your password'
+							type={isHiddenPassword ? 'password' : ' text'}
+							{...register('password', {
+								required: true,
+								minLength: 8,
+								maxLength: 25,
+							})}
+						/>
+						<button
+							onClick={() => setIsHiddenPassword((p) => !p)}
+							type='button'
+							className={classes.passwordToggleButton}>
+							{isHiddenPassword ? 'Show' : 'Hide'} password
+						</button>
+					</div>
 					{errors.password && (
 						<p className={classes.errorMessage}>
 							<ErrorOutlineIcon /> Password is invalid, min. 8 letters

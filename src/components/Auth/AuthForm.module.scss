@@ -42,6 +42,22 @@
 			display: flex;
 			flex-direction: column;
 
+			.passwordInput {
+				display: flex;
+				align-items: center;
+				position: relative;
+
+				.passwordToggleButton {
+					position: absolute;
+					right: 0;
+					background: none;
+					border: none;
+					margin: 0;
+					padding: 1rem;
+					color: var(--grey-color);
+				}
+			}
+
 			input {
 				font-family: Roboto;
 				font-size: var(--small-size);
@@ -52,6 +68,7 @@
 				outline: none;
 				border-radius: 0.5rem;
 				border: 1px solid transparent;
+				width: 100%;
 
 				&:focus {
 					border: 1px solid var(--main-color);
