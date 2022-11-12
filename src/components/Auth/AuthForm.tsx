@@ -31,8 +31,6 @@ export const AuthForm = () => {
 	const locationRegister = location.pathname === '/register'
 	let url = locationRegister ? signUpUrl : signInUrl
 
-	console.log('url ----->', url)
-
 	const submitRegister: SubmitHandler<Inputs> = async (formData) => {
 		setIsLoading(true)
 
