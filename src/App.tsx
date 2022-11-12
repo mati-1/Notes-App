@@ -1,4 +1,4 @@
-import React, { Suspense, StrictMode } from 'react'
+import React, { Suspense } from 'react'
 import { Route, createBrowserRouter, createRoutesFromElements, RouterProvider } from 'react-router-dom'
 import RootLayout from './pages/RootLayout'
 import { ErrorPage } from './pages/ErrorPage'
@@ -32,15 +32,13 @@ const router = createBrowserRouter(
 
 const App = () => {
 	return (
-		<StrictMode>
-			<AuthContextProvider>
-				<NotesContextProvider>
-					<Suspense fallback={<ProgressBar />}>
-						<RouterProvider router={router} />
-					</Suspense>
-				</NotesContextProvider>
-			</AuthContextProvider>
-		</StrictMode>
+		<AuthContextProvider>
+			<NotesContextProvider>
+				<Suspense fallback={<ProgressBar />}>
+					<RouterProvider router={router} />
+				</Suspense>
+			</NotesContextProvider>
+		</AuthContextProvider>
 	)
 }
 

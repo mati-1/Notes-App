@@ -12,10 +12,12 @@ import { Backdrop } from '../UI/Backdrop'
 import PermIdentityIcon from '@mui/icons-material/PermIdentity'
 import { NavigationLink } from './NavLink'
 import Typography from '@mui/material/Typography'
+import { AuthContext } from '../../context/AuthContext'
 
 export const Nav = () => {
 	const [hiddenNav, setHiddenNav] = useState(true)
 	const { notes, trashNotes, favouriteNotes } = useContext(NotesContext)
+	const { isLoggedIn } = useContext(AuthContext)
 
 	return (
 		<>
@@ -46,7 +48,7 @@ export const Nav = () => {
 							href='/create'
 							elementsLength={undefined}
 							icon={<AddIcon className={classes.icon} />}
-							tooltipTitle={<Typography fontSize={15}>Create</Typography>}
+							tooltipTitle={<Typography fontSize={11}>Create</Typography>}
 						/>
 
 						<NavigationLink
@@ -55,7 +57,7 @@ export const Nav = () => {
 							href='/notes'
 							elementsLength={notes.length}
 							icon={<FormatListBulletedIcon className={classes.icon} />}
-							tooltipTitle={<Typography fontSize={15}>Notes</Typography>}
+							tooltipTitle={<Typography fontSize={11}>Notes</Typography>}
 						/>
 
 						<NavigationLink
@@ -64,7 +66,7 @@ export const Nav = () => {
 							href='/trash'
 							elementsLength={trashNotes.length}
 							icon={<DeleteOutlineIcon className={classes.icon} />}
-							tooltipTitle={<Typography fontSize={15}>Trash</Typography>}
+							tooltipTitle={<Typography fontSize={11}>Trash</Typography>}
 						/>
 
 						<NavigationLink
@@ -73,17 +75,27 @@ export const Nav = () => {
 							href='/favourite'
 							elementsLength={favouriteNotes.length}
 							icon={<FavoriteBorderIcon className={classes.icon} />}
-							tooltipTitle={<Typography fontSize={15}>Favourite</Typography>}
+							tooltipTitle={<Typography fontSize={11}>Favourite</Typography>}
 						/>
-
-						<NavigationLink
-							title='Login'
-							hiddenNav={hiddenNav}
-							href='/login'
-							elementsLength={undefined}
-							icon={<PermIdentityIcon className={classes.icon} />}
-							tooltipTitle={<Typography fontSize={15}>Login</Typography>}
-						/>
+						{isLoggedIn ? (
+							<NavigationLink
+								title='Account'
+								hiddenNav={hiddenNav}
+								href='/user'
+								elementsLength={undefined}
+								icon={<PermIdentityIcon className={classes.icon} />}
+								tooltipTitle={<Typography fontSize={11}>Login</Typography>}
+							/>
+						) : (
+							<NavigationLink
+								title='Login'
+								hiddenNav={hiddenNav}
+								href='/login'
+								elementsLength={undefined}
+								icon={<PermIdentityIcon className={classes.icon} />}
+								tooltipTitle={<Typography fontSize={11}>Login</Typography>}
+							/>
+						)}
 
 						<NavigationLink
 							hiddenNav={hiddenNav}
@@ -91,7 +103,7 @@ export const Nav = () => {
 							href='/settings'
 							elementsLength={undefined}
 							icon={<SettingsIcon className={classes.icon} />}
-							tooltipTitle={<Typography fontSize={15}>Settings</Typography>}
+							tooltipTitle={<Typography fontSize={11}>Settings</Typography>}
 						/>
 					</div>
 				</div>

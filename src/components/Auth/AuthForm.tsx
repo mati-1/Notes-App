@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import classes from './AuthForm.module.scss'
@@ -9,6 +9,7 @@ import { MainButton } from '../UI/MainButton'
 import { signUpUrl, signInUrl } from '../../constants/authApiData'
 import { ProgressBar } from '../UI/Progressbar'
 import { regex } from './../../constants/regex'
+import { AuthContext } from './../../context/AuthContext'
 
 type Inputs = {
 	readonly name: string
@@ -24,6 +25,7 @@ export const AuthForm = () => {
 		formState: { errors },
 	} = useForm<Inputs>()
 
+	const { login } = useContext(AuthContext)
 	const location = useLocation()
 	const navigate = useNavigate()
 	const [isHiddenPassword, setIsHiddenPassword] = useState(true)
@@ -35,10 +37,14 @@ export const AuthForm = () => {
 		setIsLoading(true)
 
 		const registerData = {
+			name: formData.name,
+			surname: formData.surname,
 			email: formData.email,
 			password: formData.password,
 			returnSecureToken: true,
 		}
+
+		console.log(registerData)
 
 		try {
 			const res = await fetch(url, {
@@ -53,7 +59,7 @@ export const AuthForm = () => {
 
 			if (res.ok) {
 				setIsLoading(false)
-				navigate('/login')
+				locationRegister ? navigate('/login') : navigate('/user')
 			} else {
 				let errorMessage = 'Authentication failed'
 
@@ -63,7 +69,8 @@ export const AuthForm = () => {
 
 				alert(errorMessage)
 			}
-			console.log(data)
+
+			login(data.idToken)
 		} catch (err) {
 			console.log(err)
 		}

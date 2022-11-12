@@ -12,6 +12,10 @@
 			display: none;
 		}
 	}
+	@media (max-width: 1300px) {
+		justify-content: center;
+		gap: 0;
+	}
 
 	.form {
 		display: flex;
