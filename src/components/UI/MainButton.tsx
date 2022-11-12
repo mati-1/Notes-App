@@ -1,18 +1,17 @@
 import React from 'react'
-import Button from '@mui/material/Button'
+import classes from './MainButton.module.scss'
 
 type ButtonProps = {
-	variant: string | any
-	title: string
-	type: any
-	disabled?: boolean
-	className?: string | boolean | any
+	readonly title: string
+	readonly type?: any
+	readonly disabled?: boolean
+	onClick?: () => void
 }
 
-export const MainButton = ({ variant, title, type, disabled, className }: ButtonProps) => {
+export const MainButton = ({ title, type, disabled, onClick }: ButtonProps) => {
 	return (
-		<Button className={className} disabled={disabled} type={type} variant={variant}>
+		<button onClick={onClick} className={classes.mainButton} disabled={disabled} type={type}>
 			{title}
-		</Button>
+		</button>
 	)
 }

@@ -5,6 +5,7 @@ import classes from './AuthForm.module.scss'
 import { Link, useLocation } from 'react-router-dom'
 import loginWallpaper from '../../img/login.svg'
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline'
+import { MainButton } from '../UI/MainButton'
 
 const regex =
 	// eslint-disable-next-line no-useless-escape
@@ -115,7 +116,7 @@ export const AuthForm = () => {
 						Are you have an account? Log in
 					</Link>
 
-					<button type='submit'>Create account</button>
+					<MainButton type='submit' title='Create account' />
 				</form>
 				<div className={classes.features}>
 					<img src={loginWallpaper} alt='login' />
@@ -172,7 +173,7 @@ export const AuthForm = () => {
 					You not have an account? Register
 				</Link>
 
-				<button type='submit'>Log in</button>
+				<MainButton type='submit' title='Log in' />
 			</form>
 			<div className={classes.features}>
 				<img src={loginWallpaper} alt='login' />

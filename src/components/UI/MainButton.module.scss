@@ -1,6 +1,32 @@
 .mainButton {
-	background-color: var(--main-color);
+	padding: 0.7rem 1.5rem;
+	border-radius: 0.5rem;
+	color: var(--white-color);
+	background: var(--main-color);
+	cursor: pointer;
+	font-size: var(--small-size);
+	transition: background 0.2s ease, border 0.2s ease;
+	border: 1px solid transparent;
+	margin-top: 1rem;
+
 	&:hover {
-		background-color: var(--main-hover-color);
+		background: var(--main-hover-color);
+		border-color: var(--main2-color);
+	}
+}
+
+.secondaryButton {
+	padding: 0.7rem 1.5rem;
+	border-radius: 0.5rem;
+	color: var(--white-color);
+	background: none;
+	cursor: pointer;
+	font-size: var(--small-size);
+	transition: border 0.2s ease;
+	border: 1px solid var(--black4-color);
+	margin-top: 1rem;
+
+	&:hover {
+		border-color: var(--main2-color);
 	}
 }

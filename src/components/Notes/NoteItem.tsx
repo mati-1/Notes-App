@@ -2,7 +2,8 @@ import { useContext, useId } from 'react'
 import { Note } from '../../types/NoteType'
 import classes from './NoteItem.module.scss'
 import { motion } from 'framer-motion'
-import Button from '@mui/material/Button'
+import { MainButton } from '../UI/MainButton'
+import { SecondaryButton } from '../UI/SecondaryButton'
 import { NotesContext } from '../../context/NoteContext'
 import { Link } from 'react-router-dom'
 import Avatar from '@mui/material/Avatar'
@@ -52,12 +53,10 @@ export const NoteItem = ({ id, title, category, description, favourite, note }: 
 			</div>
 			<div className={classes.buttons}>
 				<Link to={`/notes/${id}`}>
-					<Button variant='contained'>Details</Button>
+					<MainButton title='Details' />
 				</Link>
 
-				<Button onClick={deleteHandler} type='button' variant='outlined'>
-					Move to trash
-				</Button>
+				<SecondaryButton onClick={deleteHandler} type='button' title='Delete' />
 			</div>
 		</motion.li>
 	)

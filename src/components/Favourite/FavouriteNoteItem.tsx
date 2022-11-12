@@ -2,9 +2,9 @@ import { useState, useContext } from 'react'
 import { Note } from '../../types/NoteType'
 import classes from '../Notes/NoteItem.module.scss'
 import { motion } from 'framer-motion'
-import Button from '@mui/material/Button'
 import { NotesContext } from '../../context/NoteContext'
 import { Link } from 'react-router-dom'
+import { MainButton } from '../UI/MainButton'
 import Avatar from '@mui/material/Avatar'
 
 type FavouriteNoteItemProps = {
@@ -50,9 +50,7 @@ export const FavouriteNoteItem = ({ note, favourite, title, category, descriptio
 				<p>{description}</p>
 			</div>
 			<div className={classes.buttons}>
-				<Button onClick={removeFromFav} type='button' variant='outlined'>
-					Unfavourite
-				</Button>
+				<MainButton onClick={removeFromFav} type='button' title='Unfavourite' />
 			</div>
 		</motion.li>
 	)

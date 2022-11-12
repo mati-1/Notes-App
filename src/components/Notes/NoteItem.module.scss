@@ -250,3 +250,20 @@ select {
 		border: 1px solid var(--main-color);
 	}
 }
+
+.saveButton {
+	padding: 0.7rem 1.5rem;
+	border-radius: 0.5rem;
+	color: var(--white-color);
+	background: var(--main-color);
+	cursor: pointer;
+	font-size: var(--small-size);
+	transition: background 0.2s ease, border 0.2s ease;
+	border: 1px solid transparent;
+	margin-top: 1rem;
+
+	&:hover {
+		background: var(--main-hover-color);
+		border-color: var(--main2-color);
+	}
+}
