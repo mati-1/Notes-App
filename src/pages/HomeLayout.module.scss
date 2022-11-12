@@ -22,8 +22,10 @@
 		img {
 			width: 38rem;
 		}
-		button {
-			width: 9rem;
+		.buttons {
+			display: flex;
+			align-items: center;
+			gap: 1rem;
 		}
 	}
 }

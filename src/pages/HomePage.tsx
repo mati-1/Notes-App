@@ -1,7 +1,8 @@
 import classes from './HomeLayout.module.scss'
 import { Link } from 'react-router-dom'
 import header from '../img/header.svg'
-import Button from '@mui/material/Button'
+import { MainButton } from '../components/UI/MainButton'
+import { SecondaryButton } from '../components/UI/SecondaryButton'
 
 const HomePage = () => {
 	return (
@@ -10,11 +11,16 @@ const HomePage = () => {
 				<div>
 					<h1>Best notes app for everyone!</h1>
 					<p>Create your first Note</p>
-					<Link to='/create'>
-						<Button variant='contained'>Get Started</Button>
-					</Link>
+					<div className={classes.buttons}>
+						<Link to='/create'>
+							<MainButton title='Get started' />
+						</Link>
+						<Link to='/register'>
+							<SecondaryButton title='Log in' />
+						</Link>
+					</div>
 				</div>
-				<img src={header} alt='xd' />
+				<img src={header} alt='header' />
 			</div>
 		</div>
 	)
