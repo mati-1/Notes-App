@@ -8,10 +8,7 @@ import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline'
 import { MainButton } from '../UI/MainButton'
 import { signUpUrl, signInUrl } from '../../constants/authApiData'
 import { ProgressBar } from '../UI/Progressbar'
-
-const regex =
-	// eslint-disable-next-line no-useless-escape
-	/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+import { regex } from './../../constants/regex'
 
 type Inputs = {
 	readonly name: string
