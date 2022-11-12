@@ -1,20 +1,20 @@
 import React, { useState } from 'react'
 
-type NotesContextType = {
+type AuthContextType = {
 	token: string
 	isLoggedIn: boolean
 	login: (token: string) => void
 	logout: () => void
 }
 
-export const NotesContext = React.createContext<NotesContextType>({
+export const AuthContext = React.createContext<AuthContextType>({
 	token: '',
 	isLoggedIn: false,
 	login: () => {},
 	logout: () => {},
 })
 
-export const NotesContextProvider = ({ children }: { children: JSX.Element }) => {
+export const AuthContextProvider = ({ children }: { children: JSX.Element }) => {
 	const [token, setToken] = useState('')
 	const userIsLoggedIn = !!token
 
@@ -32,5 +32,5 @@ export const NotesContextProvider = ({ children }: { children: JSX.Element }) =>
 		login: loginHandler,
 		logout: logoutHandler,
 	}
-	return <NotesContext.Provider value={contextValue}>{children}</NotesContext.Provider>
+	return <AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>
 }
