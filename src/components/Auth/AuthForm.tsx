@@ -1,11 +1,13 @@
 import React, { useState } from 'react'
-// import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import classes from './AuthForm.module.scss'
 import { Link, useLocation } from 'react-router-dom'
 import loginWallpaper from '../../img/login.svg'
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline'
 import { MainButton } from '../UI/MainButton'
+import { signUpUrl } from '../../constants/authApiData'
+import { ProgressBar } from '../UI/Progressbar'
 
 const regex =
 	// eslint-disable-next-line no-useless-escape
@@ -27,16 +29,46 @@ export const AuthForm = () => {
 
 	// const navigate = useNavigate()
 	const location = useLocation()
+	const navigate = useNavigate()
 	const [isHiddenPassword, setIsHiddenPassword] = useState(true)
+	const [isLoading, setIsLoading] = useState(false)
 
-	const submitLogging: SubmitHandler<Inputs> = (data) => {
-		console.log(data)
+	const submitRegister: SubmitHandler<Inputs> = async (formData) => {
+		setIsLoading(true)
+
+		const registerData = {
+			email: formData.email,
+			password: formData.password,
+			returnSecureToken: true,
+		}
+
+		try {
+			const res = await fetch(signUpUrl, {
+				method: 'POST',
+				body: JSON.stringify(registerData),
+				headers: {
+					'Content-type': 'application/json',
+				},
+			})
+
+			const data = res.json()
+
+			if (res.ok) {
+				setIsLoading(false)
+				navigate('/login')
+			} else {
+				console.log(data)
+			}
+		} catch (err) {
+			console.log(err)
+		}
 	}
 
 	if (location.pathname === '/register') {
 		return (
 			<div className={classes.authForm}>
-				<form onSubmit={handleSubmit(submitLogging)} className={classes.form}>
+				{isLoading ? <ProgressBar /> : null}
+				<form onSubmit={handleSubmit(submitRegister)} className={classes.form}>
 					<h1 className={classes.heading}>Create new account!</h1>
 					<div className={classes.rowFormControl}>
 						<div className={classes.formControl}>
@@ -137,7 +169,7 @@ export const AuthForm = () => {
 
 	return (
 		<div className={classes.authForm}>
-			<form onSubmit={handleSubmit(submitLogging)} className={classes.form}>
+			<form onSubmit={handleSubmit(submitRegister)} className={classes.form}>
 				<h1 className={classes.heading}>Login to your account!</h1>
 				<div className={classes.formControl}>
 					<label htmlFor='email'>Email</label>
