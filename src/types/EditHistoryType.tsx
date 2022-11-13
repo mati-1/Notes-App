@@ -1,3 +1,3 @@
 export interface EditHistory {
-	date: string
+	readonly date: string
 }

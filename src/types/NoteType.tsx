@@ -1,13 +1,13 @@
 import { EditHistory } from './EditHistoryType'
 
 export interface Note {
-	id?: string | any
-	author?: string
-	title: string
-	category: string
-	description: string
-	favourite: boolean
-	date?: string
-	descLength: number
-	editHistory: EditHistory[]
+	readonly id?: string | any
+	readonly author?: string
+	readonly title: string
+	readonly category: string
+	readonly description: string
+	readonly favourite: boolean
+	readonly date?: string
+	readonly descLength: number
+	readonly editHistory: EditHistory[]
 }

@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
+import { UserData } from './../types/UserDataType'
 
 type AuthContextType = {
 	token: string
 	isLoggedIn: boolean
-	login: (token: string) => void
+	login: (userData: UserData) => void
 	logout: () => void
 }
 
@@ -18,8 +19,8 @@ export const AuthContextProvider = ({ children }: { children: JSX.Element }) => 
 	const [token, setToken] = useState('')
 	const userIsLoggedIn = !!token
 
-	const loginHandler = (token: string) => {
-		setToken(token)
+	const loginHandler = (userData: UserData) => {
+		setToken(userData.token)
 	}
 
 	const logoutHandler = () => {
