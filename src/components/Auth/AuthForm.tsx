@@ -68,7 +68,7 @@ export const AuthForm = () => {
 				alert(errorMessage)
 			}
 
-			locationRegister ? registerUser(registerData, data.idToken) : loginUser(data.idToken)
+			locationRegister ? registerUser(registerData, data.idToken) : loginUser(data.idToken, registerData)
 			console.log(data.idToken)
 		} catch (err) {
 			console.log(err)

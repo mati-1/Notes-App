@@ -7,7 +7,7 @@ type AuthContextType = {
 	token: string
 	userData: UserData
 	isLoggedIn: boolean
-	loginUser: (token: string) => void
+	loginUser: (token: string, userData: UserData) => void
 	registerUser: (userData: UserData, token: string) => void
 	logout: () => void
 }
@@ -26,12 +26,11 @@ export const AuthContextProvider = ({ children }: { children: React.ReactNode })
 	const [token, setToken] = useState('')
 	const userIsLoggedIn = !!token
 
-	const loginHandler = useCallback(async (token: string) => {
-		const q = query(collection(db, 'users'), where('token', '==', token))
+	const loginHandler = useCallback(async (token: string, userData: UserData) => {
+		const q = query(collection(db, 'users'), where('email', '==', userData.email))
 
 		const querySnapshot = await getDocs(q)
 		querySnapshot.forEach((doc) => {
-			// doc.data() is never undefined for query doc snapshots
 			console.log(doc.id, '  =>  ', doc.data())
 
 			setInitialData({
