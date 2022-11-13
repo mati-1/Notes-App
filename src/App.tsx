@@ -14,6 +14,7 @@ const DetailNoteLayout = React.lazy(() => import('./pages/DetailNotePage'))
 const FavouriteLayout = React.lazy(() => import('./pages/FavouritePage'))
 const LoginLayout = React.lazy(() => import('./pages/LoginPage'))
 const RegisterLayout = React.lazy(() => import('./pages/RegisterPage'))
+const UserLayout = React.lazy(() => import('./pages/UserPage'))
 
 const router = createBrowserRouter(
 	createRoutesFromElements(
@@ -26,6 +27,7 @@ const router = createBrowserRouter(
 			<Route path='/favourite' element={<FavouriteLayout />} />
 			<Route path='/login' element={<LoginLayout />} />
 			<Route path='/register' element={<RegisterLayout />} />
+			<Route path='/user' element={<UserLayout />} />
 		</Route>
 	)
 )
