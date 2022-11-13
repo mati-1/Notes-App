@@ -25,7 +25,7 @@ export const AuthForm = () => {
 		formState: { errors },
 	} = useForm<Inputs>()
 
-	const { login } = useContext(AuthContext)
+	const { loginUser, registerUser } = useContext(AuthContext)
 	const location = useLocation()
 	const navigate = useNavigate()
 	const [isHiddenPassword, setIsHiddenPassword] = useState(true)
@@ -43,8 +43,6 @@ export const AuthForm = () => {
 			password: formData.password,
 			returnSecureToken: true,
 		}
-
-		console.log(registerData)
 
 		try {
 			const res = await fetch(url, {
@@ -70,7 +68,8 @@ export const AuthForm = () => {
 				alert(errorMessage)
 			}
 
-			login(data.idToken)
+			locationRegister ? registerUser(registerData, data.idToken) : loginUser(data.idToken)
+			console.log(data.idToken)
 		} catch (err) {
 			console.log(err)
 		}
