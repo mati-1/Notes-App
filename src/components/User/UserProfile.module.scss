@@ -1,9 +1,75 @@
 .profileWrapper {
 	padding-top: 5rem;
 
-	.welcomeHeading {
-		font-size: var(--big-size);
-		color: var(--grey-color);
-		margin-top: 1rem;
+	.profileModules {
+		.profileHeader {
+			display: flex;
+			align-items: center;
+			gap: 2rem;
+
+			.image {
+				position: relative;
+				display: flex;
+				img {
+					width: 11rem;
+					height: 11rem;
+					border-radius: 50%;
+				}
+
+				label {
+					position: absolute;
+					bottom: 0;
+					right: 0;
+					background-color: var(--black3-color);
+					svg {
+						fill: white;
+					}
+				}
+			}
+
+			.welcomeHeading {
+				font-size: var(--large-size);
+				color: var(--white-color);
+			}
+		}
+
+		.profileInfo {
+			margin-top: 5rem;
+			display: grid;
+			grid-template-columns: repeat(2, 1fr);
+			gap: 6rem;
+
+			ul {
+				display: grid;
+				grid-template-columns: 1;
+				gap: 1rem;
+				list-style: none;
+
+				button {
+					margin: 0;
+				}
+
+				a {
+					button {
+						width: 100%;
+					}
+				}
+
+				li {
+					padding: 0.7rem 1rem;
+					border-radius: 0.5rem;
+					color: var(--white-color);
+					border: 1px solid var(--black4-color);
+					div {
+						display: flex;
+						flex-direction: column;
+
+						h3 {
+							padding-bottom: 0.3rem;
+						}
+					}
+				}
+			}
+		}
 	}
 }
