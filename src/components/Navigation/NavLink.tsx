@@ -11,16 +11,25 @@ type NavLinkProps = {
 	elementsLength: number | undefined
 	href: string
 	tooltipTitle: JSX.Element
+	onClick?: () => void
 }
 
-export const NavigationLink = ({ icon, hiddenNav, title, elementsLength, href, tooltipTitle }: NavLinkProps) => {
+export const NavigationLink = ({
+	icon,
+	hiddenNav,
+	title,
+	elementsLength,
+	href,
+	tooltipTitle,
+	onClick,
+}: NavLinkProps) => {
 	const location = useLocation()
 
 	const pathCondition = location.pathname === href
 
 	return hiddenNav ? (
 		<Tooltip enterDelay={500} leaveDelay={100} arrow title={tooltipTitle} TransitionComponent={Zoom} placement='right'>
-			<NavLink className={pathCondition ? classes.activeLink : classes.link} to={href}>
+			<NavLink onClick={onClick} className={pathCondition ? classes.activeLink : classes.link} to={href}>
 				<Badge badgeContent={elementsLength} color='primary'>
 					{icon}
 					<span className={` ${hiddenNav ? classes.hiddenLinkTitle : ''}`}>{title}</span>
@@ -28,7 +37,7 @@ export const NavigationLink = ({ icon, hiddenNav, title, elementsLength, href, t
 			</NavLink>
 		</Tooltip>
 	) : (
-		<NavLink className={({ isActive }) => (isActive ? classes.activeLink : classes.link)} to={href}>
+		<NavLink onClick={onClick} className={({ isActive }) => (isActive ? classes.activeLink : classes.link)} to={href}>
 			<Badge badgeContent={elementsLength} color='primary'>
 				{icon}
 				<span className={` ${hiddenNav ? classes.hiddenLinkTitle : ''}`}>{title}</span>

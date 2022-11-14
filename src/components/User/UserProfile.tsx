@@ -10,7 +10,7 @@ export const UserProfile = () => {
 			<h1 className={classes.heading}>Your account</h1>
 
 			<div className={classes.profileModules}>
-				<form action=''>essa</form>
+				<form action=''>{userData.name}</form>
 			</div>
 		</div>
 	)

@@ -10,21 +10,15 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
 import SettingsIcon from '@mui/icons-material/Settings'
 import { Backdrop } from '../UI/Backdrop'
 import PermIdentityIcon from '@mui/icons-material/PermIdentity'
+import LogoutIcon from '@mui/icons-material/Logout'
 import { NavigationLink } from './NavLink'
 import Typography from '@mui/material/Typography'
 import { AuthContext } from '../../context/AuthContext'
-import { useNavigate } from 'react-router-dom'
 
 export const Nav = () => {
 	const [hiddenNav, setHiddenNav] = useState(true)
 	const { notes, trashNotes, favouriteNotes } = useContext(NotesContext)
 	const { isLoggedIn, logout } = useContext(AuthContext)
-	const navigate = useNavigate()
-
-	const logoutHandler = () => {
-		logout()
-		navigate('/login')
-	}
 
 	return (
 		<>
@@ -91,7 +85,7 @@ export const Nav = () => {
 								href='/user'
 								elementsLength={undefined}
 								icon={<PermIdentityIcon className={classes.icon} />}
-								tooltipTitle={<Typography fontSize={11}>Login</Typography>}
+								tooltipTitle={<Typography fontSize={11}>Account</Typography>}
 							/>
 						) : (
 							<NavigationLink
@@ -112,12 +106,18 @@ export const Nav = () => {
 							icon={<SettingsIcon className={classes.icon} />}
 							tooltipTitle={<Typography fontSize={11}>Settings</Typography>}
 						/>
+						{isLoggedIn && (
+							<NavigationLink
+								onClick={logout}
+								hiddenNav={hiddenNav}
+								title='Logout'
+								href='/login'
+								elementsLength={undefined}
+								icon={<LogoutIcon className={classes.icon} />}
+								tooltipTitle={<Typography fontSize={11}>Logout</Typography>}
+							/>
+						)}
 					</div>
-					{isLoggedIn && (
-						<button onClick={logoutHandler} type='button'>
-							Logout
-						</button>
-					)}
 				</div>
 			</nav>
 			{!hiddenNav && <Backdrop onHideNav={() => setHiddenNav(true)} />}

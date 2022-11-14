@@ -4,12 +4,12 @@ import { useForm, SubmitHandler } from 'react-hook-form'
 import classes from './AuthForm.module.scss'
 import { Link, useLocation } from 'react-router-dom'
 import loginWallpaper from '../../img/login.svg'
-import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline'
 import { MainButton } from '../UI/MainButton'
 import { signUpUrl, signInUrl } from '../../constants/authApiData'
 import { ProgressBar } from '../UI/Progressbar'
 import { regex } from './../../constants/regex'
 import { AuthContext } from './../../context/AuthContext'
+import { ErrorMessage } from './../UI/ErrorMessage'
 
 type Inputs = {
 	readonly name: string
@@ -91,12 +91,7 @@ export const AuthForm = () => {
 								placeholder='Your name'
 								type='text'
 							/>
-							{errors.name && (
-								<p className={classes.errorMessage}>
-									<ErrorOutlineIcon />
-									Name is required
-								</p>
-							)}
+							{errors.name && <ErrorMessage title='Name is required' />}
 						</div>
 
 						<div className={classes.formControl}>
@@ -108,18 +103,12 @@ export const AuthForm = () => {
 								type='text'
 								{...register('surname', { required: true, minLength: 3, maxLength: 15 })}
 							/>
-
-							{errors.surname && (
-								<p className={classes.errorMessage}>
-									<ErrorOutlineIcon /> Surname is required
-								</p>
-							)}
+							{errors.surname && <ErrorMessage title='Surname is required' />}
 						</div>
 					</div>
 					<div className={classes.formControl}>
 						<label htmlFor='email'>Email</label>
 						<input
-							autoComplete='off'
 							id='email'
 							placeholder='Your email'
 							type='email'
@@ -130,11 +119,7 @@ export const AuthForm = () => {
 								pattern: regex,
 							})}
 						/>
-						{errors.email && (
-							<p className={classes.errorMessage}>
-								<ErrorOutlineIcon /> Email is invalid
-							</p>
-						)}
+						{errors.email && <ErrorMessage title='Email is invalid' />}
 					</div>
 					<div className={classes.formControl}>
 						<label htmlFor='password'>Password</label>
@@ -157,12 +142,7 @@ export const AuthForm = () => {
 								{isHiddenPassword ? 'Show' : 'Hide'} password
 							</button>
 						</div>
-
-						{errors.password && (
-							<p className={classes.errorMessage}>
-								<ErrorOutlineIcon /> Password is invalid, min. 8 letters
-							</p>
-						)}
+						{errors.password && <ErrorMessage title='Password is invalid, min. 8 letters' />}
 					</div>
 
 					<Link className={classes.loginLink} to='/login'>
@@ -186,7 +166,6 @@ export const AuthForm = () => {
 				<div className={classes.formControl}>
 					<label htmlFor='email'>Email</label>
 					<input
-						autoComplete='off'
 						id='email'
 						placeholder='Your email'
 						type='email'
@@ -197,17 +176,12 @@ export const AuthForm = () => {
 							pattern: regex,
 						})}
 					/>
-					{errors.email && (
-						<p className={classes.errorMessage}>
-							<ErrorOutlineIcon /> Email is invalid
-						</p>
-					)}
+					{errors.email && <ErrorMessage title='Email is invalid' />}
 				</div>
 				<div className={classes.formControl}>
 					<label htmlFor='password'>Password</label>
 					<div className={classes.passwordInput}>
 						<input
-							autoComplete='off'
 							id='password'
 							placeholder='Your password'
 							type={isHiddenPassword ? 'password' : ' text'}
@@ -224,11 +198,7 @@ export const AuthForm = () => {
 							{isHiddenPassword ? 'Show' : 'Hide'} password
 						</button>
 					</div>
-					{errors.password && (
-						<p className={classes.errorMessage}>
-							<ErrorOutlineIcon /> Password is invalid, min. 8 letters
-						</p>
-					)}
+					{errors.password && <ErrorMessage title='Password is invalid, min. 8 letters' />}
 				</div>
 
 				<Link className={classes.loginLink} to='/register'>
