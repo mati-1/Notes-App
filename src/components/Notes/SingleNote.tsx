@@ -72,7 +72,7 @@ export const SingleNoteItem = () => {
 	return (
 		<div className={classes.detailPageWrapper}>
 			<div>
-				<Heading title='Manage your note' />
+				<Heading paddingBottom={true} title='Manage your note' />
 				<li className={`${classes.note} ${newFavourite ? classes.favouriteNote : undefined}`}>
 					{isEditing ? (
 						<form className={classes.form}>

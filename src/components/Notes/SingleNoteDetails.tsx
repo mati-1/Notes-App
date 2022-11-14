@@ -19,7 +19,7 @@ export const SingleNoteDetails = ({ date, id, favourite, editHistory }: noteDeta
 
 	return (
 		<div className={classes.details}>
-			<Heading title='Details' />
+			<Heading paddingBottom={true} title='Details' />
 			<div className={classes.noteDetailsWrapper}>
 				<div className={classes.detailsControls}>
 					<h3>Last edit</h3>
