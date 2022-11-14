@@ -8,7 +8,6 @@
 	transition: background 0.2s ease, border 0.3s ease;
 	border: 1px solid transparent;
 	margin-top: 1rem;
-	box-shadow: 0px 0px 30px -17px rgba(25, 118, 210, 1);
 
 	&:hover {
 		background: var(--main-hover-color);
@@ -27,7 +26,6 @@
 	transition: border 0.2s ease;
 	border: 1px solid var(--black4-color);
 	margin-top: 1rem;
-	box-shadow: 0px 0px 30px -17px rgba(25, 118, 210, 1);
 
 	&:hover {
 		border-color: var(--main2-color);
