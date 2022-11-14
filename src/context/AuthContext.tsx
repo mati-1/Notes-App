@@ -1,8 +1,8 @@
 import React, { useState, useCallback, useEffect } from 'react'
-import { UserData } from './../types/UserDataType'
 import { collection, query, where, getDocs, addDoc } from 'firebase/firestore'
-import { db } from '../firebase'
+import { UserData } from './../types/UserDataType'
 import { notify } from './../constants/Notify'
+import { db } from '../firebase'
 
 type AuthContextType = {
 	token: string
@@ -24,7 +24,6 @@ export const AuthContext = React.createContext<AuthContextType>({
 
 const getUserData = () => {
 	const userData = localStorage.getItem('userData')
-
 	return userData ? JSON.parse(userData) : {}
 }
 
@@ -41,8 +40,6 @@ export const AuthContextProvider = ({ children }: { children: React.ReactNode })
 			const querySnapshot = await getDocs(q)
 
 			querySnapshot.forEach((doc) => {
-				console.log(doc.id, '  =>  ', doc.data())
-
 				setInitialData({
 					...doc.data(),
 					id: doc.id,
@@ -71,12 +68,16 @@ export const AuthContextProvider = ({ children }: { children: React.ReactNode })
 		notify('You are successfully registered!')
 	}, [])
 
-	const logoutHandler = () => {
-		setToken('')
-		localStorage.removeItem('token')
-		localStorage.removeItem('userData')
-		notify('You have been logged out')
-	}
+	const logoutHandler = useCallback(() => {
+		try {
+			localStorage.removeItem('token')
+			localStorage.removeItem('userData')
+			notify('You have been logged out')
+			setToken('')
+		} catch (err) {
+			console.log(err)
+		}
+	}, [])
 
 	const contextValue = {
 		token: token,
