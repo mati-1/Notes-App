@@ -6,6 +6,7 @@ import { AnimatePresence } from 'framer-motion'
 import { NotesContext } from '../../context/NoteContext'
 import { MainButton } from '../UI/MainButton'
 import { Link } from 'react-router-dom'
+import { Heading } from '../UI/Heading'
 
 export const Trash = () => {
 	const { trashNotes, clearTrash } = useContext(NotesContext)
@@ -31,9 +32,9 @@ export const Trash = () => {
 	return (
 		<div className={classes.notesModules}>
 			<div className={classes.header}>
-				<h1 className={classes.heading}>
-					Trash <span className={classes.notesLength}>{trashNotes.length}</span>
-				</h1>
+				<Heading title='Trash'>
+					<span className={classes.notesLength}>{trashNotes.length}</span>
+				</Heading>
 				{trashNotes.length ? (
 					<div className={classes.buttons}>
 						<MainButton title='Delete all' onClick={clearTrash} />

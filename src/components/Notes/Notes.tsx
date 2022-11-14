@@ -10,6 +10,7 @@ import { Note } from '../../types/NoteType'
 import { useSearchParams, Link } from 'react-router-dom'
 import { MainButton } from '../UI/MainButton'
 import { SecondaryButton } from '../UI/SecondaryButton'
+import { Heading } from '../UI/Heading'
 
 export const Notes = () => {
 	const { notes, trashNotes, removeAll } = useContext(NotesContext)
@@ -63,9 +64,9 @@ export const Notes = () => {
 	return (
 		<div className={classes.notesModules}>
 			<div className={classes.header}>
-				<h1 className={classes.heading}>
-					Notes <span className={classes.notesLength}>{notes.length}</span>
-				</h1>
+				<Heading title='Notes'>
+					<span className={classes.notesLength}>{notes.length}</span>
+				</Heading>
 				{notes.length ? (
 					<div className={classes.buttons}>
 						<FilterPopup />

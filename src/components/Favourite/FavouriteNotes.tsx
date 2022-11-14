@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom'
 import Button from '@mui/material/Button'
 import empty from '../../img/favourite.svg'
 import { FavouriteNoteItem } from './FavouriteNoteItem'
+import { Heading } from '../UI/Heading'
 
 export const FavouriteNotes = () => {
 	const { favouriteNotes } = useContext(NotesContext)
@@ -27,9 +28,9 @@ export const FavouriteNotes = () => {
 	return (
 		<div className={classes.notesModules}>
 			<div className={classes.header}>
-				<h1 className={classes.heading}>
-					Favourite notes <span className={classes.notesLength}>{favouriteNotes.length}</span>
-				</h1>
+				<Heading title='Favourite notes'>
+					<span className={classes.notesLength}>{favouriteNotes.length}</span>
+				</Heading>
 			</div>
 
 			<ul className={classes.list}>

@@ -10,6 +10,7 @@ import Checkbox from '@mui/material/Checkbox'
 import formImg from '../../img/form.svg'
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline'
 import { useForm, SubmitHandler } from 'react-hook-form'
+import { Heading } from '../UI/Heading'
 
 type Inputs = {
 	readonly title: string
@@ -51,7 +52,7 @@ export const Form = () => {
 	return (
 		<div className={classes.formWrapper}>
 			<form className={classes.form} onSubmit={handleSubmit(onSubmitForm)}>
-				<h1 className={classes.heading}>Create new note</h1>
+				<Heading paddingBottom={true} title='Create new note' />
 				<div className={classes.formControl}>
 					<label htmlFor='title'>Title</label>
 					<input

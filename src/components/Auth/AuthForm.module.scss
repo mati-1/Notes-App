@@ -24,15 +24,6 @@
 		gap: 1.5rem;
 		width: 40rem;
 
-		.heading {
-			display: flex;
-			align-items: center;
-			position: relative;
-			font-size: var(--biggest-size);
-			color: var(--white-color);
-			margin-bottom: 2rem;
-		}
-
 		.rowFormControl {
 			display: grid;
 			grid-template-columns: repeat(2, 1fr);

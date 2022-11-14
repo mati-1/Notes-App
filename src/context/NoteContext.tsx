@@ -94,7 +94,6 @@ export const NotesContextProvider = ({ children }: { children: JSX.Element }) =>
 
 	const updateNote = (noteObj: Note) => {
 		const oldNotes = notes.filter((note) => note.id !== noteObj.id)
-
 		setNotes([noteObj, ...oldNotes])
 		notify('Note is saved')
 	}
@@ -102,7 +101,6 @@ export const NotesContextProvider = ({ children }: { children: JSX.Element }) =>
 	const undoNoteHandler = useCallback(
 		(id: string, noteObj: Note) => {
 			const newNotes: Note[] = trashNotes.filter((note) => note.id !== id)
-
 			const newNote = noteObj
 
 			try {
@@ -119,7 +117,6 @@ export const NotesContextProvider = ({ children }: { children: JSX.Element }) =>
 	const removeNoteHandler = useCallback(
 		(id: string, noteObj: Note) => {
 			const newNotes: Note[] = notes.filter((note) => note.id !== id)
-
 			const newTrashNote = noteObj
 
 			try {
@@ -148,10 +145,8 @@ export const NotesContextProvider = ({ children }: { children: JSX.Element }) =>
 
 	const removeAllNotes = () => {
 		const prevNotes = [...notes, ...trashNotes]
-
 		setTrashNotes(prevNotes)
 		notify('Trashed all notes')
-
 		setNotes([])
 	}
 

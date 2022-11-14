@@ -10,6 +10,7 @@ import { getFullDate } from '../../constants/FullDate'
 import Avatar from '@mui/material/Avatar'
 import { MainButton } from '../UI/MainButton'
 import { SecondaryButton } from '../UI/SecondaryButton'
+import { Heading } from '../UI/Heading'
 
 export const SingleNoteItem = () => {
 	const { notes, updateNote } = useContext(NotesContext)
@@ -71,7 +72,7 @@ export const SingleNoteItem = () => {
 	return (
 		<div className={classes.detailPageWrapper}>
 			<div>
-				<h1 className={classes.heading}>Manage your note</h1>
+				<Heading title='Manage your note' />
 				<li className={`${classes.note} ${newFavourite ? classes.favouriteNote : undefined}`}>
 					{isEditing ? (
 						<form className={classes.form}>

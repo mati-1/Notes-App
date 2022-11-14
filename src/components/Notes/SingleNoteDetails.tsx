@@ -5,6 +5,7 @@ import ArrowForwardIcon from '@mui/icons-material/ArrowForward'
 import Avatar from '@mui/material/Avatar'
 import { EditHistory } from './../../types/EditHistoryType'
 import { AuthContext } from '../../context/AuthContext'
+import { Heading } from './../UI/Heading'
 
 type noteDetailsType = {
 	id: string | undefined
@@ -18,7 +19,7 @@ export const SingleNoteDetails = ({ date, id, favourite, editHistory }: noteDeta
 
 	return (
 		<div className={classes.details}>
-			<h2 className={classes.heading}>Details</h2>
+			<Heading title='Details' />
 			<div className={classes.noteDetailsWrapper}>
 				<div className={classes.detailsControls}>
 					<h3>Last edit</h3>

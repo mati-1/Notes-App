@@ -10,6 +10,7 @@ import { ProgressBar } from '../UI/Progressbar'
 import { regex } from './../../constants/regex'
 import { AuthContext } from './../../context/AuthContext'
 import { ErrorMessage } from './../UI/ErrorMessage'
+import { Heading } from '../UI/Heading'
 
 type Inputs = {
 	readonly name: string
@@ -80,7 +81,7 @@ export const AuthForm = () => {
 			<div className={classes.authForm}>
 				<form onSubmit={handleSubmit(submitRegister)} className={classes.form}>
 					{isLoading && <ProgressBar />}
-					<h1 className={classes.heading}>Create new account!</h1>
+					<Heading paddingBottom={true} title='Create new account!' />
 					<div className={classes.rowFormControl}>
 						<div className={classes.formControl}>
 							<label htmlFor='name'>Name</label>
@@ -162,7 +163,7 @@ export const AuthForm = () => {
 		<div className={classes.authForm}>
 			<form onSubmit={handleSubmit(submitRegister)} className={classes.form}>
 				{isLoading && <ProgressBar />}
-				<h1 className={classes.heading}>Login to your account!</h1>
+				<Heading paddingBottom={true} title='Login to your account!' />
 				<div className={classes.formControl}>
 					<label htmlFor='email'>Email</label>
 					<input

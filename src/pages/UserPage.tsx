@@ -1,4 +1,4 @@
-import classes from './UserPage.module.scss'
+import classes from '../components/Notes/Notes.module.scss'
 import { motion } from 'framer-motion'
 import { Wrapper } from '../components/UI/Wrapper'
 import { variants } from '../constants/layoutMotionVariants'
