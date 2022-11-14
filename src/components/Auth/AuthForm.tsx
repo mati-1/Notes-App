@@ -11,6 +11,8 @@ import { regex } from './../../constants/regex'
 import { AuthContext } from './../../context/AuthContext'
 import { ErrorMessage } from './../UI/ErrorMessage'
 import { Heading } from '../UI/Heading'
+import { getFullDate } from './../../constants/FullDate'
+import { UserData } from './../../types/UserDataType'
 
 type Inputs = {
 	readonly name: string
@@ -33,16 +35,18 @@ export const AuthForm = () => {
 	const [isLoading, setIsLoading] = useState(false)
 	const locationRegister = location.pathname === '/register'
 	let url = locationRegister ? signUpUrl : signInUrl
+	const { fullDate: createdDate } = getFullDate()
 
 	const submitRegister: SubmitHandler<Inputs> = async (formData) => {
 		setIsLoading(true)
 
-		const registerData = {
+		const registerData: Partial<UserData> = {
 			name: formData.name,
 			surname: formData.surname,
 			email: formData.email,
 			password: formData.password,
 			returnSecureToken: true,
+			created: createdDate,
 		}
 
 		try {
