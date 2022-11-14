@@ -1,8 +1,9 @@
 import errorImg from '../img/error.svg'
 import { Layout } from '../components/UI/Layout'
-import { Button } from '@mui/material'
 import classes from './ErrorPage.module.scss'
 import { useNavigate } from 'react-router-dom'
+import { MainButton } from '../components/UI/MainButton'
+import { Link } from 'react-router-dom'
 
 export const ErrorPage = () => {
 	const navigate = useNavigate()
@@ -14,10 +15,10 @@ export const ErrorPage = () => {
 					<div>
 						<img src={errorImg} alt='errorimg' />
 						<div>
-							<h1>An error occurred!</h1>
-							<Button variant='contained' onClick={() => navigate(-1)}>
-								Back to safe page
-							</Button>
+							<h1>You've found a page that doesn't exist</h1>
+							<Link to='/notes'>
+								<MainButton onClick={() => navigate(-1)} title='Back to safe page' />
+							</Link>
 						</div>
 					</div>
 				</div>
