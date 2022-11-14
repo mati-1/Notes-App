@@ -50,8 +50,8 @@ export const NotesContextProvider = ({ children }: { children: JSX.Element }) =>
 			localStorage.setItem('notes', JSON.stringify(notes))
 			localStorage.setItem('favNotes', JSON.stringify(favouriteNotes))
 			localStorage.setItem('trashNotes', JSON.stringify(trashNotes))
-		} catch (err: any) {
-			throw new Error(err)
+		} catch (err) {
+			console.log(err)
 		}
 	}, [notes, favouriteNotes, trashNotes])
 
@@ -65,8 +65,8 @@ export const NotesContextProvider = ({ children }: { children: JSX.Element }) =>
 		try {
 			setNotes((prevNotes) => [newNote, ...prevNotes])
 			notify('Added new note')
-		} catch (err: any) {
-			throw new Error(err)
+		} catch (err) {
+			console.log(err)
 		}
 	}, [])
 
@@ -109,8 +109,8 @@ export const NotesContextProvider = ({ children }: { children: JSX.Element }) =>
 				setNotes((prevNotes) => [...prevNotes, newNote])
 				setTrashNotes(newNotes)
 				notify('Note is undo')
-			} catch (err: any) {
-				throw new Error(err)
+			} catch (err) {
+				console.log(err)
 			}
 		},
 		[trashNotes]
@@ -128,8 +128,8 @@ export const NotesContextProvider = ({ children }: { children: JSX.Element }) =>
 
 				localStorage.removeItem('notes')
 				notify('Note is trashed')
-			} catch (err: any) {
-				throw new Error(err)
+			} catch (err) {
+				console.log(err)
 			}
 		},
 		[notes]
@@ -141,8 +141,8 @@ export const NotesContextProvider = ({ children }: { children: JSX.Element }) =>
 		try {
 			setTrashNotes(newNotes)
 			notify('Note is deleted')
-		} catch (err: any) {
-			throw new Error(err)
+		} catch (err) {
+			console.log(err)
 		}
 	}
 
