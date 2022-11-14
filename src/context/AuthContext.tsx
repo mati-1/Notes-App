@@ -6,9 +6,9 @@ import { db } from '../firebase'
 
 type AuthContextType = {
 	token: string
-	userData: UserData
+	userData: Partial<UserData>
 	isLoggedIn: boolean
-	loginUser: (token: string, userData: UserData) => void
+	loginUser: (token: string, userData: Partial<UserData>) => void
 	registerUser: (userData: UserData, token: string) => void
 	logout: () => void
 }
@@ -28,12 +28,12 @@ const getUserData = () => {
 }
 
 export const AuthContextProvider = ({ children }: { children: React.ReactNode }) => {
-	const [initialData, setInitialData] = useState<UserData>(getUserData)
+	const [initialData, setInitialData] = useState<Partial<UserData>>(getUserData)
 	const initialToken: any = localStorage.getItem('token')
 	const [token, setToken] = useState(initialToken)
 	const userIsLoggedIn = !!token
 
-	const loginHandler = useCallback(async (token: string, userData: UserData) => {
+	const loginHandler = useCallback(async (token: string, userData: Partial<UserData>) => {
 		const q = query(collection(db, 'users'), where('email', '==', userData.email))
 
 		try {

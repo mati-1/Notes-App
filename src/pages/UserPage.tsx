@@ -1,14 +1,17 @@
 import { useContext } from 'react'
 import { AuthContext } from '../context/AuthContext'
+import { Layout } from '../components/UI/Layout'
 
 const UserLayout = () => {
 	const { userData } = useContext(AuthContext)
 
 	return (
-		<h1>
-			HELLO: {userData.name}
-			{userData.surname}
-		</h1>
+		<Layout>
+			<h1>
+				HELLO: {userData.name}
+				{userData.surname}
+			</h1>
+		</Layout>
 	)
 }
 
