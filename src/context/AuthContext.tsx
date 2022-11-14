@@ -68,16 +68,11 @@ export const AuthContextProvider = ({ children }: { children: React.ReactNode })
 		notify('You are successfully registered!')
 	}, [])
 
-	const logoutHandler = useCallback(() => {
-		try {
-			localStorage.removeItem('token')
-			localStorage.removeItem('userData')
-			notify('You have been logged out')
-			setToken('')
-		} catch (err) {
-			console.log(err)
-		}
-	}, [])
+	const logoutHandler = () => {
+		notify('You have been logged out')
+		setToken('')
+		setInitialData({})
+	}
 
 	const contextValue = {
 		token: token,
