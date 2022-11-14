@@ -3,7 +3,7 @@ import { NotesContext } from '../../context/NoteContext'
 import { AnimatePresence } from 'framer-motion'
 import classes from '../Notes/Notes.module.scss'
 import { Link } from 'react-router-dom'
-import Button from '@mui/material/Button'
+import { MainButton } from '../UI/MainButton'
 import empty from '../../img/favourite.svg'
 import { FavouriteNoteItem } from './FavouriteNoteItem'
 import { Heading } from '../UI/Heading'
@@ -14,14 +14,17 @@ export const FavouriteNotes = () => {
 	const emptyContent = (
 		<div className={classes.emptyWrapper}>
 			<img src={empty} alt='empty' />
-			<h3 className={classes.empty}>Favourite notes list is empty</h3>
+			<h3 className={classes.empty}>Trash is empty</h3>
 
 			<div className={classes.buttons}>
-				{!favouriteNotes.length ? (
+				{favouriteNotes.length ? (
 					<Link to='/notes'>
-						<Button variant='outlined'>Check notes</Button>
+						<MainButton title='Check notes' />
 					</Link>
 				) : null}
+				<Link to='/create'>
+					<MainButton title='Create new' />
+				</Link>
 			</div>
 		</div>
 	)
