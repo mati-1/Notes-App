@@ -2,6 +2,7 @@ import React, { useState, useCallback, useEffect } from 'react'
 import { UserData } from './../types/UserDataType'
 import { collection, query, where, getDocs, addDoc } from 'firebase/firestore'
 import { db } from '../firebase'
+import { notify } from './../constants/Notify'
 
 type AuthContextType = {
 	token: string
@@ -32,7 +33,6 @@ export const AuthContextProvider = ({ children }: { children: React.ReactNode })
 	const initialToken: any = localStorage.getItem('token')
 	const [token, setToken] = useState(initialToken)
 	const userIsLoggedIn = !!token
-	console.log(userIsLoggedIn)
 
 	const loginHandler = useCallback(async (token: string, userData: UserData) => {
 		const q = query(collection(db, 'users'), where('email', '==', userData.email))
@@ -50,7 +50,7 @@ export const AuthContextProvider = ({ children }: { children: React.ReactNode })
 			})
 
 			setToken(token)
-			localStorage.setItem('token', token)
+			notify('Successfully logged in!')
 		} catch (err) {
 			console.log(err)
 		}
@@ -58,7 +58,8 @@ export const AuthContextProvider = ({ children }: { children: React.ReactNode })
 
 	useEffect(() => {
 		localStorage.setItem('userData', JSON.stringify(initialData))
-	}, [initialData])
+		localStorage.setItem('token', token)
+	}, [initialData, token])
 
 	const registerHandler = useCallback(async (userData: UserData, token: string) => {
 		const user = {
@@ -66,15 +67,15 @@ export const AuthContextProvider = ({ children }: { children: React.ReactNode })
 			token: token,
 		}
 
-		console.log('register')
-		console.log(user)
-
 		await addDoc(collection(db, 'users'), user)
+		notify('You are successfully registered!')
 	}, [])
 
 	const logoutHandler = () => {
 		setToken('')
 		localStorage.removeItem('token')
+		localStorage.removeItem('userData')
+		notify('You have been logged out')
 	}
 
 	const contextValue = {

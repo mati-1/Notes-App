@@ -13,11 +13,18 @@ import PermIdentityIcon from '@mui/icons-material/PermIdentity'
 import { NavigationLink } from './NavLink'
 import Typography from '@mui/material/Typography'
 import { AuthContext } from '../../context/AuthContext'
+import { useNavigate } from 'react-router-dom'
 
 export const Nav = () => {
 	const [hiddenNav, setHiddenNav] = useState(true)
 	const { notes, trashNotes, favouriteNotes } = useContext(NotesContext)
-	const { isLoggedIn } = useContext(AuthContext)
+	const { isLoggedIn, logout } = useContext(AuthContext)
+	const navigate = useNavigate()
+
+	const logoutHandler = () => {
+		logout()
+		navigate('/login')
+	}
 
 	return (
 		<>
@@ -106,6 +113,11 @@ export const Nav = () => {
 							tooltipTitle={<Typography fontSize={11}>Settings</Typography>}
 						/>
 					</div>
+					{isLoggedIn && (
+						<button onClick={logoutHandler} type='button'>
+							Logout
+						</button>
+					)}
 				</div>
 			</nav>
 			{!hiddenNav && <Backdrop onHideNav={() => setHiddenNav(true)} />}
