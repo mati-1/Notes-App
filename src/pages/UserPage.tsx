@@ -1,17 +1,22 @@
-import { useContext } from 'react'
-import { AuthContext } from '../context/AuthContext'
-import { Layout } from '../components/UI/Layout'
+import classes from './UserPage.module.scss'
+import { motion } from 'framer-motion'
+import { Wrapper } from '../components/UI/Wrapper'
+import { variants } from '../constants/layoutMotionVariants'
+import { UserProfile } from '../components/User/UserProfile'
 
 const UserLayout = () => {
-	const { userData } = useContext(AuthContext)
-
 	return (
-		<Layout>
-			<h1>
-				HELLO: {userData.name}
-				{userData.surname}
-			</h1>
-		</Layout>
+		<motion.div
+			variants={variants}
+			initial='hidden'
+			animate='enter'
+			exit='exit'
+			transition={{ type: 'linear' }}
+			className={classes.mainWrapper}>
+			<Wrapper>
+				<UserProfile />
+			</Wrapper>
+		</motion.div>
 	)
 }
 

@@ -1,0 +1,10 @@
+.mainWrapper {
+	margin-top: 10rem;
+	.heading {
+		display: flex;
+		align-items: center;
+		position: relative;
+		font-size: var(--biggest-size);
+		color: var(--white-color);
+	}
+}
