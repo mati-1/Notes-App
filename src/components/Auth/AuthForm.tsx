@@ -57,6 +57,7 @@ export const AuthForm = () => {
 
 			if (res.ok) {
 				setIsLoading(false)
+				locationRegister ? registerUser(registerData, data.idToken) : loginUser(data.idToken, registerData)
 				locationRegister ? navigate('/login') : navigate('/user')
 			} else {
 				let errorMessage = 'Authentication failed'
@@ -67,9 +68,6 @@ export const AuthForm = () => {
 
 				alert(errorMessage)
 			}
-
-			locationRegister ? registerUser(registerData, data.idToken) : loginUser(data.idToken, registerData)
-			console.log(data.idToken)
 		} catch (err) {
 			console.log(err)
 		}

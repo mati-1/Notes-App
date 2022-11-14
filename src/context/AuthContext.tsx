@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react'
+import React, { useState, useCallback, useEffect } from 'react'
 import { UserData } from './../types/UserDataType'
 import { collection, query, where, getDocs, addDoc } from 'firebase/firestore'
 import { db } from '../firebase'
@@ -21,26 +21,44 @@ export const AuthContext = React.createContext<AuthContextType>({
 	logout: () => {},
 })
 
+const getUserData = () => {
+	const userData = localStorage.getItem('userData')
+
+	return userData ? JSON.parse(userData) : {}
+}
+
 export const AuthContextProvider = ({ children }: { children: React.ReactNode }) => {
-	const [initialData, setInitialData] = useState<UserData>({})
-	const [token, setToken] = useState('')
+	const [initialData, setInitialData] = useState<UserData>(getUserData)
+	const initialToken: any = localStorage.getItem('token')
+	const [token, setToken] = useState(initialToken)
 	const userIsLoggedIn = !!token
+	console.log(userIsLoggedIn)
 
 	const loginHandler = useCallback(async (token: string, userData: UserData) => {
 		const q = query(collection(db, 'users'), where('email', '==', userData.email))
 
-		const querySnapshot = await getDocs(q)
-		querySnapshot.forEach((doc) => {
-			console.log(doc.id, '  =>  ', doc.data())
+		try {
+			const querySnapshot = await getDocs(q)
 
-			setInitialData({
-				...doc.data(),
-				id: doc.id,
+			querySnapshot.forEach((doc) => {
+				console.log(doc.id, '  =>  ', doc.data())
+
+				setInitialData({
+					...doc.data(),
+					id: doc.id,
+				})
 			})
-		})
 
-		setToken(token)
+			setToken(token)
+			localStorage.setItem('token', token)
+		} catch (err) {
+			console.log(err)
+		}
 	}, [])
+
+	useEffect(() => {
+		localStorage.setItem('userData', JSON.stringify(initialData))
+	}, [initialData])
 
 	const registerHandler = useCallback(async (userData: UserData, token: string) => {
 		const user = {
@@ -56,6 +74,7 @@ export const AuthContextProvider = ({ children }: { children: React.ReactNode })
 
 	const logoutHandler = () => {
 		setToken('')
+		localStorage.removeItem('token')
 	}
 
 	const contextValue = {
