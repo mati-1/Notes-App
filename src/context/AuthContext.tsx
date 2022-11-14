@@ -3,13 +3,14 @@ import { collection, query, where, getDocs, addDoc } from 'firebase/firestore'
 import { UserData } from './../types/UserDataType'
 import { notify } from './../constants/Notify'
 import { db } from '../firebase'
+import { getFullDate } from './../constants/FullDate'
 
 type AuthContextType = {
 	token: string
 	userData: Partial<UserData>
 	isLoggedIn: boolean
 	loginUser: (token: string, userData: Partial<UserData>) => void
-	registerUser: (userData: UserData, token: string) => void
+	registerUser: (userData: Partial<UserData>, token: string) => void
 	logout: () => void
 }
 
@@ -32,33 +33,38 @@ export const AuthContextProvider = ({ children }: { children: React.ReactNode })
 	const initialToken: any = localStorage.getItem('token')
 	const [token, setToken] = useState(initialToken)
 	const userIsLoggedIn = !!token
+	const { fullDate: lastLoginDate } = getFullDate()
 
-	const loginHandler = useCallback(async (token: string, userData: Partial<UserData>) => {
-		const q = query(collection(db, 'users'), where('email', '==', userData.email))
+	const loginHandler = useCallback(
+		async (token: string, userData: Partial<UserData>) => {
+			const q = query(collection(db, 'users'), where('email', '==', userData.email))
 
-		try {
-			const querySnapshot = await getDocs(q)
+			try {
+				const querySnapshot = await getDocs(q)
 
-			querySnapshot.forEach((doc) => {
-				setInitialData({
-					...doc.data(),
-					id: doc.id,
+				querySnapshot.forEach((doc) => {
+					setInitialData({
+						...doc.data(),
+						id: doc.id,
+						lastLogin: lastLoginDate,
+					})
 				})
-			})
 
-			setToken(token)
-			notify('Successfully logged in!')
-		} catch (err) {
-			console.log(err)
-		}
-	}, [])
+				setToken(token)
+				notify('Successfully logged in!')
+			} catch (err) {
+				console.log(err)
+			}
+		},
+		[lastLoginDate]
+	)
 
 	useEffect(() => {
 		localStorage.setItem('userData', JSON.stringify(initialData))
 		localStorage.setItem('token', token)
 	}, [initialData, token])
 
-	const registerHandler = useCallback(async (userData: UserData, token: string) => {
+	const registerHandler = useCallback(async (userData: Partial<UserData>, token: string) => {
 		const user = {
 			...userData,
 			token: token,
