@@ -14,6 +14,7 @@
 					width: 11rem;
 					height: 11rem;
 					border-radius: 50%;
+					pointer-events: none;
 				}
 
 				label {
@@ -39,11 +40,11 @@
 		}
 
 		.profileInfo {
-			margin-top: 5rem;
+			margin-top: 7rem;
 			display: grid;
 			grid-template-columns: repeat(2, 1fr);
 			grid-template-rows: repeat(1, 1fr);
-			gap: 6rem;
+			gap: 10rem;
 
 			@media (max-width: 1000px) {
 				grid-template-columns: repeat(1, 1fr);

@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useEffect } from 'react'
-import { collection, query, where, getDocs, addDoc } from 'firebase/firestore'
+import { collection, query, where, getDocs, addDoc, doc, updateDoc } from 'firebase/firestore'
 import { UserData } from './../types/UserDataType'
 import { notify } from './../constants/Notify'
 import { db } from '../firebase'
@@ -12,6 +12,7 @@ type AuthContextType = {
 	loginUser: (token: string, userData: Partial<UserData>) => void
 	registerUser: (userData: Partial<UserData>, token: string) => void
 	logout: () => void
+	update: (id: string, userData: Partial<UserData>) => void
 }
 
 export const AuthContext = React.createContext<AuthContextType>({
@@ -21,6 +22,7 @@ export const AuthContext = React.createContext<AuthContextType>({
 	loginUser: () => {},
 	registerUser: () => {},
 	logout: () => {},
+	update: () => {},
 })
 
 const getUserData = () => {
@@ -80,6 +82,10 @@ export const AuthContextProvider = ({ children }: { children: React.ReactNode })
 		setInitialData({})
 	}
 
+	const updateHandler = async (id: string, userData: Partial<UserData>) => {
+		await updateDoc(doc(db, 'users', id), userData)
+	}
+
 	const contextValue = {
 		token: token,
 		userData: initialData,
@@ -87,6 +93,7 @@ export const AuthContextProvider = ({ children }: { children: React.ReactNode })
 		loginUser: loginHandler,
 		registerUser: registerHandler,
 		logout: logoutHandler,
+		update: updateHandler,
 	}
 	return <AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>
 }
