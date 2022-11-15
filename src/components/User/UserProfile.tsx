@@ -5,9 +5,9 @@ import IconButton from '@mui/material/IconButton'
 import classes from './UserProfile.module.scss'
 import { Heading } from '../UI/Heading'
 import { SecondaryButton } from '../UI/SecondaryButton'
-import { MainButton } from '../UI/MainButton'
 import { Link } from 'react-router-dom'
 import Tooltip from '@mui/material/Tooltip'
+import { TabPanel } from './TabPanel'
 
 export const UserProfile = () => {
 	const { userData, logout } = useContext(AuthContext)
@@ -32,47 +32,44 @@ export const UserProfile = () => {
 					</div>
 					<h2 className={classes.welcomeHeading}>
 						{userData.name} {userData.surname}
+						<p>{userData.nick}</p>
 					</h2>
 				</div>
 				<div className={classes.profileInfo}>
-					<ul>
+					<div>
 						<Heading paddingBottom={true} title='Profile information' />
-						<li>
-							<div>
-								<h3>Email</h3>
-								{userData.email}
-							</div>
-						</li>
-						<li>
-							<div>
-								<h3>Created at</h3>
-								{userData.created}
-							</div>
-						</li>
-						<li>
-							<div>
-								<h3>Last login</h3>
-								{userData.lastLogin}
-							</div>
-						</li>
-						<SecondaryButton title='Edit profile' />
-					</ul>
+						<ul>
+							<li>
+								<div>
+									<h3>Email</h3>
+									{userData.email}
+								</div>
+							</li>
+							<li>
+								<div>
+									<h3>Created at</h3>
+									{userData.created}
+								</div>
+							</li>
+							<li>
+								<div>
+									<h3>Last login</h3>
+									{userData.lastLogin}
+								</div>
+							</li>
+							<Link to='/login'>
+								<SecondaryButton onClick={logout} title='Logout' />
+							</Link>
+						</ul>
+					</div>
 
-					<ul>
+					<div className={classes.optionsContent}>
 						<Heading paddingBottom={true} title='Profile settings' />
-						<li>
-							<SecondaryButton title='Change password' />
-						</li>
-						<li>
-							<SecondaryButton title='Change Name' />
-						</li>
-						<li>
-							<SecondaryButton title='Change Nick' />
-						</li>
-						<Link to='/login'>
-							<MainButton onClick={logout} title='Logout' />
-						</Link>
-					</ul>
+
+						<div className={classes.content}>
+							<TabPanel />
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>

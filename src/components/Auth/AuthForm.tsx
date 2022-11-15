@@ -40,6 +40,8 @@ export const AuthForm = () => {
 	const submitRegister: SubmitHandler<Inputs> = async (formData) => {
 		setIsLoading(true)
 
+		const nick = `@${formData.name}${formData.surname}`.toLowerCase()
+
 		const registerData: Partial<UserData> = {
 			name: formData.name,
 			surname: formData.surname,
@@ -47,6 +49,7 @@ export const AuthForm = () => {
 			password: formData.password,
 			returnSecureToken: true,
 			created: createdDate,
+			nick: nick,
 		}
 
 		try {
@@ -90,7 +93,7 @@ export const AuthForm = () => {
 						<div className={classes.formControl}>
 							<label htmlFor='name'>Name</label>
 							<input
-								{...register('name', { required: true, minLength: 3, maxLength: 15 })}
+								{...register('name', { required: true, minLength: 2, maxLength: 20 })}
 								autoComplete='off'
 								id='name'
 								placeholder='Your name'
@@ -106,7 +109,7 @@ export const AuthForm = () => {
 								id='surname'
 								placeholder='Your surname'
 								type='text'
-								{...register('surname', { required: true, minLength: 3, maxLength: 15 })}
+								{...register('surname', { required: true, minLength: 2, maxLength: 20 })}
 							/>
 							{errors.surname && <ErrorMessage title='Surname is required' />}
 						</div>
@@ -120,7 +123,7 @@ export const AuthForm = () => {
 							{...register('email', {
 								required: true,
 								minLength: 5,
-								maxLength: 25,
+								maxLength: 40,
 								pattern: regex,
 							})}
 						/>
@@ -177,7 +180,7 @@ export const AuthForm = () => {
 						{...register('email', {
 							required: true,
 							minLength: 5,
-							maxLength: 25,
+							maxLength: 40,
 							pattern: regex,
 						})}
 					/>

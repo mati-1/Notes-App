@@ -1,5 +1,5 @@
 .profileWrapper {
-	padding-top: 5rem;
+	padding: 5rem 0;
 
 	.profileModules {
 		.profileHeader {
@@ -30,6 +30,11 @@
 			.welcomeHeading {
 				font-size: var(--large-size);
 				color: var(--white-color);
+
+				p {
+					font-size: var(--basic-size);
+					color: var(--grey-color);
+				}
 			}
 		}
 
@@ -37,7 +42,12 @@
 			margin-top: 5rem;
 			display: grid;
 			grid-template-columns: repeat(2, 1fr);
+			grid-template-rows: repeat(1, 1fr);
 			gap: 6rem;
+
+			@media (max-width: 1000px) {
+				grid-template-columns: repeat(1, 1fr);
+			}
 
 			ul {
 				display: grid;
@@ -69,6 +79,11 @@
 						}
 					}
 				}
+			}
+
+			.optionsContent {
+				display: flex;
+				flex-direction: column;
 			}
 		}
 	}
