@@ -14,7 +14,7 @@ export const UserProfile = () => {
 
 	return (
 		<div className={classes.profileWrapper}>
-			<Heading paddingBottom={true} title='Your account' />
+			<Heading paddingBottom={true} title='Your Profile' />
 
 			<div className={classes.profileModules}>
 				<div className={classes.profileHeader}>
@@ -30,10 +30,13 @@ export const UserProfile = () => {
 							</IconButton>
 						</Tooltip>
 					</div>
-					<h2 className={classes.welcomeHeading}>
-						{userData.name} {userData.surname}
-						<p>{userData.nick}</p>
-					</h2>
+					<div className={classes.welcomeHeading}>
+						<div>
+							<h2>{userData.name}</h2>
+							<h2>{userData.surname}</h2>
+						</div>
+						<p>@{userData.nick}</p>
+					</div>
 				</div>
 				<div className={classes.profileInfo}>
 					<div>
@@ -43,6 +46,12 @@ export const UserProfile = () => {
 								<div>
 									<h3>Email</h3>
 									{userData.email}
+								</div>
+							</li>
+							<li>
+								<div>
+									<h3>Name</h3>
+									{userData.name} {userData.surname}
 								</div>
 							</li>
 							<li>
@@ -57,9 +66,6 @@ export const UserProfile = () => {
 									{userData.lastLogin}
 								</div>
 							</li>
-							<Link to='/login'>
-								<SecondaryButton onClick={logout} title='Logout' />
-							</Link>
 						</ul>
 					</div>
 
@@ -69,6 +75,17 @@ export const UserProfile = () => {
 						<div className={classes.content}>
 							<TabPanel />
 						</div>
+					</div>
+				</div>
+
+				<div className={classes.profileInfo}>
+					<div>
+						<Heading paddingBottom={true} title='Account managment' />
+					</div>
+					<div>
+						<Link to='/login'>
+							<SecondaryButton onClick={logout} title='Logout' />
+						</Link>
 					</div>
 				</div>
 			</div>

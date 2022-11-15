@@ -1,4 +1,5 @@
 import { useState, useContext } from 'react'
+import ReactDOM from 'react-dom'
 import classes from './TabPanel.module.scss'
 import { ErrorMessage } from '../UI/ErrorMessage'
 import { AuthContext } from '../../context/AuthContext'
@@ -7,6 +8,7 @@ import { useForm, SubmitHandler } from 'react-hook-form'
 import { ProgressBar } from '../UI/Progressbar'
 import { editPasswordUrl } from './../../constants/authApiData'
 import { useNavigate } from 'react-router-dom'
+import { progressPortal } from './../../constants/progressPortal'
 
 type Inputs = {
 	readonly password: string
@@ -32,22 +34,18 @@ export const ChangePasswordForm = () => {
 		const newPasswordData = {
 			...userData,
 			password: newData.newPassword,
-			returnSecureToken: false,
 		}
 
 		try {
 			const res = await fetch(editPasswordUrl, {
 				method: 'POST',
-				body: JSON.stringify({ ...newPasswordData, idToken: token }),
+				body: JSON.stringify({ ...newPasswordData, idToken: token, returnSecureToken: false }),
 				headers: {
 					'Content-type': 'application/json',
 				},
 			})
 
-			// const data = await res.json()
-
 			if (res.ok) {
-				console.log(userData.id)
 				update(userData.id as string, newPasswordData)
 				logout()
 				navigate('/login')
@@ -62,7 +60,7 @@ export const ChangePasswordForm = () => {
 
 	return (
 		<>
-			{isLoading && <ProgressBar />}
+			{ReactDOM.createPortal(isLoading && <ProgressBar />, progressPortal!)}
 			<form onSubmit={handleSubmit(submitNewPassword)} className={classes.form}>
 				<div className={classes.fieldset}>
 					<label htmlFor='password'>Actual password</label>

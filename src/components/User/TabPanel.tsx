@@ -3,6 +3,7 @@ import Tabs from '@mui/material/Tabs'
 import Tab from '@mui/material/Tab'
 import Box from '@mui/material/Box'
 import { ChangePasswordForm } from './ChangePasswordForm'
+import { EditProfileForm } from './EditProfileForm'
 import classes from './TabPanel.module.scss'
 
 export const TabPanel = () => {
@@ -51,15 +52,7 @@ export const TabPanel = () => {
 				<ChangePasswordForm />
 			</TabPanel>
 			<TabPanel value={value} index={1}>
-				<ul>
-					<li>essa</li>
-					<li>essa</li>
-					<li>essa</li>
-					<li>essa</li>
-					<li>essa</li>
-					<li>essa</li>
-					<li>essa</li>
-				</ul>
+				<EditProfileForm />
 			</TabPanel>
 			<TabPanel value={value} index={2}>
 				<ul>

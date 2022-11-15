@@ -29,8 +29,18 @@
 			}
 
 			.welcomeHeading {
-				font-size: var(--large-size);
 				color: var(--white-color);
+				font-size: var(--large-size);
+				display: flex;
+				flex-direction: column;
+
+				div {
+					display: flex;
+					gap: 1rem;
+					h2::first-letter {
+						text-transform: uppercase;
+					}
+				}
 
 				p {
 					font-size: var(--basic-size);
@@ -42,9 +52,9 @@
 		.profileInfo {
 			margin-top: 7rem;
 			display: grid;
-			grid-template-columns: repeat(2, 1fr);
-			grid-template-rows: repeat(1, 1fr);
-			gap: 10rem;
+			grid-template-columns: repeat(1, 1fr);
+			max-width: 40rem;
+			gap: 6rem;
 
 			@media (max-width: 1000px) {
 				grid-template-columns: repeat(1, 1fr);
@@ -53,7 +63,7 @@
 			ul {
 				display: grid;
 				grid-template-columns: 1;
-				gap: 1rem;
+				gap: 2rem;
 				list-style: none;
 
 				button {
@@ -70,7 +80,7 @@
 					padding: 0.7rem 1rem;
 					border-radius: 0.5rem;
 					color: var(--white-color);
-					border: 1px solid var(--black4-color);
+					background-color: var(--black4-color);
 					div {
 						display: flex;
 						flex-direction: column;
