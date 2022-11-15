@@ -31,10 +31,9 @@ export const UserProfile = () => {
 						</Tooltip>
 					</div>
 					<div className={classes.welcomeHeading}>
-						<div>
-							<h2>{userData.name}</h2>
-							<h2>{userData.surname}</h2>
-						</div>
+						<h2>
+							{userData.name} {userData.surname}
+						</h2>
 						<p>@{userData.nick}</p>
 					</div>
 				</div>

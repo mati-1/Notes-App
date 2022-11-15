@@ -32,7 +32,6 @@ export const ChangePasswordForm = () => {
 		setIsLoading(true)
 
 		const newPasswordData = {
-			...userData,
 			password: newData.newPassword,
 		}
 

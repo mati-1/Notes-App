@@ -46,20 +46,12 @@ export const TabPanel = () => {
 			<Tabs className={classes.tabPanelWrapper} value={value} onChange={handleChange} aria-label='basic tabs example'>
 				<Tab disableRipple sx={{ color: 'var(--white-color)' }} label='Change password' {...a11yProps(0)} />
 				<Tab disableRipple sx={{ color: 'var(--white-color)' }} label='Edit user profile' {...a11yProps(1)} />
-				<Tab disableRipple sx={{ color: 'var(--white-color)' }} label='Statistics' {...a11yProps(2)} />
 			</Tabs>
 			<TabPanel value={value} index={0}>
 				<ChangePasswordForm />
 			</TabPanel>
 			<TabPanel value={value} index={1}>
 				<EditProfileForm />
-			</TabPanel>
-			<TabPanel value={value} index={2}>
-				<ul>
-					<li>essa</li>
-					<li>essa</li>
-					<li>essa</li>
-				</ul>
 			</TabPanel>
 		</div>
 	)
