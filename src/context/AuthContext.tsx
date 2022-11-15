@@ -77,14 +77,16 @@ export const AuthContextProvider = ({ children }: { children: React.ReactNode })
 	}, [])
 
 	const logoutHandler = () => {
-		notify('You have been logged out')
 		setToken('')
 		setInitialData({})
+		notify('You have been logged out')
 	}
 
-	const updateHandler = async (id: string, userData: Partial<UserData>) => {
+	const updateHandler = useCallback(async (id: string, userData: Partial<UserData>) => {
 		await updateDoc(doc(db, 'users', id), userData)
-	}
+		localStorage.setItem('userData', JSON.stringify(userData))
+		notify('Profile has been updated!')
+	}, [])
 
 	const contextValue = {
 		token: token,
