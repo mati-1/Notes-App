@@ -8,4 +8,6 @@ export interface UserData {
 	readonly returnSecureToken: boolean
 	readonly created: string
 	readonly lastLogin: string
+	readonly nick: string
+	readonly image: null
 }
