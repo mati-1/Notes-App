@@ -1,9 +1,11 @@
 import React, { useState, useCallback, useEffect } from 'react'
-import { collection, query, where, getDocs, addDoc, doc, updateDoc } from 'firebase/firestore'
+import { collection, query, where, getDocs, addDoc, doc, updateDoc, deleteDoc } from 'firebase/firestore'
 import { UserData } from './../types/UserDataType'
 import { notify } from './../constants/Notify'
 import { db } from '../firebase'
 import { getFullDate } from './../constants/FullDate'
+import { deleteAccountUrl } from '../constants/authApiData'
+import { getStorage, ref, deleteObject } from 'firebase/storage'
 
 type AuthContextType = {
 	token: string
@@ -13,6 +15,7 @@ type AuthContextType = {
 	registerUser: (userData: Partial<UserData>, token: string) => void
 	logout: () => void
 	update: (id: string, userData: Partial<UserData>) => void
+	deleteData: (id: string) => void
 }
 
 export const AuthContext = React.createContext<AuthContextType>({
@@ -23,6 +26,7 @@ export const AuthContext = React.createContext<AuthContextType>({
 	registerUser: () => {},
 	logout: () => {},
 	update: () => {},
+	deleteData: () => {},
 })
 
 const getUserData = () => {
@@ -36,6 +40,7 @@ export const AuthContextProvider = ({ children }: { children: React.ReactNode })
 	const [token, setToken] = useState(initialToken)
 	const userIsLoggedIn = !!token
 	const { fullDate: lastLoginDate } = getFullDate()
+	const storage = getStorage()
 
 	const loginHandler = useCallback(
 		async (token: string, userData: Partial<UserData>) => {
@@ -87,6 +92,32 @@ export const AuthContextProvider = ({ children }: { children: React.ReactNode })
 		localStorage.setItem('userData', JSON.stringify(userData))
 	}, [])
 
+	const deleteAccountHandler = useCallback(
+		async (id: string) => {
+			const desertRef = ref(storage, `${initialData.email}/profile`)
+
+			try {
+				await deleteDoc(doc(db, 'users', id))
+				await deleteObject(desertRef)
+
+				const res = await fetch(deleteAccountUrl, {
+					method: 'POST',
+					body: JSON.stringify({ idToken: token }),
+					headers: {
+						'Content-type': 'application/json',
+					},
+				})
+
+				if (res.ok) {
+					logoutHandler()
+				}
+			} catch (err) {
+				console.log(err)
+			}
+		},
+		[initialData.email, storage, token]
+	)
+
 	const contextValue = {
 		token: token,
 		userData: initialData,
@@ -95,6 +126,7 @@ export const AuthContextProvider = ({ children }: { children: React.ReactNode })
 		registerUser: registerHandler,
 		logout: logoutHandler,
 		update: updateHandler,
+		deleteData: deleteAccountHandler,
 	}
 	return <AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>
 }

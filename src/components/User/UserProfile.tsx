@@ -15,7 +15,7 @@ import { notify } from '../../constants/Notify'
 import { ProgressBar } from '../UI/Progressbar'
 
 export const UserProfile = () => {
-	const { userData, logout, update } = useContext(AuthContext)
+	const { userData, logout, update, deleteData } = useContext(AuthContext)
 	const [imageUpload, setImageUpload] = useState<File>()
 	const [isLoading, setIsLoading] = useState(false)
 	const [avatarUrl, setAvatarUrl] = useState('')
@@ -122,16 +122,19 @@ export const UserProfile = () => {
 							<TabPanel />
 						</div>
 					</div>
-				</div>
 
-				<div className={classes.profileInfo}>
-					<div>
+					<div className={classes.managmentWrapper}>
 						<Heading paddingBottom={true} title='Account managment' />
-					</div>
-					<div>
-						<Link to='/login'>
-							<SecondaryButton onClick={logout} title='Logout' />
-						</Link>
+
+						<div className={classes.buttons}>
+							<Link to='/login'>
+								<SecondaryButton onClick={() => deleteData(userData.id as string)} title='Delete account' />
+							</Link>
+
+							<Link to='/login'>
+								<MainButton onClick={logout} title='Logout' />
+							</Link>
+						</div>
 					</div>
 				</div>
 			</div>
