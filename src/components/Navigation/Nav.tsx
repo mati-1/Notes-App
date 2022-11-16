@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import classes from './Nav.module.scss'
 import { NavLink } from 'react-router-dom'
 import { NotesContext } from '../../context/NoteContext'
@@ -14,11 +14,33 @@ import LogoutIcon from '@mui/icons-material/Logout'
 import { NavigationLink } from './NavLink'
 import Typography from '@mui/material/Typography'
 import { AuthContext } from '../../context/AuthContext'
+import Switch from '@mui/material/Switch'
+import FormControlLabel from '@mui/material/FormControlLabel'
+import { useToggle } from '../../hooks/useToggle'
+
+const getTheme = () => {
+	const theme = localStorage.getItem('theme')
+	return {
+		localTheme: theme ? JSON.parse(theme) : null,
+	}
+}
 
 export const Nav = () => {
 	const [hiddenNav, setHiddenNav] = useState(true)
 	const { notes, trashNotes, favouriteNotes } = useContext(NotesContext)
 	const { isLoggedIn, logout } = useContext(AuthContext)
+	const { localTheme: theme1 } = getTheme()
+	const [theme, setTheme] = useToggle(theme1)
+
+	useEffect(() => {
+		localStorage.setItem('theme', JSON.stringify(theme))
+
+		if (theme) {
+			document.body.classList.add('light-mode')
+		} else {
+			document.body.classList.remove('light-mode')
+		}
+	}, [theme])
 
 	return (
 		<>
@@ -117,6 +139,17 @@ export const Nav = () => {
 								tooltipTitle={<Typography fontSize={11}>Logout</Typography>}
 							/>
 						)}
+						<FormControlLabel
+							control={<Switch onClick={setTheme} checked={!theme} />}
+							label={
+								<Typography
+									className={hiddenNav ? classes.hiddenLinkTitle : ''}
+									sx={{ color: 'var(--grey-color)', paddingLeft: '0.1rem' }}
+									fontSize={17.68}>
+									{theme ? 'Light mode' : 'Dark mode'}
+								</Typography>
+							}
+						/>
 					</div>
 				</div>
 			</nav>
