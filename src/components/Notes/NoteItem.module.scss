@@ -2,13 +2,14 @@
 	position: relative;
 	border-radius: 0.5rem;
 	padding: 1rem;
-	background-color: var(--black3-color);
 	list-style: none;
 	width: 100%;
-	border: 4px solid transparent;
+	background-color: var(--black-color);
+	border: 1px solid var(--black4-color);
 
 	.header .headerTitle {
-		background-color: var(--black4-color);
+		background-color: var(--black-color);
+		border: 1px solid var(--black4-color);
 		width: 100%;
 		padding: 1rem;
 		border-radius: 0.5rem;
@@ -22,12 +23,12 @@
 			font-size: var(--basic-size);
 		}
 		h2 {
-			color: var(--grey-color);
+			color: var(--white-color);
 			font-size: var(--big-size);
-			background-color: var(--black4-color);
-			border-radius: 0.5rem;
 			width: 100%;
-			padding: 1rem;
+			padding-top: 0.5rem;
+			padding-left: 1.4rem;
+			border-left: 1px solid var(--black4-color);
 		}
 		.user {
 			position: relative;
@@ -46,7 +47,8 @@
 		display: flex;
 		flex-direction: column;
 		gap: 1rem;
-		background: var(--black4-color);
+		background-color: var(--black-color);
+		border: 1px solid var(--black4-color);
 		padding: 1rem;
 
 		h3 {
@@ -80,18 +82,25 @@
 
 .form {
 	.content {
-		padding: 0;
+		padding: 1rem;
 		background: none;
 	}
 	.header,
 	.contentParams {
 		display: flex;
 		flex-direction: column;
-		gap: 0;
+		gap: 0.5rem;
+
+		input {
+			background-color: var(--black-color);
+			border: 1px solid var(--black4-color);
+		}
 
 		textarea {
 			resize: none;
 			height: 10rem;
+			background-color: var(--black-color);
+			border: 1px solid var(--black4-color);
 		}
 
 		label {
@@ -102,6 +111,8 @@
 
 		select {
 			cursor: pointer;
+			background-color: var(--black-color);
+			border: 1px solid var(--black4-color);
 		}
 	}
 
@@ -113,11 +124,6 @@
 			}
 		}
 	}
-}
-
-.favouriteNote {
-	border: 4px solid var(--black4-color);
-	opacity: 1;
 }
 
 .heading {
@@ -153,7 +159,8 @@
 			display: flex;
 			flex-direction: column;
 			gap: 1.5rem;
-			background-color: var(--black3-color);
+			background-color: var(--black-color);
+			border: 1px solid var(--black4-color);
 			border-radius: 0.5rem;
 			padding: 1rem;
 
@@ -190,7 +197,8 @@
 
 			.detailsControls,
 			div {
-				background-color: var(--black4-color);
+				background-color: var(--black-color);
+				border: 1px solid var(--black4-color);
 				color: var(--white-color);
 				border-radius: 0.5rem;
 
@@ -203,10 +211,6 @@
 
 					p {
 						color: var(--white-color);
-					}
-
-					&:hover {
-						background-color: var(--black3-color);
 					}
 				}
 

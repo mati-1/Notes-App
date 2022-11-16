@@ -13,6 +13,7 @@
 				img {
 					width: 11rem;
 					height: 11rem;
+					background-size: cover;
 					border-radius: 50%;
 					pointer-events: none;
 				}
@@ -55,7 +56,7 @@
 			ul {
 				display: grid;
 				grid-template-columns: 1;
-				gap: 2rem;
+				gap: 1rem;
 				list-style: none;
 
 				button {
@@ -70,9 +71,11 @@
 
 				li {
 					padding: 0.7rem 1rem;
-					border-radius: 0.5rem;
 					color: var(--white-color);
-					background-color: var(--black4-color);
+					border-radius: 0.5rem;
+					background-color: var(--black-color);
+					border: 1px solid var(--black4-color);
+
 					div {
 						display: flex;
 						flex-direction: column;

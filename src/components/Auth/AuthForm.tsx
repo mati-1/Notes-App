@@ -13,6 +13,7 @@ import { ErrorMessage } from './../UI/ErrorMessage'
 import { Heading } from '../UI/Heading'
 import { getFullDate } from './../../constants/FullDate'
 import { UserData } from './../../types/UserDataType'
+import { userProfile } from './../../constants/userProfile'
 
 type Inputs = {
 	readonly name: string
@@ -40,7 +41,7 @@ export const AuthForm = () => {
 	const submitRegister: SubmitHandler<Inputs> = async (formData) => {
 		setIsLoading(true)
 
-		const nick = `@${formData.name}${formData.surname}`.toLowerCase()
+		const nick = `${formData.name}${formData.surname}`.toLowerCase()
 
 		const registerData: Partial<UserData> = {
 			name: formData.name,
@@ -50,6 +51,7 @@ export const AuthForm = () => {
 			returnSecureToken: true,
 			created: createdDate,
 			nick: nick,
+			image: userProfile,
 		}
 
 		try {

@@ -90,12 +90,11 @@ select {
 	font-family: Roboto;
 	font-size: var(--small-size);
 	color: var(--white-color);
-	background-color: var(--black4-color);
+	background-color: var(--black-color);
+	border: 1px solid var(--black4-color);
 	padding: 0.9rem;
-	border: none;
 	outline: none;
 	border-radius: 0.5rem;
-	border: 1px solid transparent;
 
 	&:focus {
 		border: 1px solid var(--main-color);

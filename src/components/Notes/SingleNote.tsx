@@ -1,5 +1,5 @@
 import { useContext, useState } from 'react'
-import { useParams, useNavigate, Link } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import classes from './NoteItem.module.scss'
 import FormControlLabel from '@mui/material/FormControlLabel'
 import Checkbox from '@mui/material/Checkbox'
@@ -7,10 +7,10 @@ import { NotesContext } from '../../context/NoteContext'
 import { Note } from '../../types/NoteType'
 import { SingleNoteDetails } from './SingleNoteDetails'
 import { getFullDate } from '../../constants/FullDate'
-import Avatar from '@mui/material/Avatar'
 import { MainButton } from '../UI/MainButton'
 import { SecondaryButton } from '../UI/SecondaryButton'
 import { Heading } from '../UI/Heading'
+import { ProfileLink } from '../UI/ProfileLink'
 
 export const SingleNoteItem = () => {
 	const { notes, updateNote } = useContext(NotesContext)
@@ -129,13 +129,7 @@ export const SingleNoteItem = () => {
 					) : (
 						<>
 							<div className={classes.header}>
-								<Link to='/user' className={classes.user}>
-									<Avatar
-										alt='user profile'
-										src='https://scontent-frx5-1.xx.fbcdn.net/v/t39.30808-6/277465687_1630667890617860_6404384895161569634_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=HQ6CITGFdowAX_iS7LP&_nc_ht=scontent-frx5-1.xx&oh=00_AfCypr7OTxIUIcJ_xmN5P3kjUeeEQSsiPQ72HwA8EWVE-Q&oe=636D10CC'
-									/>
-									<p>Mateusz</p>
-								</Link>
+								<ProfileLink />
 								<div className={classes.headerTitle}>
 									<p>Title</p>
 									<h2>{newTitle}</h2>
