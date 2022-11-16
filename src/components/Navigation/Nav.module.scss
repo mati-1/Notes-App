@@ -17,7 +17,7 @@
 		top: 2rem;
 		right: -5rem;
 		cursor: pointer;
-		color: white;
+		color: var(--white-color);
 		border-radius: 1rem;
 		width: 3rem;
 		height: 3rem;
@@ -58,12 +58,12 @@
 		}
 
 		.logo {
-			color: white;
+			color: var(--white-color);
 			font-size: var(--logo-size);
 			margin: 2.5rem 0 0 2rem;
 
 			span {
-				color: var(--white-color);
+				color: white;
 				background-color: var(--main-color);
 				font-weight: bold;
 				padding: 0.1rem 0.5rem;
@@ -82,7 +82,6 @@
 				align-items: center;
 				font-size: var(--basic-size);
 				color: var(--grey-color);
-				padding: 0.4rem;
 				transition: color 0.2s ease;
 				padding: 1.5rem 2rem;
 				border-radius: 1rem;
@@ -105,6 +104,11 @@
 					}
 				}
 			}
+
+			label {
+				padding: 0.7rem 1.3rem;
+			}
+
 			.activeLink,
 			.active {
 				display: flex;

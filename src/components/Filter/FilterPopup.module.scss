@@ -2,25 +2,10 @@
 	position: relative;
 	border-radius: 0.5rem;
 	transition: border 0.2s ease;
-	padding: 0.3rem 0.5rem;
-	button {
-		color: var(--white-color);
-	}
-
-	div {
-		label {
-			color: var(--grey-color);
-		}
-		&::after {
-			display: none;
-		}
-		select {
-			color: var(--white-color);
-
-			option {
-				color: var(--black2-color);
-				margin: 1rem;
-			}
-		}
+	select {
+		cursor: pointer;
+		background-color: var(--black-color);
+		border: 1px solid var(--black4-color);
+		padding: 0.7rem;
 	}
 }

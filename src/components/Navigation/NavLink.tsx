@@ -8,7 +8,7 @@ type NavLinkProps = {
 	icon: JSX.Element
 	hiddenNav: boolean
 	title: string
-	elementsLength: number | undefined
+	elementsLength?: number
 	href: string
 	tooltipTitle: JSX.Element
 	onClick?: () => void

@@ -69,7 +69,6 @@ export const Nav = () => {
 							hiddenNav={hiddenNav}
 							title='Create new'
 							href='/create'
-							elementsLength={undefined}
 							icon={<AddIcon className={classes.icon} />}
 							tooltipTitle={<Typography fontSize={11}>Create</Typography>}
 						/>
@@ -105,7 +104,6 @@ export const Nav = () => {
 								title='Account'
 								hiddenNav={hiddenNav}
 								href='/user'
-								elementsLength={undefined}
 								icon={<PermIdentityIcon className={classes.icon} />}
 								tooltipTitle={<Typography fontSize={11}>Account</Typography>}
 							/>
@@ -114,7 +112,6 @@ export const Nav = () => {
 								title='Login'
 								hiddenNav={hiddenNav}
 								href='/login'
-								elementsLength={undefined}
 								icon={<PermIdentityIcon className={classes.icon} />}
 								tooltipTitle={<Typography fontSize={11}>Login</Typography>}
 							/>
@@ -124,7 +121,6 @@ export const Nav = () => {
 							hiddenNav={hiddenNav}
 							title='Settings'
 							href='/settings'
-							elementsLength={undefined}
 							icon={<SettingsIcon className={classes.icon} />}
 							tooltipTitle={<Typography fontSize={11}>Settings</Typography>}
 						/>
@@ -134,11 +130,11 @@ export const Nav = () => {
 								hiddenNav={hiddenNav}
 								title='Logout'
 								href='/login'
-								elementsLength={undefined}
 								icon={<LogoutIcon className={classes.icon} />}
 								tooltipTitle={<Typography fontSize={11}>Logout</Typography>}
 							/>
 						)}
+
 						<FormControlLabel
 							control={<Switch onClick={setTheme} checked={!theme} />}
 							label={

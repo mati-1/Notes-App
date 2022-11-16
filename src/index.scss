@@ -8,7 +8,6 @@ html {
 	font-size: 85%;
 }
 
-html,
 body {
 	font-family: Roboto;
 	background-color: var(--black2-color);
@@ -58,4 +57,14 @@ body {
 		background-color: var(--black2-color);
 		width: 0.7rem;
 	}
+}
+
+.light-mode {
+	--white-color: rgb(29, 29, 29);
+	--grey-color: rgb(75, 75, 75);
+
+	--black-color: rgb(248, 248, 248);
+	--black2-color: rgb(255, 255, 255);
+	--black3-color: rgb(231, 231, 231);
+	--black4-color: rgb(236, 236, 236);
 }
