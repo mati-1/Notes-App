@@ -1,35 +1,89 @@
-import { useContext } from 'react'
+import { useContext, useState, useEffect } from 'react'
 import { AuthContext } from '../../context/AuthContext'
 import PhotoCamera from '@mui/icons-material/PhotoCamera'
 import IconButton from '@mui/material/IconButton'
 import classes from './UserProfile.module.scss'
 import { Heading } from '../UI/Heading'
 import { SecondaryButton } from '../UI/SecondaryButton'
-import { Link } from 'react-router-dom'
+import { MainButton } from '../UI/MainButton'
+import { Link, useNavigate } from 'react-router-dom'
 import Tooltip from '@mui/material/Tooltip'
 import { TabPanel } from './TabPanel'
+import { ref, uploadBytes, getDownloadURL } from 'firebase/storage'
+import { storage } from '../../firebase'
+import { notify } from '../../constants/Notify'
+import { ProgressBar } from '../UI/Progressbar'
 
 export const UserProfile = () => {
-	const { userData, logout } = useContext(AuthContext)
+	const { userData, logout, update } = useContext(AuthContext)
+	const [imageUpload, setImageUpload] = useState<File>()
+	const [isLoading, setIsLoading] = useState(false)
+	const [avatarUrl, setAvatarUrl] = useState('')
+	const navigate = useNavigate()
+	const imageRef = ref(storage, `${userData.email}/profile`)
+
+	const uploadFileHandler = async () => {
+		if (imageUpload) {
+			setIsLoading(true)
+
+			const newPhotoData = {
+				...userData,
+				image: avatarUrl,
+			}
+
+			try {
+				await uploadBytes(imageRef, imageUpload).then(() => {
+					getDownloadURL(imageRef).then((url) => {
+						setAvatarUrl(url)
+					})
+					update(userData.id as string, newPhotoData)
+
+					console.log('1 --->', avatarUrl)
+
+					setIsLoading(false)
+					notify('Avatar has been changed!')
+				})
+			} catch (err) {
+				console.log(err)
+			}
+		}
+
+		setTimeout(() => {
+			setIsLoading(false)
+			navigate(0)
+		}, 1000)
+	}
+
+	useEffect(() => {
+		getDownloadURL(imageRef).then((url) => {
+			setAvatarUrl(url)
+		})
+
+		console.log('2 --->', avatarUrl)
+	}, [avatarUrl, imageRef])
 
 	return (
 		<div className={classes.profileWrapper}>
+			{isLoading && <ProgressBar />}
 			<Heading paddingBottom={true} title='Your Profile' />
 
 			<div className={classes.profileModules}>
 				<div className={classes.profileHeader}>
 					<div className={classes.image}>
-						<img
-							src='https://us.123rf.com/450wm/afe207/afe2071602/afe207160200158/52329668-m%C4%99%C5%BCczyzna-obraz-profilu-awatara-cie%C5%84-sylwetka-%C5%9Bwiat%C5%82a.jpg?ver=6'
-							alt='userProfile'
-						/>
+						<img src={userData.image} alt='userProfile' />
 						<Tooltip arrow title='Change photo' placement='right'>
 							<IconButton size='large' color='primary' aria-label='upload picture' component='label'>
-								<input hidden accept='image/*' type='file' />
+								<input
+									onChange={(e: React.ChangeEvent<any>) => setImageUpload(e.target.files[0])}
+									hidden
+									accept='image/*'
+									type='file'
+								/>
 								<PhotoCamera />
 							</IconButton>
 						</Tooltip>
 					</div>
+					{imageUpload ? <MainButton title='Upload' onClick={uploadFileHandler} /> : null}
 					<div className={classes.welcomeHeading}>
 						<h2>
 							{userData.name} {userData.surname}

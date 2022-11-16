@@ -9,5 +9,5 @@ export interface UserData {
 	readonly created: string
 	readonly lastLogin: string
 	readonly nick: string
-	readonly image: null
+	readonly image: string
 }
