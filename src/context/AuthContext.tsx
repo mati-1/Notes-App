@@ -85,7 +85,6 @@ export const AuthContextProvider = ({ children }: { children: React.ReactNode })
 	const updateHandler = useCallback(async (id: string, userData: Partial<UserData>) => {
 		await updateDoc(doc(db, 'users', id), userData)
 		localStorage.setItem('userData', JSON.stringify(userData))
-		notify('Profile has been updated!')
 	}, [])
 
 	const contextValue = {

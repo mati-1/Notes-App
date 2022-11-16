@@ -26,20 +26,8 @@ export const UserProfile = () => {
 		if (imageUpload) {
 			setIsLoading(true)
 
-			const newPhotoData = {
-				...userData,
-				image: avatarUrl,
-			}
-
 			try {
 				await uploadBytes(imageRef, imageUpload).then(() => {
-					getDownloadURL(imageRef).then((url) => {
-						setAvatarUrl(url)
-					})
-					update(userData.id as string, newPhotoData)
-
-					console.log('1 --->', avatarUrl)
-
 					setIsLoading(false)
 					notify('Avatar has been changed!')
 				})
@@ -57,10 +45,15 @@ export const UserProfile = () => {
 	useEffect(() => {
 		getDownloadURL(imageRef).then((url) => {
 			setAvatarUrl(url)
-		})
 
-		console.log('2 --->', avatarUrl)
-	}, [avatarUrl, imageRef])
+			const newPhotoData = {
+				...userData,
+				image: avatarUrl,
+			}
+
+			update(userData.id as string, newPhotoData)
+		})
+	}, [avatarUrl, imageRef, update, userData])
 
 	return (
 		<div className={classes.profileWrapper}>
