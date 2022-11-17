@@ -1,10 +1,10 @@
-[<img src="https://i.ibb.co/Tvw1T67/Readme-Header-Image.png" alt="modern notes app banner" width="100%"/>](https://modernapp.pl)
+[<img src="https://i.ibb.co/Tvw1T67/Readme-Header-Image.png" alt="modern notes app banner" width="100%"/>](https://modern-notes-app.netlify.app/)
 
 <h4 align="center">Notes App - Modern app for noting</h4>
 
 ## Live 💻
 
-tutaj bedzie link
+<a href='https://modern-notes-app.netlify.app/'>Modern Notes App</a>
 
 ## About project 🤩
 
