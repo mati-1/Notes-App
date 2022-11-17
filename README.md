@@ -23,18 +23,10 @@ That's modern app for creating notes with user login/register system. Applicatio
 | [Framer Motion](https://www.framer.com/motion/)           | Motion library for React                                            |
 | [Context API](https://reactjs.org/docs/context.html)      | React structure that enables to share data with multiple components |
 | [React Hook Form](https://react-hook-form.com)            | Forms with easy-to-use validation                                   |
-| [SCSS](https://sass-lang.com)                             | CSS with superpowers                                                |
+| [SCSS](https://sass-lang.com)                             | CSS on steroids                                                     |
 | [ESLint](https://eslint.org/)                             | TypeScript linting                                                  |
 | [Prettier](https://prettier.io/)                          | Code formatter                                                      |
 | [Firebase](https://firebase.google.com/)                  | REST APi, database, storage                                         |
-
-## Performance 💨
-
-<img src="https://i.ibb.co/54kmD1C/zagrodzki-me-lighthouse.png" alt="zagrodzki.me - lighthouse stats" >
-
-<br/>
-
-<img src="https://i.ibb.co/chHR5Df/zagrodzki-me-vercel.png" alt="zagrodzki.me - vercel stats" >
 
 ## Installation 💿
 
