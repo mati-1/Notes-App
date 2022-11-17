@@ -2,7 +2,7 @@
 	"name": "react-notes-app",
 	"version": "0.1.0",
 	"private": true,
-	"homepage": "https://skrimusss.github.io/Notes-app",
+	"homepage": "https://skrimusss.github.io/Notes-App",
 	"dependencies": {
 		"@badrap/bar-of-progress": "^0.2.2",
 		"@emotion/react": "^11.10.4",
