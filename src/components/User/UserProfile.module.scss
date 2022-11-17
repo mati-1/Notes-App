@@ -2,10 +2,22 @@
 	padding: 5rem 0;
 
 	.profileModules {
+		@media (max-width: 768px) {
+			display: flex;
+			align-items: center;
+			flex-direction: column;
+		}
 		.profileHeader {
 			display: flex;
 			align-items: center;
 			gap: 2rem;
+
+			@media (max-width: 768px) {
+				display: flex;
+				align-items: center;
+				flex-direction: column;
+				text-align: center;
+			}
 
 			.image {
 				position: relative;

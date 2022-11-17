@@ -6,6 +6,7 @@ import Zoom from '@mui/material/Zoom'
 
 type NavLinkProps = {
 	icon: JSX.Element
+	children?: React.ReactNode
 	hiddenNav: boolean
 	title: string
 	elementsLength?: number
@@ -22,6 +23,7 @@ export const NavigationLink = ({
 	href,
 	tooltipTitle,
 	onClick,
+	children,
 }: NavLinkProps) => {
 	const location = useLocation()
 
@@ -34,6 +36,7 @@ export const NavigationLink = ({
 					{icon}
 					<span className={` ${hiddenNav ? classes.hiddenLinkTitle : ''}`}>{title}</span>
 				</Badge>
+				{children}
 			</NavLink>
 		</Tooltip>
 	) : (
@@ -42,6 +45,7 @@ export const NavigationLink = ({
 				{icon}
 				<span className={` ${hiddenNav ? classes.hiddenLinkTitle : ''}`}>{title}</span>
 			</Badge>
+			{children}
 		</NavLink>
 	)
 }

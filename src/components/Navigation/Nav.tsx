@@ -7,7 +7,6 @@ import AddIcon from '@mui/icons-material/Add'
 import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted'
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline'
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
-import SettingsIcon from '@mui/icons-material/Settings'
 import { Backdrop } from '../UI/Backdrop'
 import PermIdentityIcon from '@mui/icons-material/PermIdentity'
 import LogoutIcon from '@mui/icons-material/Logout'
@@ -29,8 +28,8 @@ export const Nav = () => {
 	const [hiddenNav, setHiddenNav] = useState(true)
 	const { notes, trashNotes, favouriteNotes } = useContext(NotesContext)
 	const { isLoggedIn, logout } = useContext(AuthContext)
-	const { localTheme: theme1 } = getTheme()
-	const [theme, setTheme] = useToggle(theme1)
+	const { localTheme: themeState } = getTheme()
+	const [theme, setTheme] = useToggle(themeState)
 
 	useEffect(() => {
 		localStorage.setItem('theme', JSON.stringify(theme))
@@ -113,17 +112,10 @@ export const Nav = () => {
 								hiddenNav={hiddenNav}
 								href='/login'
 								icon={<PermIdentityIcon className={classes.icon} />}
-								tooltipTitle={<Typography fontSize={11}>Login</Typography>}
-							/>
+								tooltipTitle={<Typography fontSize={11}>Login</Typography>}>
+								{!isLoggedIn && <span className={classes.loginMark}>Login</span>}
+							</NavigationLink>
 						)}
-
-						<NavigationLink
-							hiddenNav={hiddenNav}
-							title='Settings'
-							href='/settings'
-							icon={<SettingsIcon className={classes.icon} />}
-							tooltipTitle={<Typography fontSize={11}>Settings</Typography>}
-						/>
 						{isLoggedIn && (
 							<NavigationLink
 								onClick={logout}

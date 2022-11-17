@@ -38,7 +38,7 @@ export const FilterPopup = () => {
 	return (
 		<div className={classes.filterPopup}>
 			<select defaultValue={search.toString()} onChange={changeSortingHandler}>
-				<option value={'none'}>None</option>
+				<option value={'none'}>Sorting</option>
 				<option value={'favourite'}>Favourites</option>
 				<option value={'longest'}>Longest</option>
 			</select>

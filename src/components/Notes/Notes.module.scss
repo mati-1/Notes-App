@@ -7,6 +7,11 @@
 		justify-content: space-between;
 		margin-bottom: 2rem;
 
+		@media (max-width: 600px) {
+			flex-direction: column;
+			gap: 2rem;
+		}
+
 		button {
 			margin: 0;
 		}
@@ -45,7 +50,7 @@
 		list-style: none;
 		margin-top: 3rem;
 
-		@media (max-width: 1350px) {
+		@media (max-width: 1000px) {
 			grid-template-columns: repeat(1, 1fr);
 		}
 	}
