@@ -1,4 +1,4 @@
-[<img src="xdd" alt="modern notes app banner" width="100%"/>](https://modernapp.pl)
+[<img src="https://ibb.co/K05DGdf" alt="modern notes app banner" width="100%"/>](https://modernapp.pl)
 
 <h4 align="center">Notes App - Modern app for noting</h4>
 
