@@ -106,7 +106,7 @@ export const NotesContextProvider = ({ children }: { children: JSX.Element }) =>
 			try {
 				setNotes((prevNotes) => [...prevNotes, newNote])
 				setTrashNotes(newNotes)
-				notify('Note is undo')
+				notify('Note has been withdrawn')
 			} catch (err) {
 				console.log(err)
 			}
