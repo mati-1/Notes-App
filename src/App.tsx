@@ -4,7 +4,7 @@ import RootLayout from './pages/RootLayout'
 import { ErrorPage } from './pages/ErrorPage'
 import { NotesContextProvider } from './context/NoteContext'
 import { AuthContextProvider } from './context/AuthContext'
-import { ProgressBar } from './components/UI/Progressbar'
+import { ProgressBar } from './components/ui/Progressbar'
 // import { AuthContext } from './context/AuthContext'
 
 const HomeLayout = React.lazy(() => import('./pages/HomePage'))

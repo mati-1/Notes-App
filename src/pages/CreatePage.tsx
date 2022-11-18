@@ -1,5 +1,5 @@
-import { Form } from '../components/Form/Form'
-import { Layout } from '../components/UI/Layout'
+import { Form } from '../components/form/Form'
+import { Layout } from '../components/ui/Layout'
 const CreateLayout = () => {
 	return (
 		<Layout>

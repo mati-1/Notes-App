@@ -1,6 +1,6 @@
-import { SingleNoteItem } from '../components/Notes/SingleNote'
-import classes from '../components/Notes/Notes.module.scss'
-import { Wrapper } from '../components/UI/Wrapper'
+import { SingleNoteItem } from '../components/notes/SingleNote'
+import classes from '../components/notes/Notes.module.scss'
+import { Wrapper } from '../components/ui/Wrapper'
 import { motion } from 'framer-motion'
 import { variants } from '../constants/layoutMotionVariants'
 

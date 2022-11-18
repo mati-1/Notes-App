@@ -1,5 +1,5 @@
-import { AuthForm } from '../components/Auth/AuthForm'
-import { Layout } from '../components/UI/Layout'
+import { AuthForm } from '../components/auth/AuthForm'
+import { Layout } from '../components/ui/Layout'
 
 const RegisterLayout = () => {
 	return (

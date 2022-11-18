@@ -1,5 +1,5 @@
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline'
-import classes from '../Auth/AuthForm.module.scss'
+import classes from '../auth/AuthForm.module.scss'
 
 type ErrorMessageProps = {
 	readonly title: string

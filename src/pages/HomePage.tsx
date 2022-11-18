@@ -1,8 +1,8 @@
 import { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import header from '../img/header.svg'
-import { MainButton } from '../components/UI/MainButton'
-import { SecondaryButton } from '../components/UI/SecondaryButton'
+import { MainButton } from '../components/ui/MainButton'
+import { SecondaryButton } from '../components/ui/SecondaryButton'
 import classes from './HomeLayout.module.scss'
 import { AuthContext } from '../context/AuthContext'
 

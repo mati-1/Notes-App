@@ -1,11 +1,11 @@
 import { useContext } from 'react'
 import { Note } from '../../types/NoteType'
-import classes from '../Notes/NoteItem.module.scss'
+import classes from '../notes/NoteItem.module.scss'
 import { motion } from 'framer-motion'
 import { NotesContext } from '../../context/NoteContext'
-import { MainButton } from './../UI/MainButton'
-import { SecondaryButton } from '../UI/SecondaryButton'
-import { ProfileLink } from './../UI/ProfileLink'
+import { MainButton } from '../ui/MainButton'
+import { SecondaryButton } from '../ui/SecondaryButton'
+import { ProfileLink } from '../ui/ProfileLink'
 
 type TrashItemProps = {
 	note: Note

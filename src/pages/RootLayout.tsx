@@ -1,5 +1,5 @@
 import { Outlet } from 'react-router-dom'
-import { Nav } from '../components/Navigation/Nav'
+import { Nav } from '../components/navigation/Nav'
 import classes from './RootLayout.module.scss'
 import ProgressBar from '@badrap/bar-of-progress'
 import { ToastContainer } from 'react-toastify'

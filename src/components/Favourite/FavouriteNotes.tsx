@@ -1,12 +1,12 @@
 import { useContext } from 'react'
 import { NotesContext } from '../../context/NoteContext'
 import { AnimatePresence } from 'framer-motion'
-import classes from '../Notes/Notes.module.scss'
+import classes from '../notes/Notes.module.scss'
 import { Link } from 'react-router-dom'
-import { MainButton } from '../UI/MainButton'
+import { MainButton } from '../ui/MainButton'
 import empty from '../../img/favourite.svg'
 import { FavouriteNoteItem } from './FavouriteNoteItem'
-import { Heading } from '../UI/Heading'
+import { Heading } from '../ui/Heading'
 
 export const FavouriteNotes = () => {
 	const { favouriteNotes } = useContext(NotesContext)

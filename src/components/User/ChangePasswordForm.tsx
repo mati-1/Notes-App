@@ -1,14 +1,14 @@
 import { useState, useContext } from 'react'
 import ReactDOM from 'react-dom'
 import classes from './TabPanel.module.scss'
-import { ErrorMessage } from '../UI/ErrorMessage'
+import { ErrorMessage } from '../ui/ErrorMessage'
 import { AuthContext } from '../../context/AuthContext'
-import { MainButton } from '../UI/MainButton'
+import { MainButton } from '../ui/MainButton'
 import { useForm, SubmitHandler } from 'react-hook-form'
-import { ProgressBar } from '../UI/Progressbar'
-import { editPasswordUrl } from './../../constants/authApiData'
+import { ProgressBar } from '../ui/Progressbar'
+import { editPasswordUrl } from '../../constants/authApiData'
 import { useNavigate } from 'react-router-dom'
-import { progressPortal } from './../../constants/progressPortal'
+import { progressPortal } from '../../constants/progressPortal'
 
 type Inputs = {
 	readonly password: string

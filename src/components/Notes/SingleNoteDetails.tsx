@@ -2,9 +2,9 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import classes from './NoteItem.module.scss'
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward'
-import { EditHistory } from './../../types/EditHistoryType'
-import { Heading } from './../UI/Heading'
-import { ProfileLink } from './../UI/ProfileLink'
+import { EditHistory } from '../../types/EditHistoryType'
+import { Heading } from '../ui/Heading'
+import { ProfileLink } from '../ui/ProfileLink'
 
 type noteDetailsType = {
 	id: string | undefined

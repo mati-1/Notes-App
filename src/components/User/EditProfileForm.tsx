@@ -1,13 +1,13 @@
 import { useContext, useState } from 'react'
 import ReactDOM from 'react-dom'
 import classes from './TabPanel.module.scss'
-import { ErrorMessage } from '../UI/ErrorMessage'
+import { ErrorMessage } from '../ui/ErrorMessage'
 import { AuthContext } from '../../context/AuthContext'
-import { MainButton } from '../UI/MainButton'
+import { MainButton } from '../ui/MainButton'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
-import { ProgressBar } from '../UI/Progressbar'
-import { progressPortal } from './../../constants/progressPortal'
+import { ProgressBar } from '../ui/Progressbar'
+import { progressPortal } from '../../constants/progressPortal'
 
 type Inputs = {
 	readonly name: string

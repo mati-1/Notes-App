@@ -1,6 +1,6 @@
-import { Notes } from '../components/Notes/Notes'
-import classes from '../components/Notes/Notes.module.scss'
-import { Wrapper } from '../components/UI/Wrapper'
+import { Notes } from '../components/notes/Notes'
+import classes from '../components/notes/Notes.module.scss'
+import { Wrapper } from '../components/ui/Wrapper'
 import { motion } from 'framer-motion'
 import { variants } from '../constants/layoutMotionVariants'
 

@@ -1,8 +1,8 @@
-import classes from '../components/Notes/Notes.module.scss'
+import classes from '../components/notes/Notes.module.scss'
 import { motion } from 'framer-motion'
-import { Wrapper } from '../components/UI/Wrapper'
+import { Wrapper } from '../components/ui/Wrapper'
 import { variants } from '../constants/layoutMotionVariants'
-import { UserProfile } from '../components/User/UserProfile'
+import { UserProfile } from '../components/user/UserProfile'
 
 const UserLayout = () => {
 	return (

@@ -4,13 +4,13 @@ import { AnimatePresence } from 'framer-motion'
 import classes from './Notes.module.scss'
 import empty from '../../img/empty.svg'
 import { NotesContext } from '../../context/NoteContext'
-import { NotePagination } from '../Pagination/Pagination'
-import { FilterPopup } from '../Filter/FilterPopup'
+import { NotePagination } from '../pagination/Pagination'
+import { FilterPopup } from '../filter/FilterPopup'
 import { Note } from '../../types/NoteType'
 import { useSearchParams, Link } from 'react-router-dom'
-import { MainButton } from '../UI/MainButton'
-import { SecondaryButton } from '../UI/SecondaryButton'
-import { Heading } from '../UI/Heading'
+import { MainButton } from '../ui/MainButton'
+import { SecondaryButton } from '../ui/SecondaryButton'
+import { Heading } from '../ui/Heading'
 
 export const Notes = () => {
 	const { notes, trashNotes, removeAll } = useContext(NotesContext)

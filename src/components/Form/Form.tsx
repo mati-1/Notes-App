@@ -10,7 +10,7 @@ import Checkbox from '@mui/material/Checkbox'
 import formImg from '../../img/form.svg'
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline'
 import { useForm, SubmitHandler } from 'react-hook-form'
-import { Heading } from '../UI/Heading'
+import { Heading } from '../ui/Heading'
 
 type Inputs = {
 	readonly title: string

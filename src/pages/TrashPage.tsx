@@ -1,6 +1,6 @@
-import { Trash } from '../components/Trash/Trash'
-import classes from '../components/Notes/Notes.module.scss'
-import { Wrapper } from '../components/UI/Wrapper'
+import { Trash } from '../components/trash/Trash'
+import classes from '../components/notes/Notes.module.scss'
+import { Wrapper } from '../components/ui/Wrapper'
 import { motion } from 'framer-motion'
 import { variants } from '../constants/layoutMotionVariants'
 

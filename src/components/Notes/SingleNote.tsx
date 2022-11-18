@@ -7,10 +7,10 @@ import { NotesContext } from '../../context/NoteContext'
 import { Note } from '../../types/NoteType'
 import { SingleNoteDetails } from './SingleNoteDetails'
 import { getFullDate } from '../../constants/FullDate'
-import { MainButton } from '../UI/MainButton'
-import { SecondaryButton } from '../UI/SecondaryButton'
-import { Heading } from '../UI/Heading'
-import { ProfileLink } from '../UI/ProfileLink'
+import { MainButton } from '../ui/MainButton'
+import { SecondaryButton } from '../ui/SecondaryButton'
+import { Heading } from '../ui/Heading'
+import { ProfileLink } from '../ui/ProfileLink'
 
 export const SingleNoteItem = () => {
 	const { notes, updateNote } = useContext(NotesContext)

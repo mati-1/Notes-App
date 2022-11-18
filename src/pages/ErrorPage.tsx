@@ -1,8 +1,8 @@
 import errorImg from '../img/error.svg'
-import { Layout } from '../components/UI/Layout'
+import { Layout } from '../components/ui/Layout'
 import classes from './ErrorPage.module.scss'
 import { useNavigate } from 'react-router-dom'
-import { MainButton } from '../components/UI/MainButton'
+import { MainButton } from '../components/ui/MainButton'
 import { Link } from 'react-router-dom'
 
 export const ErrorPage = () => {
