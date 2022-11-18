@@ -7,11 +7,11 @@ import { HashRouter } from 'react-router-dom'
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 root.render(
-	<HashRouter>
-		<StrictMode>
+	<StrictMode>
+		<HashRouter>
 			<App />
-		</StrictMode>
-	</HashRouter>
+		</HashRouter>
+	</StrictMode>
 )
 
 reportWebVitals()

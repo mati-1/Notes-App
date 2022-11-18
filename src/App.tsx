@@ -1,5 +1,5 @@
 import React, { Suspense } from 'react'
-import { Route, createBrowserRouter, createRoutesFromElements, RouterProvider } from 'react-router-dom'
+import { Route, createHashRouter, createRoutesFromElements, RouterProvider } from 'react-router-dom'
 import RootLayout from './pages/RootLayout'
 import { ErrorPage } from './pages/ErrorPage'
 import { NotesContextProvider } from './context/NoteContext'
@@ -20,7 +20,7 @@ const UserLayout = React.lazy(() => import('./pages/UserPage'))
 const App = () => {
 	// const { isLoggedIn } = useContext(AuthContext)
 
-	const router = createBrowserRouter(
+	const router = createHashRouter(
 		createRoutesFromElements(
 			<Route path='/' element={<RootLayout />} errorElement={<ErrorPage />}>
 				<Route index path='/' element={<HomeLayout />} />
