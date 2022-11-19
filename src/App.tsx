@@ -5,33 +5,33 @@ import { ErrorPage } from './pages/ErrorPage'
 import { NotesContextProvider } from './context/NoteContext'
 import { AuthContextProvider } from './context/AuthContext'
 import { ProgressBar } from './components/ui/Progressbar'
-// import { AuthContext } from './context/AuthContext'
-
-const HomeLayout = React.lazy(() => import('./pages/HomePage'))
-const CreateLayout = React.lazy(() => import('./pages/CreatePage'))
-const NotesLayout = React.lazy(() => import('./pages/NotesPage'))
-const TrashLayout = React.lazy(() => import('./pages/TrashPage'))
-const DetailNoteLayout = React.lazy(() => import('./pages/DetailNotePage'))
-const FavouriteLayout = React.lazy(() => import('./pages/FavouritePage'))
-const LoginLayout = React.lazy(() => import('./pages/LoginPage'))
-const RegisterLayout = React.lazy(() => import('./pages/RegisterPage'))
-const UserLayout = React.lazy(() => import('./pages/UserPage'))
+import HomePage from './pages/HomePage'
+import CreateLayout from './pages/CreatePage'
+import NotesPage from './pages/NotesPage'
+import TrashPage from './pages/TrashPage'
+import DetailNoteLayout from './pages/DetailNotePage'
+import FavouritePage from './pages/FavouritePage'
+import LoginLayout from './pages/LoginPage'
+import RegisterLayout from './pages/RegisterPage'
+import UserLayout from './pages/UserPage'
+import PeopleLayout from './pages/PeoplePage'
+import PeopleProfilePage from './pages/PeopleProfilePage'
 
 const App = () => {
-	// const { isLoggedIn } = useContext(AuthContext)
-
 	const router = createHashRouter(
 		createRoutesFromElements(
 			<Route path='/' element={<RootLayout />} errorElement={<ErrorPage />}>
-				<Route index path='/' element={<HomeLayout />} />
+				<Route index path='/' element={<HomePage />} />
 				<Route path='/create' element={<CreateLayout />} />
-				<Route path='/notes' element={<NotesLayout />} />
+				<Route path='/notes' element={<NotesPage />} />
 				<Route path='/notes/:noteId' element={<DetailNoteLayout />} />
-				<Route path='/trash' element={<TrashLayout />} />
-				<Route path='/favourite' element={<FavouriteLayout />} />
+				<Route path='/trash' element={<TrashPage />} />
+				<Route path='/favourite' element={<FavouritePage />} />
 				<Route path='/login' element={<LoginLayout />} />
 				<Route path='/register' element={<RegisterLayout />} />
 				<Route path='/user' element={<UserLayout />} />
+				<Route path='/peoples' element={<PeopleLayout />} />
+				<Route path='/peoples/:id' element={<PeopleProfilePage />} />
 			</Route>
 		)
 	)
