@@ -1,0 +1,55 @@
+.peoplesWrapper {
+	padding: 5rem 0;
+}
+
+.peopleItem {
+	position: relative;
+	display: flex;
+	align-items: center;
+	gap: 2rem;
+	background-color: var(--black-color);
+	border: 1px solid var(--black4-color);
+	border-radius: 0.5rem;
+	padding: 2rem;
+
+	@media (max-width: 600px) {
+		flex-direction: column;
+		text-align: center;
+	}
+
+	.icon {
+		position: absolute;
+		top: 1rem;
+		right: 1rem;
+		font-size: var(--big-size);
+		color: var(--main-color);
+	}
+
+	img {
+		width: 12rem;
+		height: 12rem;
+		border-radius: 50%;
+		pointer-events: none;
+	}
+	.heading {
+		h1 {
+			color: var(--white-color);
+			font-size: var(--big-size);
+			padding-bottom: 0.5rem;
+		}
+
+		p {
+			color: var(--grey-color);
+		}
+	}
+}
+
+.list {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: 2rem;
+
+	@media (max-width: 1000px) {
+		grid-template-columns: repeat(1, 1fr);
+	}
+}

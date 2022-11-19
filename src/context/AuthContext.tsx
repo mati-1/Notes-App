@@ -52,7 +52,7 @@ export const AuthContextProvider = ({ children }: { children: React.ReactNode })
 				querySnapshot.forEach((doc) => {
 					setInitialData({
 						...doc.data(),
-						id: doc.id,
+						id: doc.id!,
 						lastLogin: lastLoginDate,
 					})
 				})

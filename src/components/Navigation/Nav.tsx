@@ -6,6 +6,7 @@ import ArrowForwardIcon from '@mui/icons-material/ArrowForward'
 import AddIcon from '@mui/icons-material/Add'
 import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted'
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline'
+import Groups2Icon from '@mui/icons-material/Groups2'
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
 import { Backdrop } from '../ui/Backdrop'
 import PermIdentityIcon from '@mui/icons-material/PermIdentity'
@@ -116,6 +117,12 @@ export const Nav = () => {
 								{!isLoggedIn && <span className={classes.loginMark}>Login</span>}
 							</NavigationLink>
 						)}
+						<NavigationLink
+							title='Peoples'
+							hiddenNav={hiddenNav}
+							href='/peoples'
+							icon={<Groups2Icon className={classes.icon} />}
+							tooltipTitle={<Typography fontSize={11}>Peoples</Typography>}></NavigationLink>
 						{isLoggedIn && (
 							<NavigationLink
 								onClick={logout}
