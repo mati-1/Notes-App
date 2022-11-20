@@ -9,12 +9,21 @@ import { Heading } from '../ui/Heading'
 import { SearchBar } from '../ui/SearchBar'
 import { useSearchParams } from 'react-router-dom'
 import { AnimatePresence } from 'framer-motion'
+import emptyUserList from '../../img/users.svg'
+import { sliderSettings } from '../../constants/sliderSettings'
+import { SecondaryButton } from './../ui/SecondaryButton'
+import Slider from 'react-slick'
+import 'slick-carousel/slick/slick.css'
+import 'slick-carousel/slick/slick-theme.css'
 
 export const UsersList = () => {
 	const [isLoading, setIsLoading] = useState(false)
 	const [users, setUsers] = useState<UserData[]>([])
 	const [search] = useSearchParams()
 	const searchValue = search.get('search')
+	const [view, setView] = useSearchParams()
+	const viewValue = view.get('view')
+	const viewCondition = viewValue === 'grid'
 
 	const filteredUsers = searchValue
 		? users.filter((user) => user.name.trim().toLowerCase().includes(searchValue.toLowerCase()))
@@ -40,30 +49,74 @@ export const UsersList = () => {
 		})()
 	}, [])
 
+	const onViewToggle = () => {
+		if (!viewCondition) {
+			view.set('view', 'grid')
+			setView(view, {
+				replace: true,
+			})
+		} else {
+			view.set('view', 'carousel')
+			setView(view, {
+				replace: true,
+			})
+		}
+	}
+
+	const emptyUsersList = (
+		<div className={classes.emptyWrapper}>
+			<img src={emptyUserList} alt='empty' />
+			<h2>Users list is empty</h2>
+		</div>
+	)
+
 	return (
 		<div className={classes.peoplesWrapper}>
 			<div className={classes.header}>
 				<Heading title='People' />
-				<SearchBar title='people' />
+				<div className={classes.buttons}>
+					<SearchBar disabled={!viewCondition} className={!viewCondition ? 'disabledBar' : ''} title='users' />
+					<SecondaryButton onClick={onViewToggle} title={viewCondition ? 'Carousel view' : 'Grid view'} />
+				</div>
 			</div>
 			{isLoading && <ProgressBar />}
 			<AnimatePresence>
-				<ul className={classes.list}>
-					{filteredUsers.map((user) => {
-						return (
-							<UserItem
-								key={user.id}
-								id={user.id}
-								name={user.name}
-								surname={user.surname}
-								image={user.image}
-								email={user.email}
-								nick={user.nick}
-							/>
-						)
-					})}
-					{!filteredUsers.length && <h1>CHUJA</h1>}
-				</ul>
+				{viewCondition && (
+					<ul className={classes.list}>
+						{filteredUsers.map((user) => {
+							return (
+								<UserItem
+									key={user.id}
+									id={user.id}
+									name={user.name}
+									surname={user.surname}
+									image={user.image}
+									email={user.email}
+									nick={user.nick}
+								/>
+							)
+						})}
+					</ul>
+				)}
+
+				{!viewCondition && (
+					<Slider className={classes.slider} {...sliderSettings}>
+						{filteredUsers.map((user) => {
+							return (
+								<UserItem
+									key={user.id}
+									id={user.id}
+									name={user.name}
+									surname={user.surname}
+									image={user.image}
+									email={user.email}
+									nick={user.nick}
+								/>
+							)
+						})}
+					</Slider>
+				)}
+				{!filteredUsers.length && emptyUsersList}
 			</AnimatePresence>
 		</div>
 	)

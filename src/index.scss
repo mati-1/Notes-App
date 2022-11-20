@@ -69,3 +69,31 @@ body {
 	--black3-color: rgb(231, 231, 231);
 	--black4-color: rgb(236, 236, 236);
 }
+
+.slick-slider {
+	margin: 2rem;
+
+	button::before {
+		color: var(--white-color);
+	}
+
+	.slick-list {
+		.slick-track {
+			display: flex;
+			align-items: center;
+			gap: 2rem;
+		}
+		.slick-disabled {
+			display: none;
+		}
+	}
+
+	.slick-dots {
+		li,
+		.slick-active {
+			button::before {
+				color: var(--white-color);
+			}
+		}
+	}
+}

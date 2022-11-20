@@ -14,7 +14,11 @@ const notify = (text: string) =>
 		theme: 'colored',
 	})
 
-export const FilterPopup = () => {
+type FilterProps = {
+	disabled: boolean
+}
+
+export const FilterPopup = ({ disabled }: FilterProps) => {
 	const [search, setSearch] = useSearchParams()
 
 	const changeSortingHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -35,7 +39,7 @@ export const FilterPopup = () => {
 
 	return (
 		<div className={classes.filterPopup}>
-			<select defaultValue={search.get('sort') ?? ''} onChange={changeSortingHandler}>
+			<select disabled={disabled} defaultValue={search.get('sort') ?? ''} onChange={changeSortingHandler}>
 				<option value={'sorting'}>Sorting</option>
 				<option value={'favourite'}>Favourites</option>
 				<option value={'longest'}>Longest</option>

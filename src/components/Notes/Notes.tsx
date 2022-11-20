@@ -9,9 +9,13 @@ import { FilterPopup } from '../filter/FilterPopup'
 import { Note } from '../../types/NoteType'
 import { useSearchParams, Link } from 'react-router-dom'
 import { MainButton } from '../ui/MainButton'
-import { SecondaryButton } from '../ui/SecondaryButton'
 import { Heading } from '../ui/Heading'
 import { SearchBar } from '../ui/SearchBar'
+import { sliderSettings } from '../../constants/sliderSettings'
+import { SecondaryButton } from './../ui/SecondaryButton'
+import Slider from 'react-slick'
+import 'slick-carousel/slick/slick.css'
+import 'slick-carousel/slick/slick-theme.css'
 
 export const Notes = () => {
 	const { notes, trashNotes, removeAll } = useContext(NotesContext)
@@ -25,6 +29,23 @@ export const Notes = () => {
 	const [search] = useSearchParams()
 	const sort = search.get('sort')
 	const searchValue = search.get('search')
+	const [view, setView] = useSearchParams()
+	const viewValue = view.get('view')
+	const viewCondition = viewValue === 'grid'
+
+	const onViewToggle = () => {
+		if (!viewCondition) {
+			view.set('view', 'grid')
+			setView(view, {
+				replace: true,
+			})
+		} else {
+			view.set('view', 'carousel')
+			setView(view, {
+				replace: true,
+			})
+		}
+	}
 
 	const sortedNotes = (notes: Note[]) => {
 		return notes.sort((a, b) => {
@@ -74,33 +95,54 @@ export const Notes = () => {
 				</Heading>
 				{notes.length ? (
 					<div className={classes.buttons}>
-						<SearchBar title='notes' />
-						<FilterPopup />
+						<SearchBar disabled={!viewCondition} title='notes' />
+						<FilterPopup disabled={!viewCondition} />
+						<SecondaryButton onClick={onViewToggle} title={viewCondition ? 'Carousel view' : 'Grid view'} />
 						<MainButton title='Trash all' onClick={removeAll} />
 					</div>
 				) : null}
 			</div>
 
-			<ul className={classes.list}>
-				<AnimatePresence>
-					{currentNotes.map((note) => {
-						return (
-							<NoteItem
-								key={note.id}
-								id={note.id}
-								note={note}
-								title={note.title}
-								category={note.category}
-								description={note.description}
-								favourite={note.favourite}
-							/>
-						)
-					})}
-				</AnimatePresence>
-			</ul>
+			<AnimatePresence>
+				{viewCondition && (
+					<ul className={classes.list}>
+						{currentNotes.map((note) => {
+							return (
+								<NoteItem
+									key={note.id}
+									id={note.id}
+									note={note}
+									title={note.title}
+									category={note.category}
+									description={note.description}
+									favourite={note.favourite}
+								/>
+							)
+						})}
+					</ul>
+				)}
+
+				{!viewCondition && (
+					<Slider {...sliderSettings}>
+						{currentNotes.map((note) => {
+							return (
+								<NoteItem
+									key={note.id}
+									id={note.id}
+									note={note}
+									title={note.title}
+									category={note.category}
+									description={note.description}
+									favourite={note.favourite}
+								/>
+							)
+						})}
+					</Slider>
+				)}
+			</AnimatePresence>
 
 			{!currentNotes.length && emptyContent}
-			{currentNotes.length && (
+			{currentNotes.length && viewCondition && (
 				<NotePagination notesPerPage={notesPerPage} totalNotes={notes.length} paginate={paginate} />
 			)}
 		</div>
