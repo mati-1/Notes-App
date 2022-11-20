@@ -5,12 +5,14 @@ type ButtonProps = {
 	readonly title: string
 	readonly type?: any
 	readonly disabled?: boolean
+	children?: React.ReactNode
 	onClick?: () => void
 }
 
-export const MainButton = ({ title, type, disabled, onClick }: ButtonProps) => {
+export const MainButton = ({ title, type, disabled, onClick, children }: ButtonProps) => {
 	return (
 		<button onClick={onClick} className={classes.mainButton} disabled={disabled} type={type}>
+			{children}
 			{title}
 		</button>
 	)

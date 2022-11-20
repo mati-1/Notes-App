@@ -118,11 +118,11 @@ export const Nav = () => {
 							</NavigationLink>
 						)}
 						<NavigationLink
-							title='Peoples'
+							title='Users'
 							hiddenNav={hiddenNav}
-							href='/peoples'
+							href='/users'
 							icon={<Groups2Icon className={classes.icon} />}
-							tooltipTitle={<Typography fontSize={11}>Peoples</Typography>}></NavigationLink>
+							tooltipTitle={<Typography fontSize={11}>Users</Typography>}></NavigationLink>
 						{isLoggedIn && (
 							<NavigationLink
 								onClick={logout}

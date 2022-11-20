@@ -1,4 +1,4 @@
-import { PeopleList } from '../components/people/PeopleList'
+import { UsersList } from '../components/users/UsersList'
 import { motion } from 'framer-motion'
 import { variants } from '../constants/layoutMotionVariants'
 import { Wrapper } from '../components/ui/Wrapper'
@@ -14,7 +14,7 @@ const PeopleLayout = () => {
 			transition={{ type: 'linear' }}
 			className={classes.mainWrapper}>
 			<Wrapper>
-				<PeopleList />
+				<UsersList />
 			</Wrapper>
 		</motion.div>
 	)

@@ -1,5 +1,16 @@
 .peoplesWrapper {
 	padding: 5rem 0;
+
+	.header {
+		display: flex;
+		justify-content: space-between;
+		padding-bottom: 4rem;
+
+		@media (max-width: 768px) {
+			flex-direction: column;
+			gap: 2rem;
+		}
+	}
 }
 
 .peopleItem {
@@ -26,10 +37,25 @@
 	}
 
 	img {
-		width: 12rem;
-		height: 12rem;
+		position: relative;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 11rem;
+		height: 11rem;
 		border-radius: 50%;
 		pointer-events: none;
+		object-fit: cover;
+
+		&::after {
+			position: absolute;
+			content: '';
+			z-index: 1;
+			width: 12rem;
+			height: 12rem;
+			background-color: #fff;
+			border-radius: 50%;
+		}
 	}
 	.heading {
 		h1 {

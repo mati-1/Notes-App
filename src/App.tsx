@@ -14,8 +14,8 @@ import FavouritePage from './pages/FavouritePage'
 import LoginLayout from './pages/LoginPage'
 import RegisterLayout from './pages/RegisterPage'
 import UserLayout from './pages/UserPage'
-import PeopleLayout from './pages/PeoplePage'
-import PeopleProfilePage from './pages/PeopleProfilePage'
+import PeopleLayout from './pages/UsersPage'
+import PeopleProfilePage from './pages/UsersProfilePage'
 
 const App = () => {
 	const router = createHashRouter(
@@ -30,8 +30,8 @@ const App = () => {
 				<Route path='/login' element={<LoginLayout />} />
 				<Route path='/register' element={<RegisterLayout />} />
 				<Route path='/user' element={<UserLayout />} />
-				<Route path='/peoples' element={<PeopleLayout />} />
-				<Route path='/peoples/:id' element={<PeopleProfilePage />} />
+				<Route path='/users' element={<PeopleLayout />} />
+				<Route path='/users/:id' element={<PeopleProfilePage />} />
 			</Route>
 		)
 	)

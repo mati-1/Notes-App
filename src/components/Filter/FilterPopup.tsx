@@ -15,9 +15,7 @@ const notify = (text: string) =>
 	})
 
 export const FilterPopup = () => {
-	const [search, setSearch] = useSearchParams({
-		sort: 'none',
-	})
+	const [search, setSearch] = useSearchParams()
 
 	const changeSortingHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
 		const sortBy = e.target.value
@@ -37,8 +35,8 @@ export const FilterPopup = () => {
 
 	return (
 		<div className={classes.filterPopup}>
-			<select defaultValue={search.toString()} onChange={changeSortingHandler}>
-				<option value={'none'}>Sorting</option>
+			<select defaultValue={search.get('sort') ?? ''} onChange={changeSortingHandler}>
+				<option value={'sorting'}>Sorting</option>
 				<option value={'favourite'}>Favourites</option>
 				<option value={'longest'}>Longest</option>
 			</select>

@@ -1,0 +1,29 @@
+.input {
+	display: flex;
+	align-items: center;
+	position: relative;
+
+	input {
+		width: 15rem;
+		transition: width 0.2s ease;
+
+		&:focus {
+			width: 25rem;
+		}
+
+		@media (max-width: 768px) {
+			width: 100%;
+
+			&:focus {
+				width: 100%;
+			}
+		}
+	}
+
+	.icon {
+		position: absolute;
+		right: 1rem;
+		color: var(--white-color);
+		pointer-events: none;
+	}
+}

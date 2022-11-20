@@ -11,6 +11,7 @@ import { useSearchParams, Link } from 'react-router-dom'
 import { MainButton } from '../ui/MainButton'
 import { SecondaryButton } from '../ui/SecondaryButton'
 import { Heading } from '../ui/Heading'
+import { SearchBar } from '../ui/SearchBar'
 
 export const Notes = () => {
 	const { notes, trashNotes, removeAll } = useContext(NotesContext)
@@ -23,6 +24,7 @@ export const Notes = () => {
 
 	const [search] = useSearchParams()
 	const sort = search.get('sort')
+	const searchValue = search.get('search')
 
 	const sortedNotes = (notes: Note[]) => {
 		return notes.sort((a, b) => {
@@ -41,7 +43,10 @@ export const Notes = () => {
 	}
 
 	const sortingNotes = sortedNotes(notes)
-	const currentNotes = sortingNotes.slice(indexOfFirstNote, indexOfLastNote)
+	const filteredNotes = searchValue
+		? sortingNotes.filter((note) => note.title.trim().toLowerCase().includes(searchValue.toLowerCase()))
+		: sortingNotes
+	const currentNotes = filteredNotes.slice(indexOfFirstNote, indexOfLastNote)
 
 	const emptyContent = (
 		<div className={classes.emptyWrapper}>
@@ -69,6 +74,7 @@ export const Notes = () => {
 				</Heading>
 				{notes.length ? (
 					<div className={classes.buttons}>
+						<SearchBar title='notes' />
 						<FilterPopup />
 						<MainButton title='Trash all' onClick={removeAll} />
 					</div>
@@ -93,8 +99,8 @@ export const Notes = () => {
 				</AnimatePresence>
 			</ul>
 
-			{!notes.length && emptyContent}
-			{notes.length ? (
+			{!currentNotes.length && emptyContent}
+			{currentNotes.length ? (
 				<NotePagination notesPerPage={notesPerPage} totalNotes={notes.length} paginate={paginate} />
 			) : null}
 		</div>

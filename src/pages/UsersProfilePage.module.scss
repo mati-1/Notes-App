@@ -1,27 +1,47 @@
-.profileWrapper {
-	padding: 5rem 0;
+.mainWrapper {
+	.profileWrapper {
+		padding: 5rem 0;
 
-	.profileModules {
-		@media (max-width: 768px) {
-			display: flex;
-			align-items: center;
-			flex-direction: column;
+		button {
+			margin-bottom: 2rem;
+			.icon {
+				font-size: var(--small-size);
+			}
 		}
+
 		.profileHeader {
 			display: flex;
 			align-items: center;
+			justify-content: space-between;
 			gap: 2rem;
+			margin-bottom: 6rem;
+
+			.buttons {
+				display: flex;
+				gap: 1rem;
+
+				button {
+					margin: 0;
+				}
+			}
 
 			@media (max-width: 768px) {
-				display: flex;
 				align-items: center;
 				flex-direction: column;
-				text-align: center;
 			}
 
 			.image {
 				position: relative;
 				display: flex;
+				align-items: center;
+				gap: 2rem;
+
+				@media (max-width: 768px) {
+					align-items: center;
+					flex-direction: column;
+					text-align: center;
+				}
+
 				img {
 					width: 11rem;
 					height: 11rem;
@@ -56,14 +76,16 @@
 		}
 
 		.profileInfo {
-			margin-top: 7rem;
-			display: grid;
-			grid-template-columns: repeat(1, 1fr);
-			max-width: 40rem;
-			gap: 6rem;
-
-			@media (max-width: 1000px) {
-				grid-template-columns: repeat(1, 1fr);
+			display: flex;
+			flex-direction: column;
+			gap: 4rem;
+			max-width: 50rem;
+			.description {
+				background-color: var(--black-color);
+				border: 1px solid var(--black4-color);
+				border-radius: 0.5rem;
+				padding: 2rem;
+				color: var(--white-color);
 			}
 
 			ul {
@@ -97,19 +119,6 @@
 							padding-bottom: 0.3rem;
 						}
 					}
-				}
-			}
-
-			.optionsContent {
-				display: flex;
-				flex-direction: column;
-			}
-
-			.managmentWrapper {
-				.buttons {
-					display: flex;
-					gap: 1rem;
-					align-items: center;
 				}
 			}
 		}
