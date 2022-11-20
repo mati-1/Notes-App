@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import { collection, query, where, getDocs } from 'firebase/firestore'
 import { motion } from 'framer-motion'
 import { db } from '../firebase'
-import { useParams } from 'react-router-dom'
+import { useParams, Link } from 'react-router-dom'
 import { Wrapper } from '../components/ui/Wrapper'
 import { UserData } from '../types/UserDataType'
 import { ProgressBar } from '../components/ui/Progressbar'
@@ -13,11 +13,14 @@ import classes from './UsersProfilePage.module.scss'
 import { MainButton } from '../components/ui/MainButton'
 import { SecondaryButton } from '../components/ui/SecondaryButton'
 import { useNavigate } from 'react-router-dom'
+import { AuthContext } from '../context/AuthContext'
 
 const PeopleProfilePage = () => {
-	const [userData, setUserData] = useState<UserData | null>(null)
+	const { userData } = useContext(AuthContext)
+	const [userLoadedData, setLoadedUserData] = useState<UserData | null>(null)
 	const { id } = useParams()
 	const navigate = useNavigate()
+	const loggedUserCondition = userData.id !== id
 
 	useEffect(() => {
 		const q = query(collection(db, 'users'), where('id', '==', id))
@@ -25,13 +28,13 @@ const PeopleProfilePage = () => {
 		const getUserData = async () => {
 			const snapshot = await getDocs(q)
 
-			snapshot.forEach((s) => setUserData(s.data() as UserData))
+			snapshot.forEach((s) => setLoadedUserData(s.data() as UserData))
 		}
 
 		getUserData()
 	}, [id])
 
-	if (!userData) return <ProgressBar />
+	if (!userLoadedData) return <ProgressBar />
 
 	return (
 		<motion.div
@@ -46,29 +49,30 @@ const PeopleProfilePage = () => {
 					<MainButton title='Back' onClick={() => navigate(-1)}>
 						<ArrowBackIcon className={classes.icon} />
 					</MainButton>
-					<Heading paddingBottom={true} title='Public profile' />
+					<Heading paddingBottom={true} title={`${loggedUserCondition ? 'Public profile' : 'Your public profile'}`} />
 
 					<div className={classes.profileHeader}>
 						<div className={classes.image}>
-							<img src={userData.image} alt='userProfile' />
+							<img src={userLoadedData.image} alt='userProfile' />
 							<div className={classes.welcomeHeading}>
 								<h2>
-									{userData.name} {userData.surname}
+									{userLoadedData.name} {userLoadedData.surname}
 								</h2>
-								<p>@{userData.nick}</p>
+								<p>@{userLoadedData.nick}</p>
 							</div>
 						</div>
-						<div className={classes.buttons}>
-							<MainButton title='Add to friends' />
-							<SecondaryButton title='Block user' />
-						</div>
+						{loggedUserCondition && (
+							<div className={classes.buttons}>
+								<MainButton title='Add to friends' />
+								<SecondaryButton title='Block user' />
+							</div>
+						)}
 					</div>
-
 					<div className={classes.profileInfo}>
 						<div>
 							<Heading paddingBottom={true} title='Description' />
 
-							<p className={classes.description}>Tutaj opis bedzie</p>
+							<p className={classes.description}>{userLoadedData.description}</p>
 						</div>
 
 						<div>
@@ -77,24 +81,29 @@ const PeopleProfilePage = () => {
 								<li>
 									<div>
 										<h3>Name</h3>
-										{userData.name} {userData.surname}
+										{userLoadedData.name} {userLoadedData.surname}
 									</div>
 								</li>
 								<li>
 									<div>
 										<h3>Created at</h3>
-										{userData.created}
+										{userLoadedData.created}
 									</div>
 								</li>
 								<li>
 									<div>
 										<h3>Last login</h3>
-										{userData.lastLogin}
+										{userLoadedData.lastLogin}
 									</div>
 								</li>
 							</ul>
 						</div>
 					</div>
+					{!loggedUserCondition && (
+						<Link to='/user'>
+							<MainButton title='Your profile panel' />
+						</Link>
+					)}
 				</div>
 			</Wrapper>
 		</motion.div>

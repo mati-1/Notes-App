@@ -26,7 +26,7 @@ export const EditProfileForm = () => {
 		formState: { errors },
 	} = useForm<Inputs>()
 
-	const submitNewPassword: SubmitHandler<Inputs> = async (newData) => {
+	const submitNewPassword: SubmitHandler<Inputs> = (newData) => {
 		setIsLoading(true)
 
 		const newUserData = {

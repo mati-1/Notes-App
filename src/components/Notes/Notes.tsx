@@ -100,9 +100,9 @@ export const Notes = () => {
 			</ul>
 
 			{!currentNotes.length && emptyContent}
-			{currentNotes.length ? (
+			{currentNotes.length && (
 				<NotePagination notesPerPage={notesPerPage} totalNotes={notes.length} paginate={paginate} />
-			) : null}
+			)}
 		</div>
 	)
 }

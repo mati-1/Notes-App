@@ -10,4 +10,7 @@ export interface UserData {
 	readonly lastLogin: string
 	readonly nick: string
 	readonly image: string
+	readonly friends: []
+	readonly blockedUsers: []
+	readonly description: string
 }

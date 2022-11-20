@@ -52,6 +52,9 @@ export const AuthForm = () => {
 			created: createdDate,
 			nick: nick,
 			image: userProfile,
+			friends: [],
+			blockedUsers: [],
+			description: 'I am a new user of Notes app! You can add me to friends!',
 		}
 
 		try {
@@ -156,7 +159,7 @@ export const AuthForm = () => {
 					</div>
 
 					<Link className={classes.loginLink} to='/login'>
-						Are you have an account? Log in
+						Do you have an account? Log in
 					</Link>
 
 					<MainButton type='submit' title={`${isLoading ? 'Sending' : 'Create account'}`} />
@@ -212,7 +215,7 @@ export const AuthForm = () => {
 				</div>
 
 				<Link className={classes.loginLink} to='/register'>
-					You not have an account? Register
+					You don't have an account? Register
 				</Link>
 
 				<MainButton type='submit' title={isLoading ? 'Sending' : 'Log in'} />

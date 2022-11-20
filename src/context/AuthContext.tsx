@@ -52,7 +52,7 @@ export const AuthContextProvider = ({ children }: { children: React.ReactNode })
 				querySnapshot.forEach((doc) => {
 					setInitialData({
 						...doc.data(),
-						id: doc.id!,
+						id: doc.id,
 						lastLogin: lastLoginDate,
 					})
 				})
@@ -77,7 +77,14 @@ export const AuthContextProvider = ({ children }: { children: React.ReactNode })
 			token: token,
 		}
 
-		await addDoc(collection(db, 'users'), user)
+		const newItem = await addDoc(collection(db, 'users'), user)
+
+		const id = newItem.id
+		const updateId = doc(db, 'users', id)
+		await updateDoc(updateId, {
+			id: id,
+		})
+
 		notify('You are successfully registered!')
 	}, [])
 

@@ -13,9 +13,11 @@ import { ref, uploadBytes, getDownloadURL } from 'firebase/storage'
 import { storage } from '../../firebase'
 import { notify } from '../../constants/Notify'
 import { ProgressBar } from '../ui/Progressbar'
+import { EditDescriptionForm } from './EditDescriptionForm'
 
 export const UserProfile = () => {
 	const { userData, logout, update, deleteData } = useContext(AuthContext)
+
 	const [imageUpload, setImageUpload] = useState<File>()
 	const [isLoading, setIsLoading] = useState(false)
 	const [avatarUrl, setAvatarUrl] = useState('')
@@ -27,19 +29,18 @@ export const UserProfile = () => {
 			setIsLoading(true)
 
 			try {
-				await uploadBytes(imageRef, imageUpload).then(() => {
-					setIsLoading(false)
-					notify('Avatar has been changed!')
-				})
+				await uploadBytes(imageRef, imageUpload)
+					.then(() => {
+						setIsLoading(false)
+						notify('Avatar has been changed!')
+					})
+					.then(() => {
+						navigate(0)
+					})
 			} catch (err) {
 				console.log(err)
 			}
 		}
-
-		setTimeout(() => {
-			setIsLoading(false)
-			navigate(0)
-		}, 1000)
 	}
 
 	useEffect(() => {
@@ -84,6 +85,7 @@ export const UserProfile = () => {
 						<p>@{userData.nick}</p>
 					</div>
 				</div>
+				<EditDescriptionForm />
 				<div className={classes.profileInfo}>
 					<div>
 						<Heading paddingBottom={true} title='Profile information' />
