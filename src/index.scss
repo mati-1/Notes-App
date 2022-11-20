@@ -71,7 +71,7 @@ body {
 }
 
 .slick-slider {
-	margin: 2rem;
+	margin: 6rem 2rem 2rem 2rem;
 
 	button::before {
 		color: var(--white-color);
@@ -82,9 +82,6 @@ body {
 			display: flex;
 			align-items: center;
 			gap: 2rem;
-		}
-		.slick-disabled {
-			display: none;
 		}
 	}
 
