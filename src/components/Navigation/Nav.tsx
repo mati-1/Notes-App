@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import classes from './Nav.module.scss'
 import { NavLink } from 'react-router-dom'
 import { NotesContext } from '../../context/NoteContext'
@@ -10,12 +10,14 @@ import Groups2Icon from '@mui/icons-material/Groups2'
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
 import { Backdrop } from '../ui/Backdrop'
 import PermIdentityIcon from '@mui/icons-material/PermIdentity'
+import Diversity1Icon from '@mui/icons-material/Diversity1'
 import LogoutIcon from '@mui/icons-material/Logout'
 import { NavigationLink } from './NavLink'
 import Typography from '@mui/material/Typography'
 import { AuthContext } from '../../context/AuthContext'
 import Switch from '@mui/material/Switch'
 import FormControlLabel from '@mui/material/FormControlLabel'
+import sygnetLogo from '../../img/sygnet.svg'
 import { useToggle } from '../../hooks/useToggle'
 
 const getTheme = () => {
@@ -26,7 +28,7 @@ const getTheme = () => {
 }
 
 export const Nav = () => {
-	const [hiddenNav, setHiddenNav] = useState(true)
+	const [hiddenNav, setHiddenNav] = useToggle()
 	const { notes, trashNotes, favouriteNotes } = useContext(NotesContext)
 	const { isLoggedIn, logout } = useContext(AuthContext)
 	const { localTheme: themeState } = getTheme()
@@ -35,38 +37,30 @@ export const Nav = () => {
 	useEffect(() => {
 		localStorage.setItem('theme', JSON.stringify(theme))
 
-		if (theme) {
-			document.body.classList.add('light-mode')
-		} else {
-			document.body.classList.remove('light-mode')
-		}
+		theme ? document.body.classList.add('light-mode') : document.body.classList.remove('light-mode')
 	}, [theme])
 
 	return (
 		<>
-			<nav onDoubleClick={() => setHiddenNav(false)} className={`${classes.nav} ${hiddenNav ? classes.hiddenNav : ''}`}>
-				<button
-					onClick={() => setHiddenNav((prev) => !prev)}
-					className={`${classes.hideButton} ${hiddenNav ? classes.toggledArrow : ''}`}>
+			<nav onDoubleClick={setHiddenNav} className={`${classes.nav} ${!hiddenNav ? classes.hiddenNav : ''}`}>
+				<button onClick={setHiddenNav} className={`${classes.hideButton} ${hiddenNav ? classes.toggledArrow : ''}`}>
 					<ArrowForwardIcon className={`${hiddenNav ? classes.toggledArrow : ''}`} />
 				</button>
 				<div className={classes.navWrapper}>
 					<NavLink to='/' className={classes.logo}>
-						{hiddenNav ? (
-							<h3>
-								<span>N</span>
-							</h3>
+						{!hiddenNav ? (
+							<img src={sygnetLogo} alt='sygnetMichalik' />
 						) : (
-							<h3>
-								<span>Notes</span>
-								App
-							</h3>
+							<div className={classes.fullLogo}>
+								<img src={sygnetLogo} alt='sygnetMichalik' />
+								<h2>Notes App</h2>
+							</div>
 						)}
 					</NavLink>
 
 					<div className={classes.links}>
 						<NavigationLink
-							hiddenNav={hiddenNav}
+							hiddenNav={!hiddenNav}
 							title='Create new'
 							href='/create'
 							icon={<AddIcon className={classes.icon} />}
@@ -74,7 +68,7 @@ export const Nav = () => {
 						/>
 
 						<NavigationLink
-							hiddenNav={hiddenNav}
+							hiddenNav={!hiddenNav}
 							title='Notes'
 							href='/notes'
 							elementsLength={notes.length}
@@ -83,7 +77,7 @@ export const Nav = () => {
 						/>
 
 						<NavigationLink
-							hiddenNav={hiddenNav}
+							hiddenNav={!hiddenNav}
 							title='Trash'
 							href='/trash'
 							elementsLength={trashNotes.length}
@@ -92,7 +86,7 @@ export const Nav = () => {
 						/>
 
 						<NavigationLink
-							hiddenNav={hiddenNav}
+							hiddenNav={!hiddenNav}
 							title='Favourite'
 							href='/favourite'
 							elementsLength={favouriteNotes.length}
@@ -102,7 +96,7 @@ export const Nav = () => {
 						{isLoggedIn ? (
 							<NavigationLink
 								title='Account'
-								hiddenNav={hiddenNav}
+								hiddenNav={!hiddenNav}
 								href='/user'
 								icon={<PermIdentityIcon className={classes.icon} />}
 								tooltipTitle={<Typography fontSize={11}>Account</Typography>}
@@ -110,7 +104,7 @@ export const Nav = () => {
 						) : (
 							<NavigationLink
 								title='Login'
-								hiddenNav={hiddenNav}
+								hiddenNav={!hiddenNav}
 								href='/login'
 								icon={<PermIdentityIcon className={classes.icon} />}
 								tooltipTitle={<Typography fontSize={11}>Login</Typography>}>
@@ -119,26 +113,35 @@ export const Nav = () => {
 						)}
 						<NavigationLink
 							title='Users'
-							hiddenNav={hiddenNav}
+							hiddenNav={!hiddenNav}
 							href='/users'
 							icon={<Groups2Icon className={classes.icon} />}
 							tooltipTitle={<Typography fontSize={11}>Users</Typography>}></NavigationLink>
 						{isLoggedIn && (
-							<NavigationLink
-								onClick={logout}
-								hiddenNav={hiddenNav}
-								title='Logout'
-								href='/login'
-								icon={<LogoutIcon className={classes.icon} />}
-								tooltipTitle={<Typography fontSize={11}>Logout</Typography>}
-							/>
+							<>
+								<NavigationLink
+									title='Friends'
+									hiddenNav={!hiddenNav}
+									href='/friends'
+									icon={<Diversity1Icon className={classes.icon} />}
+									tooltipTitle={<Typography fontSize={11}>Friends</Typography>}></NavigationLink>
+
+								<NavigationLink
+									onClick={logout}
+									hiddenNav={!hiddenNav}
+									title='Logout'
+									href='/login'
+									icon={<LogoutIcon className={classes.icon} />}
+									tooltipTitle={<Typography fontSize={11}>Logout</Typography>}
+								/>
+							</>
 						)}
 
 						<FormControlLabel
 							control={<Switch onClick={setTheme} checked={!theme} />}
 							label={
 								<Typography
-									className={hiddenNav ? classes.hiddenLinkTitle : ''}
+									className={!hiddenNav ? classes.hiddenLinkTitle : ''}
 									sx={{ color: 'var(--grey-color)', paddingLeft: '0.1rem' }}
 									fontSize={17.68}>
 									{theme ? 'Light mode' : 'Dark mode'}
@@ -148,7 +151,7 @@ export const Nav = () => {
 					</div>
 				</div>
 			</nav>
-			{!hiddenNav && <Backdrop onHideNav={() => setHiddenNav(true)} />}
+			{hiddenNav && <Backdrop onHideNav={setHiddenNav} />}
 		</>
 	)
 }

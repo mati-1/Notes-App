@@ -60,14 +60,21 @@
 		.logo {
 			color: var(--white-color);
 			font-size: var(--logo-size);
-			margin: 2.5rem 0 0 2rem;
+			margin: 2.5rem 0 0 1.7rem;
 
-			span {
-				color: white;
-				background-color: var(--main-color);
-				font-weight: bold;
-				padding: 0.1rem 0.5rem;
-				border-radius: 2rem 2rem 2rem 0rem;
+			img {
+				pointer-events: none;
+				width: 2.7rem;
+			}
+
+			.fullLogo {
+				display: flex;
+				align-items: center;
+				gap: 1rem;
+
+				h2 {
+					font-size: var(--logo-size);
+				}
 			}
 		}
 
@@ -75,7 +82,7 @@
 			padding: 0.5rem;
 			display: flex;
 			flex-direction: column;
-			margin-top: 7rem;
+			margin-top: 6rem;
 
 			a {
 				position: relative;

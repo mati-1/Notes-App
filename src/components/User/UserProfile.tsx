@@ -14,10 +14,10 @@ import { storage } from '../../firebase'
 import { notify } from '../../constants/Notify'
 import { ProgressBar } from '../ui/Progressbar'
 import { EditDescriptionForm } from './EditDescriptionForm'
+import { userProfile } from '../../constants/userProfile'
 
 export const UserProfile = () => {
 	const { userData, logout, update, deleteData } = useContext(AuthContext)
-
 	const [imageUpload, setImageUpload] = useState<File>()
 	const [isLoading, setIsLoading] = useState(false)
 	const [avatarUrl, setAvatarUrl] = useState('')
@@ -64,6 +64,8 @@ export const UserProfile = () => {
 			<div className={classes.profileModules}>
 				<div className={classes.profileHeader}>
 					<div className={classes.image}>
+						{userData.image === userProfile && <span className={classes.noPhotoInfo}>Add photo!</span>}
+
 						<img src={userData.image} alt='userProfile' />
 						<Tooltip arrow title='Change photo' placement='right'>
 							<IconButton size='large' color='primary' aria-label='upload picture' component='label'>
