@@ -57,8 +57,8 @@ export const UsersList = () => {
 				</div>
 			</div>
 			{isLoading && <ProgressBar />}
-			<AnimatePresence>
-				<ul className={classes.list}>
+			<ul className={classes.list}>
+				<AnimatePresence>
 					{filteredUsers.map((user) => {
 						return (
 							<UserItem
@@ -72,10 +72,10 @@ export const UsersList = () => {
 							/>
 						)
 					})}
-				</ul>
+				</AnimatePresence>
+			</ul>
 
-				{!filteredUsers.length && emptyUsersList}
-			</AnimatePresence>
+			{!filteredUsers.length && emptyUsersList}
 		</div>
 	)
 }
