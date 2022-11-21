@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import { NoteItem } from './NoteItem'
 import { AnimatePresence } from 'framer-motion'
 import classes from './Notes.module.scss'
@@ -69,6 +69,15 @@ export const Notes = () => {
 		: sortingNotes
 	const currentNotes = filteredNotes.slice(indexOfFirstNote, indexOfLastNote)
 
+	useEffect(() => {
+		if (notes.length < 3) {
+			view.set('view', 'grid')
+			setView(view, {
+				replace: true,
+			})
+		}
+	}, [notes.length, setView, view])
+
 	const emptyContent = (
 		<div className={classes.emptyWrapper}>
 			<img src={empty} alt='empty' />
@@ -97,7 +106,11 @@ export const Notes = () => {
 					<div className={classes.buttons}>
 						<SearchBar disabled={!viewCondition} title='notes' />
 						<FilterPopup disabled={!viewCondition} />
-						<SecondaryButton onClick={onViewToggle} title={viewCondition ? 'Carousel view' : 'Grid view'} />
+						<SecondaryButton
+							disabled={notes.length < 3}
+							onClick={onViewToggle}
+							title={viewCondition ? 'Carousel view' : 'Grid view'}
+						/>
 						<MainButton title='Trash all' onClick={removeAll} />
 					</div>
 				) : null}

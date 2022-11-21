@@ -43,8 +43,8 @@ export const Nav = () => {
 	return (
 		<>
 			<nav onDoubleClick={setHiddenNav} className={`${classes.nav} ${!hiddenNav ? classes.hiddenNav : ''}`}>
-				<button onClick={setHiddenNav} className={`${classes.hideButton} ${hiddenNav ? classes.toggledArrow : ''}`}>
-					<ArrowForwardIcon className={`${hiddenNav ? classes.toggledArrow : ''}`} />
+				<button onClick={setHiddenNav} className={`${classes.hideButton} ${!hiddenNav ? classes.toggledArrow : ''}`}>
+					<ArrowForwardIcon className={`${!hiddenNav ? classes.toggledArrow : ''}`} />
 				</button>
 				<div className={classes.navWrapper}>
 					<NavLink to='/' className={classes.logo}>

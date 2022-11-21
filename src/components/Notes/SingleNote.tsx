@@ -119,9 +119,13 @@ export const SingleNoteItem = () => {
 								label={newFavourite ? 'Is favourite' : 'Not favourite'}
 							/>
 							<div className={classes.buttons}>
-								<SecondaryButton onClick={() => setIsEditing(false)} title='Cancel' />
+								<SecondaryButton type='button' onClick={() => setIsEditing(false)} title='Cancel' />
 
-								<button className={classes.saveButton} disabled={!allInputsIsValid} onClick={submitNewNoteDataHandler}>
+								<button
+									type='submit'
+									className={classes.saveButton}
+									disabled={!allInputsIsValid}
+									onClick={submitNewNoteDataHandler}>
 									Save
 								</button>
 							</div>
