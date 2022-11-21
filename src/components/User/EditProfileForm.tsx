@@ -16,7 +16,7 @@ type Inputs = {
 }
 
 export const EditProfileForm = () => {
-	const { userData, update } = useContext(AuthContext)
+	const { initialData, update } = useContext(AuthContext)
 	const [isLoading, setIsLoading] = useState(false)
 	const navigate = useNavigate()
 
@@ -26,39 +26,38 @@ export const EditProfileForm = () => {
 		formState: { errors },
 	} = useForm<Inputs>()
 
-	const submitNewPassword: SubmitHandler<Inputs> = (newData) => {
-		setIsLoading(true)
-
-		const newUserData = {
-			...userData,
+	const submitNewUserData: SubmitHandler<Inputs> = (newData) => {
+		const newinitialData = {
+			...initialData,
 			name: newData.name,
 			surname: newData.surname,
 			nick: newData.nick,
 		}
 
 		try {
-			update(userData.id as string, newUserData)
+			setIsLoading(true)
+			update(initialData.id as string, newinitialData)
 		} catch (err) {
 			console.log(err)
-		}
-
-		setTimeout(() => {
 			setIsLoading(false)
-			navigate(0)
-		}, 1000)
+		} finally {
+			setTimeout(() => {
+				navigate(0)
+			}, 1000)
+		}
 	}
 
 	return (
 		<>
 			{ReactDOM.createPortal(isLoading && <ProgressBar />, progressPortal!)}
-			<form onSubmit={handleSubmit(submitNewPassword)} className={classes.form}>
+			<form onSubmit={handleSubmit(submitNewUserData)} className={classes.form}>
 				<div className={classes.fieldset}>
 					<label htmlFor='Name'>Your name</label>
 					<div className={classes.passwordInput}>
 						<input
 							autoComplete='off'
 							id='name'
-							defaultValue={userData.name}
+							defaultValue={initialData.name}
 							placeholder='New name'
 							type='text'
 							{...register('name', {
@@ -77,7 +76,7 @@ export const EditProfileForm = () => {
 						<input
 							autoComplete='off'
 							id='surname'
-							defaultValue={userData.surname}
+							defaultValue={initialData.surname}
 							placeholder='New surname'
 							type='text'
 							{...register('surname', {
@@ -96,7 +95,7 @@ export const EditProfileForm = () => {
 						<input
 							autoComplete='off'
 							id='nick'
-							defaultValue={userData.nick}
+							defaultValue={initialData.nick}
 							placeholder='New nickname'
 							type='text'
 							{...register('nick', {

@@ -14,7 +14,6 @@ import { Heading } from '../ui/Heading'
 import { getFullDate } from '../../constants/FullDate'
 import { UserData } from '../../types/UserDataType'
 import { userProfile } from '../../constants/userProfile'
-
 import { basicDescription } from './../../constants/basicDescription'
 
 type Inputs = {
@@ -39,6 +38,7 @@ export const AuthForm = () => {
 	const locationRegister = location.pathname === '/register'
 	let url = locationRegister ? signUpUrl : signInUrl
 	const { fullDate: createdDate } = getFullDate()
+	const { fullDate: lastLoginDate } = getFullDate()
 
 	const submitRegister: SubmitHandler<Inputs> = async (formData) => {
 		setIsLoading(true)
@@ -57,6 +57,7 @@ export const AuthForm = () => {
 			friends: [],
 			blockedUsers: [],
 			description: basicDescription,
+			lastLogin: lastLoginDate,
 		}
 
 		try {
@@ -72,8 +73,14 @@ export const AuthForm = () => {
 
 			if (res.ok) {
 				setIsLoading(false)
-				locationRegister ? registerUser(registerData, data.idToken) : loginUser(data.idToken, registerData)
-				locationRegister ? navigate('/login') : navigate('/create')
+
+				if (locationRegister) {
+					registerUser(registerData, data.idToken)
+					navigate('/login')
+				} else {
+					loginUser(data.idToken, registerData)
+					navigate('/create')
+				}
 			} else {
 				let errorMessage = 'Authentication failed'
 

@@ -19,7 +19,7 @@ export const ChangePasswordForm = () => {
 	const [isHiddenPassword, setIsHiddenPassword] = useState(true)
 	const [isHiddenNewPassword, setIsHiddenNewPassword] = useState(true)
 	const [isLoading, setIsLoading] = useState(false)
-	const { userData, logout, token, update } = useContext(AuthContext)
+	const { initialData, logout, token, update } = useContext(AuthContext)
 	const navigate = useNavigate()
 
 	const {
@@ -45,7 +45,7 @@ export const ChangePasswordForm = () => {
 			})
 
 			if (res.ok) {
-				update(userData.id as string, newPasswordData)
+				update(initialData.id as string, newPasswordData)
 				logout()
 				navigate('/login')
 				setIsLoading(false)
@@ -71,7 +71,7 @@ export const ChangePasswordForm = () => {
 							type={isHiddenPassword ? 'password' : ' text'}
 							{...register('password', {
 								required: true,
-								validate: (value) => value === userData.password,
+								validate: (value) => value === initialData.password,
 							})}
 						/>
 						<button

@@ -8,6 +8,7 @@ import { MainButton } from '../ui/MainButton'
 import { ProgressBar } from '../ui/Progressbar'
 import { useNavigate } from 'react-router-dom'
 import classes from './UserProfile.module.scss'
+import { UserData } from '../../types/UserDataType'
 
 type Inputs = {
 	readonly description: string
@@ -15,10 +16,11 @@ type Inputs = {
 
 type FormProps = {
 	children?: React.ReactNode
+	readonly userData: UserData
 }
 
-export const EditDescriptionForm = ({ children }: FormProps) => {
-	const { userData, update } = useContext(AuthContext)
+export const EditDescriptionForm = ({ children, userData }: FormProps) => {
+	const { initialData, update } = useContext(AuthContext)
 	const [isEdit, setIsEdit] = useToggle()
 	const [isLoading, setIsLoading] = useState(false)
 	const navigate = useNavigate()
@@ -32,23 +34,21 @@ export const EditDescriptionForm = ({ children }: FormProps) => {
 	const submitEditingHandler: SubmitHandler<Inputs> = (data) => {
 		setIsLoading(true)
 
-		const newUserData = {
-			...userData,
+		const newinitialData = {
+			...initialData,
 			description: data.description,
 		}
 
 		try {
-			update(userData.id as string, newUserData)
+			update(initialData.id as string, newinitialData)
 		} catch (err) {
 			console.log(err)
 			setIsLoading(false)
+		} finally {
+			setTimeout(() => {
+				navigate(0)
+			}, 1000)
 		}
-
-		setTimeout(() => {
-			setIsLoading(false)
-			navigate(0)
-			setIsEdit()
-		}, 1000)
 	}
 
 	return (

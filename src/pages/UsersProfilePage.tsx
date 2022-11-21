@@ -16,11 +16,11 @@ import { useNavigate } from 'react-router-dom'
 import { AuthContext } from '../context/AuthContext'
 
 const PeopleProfilePage = () => {
-	const { userData } = useContext(AuthContext)
+	const { initialData } = useContext(AuthContext)
 	const [userLoadedData, setLoadedUserData] = useState<UserData | null>(null)
 	const { id } = useParams()
 	const navigate = useNavigate()
-	const loggedUserCondition = userData.id !== id
+	const loggedUserCondition = initialData.id !== id
 
 	useEffect(() => {
 		const q = query(collection(db, 'users'), where('id', '==', id))

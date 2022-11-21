@@ -3,13 +3,13 @@ import { collection, query, where, getDocs, addDoc, doc, updateDoc, deleteDoc } 
 import { UserData } from './../types/UserDataType'
 import { notify } from './../constants/Notify'
 import { db } from '../firebase'
-import { getFullDate } from './../constants/FullDate'
 import { deleteAccountUrl } from '../constants/authApiData'
 import { getStorage, ref, deleteObject } from 'firebase/storage'
+import { getFullDate } from './../constants/FullDate'
 
 type AuthContextType = {
 	token: string
-	userData: Partial<UserData>
+	initialData: Partial<UserData>
 	isLoggedIn: boolean
 	loginUser: (token: string, userData: Partial<UserData>) => void
 	registerUser: (userData: Partial<UserData>, token: string) => void
@@ -20,7 +20,7 @@ type AuthContextType = {
 
 export const AuthContext = React.createContext<AuthContextType>({
 	token: '',
-	userData: {},
+	initialData: {},
 	isLoggedIn: false,
 	loginUser: () => {},
 	registerUser: () => {},
@@ -37,9 +37,9 @@ const getUserData = () => {
 export const AuthContextProvider = ({ children }: { children: React.ReactNode }) => {
 	const [initialData, setInitialData] = useState<Partial<UserData>>(getUserData)
 	const initialToken: any = localStorage.getItem('token')
+	const { fullDate: lastLoginDate } = getFullDate()
 	const [token, setToken] = useState(initialToken)
 	const userIsLoggedIn = !!token
-	const { fullDate: lastLoginDate } = getFullDate()
 	const storage = getStorage()
 
 	const loginHandler = useCallback(
@@ -49,14 +49,12 @@ export const AuthContextProvider = ({ children }: { children: React.ReactNode })
 			try {
 				const querySnapshot = await getDocs(q)
 
-				querySnapshot.forEach((doc) => {
-					setInitialData({
-						...doc.data(),
-						id: doc.id,
-						lastLogin: lastLoginDate,
-					})
+				querySnapshot.forEach(async (s) => {
+					await updateDoc(doc(db, 'users', s.id), { lastLogin: lastLoginDate })
+					setInitialData(s.data() as UserData)
 				})
 
+				console.log(userData.email)
 				setToken(token)
 				notify('Successfully logged in!')
 			} catch (err) {
@@ -81,6 +79,7 @@ export const AuthContextProvider = ({ children }: { children: React.ReactNode })
 
 		const id = newItem.id
 		const updateId = doc(db, 'users', id)
+
 		await updateDoc(updateId, {
 			id: id,
 		})
@@ -127,7 +126,7 @@ export const AuthContextProvider = ({ children }: { children: React.ReactNode })
 
 	const contextValue = {
 		token: token,
-		userData: initialData,
+		initialData: initialData,
 		isLoggedIn: userIsLoggedIn,
 		loginUser: loginHandler,
 		registerUser: registerHandler,

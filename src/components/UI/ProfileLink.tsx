@@ -5,12 +5,12 @@ import { AuthContext } from '../../context/AuthContext'
 import classes from '../notes/NoteItem.module.scss'
 
 export const ProfileLink = () => {
-	const { userData, isLoggedIn } = useContext(AuthContext)
+	const { initialData, isLoggedIn } = useContext(AuthContext)
 
 	return (
 		<Link to={isLoggedIn ? '/user' : '/login'} className={classes.user}>
-			<Avatar alt='user profile' src={userData.image} />
-			<p>{isLoggedIn ? userData.name : 'Guest'}</p>
+			<Avatar alt='user profile' src={initialData.image} />
+			<p>{isLoggedIn ? initialData.name : 'Guest'}</p>
 		</Link>
 	)
 }
