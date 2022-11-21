@@ -9,6 +9,7 @@
 			flex-direction: column;
 		}
 		.descriptionWrapper {
+			position: relative;
 			display: grid;
 			grid-template-columns: repeat(1, 1fr);
 			margin-top: 2rem;
@@ -74,17 +75,6 @@
 					border-radius: 50%;
 					pointer-events: none;
 					object-fit: cover;
-				}
-
-				.noPhotoInfo {
-					position: absolute;
-					top: 0.4rem;
-					right: -2rem;
-					font-size: var(--mini-size);
-					padding: 0.3rem 0.6rem;
-					border-radius: 22rem;
-					background-color: var(--main-color);
-					color: white;
 				}
 
 				label {

@@ -13,7 +13,11 @@ type Inputs = {
 	readonly description: string
 }
 
-export const EditDescriptionForm = () => {
+type FormProps = {
+	children?: React.ReactNode
+}
+
+export const EditDescriptionForm = ({ children }: FormProps) => {
 	const { userData, update } = useContext(AuthContext)
 	const [isEdit, setIsEdit] = useToggle()
 	const [isLoading, setIsLoading] = useState(false)
@@ -73,6 +77,7 @@ export const EditDescriptionForm = () => {
 						<MainButton type='button' onClick={setIsEdit} title='Edit' />
 					</>
 				)}
+				{children}
 			</div>
 		</>
 	)

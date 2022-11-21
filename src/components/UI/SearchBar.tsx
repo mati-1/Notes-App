@@ -5,7 +5,7 @@ import { useSearchParams } from 'react-router-dom'
 type searchBarParams = {
 	title: string
 	className?: string
-	disabled: boolean
+	disabled?: boolean
 }
 
 export const SearchBar = ({ title, className, disabled }: searchBarParams) => {

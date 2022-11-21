@@ -15,6 +15,8 @@ import { getFullDate } from '../../constants/FullDate'
 import { UserData } from '../../types/UserDataType'
 import { userProfile } from '../../constants/userProfile'
 
+import { basicDescription } from './../../constants/basicDescription'
+
 type Inputs = {
 	readonly name: string
 	readonly surname: string
@@ -54,7 +56,7 @@ export const AuthForm = () => {
 			image: userProfile,
 			friends: [],
 			blockedUsers: [],
-			description: 'I am a new user of Notes app! You can add me to friends!',
+			description: basicDescription,
 		}
 
 		try {
@@ -71,7 +73,7 @@ export const AuthForm = () => {
 			if (res.ok) {
 				setIsLoading(false)
 				locationRegister ? registerUser(registerData, data.idToken) : loginUser(data.idToken, registerData)
-				locationRegister ? navigate('/login') : navigate('/user')
+				locationRegister ? navigate('/login') : navigate('/create')
 			} else {
 				let errorMessage = 'Authentication failed'
 
@@ -82,6 +84,7 @@ export const AuthForm = () => {
 				alert(errorMessage)
 			}
 		} catch (err) {
+			setIsLoading(false)
 			console.log(err)
 		}
 

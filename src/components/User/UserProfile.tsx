@@ -15,6 +15,8 @@ import { notify } from '../../constants/Notify'
 import { ProgressBar } from '../ui/Progressbar'
 import { EditDescriptionForm } from './EditDescriptionForm'
 import { userProfile } from '../../constants/userProfile'
+import { basicDescription } from '../../constants/basicDescription'
+import { SmallNotification } from '../ui/SmallNotification'
 
 export const UserProfile = () => {
 	const { userData, logout, update, deleteData } = useContext(AuthContext)
@@ -64,7 +66,7 @@ export const UserProfile = () => {
 			<div className={classes.profileModules}>
 				<div className={classes.profileHeader}>
 					<div className={classes.image}>
-						{userData.image === userProfile && <span className={classes.noPhotoInfo}>Add photo!</span>}
+						{userData.image === userProfile && <SmallNotification title='photo' />}
 
 						<img src={userData.image} alt='userProfile' />
 						<Tooltip arrow title='Change photo' placement='right'>
@@ -87,7 +89,9 @@ export const UserProfile = () => {
 						<p>@{userData.nick}</p>
 					</div>
 				</div>
-				<EditDescriptionForm />
+				<EditDescriptionForm>
+					{userData.description === basicDescription && <SmallNotification title='description' />}
+				</EditDescriptionForm>
 				<div className={classes.profileInfo}>
 					<div>
 						<Heading paddingBottom={true} title='Profile information' />
