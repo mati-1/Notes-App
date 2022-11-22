@@ -12,9 +12,9 @@ import { UserData } from '../../types/UserDataType'
 import { ProgressBar } from '../ui/Progressbar'
 import { Heading } from '../ui/Heading'
 import { AuthContext } from '../../context/AuthContext'
-
 import { UserImageHeader } from './UserImageHeader'
 import classes from './UserProfile.module.scss'
+import { FriendsList } from './FriendsList'
 
 export const UserProfileData = () => {
 	const { logout, deleteData, initialData } = useContext(AuthContext)
@@ -43,6 +43,8 @@ export const UserProfileData = () => {
 						{userData.description === basicDescription && <SmallNotification title='description' />}
 					</EditDescriptionForm>
 					<div className={classes.profileInfo}>
+						<FriendsList />
+
 						<div>
 							<Heading paddingBottom={true} title='Profile information' />
 							<ul>

@@ -22,7 +22,7 @@ export const UsersList = () => {
 		: users
 
 	useEffect(() => {
-		;(async () => {
+		const getUsers = async () => {
 			try {
 				setIsLoading(true)
 				const snapshots = await getDocs(collection(db, 'users'))
@@ -38,7 +38,9 @@ export const UsersList = () => {
 				setIsLoading(false)
 			}
 			setIsLoading(false)
-		})()
+		}
+
+		getUsers()
 	}, [])
 
 	const emptyUsersList = (

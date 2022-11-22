@@ -14,25 +14,52 @@ import { MainButton } from '../components/ui/MainButton'
 import { SecondaryButton } from '../components/ui/SecondaryButton'
 import { useNavigate } from 'react-router-dom'
 import { AuthContext } from '../context/AuthContext'
+import { useToggle } from './../hooks/useToggle'
 
 const PeopleProfilePage = () => {
-	const { initialData } = useContext(AuthContext)
+	const { initialData, addToFriends, removeFromFriends } = useContext(AuthContext)
 	const [userLoadedData, setLoadedUserData] = useState<UserData | null>(null)
 	const { id } = useParams()
 	const navigate = useNavigate()
+	const [isLoading, setIsLoading] = useState(false)
+	const [isFriend, setIsFriend] = useState(false)
 	const loggedUserCondition = initialData.id !== id
 
 	useEffect(() => {
 		const q = query(collection(db, 'users'), where('id', '==', id))
+		const qFriend = query(collection(db, 'users'), where('friends', 'array-contains', id))
 
 		const getUserData = async () => {
 			const snapshot = await getDocs(q)
+			const friendSnapshot = await getDocs(qFriend)
 
 			snapshot.forEach((s) => setLoadedUserData(s.data() as UserData))
+
+			friendSnapshot.forEach((s) => {
+				if (s.data().friends) setIsFriend(true)
+			})
 		}
 
 		getUserData()
-	}, [id])
+	}, [id, setIsFriend])
+
+	const addFriend = () => {
+		try {
+			setIsFriend(true)
+			addToFriends(id as string)
+		} catch (err) {
+			console.log(err)
+		}
+	}
+
+	const removeFriend = () => {
+		try {
+			setIsFriend(false)
+			removeFromFriends(id as string)
+		} catch (err) {
+			console.log(err)
+		}
+	}
 
 	if (!userLoadedData) return <ProgressBar />
 
@@ -46,6 +73,7 @@ const PeopleProfilePage = () => {
 			className={classes.mainWrapper}>
 			<Wrapper>
 				<div className={classes.profileWrapper}>
+					{isLoading && <ProgressBar />}
 					<MainButton title='Back' onClick={() => navigate(-1)}>
 						<ArrowBackIcon className={classes.icon} />
 					</MainButton>
@@ -63,7 +91,12 @@ const PeopleProfilePage = () => {
 						</div>
 						{loggedUserCondition && (
 							<div className={classes.buttons}>
-								<MainButton title='Add to friends' />
+								{!isFriend ? (
+									<MainButton onClick={addFriend} title='Add friend' />
+								) : (
+									<MainButton onClick={removeFriend} title='Remove friend' />
+								)}
+
 								<SecondaryButton title='Block user' />
 							</div>
 						)}

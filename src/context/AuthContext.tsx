@@ -1,5 +1,16 @@
 import React, { useState, useCallback, useEffect } from 'react'
-import { collection, query, where, getDocs, addDoc, doc, updateDoc, deleteDoc } from 'firebase/firestore'
+import {
+	collection,
+	query,
+	where,
+	getDocs,
+	addDoc,
+	doc,
+	updateDoc,
+	deleteDoc,
+	arrayUnion,
+	arrayRemove,
+} from 'firebase/firestore'
 import { UserData } from './../types/UserDataType'
 import { notify } from './../constants/Notify'
 import { db } from '../firebase'
@@ -16,6 +27,8 @@ type AuthContextType = {
 	logout: () => void
 	update: (id: string, userData: Partial<UserData>) => void
 	deleteData: (id: string) => void
+	addToFriends: (id: string) => void
+	removeFromFriends: (id: string) => void
 }
 
 export const AuthContext = React.createContext<AuthContextType>({
@@ -27,6 +40,8 @@ export const AuthContext = React.createContext<AuthContextType>({
 	logout: () => {},
 	update: () => {},
 	deleteData: () => {},
+	addToFriends: () => {},
+	removeFromFriends: () => {},
 })
 
 const getUserData = () => {
@@ -41,6 +56,7 @@ export const AuthContextProvider = ({ children }: { children: React.ReactNode })
 	const [token, setToken] = useState(initialToken)
 	const userIsLoggedIn = !!token
 	const storage = getStorage()
+	const userRef = doc(db, 'users', initialData.id as string)
 
 	const loginHandler = useCallback(
 		async (token: string, userData: Partial<UserData>) => {
@@ -124,6 +140,36 @@ export const AuthContextProvider = ({ children }: { children: React.ReactNode })
 		[initialData.email, storage, token]
 	)
 
+	const addToFriendsHandler = useCallback(
+		async (id: string) => {
+			try {
+				await updateDoc(userRef, {
+					friends: arrayUnion(id),
+				})
+			} catch (err) {
+				console.log(err)
+			} finally {
+				notify('Added a friend!')
+			}
+		},
+		[userRef]
+	)
+
+	const removeFromFriendsHandler = useCallback(
+		async (id: string) => {
+			try {
+				await updateDoc(userRef, {
+					friends: arrayRemove(id),
+				})
+			} catch (err) {
+				console.log(err)
+			} finally {
+				notify('Removed a friend!')
+			}
+		},
+		[userRef]
+	)
+
 	const contextValue = {
 		token: token,
 		initialData: initialData,
@@ -133,6 +179,8 @@ export const AuthContextProvider = ({ children }: { children: React.ReactNode })
 		logout: logoutHandler,
 		update: updateHandler,
 		deleteData: deleteAccountHandler,
+		addToFriends: addToFriendsHandler,
+		removeFromFriends: removeFromFriendsHandler,
 	}
 	return <AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>
 }
