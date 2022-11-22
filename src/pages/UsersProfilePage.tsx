@@ -14,14 +14,13 @@ import { MainButton } from '../components/ui/MainButton'
 import { SecondaryButton } from '../components/ui/SecondaryButton'
 import { useNavigate } from 'react-router-dom'
 import { AuthContext } from '../context/AuthContext'
-import { useToggle } from './../hooks/useToggle'
+import { Friend } from '../types/FriendType'
 
 const PeopleProfilePage = () => {
 	const { initialData, addToFriends, removeFromFriends } = useContext(AuthContext)
 	const [userLoadedData, setLoadedUserData] = useState<UserData | null>(null)
 	const { id } = useParams()
 	const navigate = useNavigate()
-	const [isLoading, setIsLoading] = useState(false)
 	const [isFriend, setIsFriend] = useState(false)
 	const loggedUserCondition = initialData.id !== id
 
@@ -43,10 +42,19 @@ const PeopleProfilePage = () => {
 		getUserData()
 	}, [id, setIsFriend])
 
+	const userData = {
+		id: id,
+		name: userLoadedData?.name,
+		surname: userLoadedData?.surname,
+		image: userLoadedData?.image,
+		nick: userLoadedData?.nick,
+	}
+
 	const addFriend = () => {
 		try {
 			setIsFriend(true)
-			addToFriends(id as string)
+
+			addToFriends(userData as Friend)
 		} catch (err) {
 			console.log(err)
 		}
@@ -55,7 +63,7 @@ const PeopleProfilePage = () => {
 	const removeFriend = () => {
 		try {
 			setIsFriend(false)
-			removeFromFriends(id as string)
+			removeFromFriends(userData as Friend)
 		} catch (err) {
 			console.log(err)
 		}
@@ -73,7 +81,6 @@ const PeopleProfilePage = () => {
 			className={classes.mainWrapper}>
 			<Wrapper>
 				<div className={classes.profileWrapper}>
-					{isLoading && <ProgressBar />}
 					<MainButton title='Back' onClick={() => navigate(-1)}>
 						<ArrowBackIcon className={classes.icon} />
 					</MainButton>

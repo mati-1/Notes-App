@@ -17,6 +17,7 @@ import { db } from '../firebase'
 import { deleteAccountUrl } from '../constants/authApiData'
 import { getStorage, ref, deleteObject } from 'firebase/storage'
 import { getFullDate } from './../constants/FullDate'
+import { Friend } from '../types/FriendType'
 
 type AuthContextType = {
 	token: string
@@ -27,8 +28,8 @@ type AuthContextType = {
 	logout: () => void
 	update: (id: string, userData: Partial<UserData>) => void
 	deleteData: (id: string) => void
-	addToFriends: (id: string) => void
-	removeFromFriends: (id: string) => void
+	addToFriends: (userData: Friend) => void
+	removeFromFriends: (userData: Friend) => void
 }
 
 export const AuthContext = React.createContext<AuthContextType>({
@@ -141,10 +142,10 @@ export const AuthContextProvider = ({ children }: { children: React.ReactNode })
 	)
 
 	const addToFriendsHandler = useCallback(
-		async (id: string) => {
+		async (userData: Friend) => {
 			try {
 				await updateDoc(userRef, {
-					friends: arrayUnion(id),
+					friends: arrayUnion(userData),
 				})
 			} catch (err) {
 				console.log(err)
@@ -156,10 +157,10 @@ export const AuthContextProvider = ({ children }: { children: React.ReactNode })
 	)
 
 	const removeFromFriendsHandler = useCallback(
-		async (id: string) => {
+		async (userData: Friend) => {
 			try {
 				await updateDoc(userRef, {
-					friends: arrayRemove(id),
+					friends: arrayRemove(userData),
 				})
 			} catch (err) {
 				console.log(err)
