@@ -26,20 +26,25 @@ const PeopleProfilePage = () => {
 
 	useEffect(() => {
 		const q = query(collection(db, 'users'), where('id', '==', id))
-
-		// const qFriend = query(collection(db, `users/${id}/friends`), where('id', '==', id))
+		const qFriend = query(collection(db, `users`), where('friends', '!=', null))
 
 		const getUserData = async () => {
 			const snapshot = await getDocs(q)
-			// const friendSnapshot = await getDocs(qFriend)
+			const friendSnapshot = await getDocs(qFriend)
 
 			snapshot.forEach((s) => setLoadedUserData(s.data() as UserData))
 
-			// friendSnapshot.forEach((s) => {
-			// 	if (s.data().friends === id) setIsFriend(true)
-			// 	console.log(s.data().friends)
-			// 	console.log('1')
-			// })
+			friendSnapshot.forEach((s) => {
+				const userFriends: Friend[] = []
+
+				userFriends.push(s.data().friends)
+
+				for (const friends of userFriends) {
+					const singleFriend = friends.find((f) => f.id === id)
+
+					if (singleFriend) setIsFriend(true)
+				}
+			})
 		}
 
 		getUserData()
@@ -57,7 +62,7 @@ const PeopleProfilePage = () => {
 		try {
 			setIsFriend(true)
 
-			addToFriends(userData as Friend)
+			addToFriends(userData as unknown as Friend)
 		} catch (err) {
 			console.log(err)
 		}
@@ -66,7 +71,7 @@ const PeopleProfilePage = () => {
 	const removeFriend = () => {
 		try {
 			setIsFriend(false)
-			removeFromFriends(userData as Friend)
+			removeFromFriends(userData as unknown as Friend)
 		} catch (err) {
 			console.log(err)
 		}

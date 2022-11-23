@@ -43,7 +43,7 @@ export const UserProfileData = () => {
 						{userData.description === basicDescription && <SmallNotification title='description' />}
 					</EditDescriptionForm>
 					<div className={classes.profileInfo}>
-						<FriendsList />
+						<FriendsList isMinified={true} />
 
 						<div>
 							<Heading paddingBottom={true} title='Profile information' />

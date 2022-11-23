@@ -6,8 +6,13 @@ import { UserData } from '../../types/UserDataType'
 import { Heading } from '../ui/Heading'
 import { MainButton } from '../ui/MainButton'
 import classes from './FriendsList.module.scss'
+import { Link } from 'react-router-dom'
 
-export const FriendsList = () => {
+type FriendsListProps = {
+	isMinified: boolean
+}
+
+export const FriendsList = ({ isMinified }: FriendsListProps) => {
 	const [friends, setFriends] = useState<UserData[]>([])
 
 	useEffect(() => {
@@ -31,22 +36,43 @@ export const FriendsList = () => {
 	return (
 		<div className={classes.friendsWrapper}>
 			<Heading paddingBottom={true} title='Friends' />
-			<ul>
-				{friends.slice(0, 2).map((friend) => {
-					return (
-						<UserItem
-							key={friend.id}
-							id={friend.id}
-							name={friend.name}
-							surname={friend.surname}
-							image={friend.image}
-							nick={friend.nick}
-						/>
-					)
-				})}
-			</ul>
 
-			<MainButton title='See all friends' />
+			{isMinified ? (
+				<>
+					<ul>
+						{friends.slice(0, 2).map((friend) => {
+							return (
+								<UserItem
+									key={friend.id}
+									id={friend.id}
+									name={friend.name}
+									surname={friend.surname}
+									image={friend.image}
+									nick={friend.nick}
+								/>
+							)
+						})}
+					</ul>
+					<Link to='/friends'>
+						<MainButton title='See all friends' />
+					</Link>
+				</>
+			) : (
+				<ul>
+					{friends.map((friend) => {
+						return (
+							<UserItem
+								key={friend.id}
+								id={friend.id}
+								name={friend.name}
+								surname={friend.surname}
+								image={friend.image}
+								nick={friend.nick}
+							/>
+						)
+					})}
+				</ul>
+			)}
 		</div>
 	)
 }

@@ -35,7 +35,7 @@ export const EditDescriptionForm = ({ children, userData }: FormProps) => {
 		setIsLoading(true)
 
 		const newinitialData = {
-			...initialData,
+			...userData,
 			description: data.description,
 		}
 

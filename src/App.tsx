@@ -2,8 +2,6 @@ import React, { Suspense } from 'react'
 import { Route, createHashRouter, createRoutesFromElements, RouterProvider } from 'react-router-dom'
 import RootLayout from './pages/RootLayout'
 import { ErrorPage } from './pages/ErrorPage'
-import { NotesContextProvider } from './context/NoteContext'
-import { AuthContextProvider } from './context/AuthContext'
 import { ProgressBar } from './components/ui/Progressbar'
 import HomePage from './pages/HomePage'
 import CreateLayout from './pages/CreatePage'
@@ -16,6 +14,7 @@ import RegisterLayout from './pages/RegisterPage'
 import UserLayout from './pages/UserPage'
 import PeopleLayout from './pages/UsersPage'
 import PeopleProfilePage from './pages/UsersProfilePage'
+import FriendsPage from './pages/FriendsPage'
 
 const App = () => {
 	const router = createHashRouter(
@@ -32,18 +31,15 @@ const App = () => {
 				<Route path='/user' element={<UserLayout />} />
 				<Route path='/users' element={<PeopleLayout />} />
 				<Route path='/users/:id' element={<PeopleProfilePage />} />
+				<Route path='/friends' element={<FriendsPage />} />
 			</Route>
 		)
 	)
 
 	return (
-		<AuthContextProvider>
-			<NotesContextProvider>
-				<Suspense fallback={<ProgressBar />}>
-					<RouterProvider router={router} />
-				</Suspense>
-			</NotesContextProvider>
-		</AuthContextProvider>
+		<Suspense fallback={<ProgressBar />}>
+			<RouterProvider router={router} />
+		</Suspense>
 	)
 }
 

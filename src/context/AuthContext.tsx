@@ -57,7 +57,6 @@ export const AuthContextProvider = ({ children }: { children: React.ReactNode })
 	const [token, setToken] = useState(initialToken)
 	const userIsLoggedIn = !!token
 	const storage = getStorage()
-	const userRef = doc(db, 'users', initialData.id as string)
 
 	const loginHandler = useCallback(
 		async (token: string, userData: Partial<UserData>) => {
@@ -143,6 +142,8 @@ export const AuthContextProvider = ({ children }: { children: React.ReactNode })
 
 	const addToFriendsHandler = useCallback(
 		async (userData: Friend) => {
+			const userRef = doc(db, 'users', initialData.id as string)
+
 			try {
 				await updateDoc(userRef, {
 					friends: arrayUnion(userData),
@@ -153,11 +154,13 @@ export const AuthContextProvider = ({ children }: { children: React.ReactNode })
 				notify('Added a friend!')
 			}
 		},
-		[userRef]
+		[initialData.id]
 	)
 
 	const removeFromFriendsHandler = useCallback(
 		async (userData: Friend) => {
+			const userRef = doc(db, 'users', initialData.id as string)
+
 			try {
 				await updateDoc(userRef, {
 					friends: arrayRemove(userData),
@@ -168,7 +171,7 @@ export const AuthContextProvider = ({ children }: { children: React.ReactNode })
 				notify('Removed a friend!')
 			}
 		},
-		[userRef]
+		[initialData.id]
 	)
 
 	const contextValue = {
