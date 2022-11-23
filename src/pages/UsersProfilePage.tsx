@@ -26,17 +26,20 @@ const PeopleProfilePage = () => {
 
 	useEffect(() => {
 		const q = query(collection(db, 'users'), where('id', '==', id))
-		const qFriend = query(collection(db, 'users'), where('friends', 'array-contains', id))
+
+		// const qFriend = query(collection(db, `users/${id}/friends`), where('id', '==', id))
 
 		const getUserData = async () => {
 			const snapshot = await getDocs(q)
-			const friendSnapshot = await getDocs(qFriend)
+			// const friendSnapshot = await getDocs(qFriend)
 
 			snapshot.forEach((s) => setLoadedUserData(s.data() as UserData))
 
-			friendSnapshot.forEach((s) => {
-				if (s.data().friends) setIsFriend(true)
-			})
+			// friendSnapshot.forEach((s) => {
+			// 	if (s.data().friends === id) setIsFriend(true)
+			// 	console.log(s.data().friends)
+			// 	console.log('1')
+			// })
 		}
 
 		getUserData()

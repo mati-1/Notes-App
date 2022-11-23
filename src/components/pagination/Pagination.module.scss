@@ -1,0 +1,13 @@
+.paginationWrapper {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	margin: 2rem 0 3rem 0;
+	li {
+		button {
+			color: var(--white-color);
+			border-color: rgb(46, 46, 46);
+		}
+	}
+}

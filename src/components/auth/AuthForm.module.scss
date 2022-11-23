@@ -1,0 +1,120 @@
+.authForm {
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+	gap: 6rem;
+
+	img {
+		width: 35rem;
+
+		@media (max-width: 1300px) {
+			display: none;
+		}
+	}
+	@media (max-width: 1300px) {
+		justify-content: center;
+		gap: 0;
+	}
+
+	.form {
+		display: flex;
+		justify-content: center;
+		flex-direction: column;
+		gap: 1.5rem;
+		width: 40rem;
+
+		.rowFormControl {
+			display: grid;
+			grid-template-columns: repeat(2, 1fr);
+			gap: 2rem;
+
+			@media (max-width: 768px) {
+				grid-template-columns: repeat(1, 1fr);
+			}
+		}
+
+		.formControl {
+			display: flex;
+			flex-direction: column;
+
+			.passwordInput {
+				display: flex;
+				align-items: center;
+				position: relative;
+
+				.passwordToggleButton {
+					position: absolute;
+					right: 0;
+					background: none;
+					border: none;
+					margin: 0;
+					padding: 1rem;
+					color: var(--grey-color);
+				}
+			}
+
+			input {
+				font-family: Roboto;
+				font-size: var(--small-size);
+				color: var(--white-color);
+				background-color: var(--black-color);
+				border: 1px solid var(--black4-color);
+				padding: 1rem;
+				outline: none;
+				border-radius: 0.5rem;
+				width: 100%;
+
+				&:focus {
+					border: 1px solid var(--main-color);
+				}
+			}
+
+			label {
+				font-size: var(--small-size);
+				color: var(--grey-color);
+				padding-bottom: 0.5rem;
+			}
+
+			.errorMessage {
+				display: flex;
+				align-items: center;
+				gap: 0.5rem;
+				color: var(--main-color);
+				margin-top: 1rem;
+			}
+		}
+		button {
+			padding: 0.7rem;
+			border-radius: 0.5rem;
+			color: white;
+			background: var(--main-color);
+			cursor: pointer;
+			font-size: var(--small-size);
+			transition: background 0.2s ease, border 0.2s ease;
+			border: 1px solid transparent;
+			margin-top: 1rem;
+
+			&:hover {
+				background: var(--main-hover-color);
+				border-color: var(--main2-color);
+			}
+		}
+
+		.loginLink {
+			color: var(--main-color);
+
+			&:hover {
+				text-decoration: underline;
+			}
+		}
+	}
+}
+
+.errorMessage {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	color: var(--main-color);
+	margin-top: 1rem;
+}

@@ -1,0 +1,164 @@
+.profileWrapper {
+	padding: 5rem 0;
+
+	.profileModules {
+		max-width: 40rem;
+		@media (max-width: 768px) {
+			display: flex;
+			align-items: center;
+			flex-direction: column;
+		}
+		.descriptionWrapper {
+			position: relative;
+			display: grid;
+			grid-template-columns: repeat(1, 1fr);
+			margin-top: 4rem;
+			width: 100%;
+
+			form {
+				display: flex;
+				flex-direction: column;
+				textarea {
+					resize: vertical;
+					min-height: 5rem;
+					max-height: 10rem;
+
+					&::-webkit-scrollbar-thumb {
+						background-color: var(--black3-color);
+						border-radius: 20rem;
+						border: 1px solid var(--black4-color);
+					}
+					&::-webkit-scrollbar {
+						background-color: var(--black2-color);
+						width: 0.7rem;
+					}
+				}
+
+				.buttons {
+					display: grid;
+					grid-template-columns: repeat(2, 1fr);
+					gap: 2rem;
+				}
+			}
+
+			.description {
+				background-color: var(--black-color);
+				border: 1px solid var(--black4-color);
+				border-radius: 0.5rem;
+				padding: 1rem;
+				color: var(--white-color);
+
+				h3 {
+					margin-bottom: 0.5rem;
+				}
+			}
+		}
+
+		.profileHeader {
+			display: flex;
+			align-items: center;
+			gap: 2rem;
+
+			@media (max-width: 768px) {
+				display: flex;
+				align-items: center;
+				flex-direction: column;
+				text-align: center;
+			}
+
+			.image {
+				position: relative;
+				display: flex;
+				img {
+					width: 11rem;
+					height: 11rem;
+					background-size: cover;
+					border-radius: 50%;
+					pointer-events: none;
+					object-fit: cover;
+				}
+
+				label {
+					position: absolute;
+					bottom: 0;
+					right: 0;
+					background-color: var(--black3-color);
+					svg {
+						fill: var(--white-color);
+					}
+				}
+			}
+
+			.welcomeHeading {
+				color: var(--white-color);
+				font-size: var(--large-size);
+				display: flex;
+				flex-direction: column;
+
+				p {
+					font-size: var(--basic-size);
+					color: var(--grey-color);
+				}
+			}
+		}
+
+		.profileInfo {
+			margin-top: 5rem;
+			display: grid;
+			grid-template-columns: repeat(1, 1fr);
+			max-width: 40rem;
+			gap: 6rem;
+
+			@media (max-width: 1000px) {
+				grid-template-columns: repeat(1, 1fr);
+			}
+
+			ul {
+				display: grid;
+				grid-template-columns: 1;
+				gap: 1rem;
+				list-style: none;
+
+				button {
+					margin: 0;
+				}
+
+				a {
+					button {
+						width: 100%;
+					}
+				}
+
+				li {
+					padding: 0.7rem 1rem;
+					color: var(--white-color);
+					border-radius: 0.5rem;
+					background-color: var(--black-color);
+					border: 1px solid var(--black4-color);
+
+					div {
+						display: flex;
+						flex-direction: column;
+
+						h3 {
+							padding-bottom: 0.3rem;
+						}
+					}
+				}
+			}
+
+			.optionsContent {
+				display: flex;
+				flex-direction: column;
+			}
+
+			.managmentWrapper {
+				.buttons {
+					display: flex;
+					gap: 1rem;
+					align-items: center;
+				}
+			}
+		}
+	}
+}
