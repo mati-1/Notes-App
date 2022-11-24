@@ -7,6 +7,7 @@ import { Heading } from '../ui/Heading'
 import { MainButton } from '../ui/MainButton'
 import classes from './FriendsList.module.scss'
 import { Link } from 'react-router-dom'
+import emptyUsers from '../../img/users.svg'
 import { AuthContext } from './../../context/AuthContext'
 
 type FriendsListProps = {
@@ -30,45 +31,58 @@ export const FriendsList = ({ isMinified }: FriendsListProps) => {
 		getFriends()
 	}, [initialData.id])
 
+	const emptyContent = (
+		<div className={classes.emptyWrapper}>
+			<img src={emptyUsers} alt='emptyFriends' />
+			<h2>You have no friends!</h2>
+		</div>
+	)
+
 	return (
 		<div className={classes.friendsWrapper}>
 			<Heading paddingBottom={true} title='Friends' />
 
-			{isMinified ? (
-				<>
-					<ul>
-						{friends.slice(0, 2).map((friend) => {
-							return (
-								<UserItem
-									key={friend.id}
-									id={friend.id}
-									name={friend.name}
-									surname={friend.surname}
-									image={friend.image}
-									nick={friend.nick}
-								/>
-							)
-						})}
-					</ul>
-					<Link to='/friends'>
-						<MainButton title='See all friends' />
-					</Link>
-				</>
+			{!friends.length ? (
+				emptyContent
 			) : (
-				<ul className={classes.list}>
-					{friends.map((friend) => {
-						return (
-							<UserItem
-								key={friend.id}
-								id={friend.id}
-								name={friend.name}
-								surname={friend.surname}
-								image={friend.image}
-								nick={friend.nick}
-							/>
-						)
-					})}
-				</ul>
+				<>
+					{isMinified ? (
+						<>
+							<ul>
+								{friends.slice(0, 2).map((friend) => {
+									return (
+										<UserItem
+											key={friend.id}
+											id={friend.id}
+											name={friend.name}
+											surname={friend.surname}
+											image={friend.image}
+											nick={friend.nick}
+										/>
+									)
+								})}
+							</ul>
+							<Link to='/friends'>
+								<MainButton title='See all friends' />
+							</Link>
+						</>
+					) : (
+						<ul className={classes.list}>
+							{friends.map((friend) => {
+								return (
+									<UserItem
+										key={friend.id}
+										id={friend.id}
+										name={friend.name}
+										surname={friend.surname}
+										image={friend.image}
+										nick={friend.nick}
+									/>
+								)
+							})}
+						</ul>
+					)}
+				</>
 			)}
 		</div>
 	)

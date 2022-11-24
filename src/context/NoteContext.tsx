@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import { Note } from '../types/NoteType'
-import { notify } from './../constants/Notify'
+import { notify } from '../constants/Notify'
 
 type NotesContextType = {
 	notes: Note[]

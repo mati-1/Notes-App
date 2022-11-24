@@ -12,12 +12,12 @@ import {
 	arrayRemove,
 } from 'firebase/firestore'
 import { UserData } from './../types/UserDataType'
-import { notify } from './../constants/Notify'
+import { notify } from '../constants/Notify'
 import { db } from '../firebase'
 import { deleteAccountUrl } from '../constants/authApiData'
 import { getStorage, ref, deleteObject } from 'firebase/storage'
-import { getFullDate } from './../constants/FullDate'
 import { Friend } from '../types/FriendType'
+import { getFullDate } from '../constants/FullDate'
 
 type AuthContextType = {
 	token: string
