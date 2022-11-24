@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/Notes-App/static/css/main.596ba594.css",
-    "main.js": "/Notes-App/static/js/main.68a71f12.js",
-    "static/js/787.09a4dcbe.chunk.js": "/Notes-App/static/js/787.09a4dcbe.chunk.js",
+    "main.css": "/Notes-App/static/css/main.18e8fce8.css",
+    "main.js": "/Notes-App/static/js/main.90196722.js",
+    "static/js/787.9243050f.chunk.js": "/Notes-App/static/js/787.9243050f.chunk.js",
     "static/media/header.svg": "/Notes-App/static/media/header.107cf7ea60b2a3747aebaf70677422d3.svg",
     "static/media/users.svg": "/Notes-App/static/media/users.e9ce0a81cef56b8b002ad889eeb44bef.svg",
     "static/media/favourite.svg": "/Notes-App/static/media/favourite.19a0e33a1b08f1b794e6dfabd35bea89.svg",
@@ -17,12 +17,12 @@
     "static/media/slick.ttf": "/Notes-App/static/media/slick.c94f7671dcc99dce43e2.ttf",
     "static/media/slick.woff": "/Notes-App/static/media/slick.295183786cd8a1389865.woff",
     "index.html": "/Notes-App/index.html",
-    "main.596ba594.css.map": "/Notes-App/static/css/main.596ba594.css.map",
-    "main.68a71f12.js.map": "/Notes-App/static/js/main.68a71f12.js.map",
-    "787.09a4dcbe.chunk.js.map": "/Notes-App/static/js/787.09a4dcbe.chunk.js.map"
+    "main.18e8fce8.css.map": "/Notes-App/static/css/main.18e8fce8.css.map",
+    "main.90196722.js.map": "/Notes-App/static/js/main.90196722.js.map",
+    "787.9243050f.chunk.js.map": "/Notes-App/static/js/787.9243050f.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.596ba594.css",
-    "static/js/main.68a71f12.js"
+    "static/css/main.18e8fce8.css",
+    "static/js/main.90196722.js"
   ]
 }
