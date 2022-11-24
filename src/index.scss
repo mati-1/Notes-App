@@ -1,0 +1,96 @@
+* {
+	box-sizing: border-box;
+	padding: 0;
+	margin: 0;
+}
+
+html {
+	font-size: 85%;
+}
+
+body {
+	font-family: 'Roboto', sans-serif;
+	background-color: var(--black2-color);
+}
+
+::selection {
+	color: white;
+	background-color: var(--main-color);
+}
+
+:root {
+	--main-color: rgb(25, 118, 210);
+	--main-hover-color: rgb(40, 147, 255);
+	--white-color: rgb(240, 240, 240);
+	--grey-color: rgb(160, 160, 160);
+	--black-color: rgb(13, 16, 22);
+	--black2-color: rgb(11, 14, 19);
+	--black3-color: rgb(23, 27, 36);
+	--black4-color: rgb(32, 37, 49);
+	--space2rem: 2rem;
+	--basic-size: 1.3rem;
+	--logo-size: 1.5rem;
+	--small-size: 1rem;
+	--mini-size: 0.8rem;
+	--big-size: 1.7rem;
+	--large-size: 2.2rem;
+	--biggest-size: 2.5rem;
+}
+
+@media (max-width: 768px) {
+	html {
+		font-size: 80%;
+	}
+}
+
+a {
+	text-decoration: none;
+	color: initial;
+}
+
+body {
+	&::-webkit-scrollbar-thumb {
+		background-color: var(--black3-color);
+		border-radius: 20rem;
+		border: 1px solid var(--black4-color);
+	}
+	&::-webkit-scrollbar {
+		background-color: var(--black2-color);
+		width: 0.7rem;
+	}
+}
+
+.light-mode {
+	--white-color: rgb(29, 29, 29);
+	--grey-color: rgb(75, 75, 75);
+
+	--black-color: rgb(248, 248, 248);
+	--black2-color: rgb(255, 255, 255);
+	--black3-color: rgb(231, 231, 231);
+	--black4-color: rgb(236, 236, 236);
+}
+
+.slick-slider {
+	margin: 6rem 2rem 2rem 2rem;
+
+	button::before {
+		color: var(--white-color);
+	}
+
+	.slick-list {
+		.slick-track {
+			display: flex;
+			align-items: center;
+			gap: 2rem;
+		}
+	}
+
+	.slick-dots {
+		li,
+		.slick-active {
+			button::before {
+				color: var(--white-color);
+			}
+		}
+	}
+}

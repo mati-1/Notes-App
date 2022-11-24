@@ -1,0 +1,23 @@
+.heading {
+	display: flex;
+	align-items: center;
+	position: relative;
+	font-size: var(--biggest-size);
+	color: var(--white-color);
+	z-index: 1;
+	width: auto;
+
+	&::after {
+		content: '';
+		position: absolute;
+		width: 1px;
+		height: 100%;
+		background-color: var(--main-hover-color);
+		left: -1.5rem;
+		z-index: -1;
+	}
+}
+
+.paddingBottom {
+	margin-bottom: 2rem;
+}

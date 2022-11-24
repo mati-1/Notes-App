@@ -1,0 +1,38 @@
+.mainButton {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 0.4rem;
+	padding: 0.7rem 1.7rem;
+	border-radius: 0.5rem;
+	color: white;
+	background: var(--main-color);
+	cursor: pointer;
+	font-size: var(--small-size);
+	transition: background 0.2s ease, border 0.3s ease;
+	border: 1px solid transparent;
+	margin-top: 1rem;
+
+	&:hover {
+		background: var(--main-hover-color);
+		border-color: var(--main-color);
+		box-shadow: 0px 0px 50px -15px rgba(25, 118, 210, 1);
+	}
+}
+
+.secondaryButton {
+	padding: 0.7rem 1.7rem;
+	border-radius: 0.5rem;
+	color: var(--white-color);
+	background: none;
+	cursor: pointer;
+	font-size: var(--small-size);
+	transition: border 0.2s ease;
+	border: 1px solid var(--black4-color);
+	margin-top: 1rem;
+
+	&:hover {
+		border-color: var(--main-color);
+		box-shadow: 0px 0px 50px -15px rgba(25, 118, 210, 1);
+	}
+}
