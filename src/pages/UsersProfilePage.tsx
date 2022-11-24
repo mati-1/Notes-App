@@ -75,7 +75,7 @@ const PeopleProfilePage = () => {
 	const emptyContent = (
 		<div className={classes.emptyWrapper}>
 			<img src={emptyUsers} alt='emptyFriends' />
-			<h2>You have no friends!</h2>
+			<h2>{userLoadedData?.name} have no friends!</h2>
 		</div>
 	)
 
