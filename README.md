@@ -1,4 +1,4 @@
-![alt text](https://i.ibb.co/M1H2M4p/Readme-Header-Image.png)
+<img src='https://i.ibb.co/M1H2M4p/Readme-Header-Image.png' />
 
 
 <h4 align="center">Notes App - Modern app for noting</h4>
