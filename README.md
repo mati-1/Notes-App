@@ -1,4 +1,4 @@
-
+[<img src="https://i.ibb.co/M1H2M4p/Readme-Header-Image.png" alt="modern notes app banner" width="100%"/>](https://skrimusss.github.io/Notes-App)
 
 <h4 align="center">Notes App - Modern app for noting</h4>
 
