@@ -15,12 +15,15 @@ import { SecondaryButton } from '../components/ui/SecondaryButton'
 import { useNavigate } from 'react-router-dom'
 import { AuthContext } from '../context/AuthContext'
 import { Friend } from '../types/FriendType'
+import { UserItem } from '../components/users/UserItem'
+import emptyUsers from '../img/users.svg'
 
 const PeopleProfilePage = () => {
 	const { initialData, addToFriends, removeFromFriends } = useContext(AuthContext)
 	const [userLoadedData, setLoadedUserData] = useState<UserData | null>(null)
 	const { id } = useParams()
 	const navigate = useNavigate()
+	const [friends, setFriends] = useState<UserData[]>([])
 	const [isFriend, setIsFriend] = useState(false)
 	const loggedUserCondition = initialData.id !== id
 
@@ -34,6 +37,9 @@ const PeopleProfilePage = () => {
 
 			snapshot.forEach((s) => {
 				setLoadedUserData(s.data() as UserData)
+				const userFriends = s.data().friends
+
+				setFriends(userFriends)
 			})
 
 			snapshotFriend.forEach((s) => {
@@ -65,6 +71,13 @@ const PeopleProfilePage = () => {
 		setIsFriend(false)
 		removeFromFriends(userData as unknown as Friend)
 	}
+
+	const emptyContent = (
+		<div className={classes.emptyWrapper}>
+			<img src={emptyUsers} alt='emptyFriends' />
+			<h2>You have no friends!</h2>
+		</div>
+	)
 
 	if (!userLoadedData) return <ProgressBar />
 
@@ -109,6 +122,25 @@ const PeopleProfilePage = () => {
 
 							<p className={classes.description}>{userLoadedData.description}</p>
 						</div>
+						<Heading title='Friends' />
+						{!friends.length ? (
+							emptyContent
+						) : (
+							<ul className={classes.list}>
+								{friends.map((friend) => {
+									return (
+										<UserItem
+											key={friend.id}
+											id={friend.id}
+											name={friend.name}
+											surname={friend.surname}
+											image={friend.image}
+											nick={friend.nick}
+										/>
+									)
+								})}
+							</ul>
+						)}
 
 						<div>
 							<Heading paddingBottom={true} title='Informations' />

@@ -80,6 +80,22 @@
 			flex-direction: column;
 			gap: 4rem;
 			max-width: 50rem;
+
+			.emptyWrapper {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+
+				img {
+					width: 15rem;
+				}
+
+				h2 {
+					color: var(--white-color);
+					padding-top: 2rem;
+				}
+			}
+
 			.description {
 				background-color: var(--black-color);
 				border: 1px solid var(--black4-color);
