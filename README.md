@@ -15,7 +15,3 @@
 <h2 align='center'>Technologies used 💎</h2> 
 <p align='center'>React 🔹 Typescript 🔹 Context API 🔹 React Hook Form 🔹 Framer motion 🔹 SCSS 🔹 Firebase</p>
 <br>
-<h2 align='center'>Installation 💿</h2> 
-<p align='center'>git clone https://github.com/skrimusss/Notes-App.git
-
-npm install</p>
