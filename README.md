@@ -1,4 +1,4 @@
-[<img src="https://assets-global.website-files.com/6019e43dcfad3c059841794a/62d6de37454aa5754ad51ba5_home%20page%20image.jpg" alt="notes app banner" width="100%"/>](https://skrimusss.github.io/Notes-App)
+[<img src=".github/ReadmeHeaderImage.png" alt="notes app banner" width="100%"/>](https://skrimusss.github.io/Notes-App)
 <h4 align="center">Notes App - Modern app for noting</h4>
 
 ## Live 💻
