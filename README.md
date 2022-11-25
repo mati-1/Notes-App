@@ -16,10 +16,6 @@
 <p align='center'>React 🔹 Typescript 🔹 Context API 🔹 React Hook Form 🔹 Framer motion 🔹 SCSS 🔹 Firebase</p>
 <br>
 <h2 align='center'>Installation 💿</h2> 
-```bash
+<p align='center'>git clone https://github.com/skrimusss/Notes-App.git
 
-git clone https://github.com/skrimusss/Notes-App.git
-
-npm install
-
-```
+npm install</p>
