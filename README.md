@@ -1,7 +1,7 @@
 [<img src=".github/ReadmeHeaderImage.png" alt="notes app banner" width="100%"/>](https://skrimusss.github.io/Notes-App)
 <h4 align="center">Notes App - Modern app for noting</h4>
 <br>
-<h2>Live 💻</h2>
+<p align='center'>Live 💻</p>
 <h2 align='center'><a href='https://skrimusss.github.io/Notes-App'>⭐ Notes App ⭐</a></h2>
 <br>
 <h2 align='center'>About project 🤩</h2> 
