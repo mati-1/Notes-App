@@ -8,7 +8,9 @@
 <p align='center'>That's modern app for creating notes with user login/register system. Application introducing new hot features with futuristic design.</p>
 <br>
 <h3 align='center'>Time spent on this project ⌛️</h3> 
-<img align='center' src='https://wakatime.com/badge/user/e5c27326-8485-48e4-9b41-02d5552c2226/project/addb37dd-75a8-4e9d-873f-44b04439781d.svg' />
+<p align='center'>
+<img src='https://wakatime.com/badge/user/e5c27326-8485-48e4-9b41-02d5552c2226/project/addb37dd-75a8-4e9d-873f-44b04439781d.svg' />
+</p>
 <br>
 <h2 align='center'>Technologies used 💎</h2> 
 <br>
