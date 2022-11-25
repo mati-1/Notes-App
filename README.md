@@ -13,18 +13,7 @@
 </p>
 <br>
 <h2 align='center'>Technologies used 💎</h2> 
-<br>
-| Tech                                                      | Description                                                         |
-| --------------------------------------------------------- | ------------------------------------------------------------------- |
-| [TypeScript](https://www.typescriptlang.org/)             | Static type-checking programming language                           |
-| [React](https://reactjs.org/)                             | Library for building user interfaces                                |
-| [Framer Motion](https://www.framer.com/motion/)           | Motion library for React                                            |
-| [Context API](https://reactjs.org/docs/context.html)      | React structure that enables to share data with multiple components |
-| [React Hook Form](https://react-hook-form.com)            | Forms with easy-to-use validation                                   |
-| [SCSS](https://sass-lang.com)                             | CSS on steroids                                                     |
-| [ESLint](https://eslint.org/)                             | TypeScript linting                                                  |
-| [Prettier](https://prettier.io/)                          | Code formatter                                                      |
-| [Firebase](https://firebase.google.com/)                  | REST APi, database, storage                                         |
+<p align='center'>React 🔹 Typescript 🔹 Context API 🔹 React Hook Form 🔹 Framer motion 🔹 SCSS 🔹 Firebase</p>
 <br>
 <h2 align='center'>Installation 💿</h2> 
 ```bash
