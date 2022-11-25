@@ -4,8 +4,7 @@
 <h3 align='center'>Live 💻</h3>
 <p align='center'><a href='https://skrimusss.github.io/Notes-App'>⭐ Notes App ⭐</a></p>
 <br>
-<h2 align='center'>About project 🤩</h2> 
-<br>
+<h3 align='center'>About project 🤩</h3> 
 <p align='center'>That's modern app for creating notes with user login/register system. Application introducing new hot features with futuristic design.</p>
 <br>
 <h2 align='center'>Time spent on this project ⌛️</h2> 
