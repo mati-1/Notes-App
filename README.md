@@ -3,11 +3,11 @@
 
 <h2 align='center'>Live 💻</h2> 
 
-<a align='center' href='https://skrimusss.github.io/Notes-App'>Modern Notes App</a>
+<a align='center' href='https://skrimusss.github.io/Notes-App'>⭐ Modern Notes App ⭐</a>
 
 <h2 align='center'>About project 🤩</h2> 
 
-That's modern app for creating notes with user login/register system. Application introducing new hot features with futuristic design.
+<p align='center'>That's modern app for creating notes with user login/register system. Application introducing new hot features with futuristic design.</p>
 
 <h2 align='center'>Time spent on this project ⌛️</h2> 
 
