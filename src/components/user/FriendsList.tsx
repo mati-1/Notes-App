@@ -12,9 +12,10 @@ import { AuthContext } from './../../context/AuthContext'
 
 type FriendsListProps = {
 	isMinified: boolean
+	className?: string
 }
 
-export const FriendsList = ({ isMinified }: FriendsListProps) => {
+export const FriendsList = ({ isMinified, className }: FriendsListProps) => {
 	const [friends, setFriends] = useState<UserData[]>([])
 	const { initialData } = useContext(AuthContext)
 
@@ -39,7 +40,7 @@ export const FriendsList = ({ isMinified }: FriendsListProps) => {
 	)
 
 	return (
-		<div className={classes.friendsWrapper}>
+		<div className={`${className} ${classes.friendsWrapper}`}>
 			<Heading paddingBottom={true} title='Friends' />
 
 			{!friends.length ? (

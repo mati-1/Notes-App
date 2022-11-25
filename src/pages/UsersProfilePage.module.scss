@@ -34,6 +34,7 @@
 				position: relative;
 				display: flex;
 				align-items: center;
+				justify-content: center;
 				gap: 2rem;
 
 				@media (max-width: 768px) {
@@ -42,13 +43,30 @@
 					text-align: center;
 				}
 
-				img {
-					width: 11rem;
-					height: 11rem;
-					background-size: cover;
-					border-radius: 50%;
-					pointer-events: none;
-					object-fit: cover;
+				.imgBox {
+					position: relative;
+					display: flex;
+					align-items: center;
+					justify-content: center;
+
+					img {
+						width: 11rem;
+						height: 11rem;
+						background-size: cover;
+						border-radius: 50%;
+						pointer-events: none;
+						object-fit: cover;
+					}
+
+					&::after {
+						content: '';
+						position: absolute;
+						width: 12rem;
+						height: 12rem;
+						border-radius: 50%;
+						background: linear-gradient(36deg, var(--black4-color) 0%, var(--main-color) 100%);
+						z-index: -1;
+					}
 				}
 
 				label {

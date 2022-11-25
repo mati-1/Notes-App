@@ -98,7 +98,10 @@ const PeopleProfilePage = () => {
 
 					<div className={classes.profileHeader}>
 						<div className={classes.image}>
-							<img src={userLoadedData.image} alt='userProfile' />
+							<div className={classes.imgBox}>
+								<img src={userLoadedData.image} alt='userProfile' />
+							</div>
+
 							<div className={classes.welcomeHeading}>
 								<h2>
 									{userLoadedData.name} {userLoadedData.surname}

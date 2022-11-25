@@ -17,13 +17,7 @@ export const NotePagination = ({ notesPerPage, totalNotes, paginate }: paginatio
 
 	return (
 		<div className={classes.paginationWrapper}>
-			<Pagination
-				disabled={totalNotes <= 4 ? true : false}
-				onChange={paginate}
-				count={pageNumbers.length}
-				variant='outlined'
-				shape='rounded'
-			/>
+			<Pagination onChange={paginate} count={pageNumbers.length} variant='outlined' shape='rounded' />
 		</div>
 	)
 }

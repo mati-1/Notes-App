@@ -9,6 +9,10 @@
 		align-items: center;
 		justify-content: space-around;
 		padding: 0 2rem;
+		@media (max-width: 1000px) {
+			justify-content: center;
+		}
+
 		h1 {
 			color: var(--white-color);
 			font-size: var(--biggest-size);
@@ -19,8 +23,12 @@
 			color: var(--grey-color);
 			margin-bottom: 1.5rem;
 		}
+
 		img {
 			width: 38rem;
+			@media (max-width: 1000px) {
+				display: none;
+			}
 		}
 		.buttons {
 			display: flex;

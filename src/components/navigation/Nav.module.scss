@@ -12,6 +12,11 @@
 		position: fixed;
 	}
 
+	@media (max-width: 600px) {
+		min-width: 20rem;
+		max-width: 20rem;
+	}
+
 	.hideButton {
 		position: absolute;
 		top: 2rem;
@@ -62,9 +67,17 @@
 			font-size: var(--logo-size);
 			margin: 2.5rem 0 0 1.7rem;
 
+			@media (max-width: 600px) {
+				margin: 2.5rem 0 0 1.4rem;
+			}
+
 			img {
 				pointer-events: none;
 				width: 2.7rem;
+
+				@media (max-width: 600px) {
+					width: 2rem;
+				}
 			}
 
 			.fullLogo {
@@ -95,6 +108,10 @@
 				border-radius: 1rem;
 				border: 1px solid transparent;
 
+				@media (max-width: 600px) {
+					padding: 1rem;
+				}
+
 				&:hover {
 					color: var(--white-color);
 					background-color: var(--black-color);
@@ -110,6 +127,12 @@
 						top: -0.5rem;
 						right: -0.5rem;
 					}
+				}
+			}
+
+			@media (max-width: 600px) {
+				label {
+					display: none;
 				}
 			}
 
@@ -141,6 +164,10 @@
 				border-radius: 1rem;
 				border: 1px solid transparent;
 
+				@media (max-width: 600px) {
+					padding: 1rem;
+				}
+
 				&:hover {
 					color: var(--white-color);
 					background-color: var(--black3-color);
@@ -165,6 +192,11 @@
 	position: fixed;
 	min-width: 6.5rem;
 	max-width: 6rem;
+
+	@media (max-width: 600px) {
+		min-width: 4.5rem;
+		max-width: 5rem;
+	}
 }
 
 .hiddenLinkTitle {

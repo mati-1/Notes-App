@@ -137,7 +137,7 @@ export const Notes = () => {
 
 				{!viewCondition && (
 					<Slider {...sliderSettings}>
-						{currentNotes.map((note) => {
+						{notes.map((note) => {
 							return (
 								<NoteItem
 									key={note.id}
@@ -154,10 +154,8 @@ export const Notes = () => {
 				)}
 			</AnimatePresence>
 
-			{!currentNotes.length && emptyContent}
-			{currentNotes.length && viewCondition && (
-				<NotePagination notesPerPage={notesPerPage} totalNotes={notes.length} paginate={paginate} />
-			)}
+			{!notes.length && emptyContent}
+			{viewCondition && <NotePagination notesPerPage={notesPerPage} totalNotes={notes.length} paginate={paginate} />}
 		</div>
 	)
 }

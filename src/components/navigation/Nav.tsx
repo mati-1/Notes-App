@@ -108,17 +108,19 @@ export const Nav = () => {
 								href='/login'
 								icon={<PermIdentityIcon className={classes.icon} />}
 								tooltipTitle={<Typography fontSize={11}>Login</Typography>}>
-								{!isLoggedIn && <span className={classes.loginMark}>Login</span>}
+								{!isLoggedIn && <span className={classes.loginMark}>Login!</span>}
 							</NavigationLink>
 						)}
-						<NavigationLink
-							title='Users'
-							hiddenNav={!hiddenNav}
-							href='/users'
-							icon={<Groups2Icon className={classes.icon} />}
-							tooltipTitle={<Typography fontSize={11}>Users</Typography>}></NavigationLink>
+
 						{isLoggedIn && (
 							<>
+								<NavigationLink
+									title='Users'
+									hiddenNav={!hiddenNav}
+									href='/users'
+									icon={<Groups2Icon className={classes.icon} />}
+									tooltipTitle={<Typography fontSize={11}>Users</Typography>}></NavigationLink>
+
 								<NavigationLink
 									title='Friends'
 									hiddenNav={!hiddenNav}

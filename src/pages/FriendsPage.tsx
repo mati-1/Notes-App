@@ -14,7 +14,7 @@ const FriendsPage = () => {
 			transition={{ type: 'linear' }}
 			className={classes.mainWrapper}>
 			<Wrapper>
-				<FriendsList isMinified={false} />
+				<FriendsList className={classes.paddingTop} isMinified={false} />
 			</Wrapper>
 		</motion.div>
 	)
