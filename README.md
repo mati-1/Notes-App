@@ -3,7 +3,7 @@
 
 <h2 align='center'>Live 💻</h2> 
 
-<a href='https://skrimusss.github.io/Notes-App'><h2 align='center'>⭐ Notes App ⭐</h2></a>
+<a href='https://skrimusss.github.io/Notes-App'>⭐ Notes App ⭐></a>
 
 <h2 align='center'>About project 🤩</h2> 
 
