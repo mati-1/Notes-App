@@ -1,4 +1,4 @@
-[<img src=".github/ReadmeHeaderImage.png" alt="notes app banner" width="100%"/>](https://skrimusss.github.io/Notes-App)
+[<img src=".github/ReadmeHeaderImage.png" alt="notes app banner" width="100%"/>](https://mati-1.github.io/Notes-App)
 <h4 align="center">Notes App - Modern app for noting</h4>
 <br>
 <h3 align='center'>Live 💻</h3>
